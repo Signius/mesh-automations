@@ -269,7 +269,7 @@ async function updateOverviewFile(projects) {
 
     // Keep the frontmatter and content until the overview section
     const frontmatterMatch = content.match(/^---\n[\s\S]*?\n---/);
-    const overviewMatch = content.match(/^# Project Catalyst Proposals\n\n[\s\S]*?\n\n## MeshJS Proposal Overview/);
+    const overviewMatch = content.match(/^# Project Catalyst Proposals\n\n[\s\S]*?\n\n## Overview/);
 
     if (!frontmatterMatch || !overviewMatch) {
         console.error('Could not find frontmatter or overview section in 0001.md');
