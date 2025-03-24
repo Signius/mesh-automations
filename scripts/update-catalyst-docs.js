@@ -349,7 +349,7 @@ async function updateOverviewFile(projects) {
     const fundNumbers = [...new Set(projects.map(p => String(p.projectDetails.project_id).substring(0, 2)))].sort();
     fundNumbers.forEach(fundNumber => {
         const fundProjects = projects.filter(p => String(p.projectDetails.project_id).substring(0, 2) === fundNumber);
-        newContent += `#### [Fund ${fundNumber}](/en/wiki/0_catalyst_proposals/${fundNumber.padStart(4, '0')})\n`;
+        newContent += `#### [Fund ${fundNumber}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')})\n`;
         fundProjects.forEach(project => {
             newContent += `- ${project.projectDetails.name} (${project.projectDetails.project_id})\n`;
         });
