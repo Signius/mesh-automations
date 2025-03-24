@@ -36,12 +36,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
-      - name: Update README
+      - name: Update Catalyst Proposal Files
         run: npm run update-readme
         
       - name: Commit and push if changed
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add README.md
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update MeshJS Catalyst Projects README" && git push) 
+          git add apps/docs/src/pages/en/catalyst-proposals/*.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update MeshJS Catalyst Proposal Files" && git push) 
