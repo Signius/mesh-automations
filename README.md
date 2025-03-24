@@ -1,10 +1,40 @@
-Insights & overview on MeshJS DRep activities and engagements at Cardano Blockchain Governance
+# DRep Voting History Automation
 
-- Mesh DRep ID: drep1yv4uesaj92wk8ljlsh4p7jzndnzrflchaz5fzug3zxg4naqkpeas3
-- DRep ID (Legacy): drep_script190xv8v32n43luhu9ag05s5mvcs6079lg4zghzyg3j9vlgle68y3
+A Node.js automation tool for tracking and documenting DRep (Delegate Representative) voting activities in the Cardano Blockchain Governance system.
 
-For more;
-- Check our Voting Guidelines: https://github.com/MeshJS/DRep/blob/main/Voting%20Guidelines 
-- Find our votes & rationals on Cardano Governance Actions at: https://github.com/MeshJS/DRep/tree/main/voting-history
+## What it Does
+
+- Automatically fetches DRep voting history using the Koios API
+- Generates organized markdown documentation of voting records
+- Tracks missing voting rationales
+- Organizes voting history by year
+- Integrates with documentation systems
+
+## Repository Structure
+
+- `scripts/` - Automation scripts for data collection and processing
+- `voting-history/` - Voting rationales
+- `apps/docs/` - Documentation output
+- `config.json` - Configuration settings
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure your environment:
+   - Copy `.env.example` to `.env`
+   - Update `config.json` with your DRep ID and organization details
+
+## Usage
+
+The automation runs through GitHub Actions to:
+- Fetch latest voting data
+- Generate documentation
+- Track missing rationales
+- Update voting history
+
 
 
