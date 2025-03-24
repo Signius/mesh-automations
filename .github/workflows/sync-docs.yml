@@ -1,0 +1,40 @@
+name: Sync Docs to Mesh Gov Test
+
+on:
+  workflow_run:
+    workflows: ["Update Catalyst Proposal Documentation", "DRep Voting Action"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          path: source
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: Signius/mesh-gov-test
+          path: target
+          token: ${{ secrets.PAT }}
+          
+      - name: Copy docs folder
+        run: |
+          cp -r source/apps/docs/src/pages target/apps/docs/src/
+          
+      - name: Commit and push changes
+        run: |
+          cd target
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add apps/docs/src/pages
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Sync docs from mesh-automations" && git push) 
