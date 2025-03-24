@@ -1,8 +1,11 @@
 {
-    "name": "drep-voting-action",
+    "name": "mesh-automations",
     "version": "1.0.0",
-    "description": "Script to fetch DRep information using Koios API",
+    "description": "Scripts for MeshJS automation tasks including DRep voting and Catalyst proposal documentation",
     "main": "voting-action.js",
+    "scripts": {
+        "update-catalyst-docs": "node scripts/update-catalyst-docs.js"
+    },
     "dependencies": {
         "axios": "^1.6.7",
         "dotenv": "^16.4.7"

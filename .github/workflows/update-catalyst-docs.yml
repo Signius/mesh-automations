@@ -37,7 +37,7 @@ jobs:
         run: npm ci
         
       - name: Update Catalyst Proposal Files
-        run: npm run update-readme
+        run: npm run update-catalyst-docs
         
       - name: Commit and push if changed
         run: |
