@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Scripts for MeshJS automation tasks including DRep voting and Catalyst proposal documentation",
     "main": "voting-action.js",
+    "type": "module",
     "scripts": {
         "update-catalyst-docs": "node scripts/update-catalyst-docs.js"
     },
