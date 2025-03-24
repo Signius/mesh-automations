@@ -1,4 +1,4 @@
-name: Update MeshJS Proposal README
+name: Update Catalyst Proposal Documentation
 
 on:
   schedule:
@@ -12,7 +12,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  update-readme:
+  update-catalyst-docs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_SUPABASE_URL2: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL2 }}
