@@ -9,6 +9,8 @@ A Node.js automation tool for tracking and documenting DRep (Delegate Representa
 - Tracks missing voting rationales
 - Organizes voting history by year
 - Integrates with documentation systems
+- Updates Catalyst proposal information and voting status
+- Tracks proposal funding and implementation progress
 
 ## Repository Structure
 
@@ -16,6 +18,7 @@ A Node.js automation tool for tracking and documenting DRep (Delegate Representa
 - `voting-history/` - Voting rationales
 - `apps/docs/` - Documentation output
 - `config.json` - Configuration settings
+- `catalyst-proposals/` - Catalyst proposal tracking and updates
 
 ## Setup
 
@@ -35,6 +38,8 @@ The automation runs through GitHub Actions to:
 - Generate documentation
 - Track missing rationales
 - Update voting history
+- Monitor and update Catalyst proposal status
+- Track proposal funding and implementation milestones
 
 
 
