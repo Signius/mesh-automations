@@ -8,6 +8,7 @@
         "update-catalyst-docs": "node scripts/update-catalyst-docs.js"
     },
     "dependencies": {
+        "@supabase/supabase-js": "^2.29.0",
         "axios": "^1.6.7",
         "dotenv": "^16.4.7"
     }
