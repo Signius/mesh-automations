@@ -267,12 +267,26 @@ async function updateOverviewFile(projects) {
     const filePath = path.join(DOCS_DIR, '0001.md');
     let content = fs.readFileSync(filePath, 'utf8');
 
+    console.log('Reading content from 0001.md...');
+    console.log('First 200 characters of content:', content.substring(0, 200));
+
     // Keep the frontmatter and content until the MeshJS Proposal Overview section
     const frontmatterMatch = content.match(/^---\n(?:[^\n]*\n)*?---/);
+    console.log('Frontmatter match:', frontmatterMatch ? 'Found' : 'Not found');
+    if (frontmatterMatch) {
+        console.log('Frontmatter content:', frontmatterMatch[0]);
+    }
+
     const overviewMatch = content.match(/^# Project Catalyst Proposals[\s\S]*?\n## MeshJS Proposal Overview/);
+    console.log('Overview match:', overviewMatch ? 'Found' : 'Not found');
+    if (overviewMatch) {
+        console.log('Overview content length:', overviewMatch[0].length);
+    }
 
     if (!frontmatterMatch || !overviewMatch) {
         console.error('Could not find frontmatter or overview section in 0001.md');
+        console.error('Frontmatter match:', frontmatterMatch ? 'Found' : 'Not found');
+        console.error('Overview match:', overviewMatch ? 'Found' : 'Not found');
         return;
     }
 
