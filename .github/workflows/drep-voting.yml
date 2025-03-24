@@ -36,7 +36,7 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add voting-history/**/*.md
+        git add apps/docs/src/pages/en/drep-voting/*.md
         git commit -m "Update DRep voting history and rationales"
         
     - name: Push changes

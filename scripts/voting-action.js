@@ -27,10 +27,39 @@ if (!organizationName) {
     process.exit(1);
 }
 
-// Create voting-history directory if it doesn't exist
-const votingHistoryDir = path.join(__dirname, '..', 'voting-history');
-if (!fs.existsSync(votingHistoryDir)) {
-    fs.mkdirSync(votingHistoryDir, { recursive: true });
+// Define the base directory for voting history files
+const votingHistoryDir = path.join(__dirname, '..', 'apps', 'docs', 'src', 'pages', 'en', 'drep-voting');
+
+// Function to read front matter from a file
+function readFrontMatter(filePath) {
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+        if (frontMatterMatch) {
+            const frontMatter = frontMatterMatch[1];
+            const yearMatch = frontMatter.match(/title:\s*(\d{4})/);
+            if (yearMatch) {
+                return parseInt(yearMatch[1]);
+            }
+        }
+    } catch (error) {
+        console.warn(`Could not read front matter from ${filePath}:`, error.message);
+    }
+    return null;
+}
+
+// Function to find the correct file for a given year
+function findFileForYear(year) {
+    const files = fs.readdirSync(votingHistoryDir);
+    for (const file of files) {
+        if (file.endsWith('.md')) {
+            const fileYear = readFrontMatter(path.join(votingHistoryDir, file));
+            if (fileYear === year) {
+                return path.join(votingHistoryDir, file);
+            }
+        }
+    }
+    return null;
 }
 
 async function fetchMetadata(metaUrl) {
@@ -141,13 +170,18 @@ function generateVoteTable(vote, proposalDetails, metadata) {
 
 // Function to generate yearly markdown file
 function generateYearlyMarkdown(votes, year) {
-    const yearDir = path.join(votingHistoryDir, year.toString());
-    if (!fs.existsSync(yearDir)) {
-        fs.mkdirSync(yearDir, { recursive: true });
+    const filePath = findFileForYear(year);
+    if (!filePath) {
+        console.error(`No file found for year ${year}`);
+        return;
     }
 
-    const yearFile = path.join(yearDir, `${year}-votes.md`);
-    let content = `# DRep Voting History for ${year}\n\n`;
+    // Read the existing front matter
+    const content = fs.readFileSync(filePath, 'utf8');
+    const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    const frontMatter = frontMatterMatch ? frontMatterMatch[0] : '';
+
+    let newContent = `${frontMatter}\n\n# DRep Voting History for ${year}\n\n`;
 
     // Sort votes by submission date
     votes.sort((a, b) => new Date(b.blockTime) - new Date(a.blockTime));
@@ -155,13 +189,13 @@ function generateYearlyMarkdown(votes, year) {
     // Add each vote table with a separator
     votes.forEach((vote, index) => {
         if (index > 0) {
-            content += '\n\n---\n\n'; // Add separator between votes
+            newContent += '\n\n---\n\n'; // Add separator between votes
         }
-        content += vote.table + '\n';
+        newContent += vote.table + '\n';
     });
 
-    fs.writeFileSync(yearFile, content);
-    console.log(`Generated yearly markdown file: ${year}-votes.md`);
+    fs.writeFileSync(filePath, newContent);
+    console.log(`Updated markdown file for year ${year}: ${filePath}`);
 }
 
 async function getDRepVotes(drepId) {
