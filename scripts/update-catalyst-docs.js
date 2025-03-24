@@ -277,7 +277,7 @@ async function updateOverviewFile(projects) {
         console.log('Frontmatter content:', frontmatterMatch[0]);
     }
 
-    const overviewMatch = content.match(/^# Project Catalyst Proposals[\s\S]*?\n## MeshJS Proposal Overview/);
+    const overviewMatch = content.match(/# Project Catalyst Proposals[\s\S]*?\n## MeshJS Proposal Overview/);
     console.log('Overview match:', overviewMatch ? 'Found' : 'Not found');
     if (overviewMatch) {
         console.log('Overview content length:', overviewMatch[0].length);
