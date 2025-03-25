@@ -3,6 +3,7 @@ name: Update Catalyst Proposal Documentation
 on:
   schedule:
     - cron: '0 0 * * 1'  # Runs at Midnight UTC every Monday
+    - cron: '0 0 * * 4'  # Runs at midnight UTC every Thursday
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 permissions:

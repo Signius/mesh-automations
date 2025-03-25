@@ -155,7 +155,7 @@ function generateProjectTable(project, milestonesCompleted) {
 
     // Create standard markdown table which will work more consistently across renderers
     const tableMarkdown = `
-| Property | Value |
+| Property${' '.repeat(17)} | Value${' '.repeat(60)} |
 |:---------|:------|
 | **Project ID** | ${project.project_id} |
 | **Name** | ${project.name} |

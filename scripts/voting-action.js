@@ -170,7 +170,7 @@ function generateVoteTable(vote, proposalDetails, metadata) {
 | Vote           | ${voteText} |
 | Vote Submitted | ${submittedDate} |
 | Rationale       | ${rationale} |
-|Link|https://adastat.net/transactions/${vote.voteTxHash || 'N/A'} |`;
+| Link | [adastat tx link](https://adastat.net/transactions/${vote.voteTxHash || 'N/A'}) |`;
 }
 
 // Function to generate yearly markdown file
