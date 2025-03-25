@@ -263,9 +263,11 @@ function generateSummaryTable(projects) {
                 // Format the project name
                 const formattedName = formatText(projectDetails.name, 40);
                 const linkName = projectDetails.name.toLowerCase()
-                    .replace(/\s+[^a-z0-9\s]\s+/g, '--')  // Replace " special_char " with "--"
-                    .replace(/[^a-z0-9\s-]/g, '')        // Replace other special chars with spaces
-                    .replace(/\s+/g, '-');              //
+                    .replace(/[:\s]+/g, '-')  // Replace colons and spaces with dashes
+                    .replace(/&/g, '--')  // Replace ampersands with double dashes
+                    .replace(/[^a-z0-9-]/g, '')  // Remove any other special characters
+                    .replace(/-+/g, '-')  // Replace multiple dashes with a single dash
+                    .replace(/^-|-$/g, '');  // Remove leading/trailing dashes
 
                 // Add project row with fund prefix and linked title using project name
                 summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}#${linkName}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
