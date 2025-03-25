@@ -155,7 +155,7 @@ function formatText(text, maxLength = 70) {
  */
 function generateProjectTable(project, milestonesCompleted) {
     // Add heading for project ID that can be linked to
-    let tableMarkdown = `## ${project.project_id}
+    let tableMarkdown = `#### ${project.project_id}
 
 `;
 
@@ -261,7 +261,7 @@ function generateSummaryTable(projects) {
                 const fundBar = '█'.repeat(fundFilled) + '·'.repeat(fundEmpty);
 
                 // Format the project name
-                const formattedName = formatText(projectDetails.name, 40);
+                const formattedName = formatText(projectDetails.name, 50);
 
                 // Add project row with fund prefix and linked title
                 summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}#${projectDetails.project_id}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
