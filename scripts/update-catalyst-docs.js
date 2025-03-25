@@ -154,6 +154,11 @@ function formatText(text, maxLength = 70) {
  * Generates markdown for a project table.
  */
 function generateProjectTable(project, milestonesCompleted) {
+    // Add heading for project ID that can be linked to
+    let tableMarkdown = `## ${project.project_id}
+
+`;
+
     // Format the budget to include commas for thousands
     const formattedBudget = new Intl.NumberFormat('en-US').format(project.budget);
 
@@ -187,8 +192,7 @@ function generateProjectTable(project, milestonesCompleted) {
     const formattedName = formatText(project.name, 70);
 
     // Create standard markdown table which will work more consistently across renderers
-    const tableMarkdown = `
-| Proposal Details | ${'▪️'.repeat(25)} |
+    tableMarkdown += `| Proposal Details | ${'▪️'.repeat(25)} |
 |:---------|:------|
 | **Project ID** | ${project.project_id} |
 | **Name** | ${formattedName} |
@@ -257,10 +261,10 @@ function generateSummaryTable(projects) {
                 const fundBar = '█'.repeat(fundFilled) + '·'.repeat(fundEmpty);
 
                 // Format the project name
-                const formattedName = formatText(projectDetails.name, 30);
+                const formattedName = formatText(projectDetails.name, 40);
 
                 // Add project row with fund prefix and linked title
-                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
+                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}#${projectDetails.project_id}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
             });
         });
 
