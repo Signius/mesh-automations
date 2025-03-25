@@ -261,7 +261,7 @@ function generateSummaryTable(projects) {
                 const fundBar = '█'.repeat(fundFilled) + '·'.repeat(fundEmpty);
 
                 // Format the project name
-                const formattedName = formatText(projectDetails.name, 40);
+                const formattedName = formatText(projectDetails.name, 70);
 
                 // Add project row with fund prefix and linked title using project ID
                 // Make the project ID a link to the fund page with an anchor to the specific project
