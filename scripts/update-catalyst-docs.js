@@ -155,7 +155,7 @@ function formatText(text, maxLength = 70) {
  */
 function generateProjectTable(project, milestonesCompleted) {
     // Add heading for project ID that can be linked to
-    let tableMarkdown = `#### ${project.project_id}
+    let tableMarkdown = `###### ${project.project_id}
 
 `;
 

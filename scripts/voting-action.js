@@ -203,6 +203,39 @@ function generateYearlyMarkdown(votes, year) {
     console.log(`Updated markdown file for year ${year}: ${filePath}`);
 }
 
+// Function to update Annual Records section in index file
+function updateAnnualRecords() {
+    const indexFilePath = path.join(votingHistoryDir, '1001.md');
+    try {
+        let content = fs.readFileSync(indexFilePath, 'utf8');
+
+        // Find all markdown files in the voting history directory
+        const files = fs.readdirSync(votingHistoryDir);
+        const yearFiles = files
+            .filter(file => file.endsWith('.md') && file !== '1001.md')
+            .map(file => {
+                const year = readFrontMatter(path.join(votingHistoryDir, file));
+                return { file, year };
+            })
+            .filter(({ year }) => year !== null)
+            .sort((a, b) => b.year - a.year); // Sort by year descending
+
+        // Generate the new Annual Records section
+        const annualRecordsSection = `## Annual Records\n\n${yearFiles
+            .map(({ file, year }) => `- [${year} Voting History](./${file})`)
+            .join('\n')}\n\n`;
+
+        // Replace the existing Annual Records section
+        content = content.replace(/## Annual Records\n\n[\s\S]*?(?=\n##|$)/, annualRecordsSection);
+
+        // Write the updated content back to the file
+        fs.writeFileSync(indexFilePath, content);
+        console.log('Updated Annual Records section in index file');
+    } catch (error) {
+        console.error('Error updating Annual Records section:', error.message);
+    }
+}
+
 async function getDRepVotes(drepId) {
     try {
         const apiKey = process.env.KOIOS_API_KEY;
@@ -277,6 +310,9 @@ async function getDRepVotes(drepId) {
         for (const [year, votes] of Object.entries(votesByYear)) {
             generateYearlyMarkdown(votes, parseInt(year));
         }
+
+        // Update the Annual Records section after processing all votes
+        updateAnnualRecords();
 
         console.log('All votes processed and organized by year successfully');
     } catch (error) {
