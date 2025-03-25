@@ -121,6 +121,45 @@ async function fetchSnapshotData(projectId) {
 }
 
 /**
+ * Formats a text to ensure it doesn't exceed the maximum length.
+ * If it does, it will be truncated and split with line breaks.
+ * @param {string} text - The text to format
+ * @param {number} maxLength - Maximum length per line
+ * @return {string} Formatted text
+ */
+function formatText(text, maxLength = 50) {
+    if (!text || text.length <= maxLength) return text;
+
+    // Split the text into words
+    const words = text.split(' ');
+    let formattedText = '';
+    let currentLine = '';
+
+    for (const word of words) {
+        // If adding this word exceeds maxLength, add a line break
+        if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+            formattedText += currentLine.trim() + '<br>';
+            currentLine = '';
+        }
+
+        currentLine += word + ' ';
+    }
+
+    // Add the final line
+    formattedText += currentLine.trim();
+    return formattedText;
+}
+
+/**
+ * Generates a fixed-width separator row for consistent table width
+ * @param {number} width - The number of characters in the row
+ * @return {string} A separator row
+ */
+function generateTableWidthRow(width = 100) {
+    return `| **Table Width** | ${'─'.repeat(width)} |\n`;
+}
+
+/**
  * Generates markdown for a project table.
  */
 function generateProjectTable(project, milestonesCompleted) {
@@ -153,15 +192,19 @@ function generateProjectTable(project, milestonesCompleted) {
         statusEmoji = '📋';
     }
 
+    // Format the project name to ensure it doesn't exceed the max length
+    const formattedName = formatText(project.name, 50);
+
     // Create standard markdown table which will work more consistently across renderers
     const tableMarkdown = `
-| Property${'\u00A0'.repeat(17)} | Value${'\u00A0'.repeat(60)} |
+| Property | Value |
 |:---------|:------|
+${generateTableWidthRow(80)}
 | **Project ID** | ${project.project_id} |
-| **Name** | ${project.name} |
+| **Name** | ${formattedName} |
 | **Link** | [Open full project](${project.url}) |
 | **Milestones** | [Milestones](${MILESTONES_BASE_URL}/projects/${project.project_id}) |
-| **${project.category.includes('Challenge') ? 'Challenge' : 'Funding Category'}** | ${project.category} |
+| **${project.category.includes('Challenge') ? 'Challenge' : 'Funding Category'}** | ${formatText(project.category, 50)} |
 | **Proposal Budget** | ADA ${formattedBudget} |
 | **Status** | ${statusEmoji} ${project.status} |
 | **Milestones completed** | ${milestonesCompleted}/${project.milestones_qty} (${milestonePercentComplete}%) |
@@ -223,8 +266,11 @@ function generateSummaryTable(projects) {
                 const fundEmpty = 20 - fundFilled;
                 const fundBar = '█'.repeat(fundFilled) + '·'.repeat(fundEmpty);
 
+                // Format the project name
+                const formattedName = formatText(projectDetails.name, 30);
+
                 // Add project row with fund prefix
-                summaryMarkdown += `| F${fundNumber} - ${projectDetails.name} | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
+                summaryMarkdown += `| F${fundNumber} - ${formattedName} | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
             });
         });
 
@@ -351,7 +397,7 @@ async function updateOverviewFile(projects) {
         const fundProjects = projects.filter(p => String(p.projectDetails.project_id).substring(0, 2) === fundNumber);
         newContent += `#### [Fund ${fundNumber}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')})\n`;
         fundProjects.forEach(project => {
-            newContent += `- ${project.projectDetails.name} (${project.projectDetails.project_id})\n`;
+            newContent += `- ${formatText(project.projectDetails.name, 50)} (${project.projectDetails.project_id})\n`;
         });
         newContent += '\n';
     });
