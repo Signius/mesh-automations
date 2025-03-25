@@ -259,8 +259,8 @@ function generateSummaryTable(projects) {
                 // Format the project name
                 const formattedName = formatText(projectDetails.name, 30);
 
-                // Add project row with fund prefix
-                summaryMarkdown += `| F${fundNumber} - ${formattedName} | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
+                // Add project row with fund prefix and linked title
+                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
             });
         });
 
