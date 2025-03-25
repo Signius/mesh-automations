@@ -127,7 +127,7 @@ async function fetchSnapshotData(projectId) {
  * @param {number} maxLength - Maximum length per line
  * @return {string} Formatted text
  */
-function formatText(text, maxLength = 60) {
+function formatText(text, maxLength = 70) {
     if (!text || text.length <= maxLength) return text;
 
     // Split the text into words
@@ -184,11 +184,11 @@ function generateProjectTable(project, milestonesCompleted) {
     }
 
     // Format the project name to ensure it doesn't exceed the max length
-    const formattedName = formatText(project.name, 60);
+    const formattedName = formatText(project.name, 70);
 
     // Create standard markdown table which will work more consistently across renderers
     const tableMarkdown = `
-| Proposal Details | ${'─'.repeat(50)} |
+| Proposal Details | ${'▪️'.repeat(48)} |
 |:---------|:------|
 | **Project ID** | ${project.project_id} |
 | **Name** | ${formattedName} |
