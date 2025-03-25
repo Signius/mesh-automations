@@ -154,8 +154,8 @@ function formatText(text, maxLength = 70) {
  * Generates markdown for a project table.
  */
 function generateProjectTable(project, milestonesCompleted) {
-    // Add heading for project name that can be linked to
-    let tableMarkdown = `#### ${project.name}
+    // Add heading for project ID that can be linked to
+    let tableMarkdown = `#### ${project.project_id}
 
 `;
 
@@ -188,8 +188,8 @@ function generateProjectTable(project, milestonesCompleted) {
         statusEmoji = '📋';
     }
 
-    // Format the project name to ensure it doesn't exceed the max length
-    const formattedName = formatText(project.name, 70);
+    // Format the project name
+    const formattedName = formatText(project.name, 40);
 
     // Create standard markdown table which will work more consistently across renderers
     tableMarkdown += `| Proposal Details | ${'▪️'.repeat(25)} |
@@ -262,15 +262,9 @@ function generateSummaryTable(projects) {
 
                 // Format the project name
                 const formattedName = formatText(projectDetails.name, 40);
-                const linkName = projectDetails.name.toLowerCase()
-                    .replace(/[:\s]+/g, '-')  // Replace colons and spaces with dashes
-                    .replace(/&/g, '--')  // Replace ampersands with double dashes
-                    .replace(/[^a-z0-9-]/g, '')  // Remove any other special characters
-                    .replace(/-+/g, '-')  // Replace multiple dashes with a single dash
-                    .replace(/^-|-$/g, '');  // Remove leading/trailing dashes
 
-                // Add project row with fund prefix and linked title using project name
-                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}#${linkName}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
+                // Add project row with fund prefix and linked title using project ID
+                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}#${projectDetails.project_id}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
             });
         });
 
