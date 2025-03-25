@@ -196,7 +196,7 @@ function generateProjectTable(project, milestonesCompleted) {
 |:---------|:------|
 | **Project ID** | ${project.project_id} |
 | **Name** | ${formattedName} |
-| **Link** | [Open full project](${project.url}) |
+| **Link** | [Open full project](/en/catalyst-proposals/${project.project_id.substring(0, 4)}#${encodeURIComponent(project.name.toLowerCase().replace(/\s+/g, '-'))}) |
 | **Milestones** | [Milestones](${MILESTONES_BASE_URL}/projects/${project.project_id}) |
 | **${project.category.includes('Challenge') ? 'Challenge' : 'Funding Category'}** | ${formatText(project.category, 50)} |
 | **Proposal Budget** | ADA ${formattedBudget} |
@@ -264,7 +264,7 @@ function generateSummaryTable(projects) {
                 const formattedName = formatText(projectDetails.name, 40);
 
                 // Add project row with fund prefix and linked title using project name
-                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${fundNumber.padStart(4, '0')}#${encodeURIComponent(projectDetails.name)}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
+                summaryMarkdown += `| F${fundNumber} - [${formattedName}](/en/catalyst-proposals/${projectDetails.project_id.substring(0, 4)}#${encodeURIComponent(projectDetails.name.toLowerCase().replace(/\s+/g, '-'))}) | ${projectDetails.project_id} | \`${milestoneBar}\` ${milestonePercentComplete}% | \`${fundBar}\` ${fundPercentComplete}% |\n`;
             });
         });
 
