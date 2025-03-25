@@ -151,15 +151,6 @@ function formatText(text, maxLength = 50) {
 }
 
 /**
- * Generates a fixed-width separator row for consistent table width
- * @param {number} width - The number of characters in the row
- * @return {string} A separator row
- */
-function generateTableWidthRow(width = 100) {
-    return `| **Table Width** | ${'─'.repeat(width)} |\n`;
-}
-
-/**
  * Generates markdown for a project table.
  */
 function generateProjectTable(project, milestonesCompleted) {
@@ -199,7 +190,7 @@ function generateProjectTable(project, milestonesCompleted) {
     const tableMarkdown = `
 | Property | Value |
 |:---------|:------|
-${generateTableWidthRow(80)}
+| **Table Width** | ${'─'.repeat(55)} |
 | **Project ID** | ${project.project_id} |
 | **Name** | ${formattedName} |
 | **Link** | [Open full project](${project.url}) |
