@@ -32,9 +32,26 @@ jobs:
           cp -r source/apps/docs/src/pages target/apps/docs/src/
           
       - name: Commit and push changes
+        id: commit
         run: |
           cd target
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add apps/docs/src/pages
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Sync docs from mesh-automations" && git push) 
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "Sync docs from mesh-automations"
+            git push
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send Discord notification
+        if: steps.commit.outputs.changes == 'true'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          title: "Docs Sync Notification"
+          description: "Documentation has been successfully synced from mesh-automations to mesh-governance"
+          color: 0x00ff00 
