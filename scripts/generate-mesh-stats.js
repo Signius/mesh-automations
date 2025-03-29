@@ -45,6 +45,11 @@ async function fetchMeshStats(githubToken) {
     const lastMonth = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core');
     const lastYear = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/core');
     const reactPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/react');
+    const transactionPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/transaction');
+    const walletPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/wallet');
+    const providerPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/provider');
+    const coreCslPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core-csl');
+    const coreCstPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core-cst');
 
     console.log('NPM Downloads:');
     console.log('- Last 24 Hours:', lastDay.data.downloads);
@@ -52,6 +57,11 @@ async function fetchMeshStats(githubToken) {
     console.log('- Last Month:', lastMonth.data.downloads);
     console.log('- Last Year:', lastYear.data.downloads);
     console.log('- React Package Monthly:', reactPackageDownloads.data.downloads);
+    console.log('- Transaction Package Monthly:', transactionPackageDownloads.data.downloads);
+    console.log('- Wallet Package Monthly:', walletPackageDownloads.data.downloads);
+    console.log('- Provider Package Monthly:', providerPackageDownloads.data.downloads);
+    console.log('- Core CSL Package Monthly:', coreCslPackageDownloads.data.downloads);
+    console.log('- Core CST Package Monthly:', coreCstPackageDownloads.data.downloads);
 
     // Get package version info
     const packageInfo = await axios.get('https://registry.npmjs.org/@meshsdk/core');
@@ -92,6 +102,11 @@ async function fetchMeshStats(githubToken) {
                 last_year: lastYear.data.downloads
             },
             react_package_downloads: reactPackageDownloads.data.downloads,
+            transaction_package_downloads: transactionPackageDownloads.data.downloads,
+            wallet_package_downloads: walletPackageDownloads.data.downloads,
+            provider_package_downloads: providerPackageDownloads.data.downloads,
+            core_csl_package_downloads: coreCslPackageDownloads.data.downloads,
+            core_cst_package_downloads: coreCstPackageDownloads.data.downloads,
             latest_version: latestVersion,
             dependents_count: dependentsResponse.data.total
         },
@@ -175,7 +190,7 @@ Last updated: ${currentDate}
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:---------|:------|
 | Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
-| Total mentions of @meshsdk/core | ${stats.github.core_in_any_file} |
+| Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
 
 ## NPM Statistics
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
@@ -184,6 +199,11 @@ Last updated: ${currentDate}
 | Total Dependents | ${stats.npm.dependents_count} |
 | @meshsdk/core Monthly Downloads | ${stats.npm.downloads.last_month} |
 | @meshsdk/react Monthly Downloads | ${stats.npm.react_package_downloads} |
+| @meshsdk/transaction Monthly Downloads | ${stats.npm.transaction_package_downloads} |
+| @meshsdk/wallet Monthly Downloads | ${stats.npm.wallet_package_downloads} |
+| @meshsdk/provider Monthly Downloads | ${stats.npm.provider_package_downloads} |
+| @meshsdk/core-csl Monthly Downloads | ${stats.npm.core_csl_package_downloads} |
+| @meshsdk/core-cst Monthly Downloads | ${stats.npm.core_cst_package_downloads} |
 
 ## Download Statistics for @meshsdk/core
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
