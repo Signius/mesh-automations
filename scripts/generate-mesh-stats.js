@@ -58,7 +58,7 @@ async function fetchMeshStats(githubToken) {
     const latestVersion = packageInfo.data['dist-tags'].latest;
     console.log('Latest Version:', latestVersion);
 
-    // Get dependents count
+    // Get dependents count and unique owner count
     const dependentsResponse = await axios.get(
         'https://registry.npmjs.org/-/v1/search',
         {
@@ -69,6 +69,23 @@ async function fetchMeshStats(githubToken) {
         }
     );
     console.log('Total Dependents:', dependentsResponse.data.total);
+
+    // Get unique owner count
+    const uniqueOwnersResponse = await axios.get(
+        'https://registry.npmjs.org/-/v1/search',
+        {
+            params: {
+                text: 'dependencies:@meshsdk/core',
+                size: 1,
+                from: 0,
+                quality: 1,
+                maintenance: 1,
+                popularity: 1,
+                uniqueOwner: true
+            }
+        }
+    );
+    console.log('Unique Owners:', uniqueOwnersResponse.data.total);
 
     // Create npm-stat URLs
     const currentDate = new Date().toISOString().split('T')[0];
@@ -93,7 +110,8 @@ async function fetchMeshStats(githubToken) {
             },
             react_package_downloads: reactPackageDownloads.data.downloads,
             latest_version: latestVersion,
-            dependents_count: dependentsResponse.data.total
+            dependents_count: dependentsResponse.data.total,
+            unique_owners_count: uniqueOwnersResponse.data.total
         },
         urls: {
             npm_stat_url: npmStatUrl,
