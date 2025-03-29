@@ -23,8 +23,61 @@ jobs:
                "https://api.github.com/search/code?q=%22%40meshsdk/core%22" \
                | jq '.total_count')
           
-          # Display results
+          # Get npm download stats for various time periods
+          LAST_DAY=$(curl -s "https://api.npmjs.org/downloads/point/last-day/@meshsdk/core" | jq '.')
+          LAST_WEEK=$(curl -s "https://api.npmjs.org/downloads/point/last-week/@meshsdk/core" | jq '.')
+          LAST_MONTH=$(curl -s "https://api.npmjs.org/downloads/point/last-month/@meshsdk/core" | jq '.')
+          LAST_YEAR=$(curl -s "https://api.npmjs.org/downloads/point/last-year/@meshsdk/core" | jq '.')
+          
+          # Get weekly downloads for the past month (more granular data)
+          CURRENT_DATE=$(date +"%Y-%m-%d")
+          ONE_MONTH_AGO=$(date -d "1 month ago" +"%Y-%m-%d")
+          WEEKLY_TREND=$(curl -s "https://api.npmjs.org/downloads/range/${ONE_MONTH_AGO}:${CURRENT_DATE}/@meshsdk/core" | jq '.')
+          
+          # Get data for related packages if any
+          REACT_PACKAGE=$(curl -s "https://api.npmjs.org/downloads/point/last-month/@meshsdk/react" | jq '.')
+          
+          # Get package version info
+          PACKAGE_INFO=$(curl -s "https://registry.npmjs.org/@meshsdk/core" | jq '{"version": .["dist-tags"].latest, "versions": [.versions | keys[] | select(. != "_id" && . != "_rev" && . != "readme")] | sort | reverse | .[0:10]}')
+          
+          # Get dependents count from npm
+          DEPENDENTS_INFO=$(curl -s "https://registry.npmjs.org/-/v1/search?text=dependencies:@meshsdk/core&size=1" | jq '.total')
+          
+          # Create npm-stat URLs
+          CURRENT_DATE=$(date +"%Y-%m-%d")
+          ONE_YEAR_AGO=$(date -d "1 year ago" +"%Y-%m-%d")
+          NPM_STAT_URL="https://npm-stat.com/charts.html?package=@meshsdk/core&from=${ONE_YEAR_AGO}&to=${CURRENT_DATE}"
+          NPM_STAT_COMPARE_URL="https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=${ONE_YEAR_AGO}&to=${CURRENT_DATE}"
+          
+          # Output complete JSON result
           echo "{
-            \"core_in_package_json\": $CORE_COUNT,
-            \"core_in_any_file\": $CORE_ANY_COUNT
-          }"
+            \"github\": {
+              \"core_in_package_json\": $CORE_COUNT,
+              \"core_in_any_file\": $CORE_ANY_COUNT
+            },
+            \"npm\": {
+              \"downloads\": {
+                \"last_day\": $LAST_DAY,
+                \"last_week\": $LAST_WEEK,
+                \"last_month\": $LAST_MONTH,
+                \"last_year\": $LAST_YEAR
+              },
+              \"weekly_trend\": $WEEKLY_TREND,
+              \"react_package\": $REACT_PACKAGE,
+              \"package_info\": $PACKAGE_INFO,
+              \"dependents_count\": $DEPENDENTS_INFO
+            },
+            \"urls\": {
+              \"npm_stat_url\": \"$NPM_STAT_URL\",
+              \"npm_stat_compare_url\": \"$NPM_STAT_COMPARE_URL\"
+            }
+          }" > mesh_stats.json
+          
+          # Display results in the action log
+          cat mesh_stats.json
+      
+      - name: Upload stats as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mesh-sdk-stats
+          path: mesh_stats.json
