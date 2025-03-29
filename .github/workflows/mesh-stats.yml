@@ -13,5 +13,5 @@ jobs:
         run: |
           curl -H "Accept: application/vnd.github.v3+json" \
                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               "https://api.github.com/search/code?q=%22%40meshsdk/core%22" \
+               "https://api.github.com/search/code?q=(filename:package.json%20OR%20filename:package-lock.json%20OR%20filename:yarn.lock)%20AND%20(%22%40meshsdk/core%22:%20OR%20%22%40meshsdk/core%22:%20%5E%20OR%20%22%40meshsdk/core%22:%20%7E)" \
                | jq '{total_count: .total_count, incomplete_results: .incomplete_results}'
