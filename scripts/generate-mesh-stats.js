@@ -198,11 +198,6 @@ Last updated: ${currentDate}
 |:-----------|:-------------|
 | Total Unique Contributors | ${stats.contributors.unique_count} |
 
-### Contributors by Repository
-${Object.entries(stats.contributors.by_repository)
-            .map(([repo, contributors]) => `#### ${repo}\n${contributors.length} contributors`)
-            .join('\n\n')}
-
 ## Useful Links
 - [NPM Stats Chart](${stats.urls.npm_stat_url})
 - [NPM Stats Comparison](${stats.urls.npm_stat_compare_url})
