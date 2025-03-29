@@ -128,9 +128,10 @@ Last updated: ${currentDate}
 |--------|-------|
 | Latest Version | ${stats.npm.latest_version} |
 | Total Dependents | ${stats.npm.dependents_count} |
+| @meshsdk/core Monthly Downloads | ${stats.npm.downloads.last_month} |
 | @meshsdk/react Monthly Downloads | ${stats.npm.react_package_downloads} |
 
-## Download Statistics
+## Download Statistics for @meshsdk/core
 | Period | Downloads |
 |--------|-----------|
 | Last 24 Hours | ${stats.npm.downloads.last_day} |
