@@ -199,12 +199,14 @@ Last updated: ${currentDate}
 | Total Unique Contributors | ${stats.contributors.unique_count} |
 
 ### Contributors
-${stats.contributors.unique_contributors.map(contributor => {
-        const contributorData = Object.values(stats.contributors.by_repository)
-            .flat()
-            .find(c => c.login === contributor);
-        return `[![${contributor}](https://github.com/${contributor}.png?size=50)](https://github.com/${contributor})`;
-    }).join(' ')}
+${stats.contributors.unique_contributors
+            .filter(contributor => !contributor.includes('github-actions[bot]') && !contributor.includes('actions'))
+            .map(contributor => {
+                const contributorData = Object.values(stats.contributors.by_repository)
+                    .flat()
+                    .find(c => c.login === contributor);
+                return `[![${contributor}](https://github.com/${contributor}.png?size=50)](https://github.com/${contributor})`;
+            }).join(' ')}
 
 ## Useful Links
 - [NPM Stats Chart](${stats.urls.npm_stat_url})
