@@ -8,35 +8,71 @@ const __dirname = path.dirname(__filename);
 
 async function fetchMeshStats(githubToken) {
     console.log('Fetching GitHub statistics...');
-    // Search for @meshsdk/core in package.json
-    const corePackageJsonResponse = await axios.get(
-        'https://api.github.com/search/code',
-        {
-            params: {
-                q: '"@meshsdk/core" in:file filename:package.json'
-            },
-            headers: {
-                'Accept': 'application/vnd.github.v3+json',
-                'Authorization': `token ${githubToken}`
+
+    // Helper function to fetch all pages of results
+    async function fetchAllPages(url, params) {
+        let allItems = [];
+        let page = 1;
+        let hasMore = true;
+
+        while (hasMore) {
+            const response = await axios.get(url, {
+                params: {
+                    ...params,
+                    page,
+                    per_page: 100
+                },
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Authorization': `token ${githubToken}`
+                }
+            });
+
+            allItems = allItems.concat(response.data.items);
+
+            // Check if there are more pages
+            if (response.data.items.length < 100) {
+                hasMore = false;
+            } else {
+                page++;
+                // Add a small delay to respect rate limits
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
         }
+
+        return {
+            items: allItems,
+            total_count: response.data.total_count
+        };
+    }
+
+    // Search for @meshsdk/core in package.json
+    console.log('Fetching package.json results...');
+    const corePackageJsonResponse = await fetchAllPages(
+        'https://api.github.com/search/code',
+        {
+            q: '"@meshsdk/core" in:file filename:package.json'
+        }
     );
-    console.log('GitHub package.json count:', corePackageJsonResponse.data.total_count);
+    console.log('GitHub package.json count:', corePackageJsonResponse.total_count);
+
+    // Extract unique repository owners from the search results
+    const uniqueOwners = new Set(corePackageJsonResponse.items.map(item => item.repository.owner.login));
+    console.log('Unique repository owners:', uniqueOwners.size);
 
     // Search for @meshsdk/core in any file
-    const coreAnyFileResponse = await axios.get(
+    console.log('Fetching general search results...');
+    const coreAnyFileResponse = await fetchAllPages(
         'https://api.github.com/search/code',
         {
-            params: {
-                q: '"@meshsdk/core"'
-            },
-            headers: {
-                'Accept': 'application/vnd.github.v3+json',
-                'Authorization': `token ${githubToken}`
-            }
+            q: '"@meshsdk/core"'
         }
     );
-    console.log('GitHub total mentions:', coreAnyFileResponse.data.total_count);
+    console.log('GitHub total mentions:', coreAnyFileResponse.total_count);
+
+    // Extract unique repository owners from the general search results
+    const uniqueOwnersGeneral = new Set(coreAnyFileResponse.items.map(item => item.repository.owner.login));
+    console.log('Unique repository owners (general search):', uniqueOwnersGeneral.size);
 
     console.log('\nFetching NPM statistics...');
     // Get npm download stats
@@ -81,8 +117,10 @@ async function fetchMeshStats(githubToken) {
 
     const stats = {
         github: {
-            core_in_package_json: corePackageJsonResponse.data.total_count,
-            core_in_any_file: coreAnyFileResponse.data.total_count
+            core_in_package_json: corePackageJsonResponse.total_count,
+            core_in_any_file: coreAnyFileResponse.total_count,
+            unique_package_json_owners: uniqueOwners.size,
+            unique_general_owners: uniqueOwnersGeneral.size
         },
         npm: {
             downloads: {
@@ -175,7 +213,9 @@ Last updated: ${currentDate}
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:---------|:------|
 | Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
+| Unique repositories using @meshsdk/core | ${stats.github.unique_package_json_owners} |
 | Total mentions of @meshsdk/core | ${stats.github.core_in_any_file} |
+| Unique repositories mentioning @meshsdk/core | ${stats.github.unique_general_owners} |
 
 ## NPM Statistics
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
@@ -197,16 +237,6 @@ Last updated: ${currentDate}
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:-----------|:-------------|
 | Total Unique Contributors | ${stats.contributors.unique_count} |
-
-### Contributors
-${stats.contributors.unique_contributors
-            .filter(contributor => !contributor.includes('github-actions[bot]') && !contributor.includes('actions'))
-            .map(contributor => {
-                const contributorData = Object.values(stats.contributors.by_repository)
-                    .flat()
-                    .find(c => c.login === contributor);
-                return `[![${contributor}](https://github.com/${contributor}.png?size=50&s=50)](https://github.com/${contributor})`;
-            }).join(' ')}
 
 ## Useful Links
 - [NPM Stats Chart](${stats.urls.npm_stat_url})
