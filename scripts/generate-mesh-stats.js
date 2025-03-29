@@ -205,7 +205,7 @@ ${stats.contributors.unique_contributors
                 const contributorData = Object.values(stats.contributors.by_repository)
                     .flat()
                     .find(c => c.login === contributor);
-                return `[![${contributor}](https://avatars.githubusercontent.com/${contributor}?size=50)](https://github.com/${contributor})`;
+                return `[![${contributor}](https://github.com/${contributor}.png?size=50&s=50)](https://github.com/${contributor})`;
             }).join(' ')}
 
 ## Useful Links
