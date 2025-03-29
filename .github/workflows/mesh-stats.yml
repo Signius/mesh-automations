@@ -11,7 +11,34 @@ jobs:
     steps:
       - name: Search for Mesh SDK Usage
         run: |
-          curl -H "Accept: application/vnd.github.v3+json" \
+          # Search for @meshsdk/core in package.json
+          CORE_COUNT=$(curl -s -H "Accept: application/vnd.github.v3+json" \
                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               "https://api.github.com/search/code?q=%22%40meshsdk/core%22+in:file+filename:package.json+filename:yarn.lock" \
-               | jq '{total_count: .total_count, incomplete_results: .incomplete_results}'
+               "https://api.github.com/search/code?q=%22%40meshsdk/core%22+in:file+filename:package.json" \
+               | jq '.total_count')
+          
+          # Search for @meshsdk/core in any file
+          CORE_ANY_COUNT=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               "https://api.github.com/search/code?q=%22%40meshsdk/core%22" \
+               | jq '.total_count')
+          
+          # Search for mesh-sdk in package.json
+          MESH_SDK_COUNT=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               "https://api.github.com/search/code?q=%22mesh-sdk%22+in:file+filename:package.json" \
+               | jq '.total_count')
+          
+          # Search for mesh-sdk in any file
+          MESH_SDK_ANY_COUNT=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               "https://api.github.com/search/code?q=%22mesh-sdk%22" \
+               | jq '.total_count')
+          
+          # Combine and display results
+          echo "{
+            \"core_in_package_json\": $CORE_COUNT,
+            \"core_in_any_file\": $CORE_ANY_COUNT,
+            \"mesh_sdk_in_package_json\": $MESH_SDK_COUNT,
+            \"mesh_sdk_in_any_file\": $MESH_SDK_ANY_COUNT
+          }"
