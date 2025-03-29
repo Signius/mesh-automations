@@ -14,9 +14,10 @@ async function fetchMeshStats(githubToken) {
         let allItems = [];
         let page = 1;
         let hasMore = true;
+        let lastResponse;
 
         while (hasMore) {
-            const response = await axios.get(url, {
+            lastResponse = await axios.get(url, {
                 params: {
                     ...params,
                     page,
@@ -28,10 +29,10 @@ async function fetchMeshStats(githubToken) {
                 }
             });
 
-            allItems = allItems.concat(response.data.items);
+            allItems = allItems.concat(lastResponse.data.items);
 
             // Check if there are more pages
-            if (response.data.items.length < 100) {
+            if (lastResponse.data.items.length < 100) {
                 hasMore = false;
             } else {
                 page++;
@@ -42,7 +43,7 @@ async function fetchMeshStats(githubToken) {
 
         return {
             items: allItems,
-            total_count: response.data.total_count
+            total_count: lastResponse.data.total_count
         };
     }
 
