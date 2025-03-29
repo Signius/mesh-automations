@@ -9,6 +9,44 @@ const __dirname = path.dirname(__filename);
 async function fetchMeshStats(githubToken) {
     console.log('Fetching GitHub statistics...');
 
+    // Helper function to handle rate limits and retries
+    async function fetchWithRetry(url, params, maxRetries = 3) {
+        let retries = 0;
+        while (retries < maxRetries) {
+            try {
+                const response = await axios.get(url, {
+                    params,
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${githubToken}`
+                    }
+                });
+
+                // Check rate limit headers
+                const remaining = parseInt(response.headers['x-ratelimit-remaining']);
+                const reset = parseInt(response.headers['x-ratelimit-reset']);
+
+                if (remaining < 10) {
+                    const waitTime = (reset - Math.floor(Date.now() / 1000)) * 1000;
+                    console.log(`Rate limit low (${remaining} remaining). Waiting ${Math.ceil(waitTime / 1000)} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                }
+
+                return response;
+            } catch (error) {
+                if (error.response?.status === 403 && retries < maxRetries - 1) {
+                    const reset = parseInt(error.response.headers['x-ratelimit-reset']);
+                    const waitTime = (reset - Math.floor(Date.now() / 1000)) * 1000;
+                    console.log(`Rate limit exceeded. Waiting ${Math.ceil(waitTime / 1000)} seconds before retry...`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                    retries++;
+                    continue;
+                }
+                throw error;
+            }
+        }
+    }
+
     // Helper function to fetch all pages of results
     async function fetchAllPages(url, params) {
         let allItems = [];
@@ -17,16 +55,11 @@ async function fetchMeshStats(githubToken) {
         let lastResponse;
 
         while (hasMore) {
-            lastResponse = await axios.get(url, {
-                params: {
-                    ...params,
-                    page,
-                    per_page: 100
-                },
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': `token ${githubToken}`
-                }
+            console.log(`Fetching page ${page}...`);
+            lastResponse = await fetchWithRetry(url, {
+                ...params,
+                page,
+                per_page: 100
             });
 
             allItems = allItems.concat(lastResponse.data.items);
@@ -36,8 +69,8 @@ async function fetchMeshStats(githubToken) {
                 hasMore = false;
             } else {
                 page++;
-                // Add a small delay to respect rate limits
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Add a longer delay between pages to respect rate limits
+                await new Promise(resolve => setTimeout(resolve, 2000));
             }
         }
 
