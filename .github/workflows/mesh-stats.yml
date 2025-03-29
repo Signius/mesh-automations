@@ -75,9 +75,3 @@ jobs:
           
           # Display results in the action log
           cat mesh_stats.json
-      
-      - name: Upload stats as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: mesh-sdk-stats
-          path: mesh_stats.json
