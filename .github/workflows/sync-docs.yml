@@ -2,7 +2,7 @@ name: Sync Docs to Mesh Gov Test
 
 on:
   workflow_run:
-    workflows: ["Update Catalyst Proposal Documentation", "DRep Voting Action"]
+    workflows: ["Update Catalyst Proposal Documentation", "DRep Voting Action", "mesh-stats"]
     types:
       - completed
     branches:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout target repository
         uses: actions/checkout@v4
         with:
-          repository: Andre-Diamond/mesh-governance
+          repository: Andre-Diamond/mesh-gov
           path: target
           token: ${{ secrets.PAT }}
           

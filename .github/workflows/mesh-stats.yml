@@ -2,7 +2,7 @@ name: Mesh SDK Usage Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Run daily at midnight UTC
+    - cron: '0 0 * * 4'  # Run every Thursday at midnight UTC
   workflow_dispatch:
 
 jobs:

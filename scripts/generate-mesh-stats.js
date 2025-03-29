@@ -194,8 +194,8 @@ Last updated: ${currentDate}
 ## GitHub Usage
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:---------|:------|
-| Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
-| Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
+| Public Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
+| Public Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
 
 ## Monthly NPM Package Downloads
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
