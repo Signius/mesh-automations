@@ -107,6 +107,60 @@ async function fetchMeshStats(githubToken) {
     return stats;
 }
 
+async function fetchMeshContributors(githubToken) {
+    console.log('\nFetching repository contributors...');
+
+    // First get all repositories from MeshJS organization
+    const reposResponse = await axios.get(
+        'https://api.github.com/orgs/MeshJS/repos',
+        {
+            headers: {
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': `token ${githubToken}`
+            }
+        }
+    );
+
+    const contributorsData = {};
+    const uniqueContributors = new Set();
+
+    for (const repo of reposResponse.data) {
+        console.log(`Fetching contributors for ${repo.name}...`);
+
+        try {
+            const contributorsResponse = await axios.get(
+                `https://api.github.com/repos/MeshJS/${repo.name}/contributors`,
+                {
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${githubToken}`
+                    }
+                }
+            );
+
+            contributorsData[repo.name] = contributorsResponse.data.map(contributor => ({
+                login: contributor.login,
+                contributions: contributor.contributions,
+                avatar_url: contributor.avatar_url
+            }));
+
+            // Add to unique contributors set
+            contributorsResponse.data.forEach(contributor => {
+                uniqueContributors.add(contributor.login);
+            });
+        } catch (error) {
+            console.error(`Error fetching contributors for ${repo.name}:`, error.message);
+            contributorsData[repo.name] = [];
+        }
+    }
+
+    return {
+        by_repository: contributorsData,
+        unique_count: uniqueContributors.size,
+        unique_contributors: Array.from(uniqueContributors)
+    };
+}
+
 function generateMarkdown(stats) {
     const currentDate = new Date().toLocaleDateString('en-US', {
         year: 'numeric',
@@ -139,6 +193,16 @@ Last updated: ${currentDate}
 | Last Month | ${stats.npm.downloads.last_month} |
 | Last Year | ${stats.npm.downloads.last_year} |
 
+## Contributor Statistics
+| ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
+|:-----------|:-------------|
+| Total Unique Contributors | ${stats.contributors.unique_count} |
+
+### Contributors by Repository
+${Object.entries(stats.contributors.by_repository)
+            .map(([repo, contributors]) => `#### ${repo}\n${contributors.length} contributors`)
+            .join('\n\n')}
+
 ## Useful Links
 - [NPM Stats Chart](${stats.urls.npm_stat_url})
 - [NPM Stats Comparison](${stats.urls.npm_stat_compare_url})
@@ -159,14 +223,23 @@ async function main() {
 
     try {
         console.log('Starting Mesh SDK Stats Generation...\n');
-        const stats = await fetchMeshStats(githubToken);
+        const [stats, contributors] = await Promise.all([
+            fetchMeshStats(githubToken),
+            fetchMeshContributors(githubToken)
+        ]);
+
+        // Combine stats and contributors data
+        const combinedStats = {
+            ...stats,
+            contributors
+        };
 
         // Save JSON data
-        fs.writeFileSync('mesh_stats.json', JSON.stringify(stats, null, 2));
+        fs.writeFileSync('mesh_stats.json', JSON.stringify(combinedStats, null, 2));
         console.log('\nSaved mesh_stats.json');
 
         // Generate and save markdown
-        const markdown = generateMarkdown(stats);
+        const markdown = generateMarkdown(combinedStats);
         const markdownPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', '2001.md');
         fs.writeFileSync(markdownPath, markdown);
         console.log(`Saved markdown to ${markdownPath}`);
