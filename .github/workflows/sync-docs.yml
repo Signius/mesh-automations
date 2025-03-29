@@ -2,7 +2,7 @@ name: Sync Docs to Mesh Gov Test
 
 on:
   workflow_run:
-    workflows: ["Update Catalyst Proposal Documentation", "DRep Voting Action", "mesh-stats"]
+    workflows: ["Update Catalyst Proposal Documentation", "DRep Voting Action", "Mesh SDK Usage Stats"]
     types:
       - completed
     branches:
