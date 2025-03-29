@@ -118,22 +118,22 @@ function generateMarkdown(stats) {
 Last updated: ${currentDate}
 
 ## GitHub Usage
-| Metric | Count |
-|--------|-------|
+| ${'▪️'.repeat(6)} Metric ${'▪️'.repeat(6)} | ${'▪️'.repeat(5)} Count ${'▪️'.repeat(5)} |
+|:---------|:------|
 | Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
 | Total mentions of @meshsdk/core | ${stats.github.core_in_any_file} |
 
 ## NPM Statistics
-| Metric | Value |
-|--------|-------|
+| ${'▪️'.repeat(6)} Metric ${'▪️'.repeat(6)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
+|:-----------|:----------|
 | Latest Version | ${stats.npm.latest_version} |
 | Total Dependents | ${stats.npm.dependents_count} |
 | @meshsdk/core Monthly Downloads | ${stats.npm.downloads.last_month} |
 | @meshsdk/react Monthly Downloads | ${stats.npm.react_package_downloads} |
 
 ## Download Statistics for @meshsdk/core
-| Period | Downloads |
-|--------|-----------|
+| ${'▪️'.repeat(6)} Period ${'▪️'.repeat(6)} | ${'▪️'.repeat(2)} Downloads ${'▪️'.repeat(2)} |
+|:-----------|:-------------|
 | Last 24 Hours | ${stats.npm.downloads.last_day} |
 | Last Week | ${stats.npm.downloads.last_week} |
 | Last Month | ${stats.npm.downloads.last_month} |
