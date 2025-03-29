@@ -8,105 +8,35 @@ const __dirname = path.dirname(__filename);
 
 async function fetchMeshStats(githubToken) {
     console.log('Fetching GitHub statistics...');
-
-    // Helper function to handle rate limits and retries
-    async function fetchWithRetry(url, params, maxRetries = 3) {
-        let retries = 0;
-        while (retries < maxRetries) {
-            try {
-                const response = await axios.get(url, {
-                    params,
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Authorization': `token ${githubToken}`
-                    }
-                });
-
-                // Check rate limit headers
-                const remaining = parseInt(response.headers['x-ratelimit-remaining']);
-                const reset = parseInt(response.headers['x-ratelimit-reset']);
-
-                if (remaining < 10) {
-                    const waitTime = (reset - Math.floor(Date.now() / 1000)) * 1000;
-                    console.log(`Rate limit low (${remaining} remaining). Waiting ${Math.ceil(waitTime / 1000)} seconds...`);
-                    await new Promise(resolve => setTimeout(resolve, waitTime));
-                }
-
-                return response;
-            } catch (error) {
-                if (error.response?.status === 403 && retries < maxRetries - 1) {
-                    const reset = parseInt(error.response.headers['x-ratelimit-reset']);
-                    const waitTime = (reset - Math.floor(Date.now() / 1000)) * 1000;
-                    console.log(`Rate limit exceeded. Waiting ${Math.ceil(waitTime / 1000)} seconds before retry...`);
-                    await new Promise(resolve => setTimeout(resolve, waitTime));
-                    retries++;
-                    continue;
-                }
-                throw error;
-            }
-        }
-    }
-
-    // Helper function to fetch all pages of results
-    async function fetchAllPages(url, params) {
-        let allItems = [];
-        let page = 1;
-        let hasMore = true;
-        let lastResponse;
-
-        while (hasMore) {
-            console.log(`Fetching page ${page}...`);
-            lastResponse = await fetchWithRetry(url, {
-                ...params,
-                page,
-                per_page: 100
-            });
-
-            allItems = allItems.concat(lastResponse.data.items);
-
-            // Check if there are more pages
-            if (lastResponse.data.items.length < 100) {
-                hasMore = false;
-            } else {
-                page++;
-                // Add a longer delay between pages to respect rate limits
-                await new Promise(resolve => setTimeout(resolve, 2000));
-            }
-        }
-
-        return {
-            items: allItems,
-            total_count: lastResponse.data.total_count
-        };
-    }
-
     // Search for @meshsdk/core in package.json
-    console.log('Fetching package.json results...');
-    const corePackageJsonResponse = await fetchAllPages(
+    const corePackageJsonResponse = await axios.get(
         'https://api.github.com/search/code',
         {
-            q: '"@meshsdk/core" in:file filename:package.json'
+            params: {
+                q: '"@meshsdk/core" in:file filename:package.json'
+            },
+            headers: {
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': `token ${githubToken}`
+            }
         }
     );
-    console.log('GitHub package.json count:', corePackageJsonResponse.total_count);
-
-    // Extract unique repository owners from the search results
-    const uniqueOwners = new Set(corePackageJsonResponse.items.map(item => item.repository.owner.login));
-    console.log('Unique repository owners:', uniqueOwners.size);
+    console.log('GitHub package.json count:', corePackageJsonResponse.data.total_count);
 
     // Search for @meshsdk/core in any file
-    console.log('Fetching general search results...');
-    const coreAnyFileResponse = await fetchAllPages(
+    const coreAnyFileResponse = await axios.get(
         'https://api.github.com/search/code',
         {
-            q: '"@meshsdk/core"'
+            params: {
+                q: '"@meshsdk/core"'
+            },
+            headers: {
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': `token ${githubToken}`
+            }
         }
     );
-    console.log('GitHub total mentions:', coreAnyFileResponse.total_count);
-
-    // Extract unique repository owners from the general search results
-    const uniqueOwnersGeneral = new Set(coreAnyFileResponse.items.map(item => item.repository.owner.login));
-    console.log('Unique repository owners (general search):', uniqueOwnersGeneral.size);
+    console.log('GitHub total mentions:', coreAnyFileResponse.data.total_count);
 
     console.log('\nFetching NPM statistics...');
     // Get npm download stats
@@ -151,10 +81,8 @@ async function fetchMeshStats(githubToken) {
 
     const stats = {
         github: {
-            core_in_package_json: corePackageJsonResponse.total_count,
-            core_in_any_file: coreAnyFileResponse.total_count,
-            unique_package_json_owners: uniqueOwners.size,
-            unique_general_owners: uniqueOwnersGeneral.size
+            core_in_package_json: corePackageJsonResponse.data.total_count,
+            core_in_any_file: coreAnyFileResponse.data.total_count
         },
         npm: {
             downloads: {
@@ -247,9 +175,7 @@ Last updated: ${currentDate}
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:---------|:------|
 | Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
-| Unique repositories using @meshsdk/core | ${stats.github.unique_package_json_owners} |
 | Total mentions of @meshsdk/core | ${stats.github.core_in_any_file} |
-| Unique repositories mentioning @meshsdk/core | ${stats.github.unique_general_owners} |
 
 ## NPM Statistics
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
