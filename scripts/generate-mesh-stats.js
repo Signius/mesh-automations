@@ -186,6 +186,11 @@ function generateMarkdown(stats) {
     const markdown = `# Mesh SDK Usage Statistics
 Last updated: ${currentDate}
 
+## GitHub Organization Contributor Statistics
+| ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
+|:-----------|:-------------|
+| Total Unique Contributors in MeshJS | ${stats.contributors.unique_count} |
+
 ## GitHub Usage
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:---------|:------|
@@ -210,11 +215,6 @@ Last updated: ${currentDate}
 | Last Week | ${stats.npm.downloads.last_week} |
 | Last Month | ${stats.npm.downloads.last_month} |
 | Last Year | ${stats.npm.downloads.last_year} |
-
-## Contributor Statistics
-| ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
-|:-----------|:-------------|
-| Total Unique Contributors | ${stats.contributors.unique_count} |
 
 ## Useful Links
 - [NPM Stats Chart](${stats.urls.npm_stat_url})
