@@ -192,18 +192,16 @@ Last updated: ${currentDate}
 | Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
 | Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
 
-## NPM Statistics
+## Monthly NPM Package Downloads
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
 |:-----------|:----------|
-| Latest Version | ${stats.npm.latest_version} |
-| Total Dependents | ${stats.npm.dependents_count} |
-| @meshsdk/core Monthly Downloads | ${stats.npm.downloads.last_month} |
-| @meshsdk/react Monthly Downloads | ${stats.npm.react_package_downloads} |
-| @meshsdk/transaction Monthly Downloads | ${stats.npm.transaction_package_downloads} |
-| @meshsdk/wallet Monthly Downloads | ${stats.npm.wallet_package_downloads} |
-| @meshsdk/provider Monthly Downloads | ${stats.npm.provider_package_downloads} |
-| @meshsdk/core-csl Monthly Downloads | ${stats.npm.core_csl_package_downloads} |
-| @meshsdk/core-cst Monthly Downloads | ${stats.npm.core_cst_package_downloads} |
+| @meshsdk/core | ${stats.npm.downloads.last_month} |
+| @meshsdk/react | ${stats.npm.react_package_downloads} |
+| @meshsdk/transaction | ${stats.npm.transaction_package_downloads} |
+| @meshsdk/wallet | ${stats.npm.wallet_package_downloads} |
+| @meshsdk/provider | ${stats.npm.provider_package_downloads} |
+| @meshsdk/core-csl | ${stats.npm.core_csl_package_downloads} |
+| @meshsdk/core-cst | ${stats.npm.core_cst_package_downloads} |
 
 ## Download Statistics for @meshsdk/core
 | ${'▪️'.repeat(8)} Metric ${'▪️'.repeat(8)} | ${'▪️'.repeat(5)} Value ${'▪️'.repeat(5)} |
