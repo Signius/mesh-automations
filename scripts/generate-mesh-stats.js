@@ -63,12 +63,17 @@ async function fetchMeshStats(githubToken) {
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
     const oneYearAgoStr = oneYearAgo.toISOString().split('T')[0];
 
+    // For weekly trend, use one month ago
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const oneMonthAgoStr = oneMonthAgo.toISOString().split('T')[0];
+
     const npmStatUrl = `https://npm-stat.com/charts.html?package=@meshsdk/core&from=${oneYearAgoStr}&to=${currentDate}`;
     const npmStatCompareUrl = `https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=${oneYearAgoStr}&to=${currentDate}`;
 
-    // Get weekly trend data
+    // Get weekly trend data using one month ago
     const weeklyTrendResponse = await axios.get(
-        `https://api.npmjs.org/downloads/range/${oneYearAgoStr}:${currentDate}/@meshsdk/core`
+        `https://api.npmjs.org/downloads/range/${oneMonthAgoStr}:${currentDate}/@meshsdk/core`
     );
     const weeklyDownloads = weeklyTrendResponse.data.downloads.reduce((sum, day) => sum + day.downloads, 0);
 
