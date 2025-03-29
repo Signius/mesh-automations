@@ -11,8 +11,13 @@
       "last_year": 68069
     },
     "react_package_downloads": 9963,
+    "transaction_package_downloads": 10373,
+    "wallet_package_downloads": 11144,
+    "provider_package_downloads": 10554,
+    "core_csl_package_downloads": 6058,
+    "core_cst_package_downloads": 10676,
     "latest_version": "1.9.0-beta.21",
-    "dependents_count": 274817
+    "dependents_count": 274816
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-03-29&to=2025-03-29",
