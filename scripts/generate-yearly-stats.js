@@ -157,12 +157,13 @@ async function loadPreviousStats(year) {
                 const monthlyStats = {};
 
                 rows.forEach(row => {
-                    const match = row.match(/\| (.*?) \| (\d+) \| (\d+) \|/);
+                    // Updated regex to handle comma-formatted numbers
+                    const match = row.match(/\| (.*?) \| ([\d,]+) \| ([\d,]+) \|/);
                     if (match) {
                         const [_, month, projects, files] = match;
                         monthlyStats[month] = {
-                            core_in_package_json: parseInt(projects),
-                            core_in_any_file: parseInt(files)
+                            core_in_package_json: parseInt(projects.replace(/,/g, '')),
+                            core_in_any_file: parseInt(files.replace(/,/g, ''))
                         };
                     }
                 });
