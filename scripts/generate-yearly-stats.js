@@ -130,10 +130,12 @@ ${monthlyDownloads.core.map(m => {
 
 ## 🔍 GitHub Usage Statistics
 
-| Metric | Count |
-|--------|-------|
-| Public Projects using @meshsdk/core in package.json | ${githubStats.core_in_package_json.toLocaleString()} |
-| Public Files containing @meshsdk/core references | ${githubStats.core_in_any_file.toLocaleString()} |`;
+| Month | Projects | Files |
+|-------|----------|-------|
+${monthNames.map((month, index) => {
+        const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
+        return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
+    }).join('\n')}`;
 
     return markdown;
 }
@@ -144,15 +146,22 @@ async function loadPreviousStats(year) {
         if (fs.existsSync(statsPath)) {
             const content = fs.readFileSync(statsPath, 'utf8');
             // Extract GitHub stats from the markdown
-            const packageJsonMatch = content.match(/Public Projects using @meshsdk\/core in package.json \| (\d+)/);
-            const anyFileMatch = content.match(/Public Files containing @meshsdk\/core references \| (\d+)/);
+            const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month \| Projects \| Files \|\n\|-------\|----------\|-------\|\n([\s\S]*?)(?=\n\n|$)/);
 
-            return {
-                github: {
-                    core_in_package_json: packageJsonMatch ? parseInt(packageJsonMatch[1]) : 0,
-                    core_in_any_file: anyFileMatch ? parseInt(anyFileMatch[1]) : 0
-                }
-            };
+            if (githubStatsMatch) {
+                const rows = githubStatsMatch[1].split('\n');
+                const monthlyStats = {};
+
+                rows.forEach(row => {
+                    const [_, month, projects, files] = row.match(/\| (.*?) \| (\d+) \| (\d+) \|/);
+                    monthlyStats[month] = {
+                        core_in_package_json: parseInt(projects),
+                        core_in_any_file: parseInt(files)
+                    };
+                });
+
+                return { github: monthlyStats };
+            }
         }
     } catch (error) {
         console.error(`Error loading previous stats for ${year}:`, error);
@@ -164,6 +173,11 @@ async function main() {
     const currentYear = new Date().getFullYear();
     const years = [2024, currentYear];
     const githubToken = process.env.GITHUB_TOKEN;
+    const currentMonth = new Date().getMonth();
+    const currentMonthName = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ][currentMonth];
 
     if (!githubToken) {
         console.error('GITHUB_TOKEN environment variable is required');
@@ -182,10 +196,17 @@ async function main() {
             // Fetch current GitHub stats
             const currentGitHubStats = await fetchGitHubStats(githubToken);
 
-            // Only update GitHub stats if they've increased or it's a new month
-            const shouldUpdateGitHubStats = !previousStats ||
-                currentGitHubStats.core_in_package_json > previousStats.github.core_in_package_json ||
-                currentGitHubStats.core_in_any_file > previousStats.github.core_in_any_file;
+            // Initialize or get existing monthly GitHub stats
+            const monthlyGitHubStats = previousStats?.github || {};
+
+            // Only update current month's stats if they've increased
+            if (year === currentYear) {
+                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
+                if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
+                    currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
+                    monthlyGitHubStats[currentMonthName] = currentGitHubStats;
+                }
+            }
 
             // Fetch monthly downloads for all packages
             const monthlyDownloads = {
@@ -199,7 +220,7 @@ async function main() {
             };
 
             // Generate markdown
-            const markdown = generateYearlyMarkdown(year, monthlyDownloads, currentGitHubStats);
+            const markdown = generateYearlyMarkdown(year, monthlyDownloads, monthlyGitHubStats);
 
             // Save markdown file
             const markdownPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
