@@ -171,7 +171,7 @@ async function loadPreviousStats(year) {
 
 async function main() {
     const currentYear = new Date().getFullYear();
-    const years = [2024, currentYear];
+    const years = Array.from({ length: currentYear - 2023 }, (_, i) => 2024 + i);
     const githubToken = process.env.GITHUB_TOKEN;
     const currentMonth = new Date().getMonth();
     const currentMonthName = [
@@ -193,14 +193,15 @@ async function main() {
             // Load previous stats
             const previousStats = await loadPreviousStats(year);
 
-            // Fetch current GitHub stats
-            const currentGitHubStats = await fetchGitHubStats(githubToken);
-
-            // Initialize or get existing monthly GitHub stats
+            // Initialize monthly GitHub stats with previous data or empty object
             const monthlyGitHubStats = previousStats?.github || {};
 
-            // Only update current month's stats if they've increased
+            // Only fetch and update GitHub stats for current year
             if (year === currentYear) {
+                // Fetch current GitHub stats
+                const currentGitHubStats = await fetchGitHubStats(githubToken);
+
+                // Only update current month's stats if they've increased
                 const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
                 if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
                     currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
