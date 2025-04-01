@@ -8,6 +8,9 @@ on:
 jobs:
   search-mesh-usage:
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       
@@ -17,16 +20,12 @@ jobs:
           node-version: '20'
           
       - name: Install dependencies
-        run: npm install axios
-        
+        run: npm install
+      
       - name: Generate Current Stats
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/generate-mesh-stats.js
         
       - name: Generate Yearly Stats
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/generate-yearly-stats.js
         
       - name: Check for changes

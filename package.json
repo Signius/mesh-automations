@@ -8,6 +8,7 @@
         "update-catalyst-docs": "node scripts/update-catalyst-docs.js"
     },
     "dependencies": {
+        "@google-cloud/bigquery": "^7.9.3",
         "@supabase/supabase-js": "^2.29.0",
         "axios": "^1.6.7",
         "dotenv": "^16.4.7"
