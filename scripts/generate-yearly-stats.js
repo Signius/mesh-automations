@@ -202,8 +202,8 @@ async function loadPreviousStats(year) {
  */
 async function fetchHistoricalGitHubStatsForMonth(year, month) {
   const monthStr = month.toString().padStart(2, '0');
-  // The table name format is assumed to be `gharchive.month.YYYYMM`
-  const tableName = `gharchive.month.${year}${monthStr}`;
+  // Updated table name to use the public dataset:
+  const tableName = `bigquery-public-data.gharchive.month.${year}${monthStr}`;
   // The query searches for occurrences of "@meshsdk/core" in the payload.
   // We cast the payload to STRING in order to run REGEXP_CONTAINS.
   const query = `
