@@ -101,6 +101,12 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
     const maxMonth = monthlyDownloads.core.find(m => m.downloads === maxDownloads);
     const maxMonthName = monthNames[maxMonth.month - 1];
 
+    // Determine which months to show for GitHub stats
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const monthsToShow = year === currentYear ? monthNames.slice(0, currentMonth + 1) : monthNames;
+
     const markdown = `# 📊 Mesh SDK Usage Statistics ${year}
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
@@ -132,7 +138,7 @@ ${monthlyDownloads.core.map(m => {
 
 | Month | Projects | Files |
 |-------|----------|-------|
-${monthNames.map((month, index) => {
+${monthsToShow.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
         return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
     }).join('\n')}`;

@@ -9,7 +9,6 @@ jobs:
   search-mesh-usage:
     runs-on: ubuntu-latest
     env:
-      GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
