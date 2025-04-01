@@ -202,25 +202,44 @@ async function loadPreviousStats(year) {
  */
 async function fetchHistoricalGitHubStatsForMonth(year, month) {
   const monthStr = month.toString().padStart(2, '0');
-  // Updated table name using underscore: project.dataset.table format
-  const tableName = `bigquery-public-data.gharchive.${year}_${monthStr}`;
+  // Calculate the last day of the given month and year
+  const lastDayOfMonth = new Date(year, month, 0).getDate().toString().padStart(2, '0'); // Gets the last day (e.g., 31 for Jan, 29 for Feb 2024)
+
+  // Define the start and end suffixes for the tables (YYYYMMDD format)
+  const startSuffix = `${year}${monthStr}01`;
+  const endSuffix = `${year}${monthStr}${lastDayOfMonth}`;
+
   // The query searches for occurrences of "@meshsdk/core" in the payload.
   // We cast the payload to STRING in order to run REGEXP_CONTAINS.
+  // We use a wildcard table `gharchive.*` and filter by _TABLE_SUFFIX.
   const query = `
     SELECT
       SUM(CASE WHEN REGEXP_CONTAINS(CAST(payload AS STRING), r'"@meshsdk/core"') THEN 1 ELSE 0 END) AS core_in_any_file,
       SUM(CASE WHEN REGEXP_CONTAINS(CAST(payload AS STRING), r'"@meshsdk/core"') AND REGEXP_CONTAINS(CAST(payload AS STRING), r'package\\.json') THEN 1 ELSE 0 END) AS core_in_package_json
-    FROM \`${tableName}\`
+    FROM \`bigquery-public-data.gharchive.*\`
+    WHERE _TABLE_SUFFIX BETWEEN '${startSuffix}' AND '${endSuffix}'
   `;
+
+  console.log(`Executing BigQuery query for ${year}-${monthStr} (Tables: ${startSuffix} to ${endSuffix})`); // Added for debugging
+
   try {
     const [job] = await bigquery.createQueryJob({ query });
+    console.log(`Job ${job.id} started.`); // Added for debugging
+
     const [rows] = await job.getQueryResults();
+    console.log(`Job ${job.id} completed.`); // Added for debugging
+
     return {
-      core_in_any_file: rows[0].core_in_any_file || 0,
-      core_in_package_json: rows[0].core_in_package_json || 0
+      // Handle potential null results if no matching events are found
+      core_in_any_file: rows[0]?.core_in_any_file || 0,
+      core_in_package_json: rows[0]?.core_in_package_json || 0
     };
   } catch (error) {
     console.error(`Error fetching historical stats for ${year}-${monthStr}:`, error.message);
+    // Log more details if available
+    if (error.errors) {
+      console.error("BigQuery API Errors:", JSON.stringify(error.errors, null, 2));
+    }
     return {
       core_in_any_file: 0,
       core_in_package_json: 0
