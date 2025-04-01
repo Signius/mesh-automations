@@ -19,10 +19,15 @@ jobs:
       - name: Install dependencies
         run: npm install axios
         
-      - name: Generate Mesh Stats
+      - name: Generate Current Stats
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/generate-mesh-stats.js
+        
+      - name: Generate Yearly Stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/generate-yearly-stats.js
         
       - name: Check for changes
         id: git-check
@@ -35,7 +40,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add mesh_stats.json apps/docs/src/pages/en/mesh-stats/2001.md
+          git add mesh_stats.json apps/docs/src/pages/en/mesh-stats/*.md
           git commit -m "Update Mesh SDK usage statistics"
           
       - name: Push changes
