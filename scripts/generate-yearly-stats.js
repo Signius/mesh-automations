@@ -143,12 +143,16 @@ ${monthNames.map(month => {
 async function loadPreviousStats(year) {
     try {
         const statsPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
+        console.log(`Attempting to load previous stats from: ${statsPath}`);
+
         if (fs.existsSync(statsPath)) {
+            console.log(`Found existing stats file for ${year}`);
             const content = fs.readFileSync(statsPath, 'utf8');
             // Extract GitHub stats from the markdown
             const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month \| Projects \| Files \|\n\|-------\|----------\|-------\|\n([\s\S]*?)(?=\n\n|$)/);
 
             if (githubStatsMatch) {
+                console.log(`Successfully matched GitHub stats section for ${year}`);
                 const rows = githubStatsMatch[1].split('\n').filter(row => row.trim());
                 const monthlyStats = {};
 
@@ -163,8 +167,13 @@ async function loadPreviousStats(year) {
                     }
                 });
 
+                console.log(`Loaded monthly stats for ${year}:`, monthlyStats);
                 return { github: monthlyStats };
+            } else {
+                console.log(`No GitHub stats section found in ${year} file`);
             }
+        } else {
+            console.log(`No existing stats file found for ${year}`);
         }
     } catch (error) {
         console.error(`Error loading previous stats for ${year}:`, error);
@@ -191,23 +200,30 @@ async function main() {
         console.log('Starting Yearly Mesh SDK Stats Generation...\n');
 
         for (const year of years) {
-            console.log(`Generating stats for ${year}...`);
+            console.log(`\n=== Processing year ${year} ===`);
 
             // Load previous stats
             const previousStats = await loadPreviousStats(year);
+            console.log(`Previous stats loaded for ${year}:`, previousStats);
 
             // Keep all previous GitHub stats exactly as they are
             const monthlyGitHubStats = { ...previousStats?.github };
+            console.log(`Monthly GitHub stats after loading:`, monthlyGitHubStats);
 
             // Only fetch and update GitHub stats for current year and current month
             if (year === currentYear) {
+                console.log(`Fetching current GitHub stats for ${currentMonthName} ${year}`);
                 // Fetch current GitHub stats
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
 
                 // Only update current month's stats if they've increased
                 const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
+                console.log(`Current month stats before update:`, currentMonthStats);
+                console.log(`New GitHub stats:`, currentGitHubStats);
+
                 if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
                     currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
+                    console.log(`Updating stats for ${currentMonthName} as new numbers are higher`);
                     monthlyGitHubStats[currentMonthName] = currentGitHubStats;
                 }
             }
