@@ -198,20 +198,21 @@ async function loadPreviousStats(year) {
 }
 
 /**
- * Fetch historical GitHub stats from BigQuery (GH Archive) for a specific month.
+ * [TEMPORARY TEST FUNCTION] Fetch historical GitHub stats from BigQuery (GH Archive) for a specific month.
  */
 async function fetchHistoricalGitHubStatsForMonth(year, month) {
   const monthStr = month.toString().padStart(2, '0');
+
+  // --- TEMPORARY TEST QUERY ---
+  const query = `SELECT 1 AS test_result`;
+  console.log(`>>> EXECUTING TEST QUERY for ${year}-${monthStr} <<<`);
+  // --- END OF TEST QUERY ---
+
+  /* --- Original Query Code (Commented Out for Test) ---
   // Calculate the last day of the given month and year
   const lastDayOfMonth = new Date(year, month, 0).getDate().toString().padStart(2, '0'); // Gets the last day (e.g., 31 for Jan, 29 for Feb 2024)
-
-  // Define the start and end suffixes for the tables (YYYYMMDD format)
   const startSuffix = `${year}${monthStr}01`;
   const endSuffix = `${year}${monthStr}${lastDayOfMonth}`;
-
-  // The query searches for occurrences of "@meshsdk/core" in the payload.
-  // We cast the payload to STRING in order to run REGEXP_CONTAINS.
-  // We use a wildcard table `gharchive.*` and filter by _TABLE_SUFFIX.
   const query = `
     SELECT
       SUM(CASE WHEN REGEXP_CONTAINS(CAST(payload AS STRING), r'"@meshsdk/core"') THEN 1 ELSE 0 END) AS core_in_any_file,
@@ -219,27 +220,34 @@ async function fetchHistoricalGitHubStatsForMonth(year, month) {
     FROM \`bigquery-public-data.gharchive.*\`
     WHERE _TABLE_SUFFIX BETWEEN '${startSuffix}' AND '${endSuffix}'
   `;
+  console.log(`Executing BigQuery query for ${year}-${monthStr} (Tables: ${startSuffix} to ${endSuffix})`);
+  --- End of Original Query Code --- */
 
-  console.log(`Executing BigQuery query for ${year}-${monthStr} (Tables: ${startSuffix} to ${endSuffix})`); // Added for debugging
 
   try {
     const [job] = await bigquery.createQueryJob({ query });
-    console.log(`Job ${job.id} started.`); // Added for debugging
+    console.log(`Test Job ${job.id} started.`);
 
     const [rows] = await job.getQueryResults();
-    console.log(`Job ${job.id} completed.`); // Added for debugging
+    console.log(`Test Job ${job.id} completed.`);
 
-    return {
-      // Handle potential null results if no matching events are found
-      core_in_any_file: rows[0]?.core_in_any_file || 0,
-      core_in_package_json: rows[0]?.core_in_package_json || 0
-    };
-  } catch (error) {
-    console.error(`Error fetching historical stats for ${year}-${monthStr}:`, error.message);
-    // Log more details if available
-    if (error.errors) {
-      console.error("BigQuery API Errors:", JSON.stringify(error.errors, null, 2));
+    // Check the result of the test query
+    if (rows.length > 0 && rows[0].test_result === 1) {
+        console.log(`>>> TEST QUERY SUCCEEDED for ${year}-${monthStr}. Basic permissions seem OK. <<<`);
+        // Return dummy data for the test so the script doesn't break
+         return { core_in_any_file: 0, core_in_package_json: 0 };
+    } else {
+        console.error(`>>> TEST QUERY for ${year}-${monthStr} completed but result was unexpected:`, rows);
+         return { core_in_any_file: 0, core_in_package_json: 0 };
     }
+
+  } catch (error) {
+    // If it fails here, the problem is more fundamental
+    console.error(`>>> TEST QUERY FAILED for ${year}-${monthStr}:`, error.message);
+    if (error.errors) {
+      console.error(">>> BigQuery API Errors during TEST:", JSON.stringify(error.errors, null, 2));
+    }
+    // Still return dummy data
     return {
       core_in_any_file: 0,
       core_in_package_json: 0
