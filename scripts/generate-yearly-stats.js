@@ -149,15 +149,18 @@ async function loadPreviousStats(year) {
             const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month \| Projects \| Files \|\n\|-------\|----------\|-------\|\n([\s\S]*?)(?=\n\n|$)/);
 
             if (githubStatsMatch) {
-                const rows = githubStatsMatch[1].split('\n');
+                const rows = githubStatsMatch[1].split('\n').filter(row => row.trim());
                 const monthlyStats = {};
 
                 rows.forEach(row => {
-                    const [_, month, projects, files] = row.match(/\| (.*?) \| (\d+) \| (\d+) \|/);
-                    monthlyStats[month] = {
-                        core_in_package_json: parseInt(projects),
-                        core_in_any_file: parseInt(files)
-                    };
+                    const match = row.match(/\| (.*?) \| (\d+) \| (\d+) \|/);
+                    if (match) {
+                        const [_, month, projects, files] = match;
+                        monthlyStats[month] = {
+                            core_in_package_json: parseInt(projects),
+                            core_in_any_file: parseInt(files)
+                        };
+                    }
                 });
 
                 return { github: monthlyStats };
@@ -166,7 +169,7 @@ async function loadPreviousStats(year) {
     } catch (error) {
         console.error(`Error loading previous stats for ${year}:`, error);
     }
-    return null;
+    return { github: {} };
 }
 
 async function main() {
