@@ -17,7 +17,7 @@
     "core_csl_package_downloads": 5847,
     "core_cst_package_downloads": 10355,
     "latest_version": "1.9.0-beta.25",
-    "dependents_count": 275195
+    "dependents_count": 275192
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-01&to=2025-04-01",
