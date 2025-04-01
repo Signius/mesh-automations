@@ -1,27 +1,27 @@
 {
   "github": {
-    "core_in_package_json": 332,
-    "core_in_any_file": 1180
+    "core_in_package_json": 344,
+    "core_in_any_file": 1612
   },
   "npm": {
     "downloads": {
-      "last_day": 374,
-      "last_week": 2450,
-      "last_month": 10770,
-      "last_year": 68069
+      "last_day": 541,
+      "last_week": 2434,
+      "last_month": 10437,
+      "last_year": 68690
     },
-    "react_package_downloads": 9963,
-    "transaction_package_downloads": 10373,
-    "wallet_package_downloads": 11144,
-    "provider_package_downloads": 10554,
-    "core_csl_package_downloads": 6058,
-    "core_cst_package_downloads": 10676,
-    "latest_version": "1.9.0-beta.21",
-    "dependents_count": 274819
+    "react_package_downloads": 9645,
+    "transaction_package_downloads": 10098,
+    "wallet_package_downloads": 10564,
+    "provider_package_downloads": 10231,
+    "core_csl_package_downloads": 5847,
+    "core_cst_package_downloads": 10355,
+    "latest_version": "1.9.0-beta.25",
+    "dependents_count": 275149
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-03-29&to=2025-03-29",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-03-29&to=2025-03-29"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-01&to=2025-04-01",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-01&to=2025-04-01"
   },
   "contributors": {
     "by_repository": {
@@ -32,14 +32,14 @@
           "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
         },
         {
+          "login": "HinsonSIDAN",
+          "contributions": 391,
+          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
+        },
+        {
           "login": "abdelkrimdev",
           "contributions": 384,
           "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 375,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
         },
         {
           "login": "twwu123",
@@ -477,25 +477,25 @@
       ],
       "cardano-governance": [
         {
+          "login": "Andre-Diamond",
+          "contributions": 47,
+          "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4"
+        },
+        {
           "login": "Felix-at-Swarm",
           "contributions": 39,
           "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4"
         },
         {
-          "login": "Andre-Diamond",
-          "contributions": 26,
-          "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4"
-        },
-        {
           "login": "github-actions[bot]",
-          "contributions": 5,
+          "contributions": 11,
           "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4"
         }
       ],
       "funding": [
         {
           "login": "Felix-at-Swarm",
-          "contributions": 100,
+          "contributions": 101,
           "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4"
         },
         {
@@ -505,7 +505,7 @@
         },
         {
           "login": "actions-user",
-          "contributions": 8,
+          "contributions": 9,
           "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4"
         },
         {
@@ -559,8 +559,8 @@
     "unique_count": 36,
     "unique_contributors": [
       "jinglescode",
-      "abdelkrimdev",
       "HinsonSIDAN",
+      "abdelkrimdev",
       "twwu123",
       "lisicky",
       "JustLeif",
@@ -590,8 +590,8 @@
       "karkigrishmin",
       "QSchlegel",
       "justinschreiner",
-      "Felix-at-Swarm",
       "Andre-Diamond",
+      "Felix-at-Swarm",
       "github-actions[bot]",
       "actions-user"
     ]
