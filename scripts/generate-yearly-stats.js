@@ -210,18 +210,24 @@ async function main() {
             const previousStats = await loadPreviousStats(year);
 
             // Initialize monthly GitHub stats from loaded data
-            const monthlyGitHubStats = previousStats?.github || {};
+            let monthlyGitHubStats = previousStats?.github || {};
 
             // Only fetch and update current month's GitHub stats if we're processing the current year
             if (year === currentYear) {
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
-                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
 
-                // Only update if the new stats are higher
+                // Create a new object with all existing stats
+                const updatedStats = { ...monthlyGitHubStats };
+
+                // Only update the current month's stats if they're higher
+                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
                 if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
                     currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
-                    monthlyGitHubStats[currentMonthName] = currentGitHubStats;
+                    updatedStats[currentMonthName] = currentGitHubStats;
                 }
+
+                // Use the updated stats that preserve all other months
+                monthlyGitHubStats = updatedStats;
             }
 
             // Fetch monthly downloads for all packages
