@@ -105,7 +105,7 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month${'&nbsp;'.repeat(35)} |   Download Count |   Performance |
+| Month${'&nbsp;'.repeat(33)} |   Download Count |   Performance |
 | :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
@@ -167,13 +167,14 @@ async function extractGitHubStatsFromMarkdown(markdownContent) {
 
 async function main() {
     const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
     const years = Array.from({ length: currentYear - 2023 }, (_, i) => 2024 + i);
     const githubToken = process.env.GITHUB_TOKEN;
-    const currentMonth = new Date().getMonth();
-    const currentMonthName = [
+    const monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
-    ][currentMonth];
+    ];
+    const currentMonthName = monthNames[currentMonth];
 
     if (!githubToken) {
         console.error('GITHUB_TOKEN environment variable is required');
@@ -207,10 +208,25 @@ async function main() {
             }
 
             if (year === currentYear) {
-                // Update GitHub stats for the current month
+                // For current year, update current month but preserve previous months
                 console.log(`Fetching current GitHub stats for ${currentMonthName} ${year}`);
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
-                githubStats[currentMonthName] = currentGitHubStats;
+
+                // Create a new stats object with previous months preserved
+                const updatedStats = {};
+                monthNames.forEach((month, index) => {
+                    if (index < currentMonth) {
+                        // Preserve previous months
+                        if (githubStats[month]) {
+                            updatedStats[month] = githubStats[month];
+                        }
+                    } else if (index === currentMonth) {
+                        // Update current month
+                        updatedStats[month] = currentGitHubStats;
+                    }
+                    // Future months are left empty
+                });
+                githubStats = updatedStats;
             }
 
             const markdown = generateYearlyMarkdown(year, monthlyDownloads, githubStats);
