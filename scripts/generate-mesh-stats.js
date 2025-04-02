@@ -192,7 +192,7 @@ Last updated: ${currentDate}
 | Total Unique Contributors in MeshJS        | ${stats.contributors.unique_count} |
 
 ## GitHub Usage
-| Repository Metric${'&nbsp;'.repeat(44)} |   Count |
+| Repository Metric${'&nbsp;'.repeat(46)} |   Count |
 | :---------------------------------------- | ------: |
 | Public Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
 | Public Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |

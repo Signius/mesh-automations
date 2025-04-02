@@ -105,13 +105,13 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month${'&nbsp;'.repeat(33)} |   Download Count |   Performance |
+| Month${'&nbsp;'.repeat(30)} |   Download Count |   Performance |
 | :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
             m.downloads > monthlyDownloads.core[m.month - 2]?.downloads ? '📈' :
                 m.downloads < monthlyDownloads.core[m.month - 2]?.downloads ? '📉' : '➡️';
-        return `| ${monthNames[m.month - 1]}${'&nbsp;'.repeat(40 - monthNames[m.month - 1].length)} | ${m.downloads.toLocaleString().padStart(15)} | ${trend.padStart(11)} |`;
+        return `| ${monthNames[m.month - 1]} | ${m.downloads.toLocaleString()} | ${trend} |`;
     }).join('\n')}
 
 **Peak Month**: ${maxMonthName} with ${maxDownloads.toLocaleString()} downloads
@@ -120,13 +120,13 @@ ${monthlyDownloads.core.map(m => {
 
 | Package Name${'&nbsp;'.repeat(32)} |   Total Downloads |   Rating |
 | :---------------------------------------- | ---------------: | -------: |
-| @meshsdk/core | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/react | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString().padStart(15)} | ${(yearlyTotals.transaction > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/wallet | ${yearlyTotals.wallet.toLocaleString().padStart(15)} | ${(yearlyTotals.wallet > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/provider | ${yearlyTotals.provider.toLocaleString().padStart(15)} | ${(yearlyTotals.provider > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/core-csl | ${yearlyTotals.coreCsl.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/core-cst | ${yearlyTotals.coreCst.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCst > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core | ${yearlyTotals.core.toLocaleString()} | ${yearlyTotals.core > 50000 ? '🌟' : '⭐'} |
+| @meshsdk/react | ${yearlyTotals.react.toLocaleString()} | ${yearlyTotals.react > 50000 ? '🌟' : '⭐'} |
+| @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString()} | ${yearlyTotals.transaction > 50000 ? '🌟' : '⭐'} |
+| @meshsdk/wallet | ${yearlyTotals.wallet.toLocaleString()} | ${yearlyTotals.wallet > 50000 ? '🌟' : '⭐'} |
+| @meshsdk/provider | ${yearlyTotals.provider.toLocaleString()} | ${yearlyTotals.provider > 50000 ? '🌟' : '⭐'} |
+| @meshsdk/core-csl | ${yearlyTotals.coreCsl.toLocaleString()} | ${yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐'} |
+| @meshsdk/core-cst | ${yearlyTotals.coreCst.toLocaleString()} | ${yearlyTotals.coreCst > 50000 ? '🌟' : '⭐'} |
 
 ## 🔍 GitHub Usage Statistics
 
@@ -134,47 +134,63 @@ ${monthlyDownloads.core.map(m => {
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
-        return `| ${month}${'&nbsp;'.repeat(40 - month.length)} | ${monthStats.core_in_package_json.toLocaleString().padStart(14)} | ${monthStats.core_in_any_file.toLocaleString().padStart(11)} |`;
+        return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
     }).join('\n')}`;
 
     return markdown;
 }
 
-async function extractGitHubStatsFromMarkdown(markdownContent) {
-    const stats = {};
-    const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
+async function loadPreviousStats(year) {
+    try {
+        const statsPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
+        console.log(`Attempting to load previous stats from: ${statsPath}`);
 
-    // Extract the GitHub stats table content
-    const tableMatch = markdownContent.match(/## 🔍 GitHub Usage Statistics\n\n\|.*?\n\|.*?\n((?:\|.*?\n)*)/);
-    if (tableMatch) {
-        const tableRows = tableMatch[1].trim().split('\n');
-        tableRows.forEach(row => {
-            const [, month, projectCount, fileCount] = row.match(/\|\s*(.*?)\s*\|\s*(\d[,\d]*)\s*\|\s*(\d[,\d]*)\s*\|/);
-            const cleanMonth = month.trim();
-            if (monthNames.includes(cleanMonth)) {
-                stats[cleanMonth] = {
-                    core_in_package_json: parseInt(projectCount.replace(/,/g, '')),
-                    core_in_any_file: parseInt(fileCount.replace(/,/g, ''))
-                };
+        if (fs.existsSync(statsPath)) {
+            console.log(`Found existing stats file for ${year}`);
+            const content = fs.readFileSync(statsPath, 'utf8');
+            // Extract GitHub stats from the markdown
+            const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month \| Projects \| Files \|\n\|-------\|----------\|-------\|\n([\s\S]*?)(?=\n\n|$)/);
+
+            if (githubStatsMatch) {
+                console.log(`Successfully matched GitHub stats section for ${year}`);
+                const rows = githubStatsMatch[1].split('\n').filter(row => row.trim());
+                const monthlyStats = {};
+
+                rows.forEach(row => {
+                    // Updated regex to handle comma-formatted numbers
+                    const match = row.match(/\| (.*?) \| ([\d,]+) \| ([\d,]+) \|/);
+                    if (match) {
+                        const [_, month, projects, files] = match;
+                        monthlyStats[month] = {
+                            core_in_package_json: parseInt(projects.replace(/,/g, '')),
+                            core_in_any_file: parseInt(files.replace(/,/g, ''))
+                        };
+                    }
+                });
+
+                console.log(`Loaded monthly stats for ${year}:`, monthlyStats);
+                return { github: monthlyStats };
+            } else {
+                console.log(`No GitHub stats section found in ${year} file`);
             }
-        });
+        } else {
+            console.log(`No existing stats file found for ${year}`);
+        }
+    } catch (error) {
+        console.error(`Error loading previous stats for ${year}:`, error);
     }
-    return stats;
+    return { github: {} };
 }
 
 async function main() {
     const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
     const years = Array.from({ length: currentYear - 2023 }, (_, i) => 2024 + i);
     const githubToken = process.env.GITHUB_TOKEN;
-    const monthNames = [
+    const currentMonth = new Date().getMonth();
+    const currentMonthName = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    const currentMonthName = monthNames[currentMonth];
+    ][currentMonth];
 
     if (!githubToken) {
         console.error('GITHUB_TOKEN environment variable is required');
@@ -186,7 +202,32 @@ async function main() {
 
         for (const year of years) {
             console.log(`\n=== Processing year ${year} ===`);
-            const markdownPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
+
+            // Load previous stats
+            const previousStats = await loadPreviousStats(year);
+            console.log(`Previous stats loaded for ${year}:`, previousStats);
+
+            // Keep all previous GitHub stats exactly as they are
+            const monthlyGitHubStats = { ...previousStats?.github };
+            console.log(`Monthly GitHub stats after loading:`, monthlyGitHubStats);
+
+            // Only fetch and update GitHub stats for current year and current month
+            if (year === currentYear) {
+                console.log(`Fetching current GitHub stats for ${currentMonthName} ${year}`);
+                // Fetch current GitHub stats
+                const currentGitHubStats = await fetchGitHubStats(githubToken);
+
+                // Only update current month's stats if they've increased
+                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
+                console.log(`Current month stats before update:`, currentMonthStats);
+                console.log(`New GitHub stats:`, currentGitHubStats);
+
+                if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
+                    currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
+                    console.log(`Updating stats for ${currentMonthName} as new numbers are higher`);
+                    monthlyGitHubStats[currentMonthName] = currentGitHubStats;
+                }
+            }
 
             // Fetch monthly downloads for all packages
             const monthlyDownloads = {
@@ -199,39 +240,13 @@ async function main() {
                 coreCst: await fetchMonthlyDownloads('@meshsdk/core-cst', year)
             };
 
-            let githubStats = {};
+            // Generate markdown
+            const markdown = generateYearlyMarkdown(year, monthlyDownloads, monthlyGitHubStats);
 
-            if (fs.existsSync(markdownPath)) {
-                // Read existing GitHub stats from the markdown file
-                const existingContent = fs.readFileSync(markdownPath, 'utf8');
-                githubStats = await extractGitHubStatsFromMarkdown(existingContent);
-            }
-
-            if (year === currentYear) {
-                // For current year, update current month but preserve previous months
-                console.log(`Fetching current GitHub stats for ${currentMonthName} ${year}`);
-                const currentGitHubStats = await fetchGitHubStats(githubToken);
-
-                // Create a new stats object with previous months preserved
-                const updatedStats = {};
-                monthNames.forEach((month, index) => {
-                    if (index < currentMonth) {
-                        // Preserve previous months
-                        if (githubStats[month]) {
-                            updatedStats[month] = githubStats[month];
-                        }
-                    } else if (index === currentMonth) {
-                        // Update current month
-                        updatedStats[month] = currentGitHubStats;
-                    }
-                    // Future months are left empty
-                });
-                githubStats = updatedStats;
-            }
-
-            const markdown = generateYearlyMarkdown(year, monthlyDownloads, githubStats);
+            // Save markdown file
+            const markdownPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
             fs.writeFileSync(markdownPath, markdown);
-            console.log(`Updated markdown file for year ${year} at ${markdownPath}`);
+            console.log(`Saved markdown to ${markdownPath}`);
         }
 
         console.log('\nYearly stats generated successfully!');
@@ -241,4 +256,4 @@ async function main() {
     }
 }
 
-main();
+main(); 
