@@ -108,9 +108,16 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 | Month${'&nbsp;'.repeat(35)} |   Download Count |   Performance |
 | :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
-        const trend = m.downloads === maxDownloads ? '🔥' :
-            m.downloads > monthlyDownloads.core[m.month - 2]?.downloads ? '📈' :
-                m.downloads < monthlyDownloads.core[m.month - 2]?.downloads ? '📉' : '➡️';
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1;
+
+        // Only show performance trends up to current month
+        const trend = (year < currentYear || (year === currentYear && m.month <= currentMonth))
+            ? (m.downloads === maxDownloads ? '🔥' :
+                m.downloads > monthlyDownloads.core[m.month - 2]?.downloads ? '📈' :
+                    m.downloads < monthlyDownloads.core[m.month - 2]?.downloads ? '📉' : '➡️')
+            : '➡️';
         return `| ${monthNames[m.month - 1]} | ${m.downloads.toLocaleString()} | ${trend} |`;
     }).join('\n')}
 
