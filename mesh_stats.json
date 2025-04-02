@@ -5,17 +5,17 @@
   },
   "npm": {
     "downloads": {
-      "last_day": 541,
-      "last_week": 2434,
-      "last_month": 10437,
-      "last_year": 68690
+      "last_day": 371,
+      "last_week": 2532,
+      "last_month": 10460,
+      "last_year": 68938
     },
-    "react_package_downloads": 9645,
-    "transaction_package_downloads": 10098,
-    "wallet_package_downloads": 10564,
-    "provider_package_downloads": 10231,
-    "core_csl_package_downloads": 5847,
-    "core_cst_package_downloads": 10355,
+    "react_package_downloads": 9655,
+    "transaction_package_downloads": 10125,
+    "wallet_package_downloads": 10446,
+    "provider_package_downloads": 10220,
+    "core_csl_package_downloads": 5979,
+    "core_cst_package_downloads": 10381,
     "latest_version": "1.9.0-beta.25",
     "dependents_count": 275273
   },
