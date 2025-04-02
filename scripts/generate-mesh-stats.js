@@ -234,7 +234,6 @@ Last updated: ${currentDate}
 ## 📈 Download Statistics for @meshsdk/core
 | Time Period${'&nbsp;'.repeat(49)} |   Download Count |
 | :---------------------------------------- | --------------: |
-| Last 24 Hours | ${stats.npm.downloads.last_day} |
 | Last Week | ${stats.npm.downloads.last_week} |
 | Last Month | ${stats.npm.downloads.last_month} |
 | Last Year | ${stats.npm.downloads.last_year} |
