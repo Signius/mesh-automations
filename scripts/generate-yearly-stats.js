@@ -105,7 +105,7 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month${'&nbsp;'.repeat(37)} |   Download Count |   Performance |
+| Month${'&nbsp;'.repeat(35)} |   Download Count |   Performance |
 | :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
@@ -130,7 +130,7 @@ ${monthlyDownloads.core.map(m => {
 
 ## 🔍 GitHub Usage Statistics
 
-| Month${'&nbsp;'.repeat(45)} |   Project Count |   File Count |
+| Month${'&nbsp;'.repeat(42)} |   Project Count |   File Count |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
