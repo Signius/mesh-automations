@@ -40,10 +40,28 @@ async function fetchMeshStats(githubToken) {
 
     console.log('\nFetching NPM statistics...');
     // Get npm download stats
-    const lastDay = await axios.get('https://api.npmjs.org/downloads/point/last-day/@meshsdk/core');
-    const lastWeek = await axios.get('https://api.npmjs.org/downloads/point/last-week/@meshsdk/core');
-    const lastMonth = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core');
-    const lastYear = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/core');
+    const currentDate = new Date();
+    const lastDay = new Date(currentDate);
+    lastDay.setDate(lastDay.getDate() - 1);
+    const lastWeek = new Date(currentDate);
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    const lastMonth = new Date(currentDate);
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+    const lastYear = new Date(currentDate);
+    lastYear.setFullYear(lastYear.getFullYear() - 1);
+
+    const formatDate = (date) => date.toISOString().split('T')[0];
+    const getDownloads = async (startDate, endDate) => {
+        const response = await axios.get(
+            `https://api.npmjs.org/downloads/point/${startDate}:${endDate}/@meshsdk/core`
+        );
+        return response.data.downloads;
+    };
+
+    const lastDayDownloads = await getDownloads(formatDate(lastDay), formatDate(currentDate));
+    const lastWeekDownloads = await getDownloads(formatDate(lastWeek), formatDate(currentDate));
+    const lastMonthDownloads = await getDownloads(formatDate(lastMonth), formatDate(currentDate));
+    const lastYearDownloads = await getDownloads(formatDate(lastYear), formatDate(currentDate));
     const reactPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/react');
     const transactionPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/transaction');
     const walletPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/wallet');
@@ -52,10 +70,10 @@ async function fetchMeshStats(githubToken) {
     const coreCstPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core-cst');
 
     console.log('NPM Downloads:');
-    console.log('- Last 24 Hours:', lastDay.data.downloads);
-    console.log('- Last Week:', lastWeek.data.downloads);
-    console.log('- Last Month:', lastMonth.data.downloads);
-    console.log('- Last Year:', lastYear.data.downloads);
+    console.log('- Last 24 Hours:', lastDayDownloads);
+    console.log('- Last Week:', lastWeekDownloads);
+    console.log('- Last Month:', lastMonthDownloads);
+    console.log('- Last Year:', lastYearDownloads);
     console.log('- React Package Monthly:', reactPackageDownloads.data.downloads);
     console.log('- Transaction Package Monthly:', transactionPackageDownloads.data.downloads);
     console.log('- Wallet Package Monthly:', walletPackageDownloads.data.downloads);
@@ -81,13 +99,13 @@ async function fetchMeshStats(githubToken) {
     console.log('Total Dependents:', dependentsResponse.data.total);
 
     // Create npm-stat URLs
-    const currentDate = new Date().toISOString().split('T')[0];
-    const oneYearAgo = new Date();
+    const currentDateStr = currentDate.toISOString().split('T')[0];
+    const oneYearAgo = new Date(currentDate);
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
     const oneYearAgoStr = oneYearAgo.toISOString().split('T')[0];
 
-    const npmStatUrl = `https://npm-stat.com/charts.html?package=@meshsdk/core&from=${oneYearAgoStr}&to=${currentDate}`;
-    const npmStatCompareUrl = `https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=${oneYearAgoStr}&to=${currentDate}`;
+    const npmStatUrl = `https://npm-stat.com/charts.html?package=@meshsdk/core&from=${oneYearAgoStr}&to=${currentDateStr}`;
+    const npmStatCompareUrl = `https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=${oneYearAgoStr}&to=${currentDateStr}`;
 
     const stats = {
         github: {
@@ -96,10 +114,10 @@ async function fetchMeshStats(githubToken) {
         },
         npm: {
             downloads: {
-                last_day: lastDay.data.downloads,
-                last_week: lastWeek.data.downloads,
-                last_month: lastMonth.data.downloads,
-                last_year: lastYear.data.downloads
+                last_day: lastDayDownloads,
+                last_week: lastWeekDownloads,
+                last_month: lastMonthDownloads,
+                last_year: lastYearDownloads
             },
             react_package_downloads: reactPackageDownloads.data.downloads,
             transaction_package_downloads: transactionPackageDownloads.data.downloads,
