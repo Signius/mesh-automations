@@ -130,7 +130,7 @@ ${monthlyDownloads.core.map(m => {
 
 ## 🔍 GitHub Usage Statistics
 
-| Month${'&nbsp;'.repeat(44)} |   Project Count |   File Count |
+| Month${'&nbsp;'.repeat(44)} |   Projects |   Files |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
