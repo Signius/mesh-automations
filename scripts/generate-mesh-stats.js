@@ -187,7 +187,7 @@ function generateMarkdown(stats) {
 Last updated: ${currentDate}
 
 ## GitHub Organization Contributor Statistics
-| ${'··'.repeat(18)} | ${'··'.repeat(12)} |
+| ${'▪️'.repeat(18)} | ${'▪️'.repeat(12)} |
 |:-----------|:-------------|
 | Total Unique Contributors in MeshJS | ${stats.contributors.unique_count} |
 
