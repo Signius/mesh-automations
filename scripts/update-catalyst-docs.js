@@ -192,7 +192,7 @@ function generateProjectTable(project, milestonesCompleted) {
     const formattedName = formatText(project.name, 70);
 
     // Create standard markdown table which will work more consistently across renderers
-    tableMarkdown += `| Field | Value${'&nbsp;'.repeat(120)} |
+    tableMarkdown += `| Field | Value${'&nbsp;'.repeat(115)} |
 |:--------------------------------|:--------------------------------|
 | **Project ID** | ${project.project_id} |
 | **Name** | ${formattedName} |
