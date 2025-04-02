@@ -105,8 +105,8 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month | Downloads | Trend |
-|-------|-----------|-------|
+| Month                   | Download Count         | Performance           |
+|------------------------|------------------------|----------------------|
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
             m.downloads > monthlyDownloads.core[m.month - 2]?.downloads ? '📈' :
@@ -118,8 +118,8 @@ ${monthlyDownloads.core.map(m => {
 
 ## 📦 Yearly Package Download Totals
 
-| Package | Total Downloads | Status |
-|---------|----------------|---------|
+| Package Name           | Total Downloads        | Performance Rating    |
+|------------------------|------------------------|----------------------|
 | @meshsdk/core | ${yearlyTotals.core.toLocaleString()} | ${yearlyTotals.core > 50000 ? '🌟' : '⭐'} |
 | @meshsdk/react | ${yearlyTotals.react.toLocaleString()} | ${yearlyTotals.react > 50000 ? '🌟' : '⭐'} |
 | @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString()} | ${yearlyTotals.transaction > 50000 ? '🌟' : '⭐'} |
@@ -130,8 +130,8 @@ ${monthlyDownloads.core.map(m => {
 
 ## 🔍 GitHub Usage Statistics
 
-| Month | Projects | Files |
-|-------|----------|-------|
+| Month                   | Project References    | File References      |
+|------------------------|----------------------|---------------------|
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
         return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
