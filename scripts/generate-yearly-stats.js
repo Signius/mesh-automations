@@ -130,7 +130,7 @@ ${monthlyDownloads.core.map(m => {
 
 ## 🔍 GitHub Usage Statistics
 
-| Month${'&nbsp;'.repeat(54)} |   Projects |   Files |
+| Month${'&nbsp;'.repeat(65)} |   Projects |   Files |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
@@ -149,7 +149,7 @@ async function loadPreviousStats(year) {
             console.log(`Found existing stats file for ${year}`);
             const content = fs.readFileSync(statsPath, 'utf8');
             // Extract GitHub stats from the markdown
-            const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month \| Projects \| Files \|\n\|-------\|----------\|-------\|\n([\s\S]*?)(?=\n\n|$)/);
+            const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month.*?\| Projects \| Files \|\n\|[-\s]*\|\n([\s\S]*?)(?=\n\n|$)/);
 
             if (githubStatsMatch) {
                 console.log(`Successfully matched GitHub stats section for ${year}`);
