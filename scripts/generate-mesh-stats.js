@@ -45,8 +45,13 @@ async function fetchMeshStats(githubToken) {
     lastDay.setDate(lastDay.getDate() - 1);
     const lastWeek = new Date(currentDate);
     lastWeek.setDate(lastWeek.getDate() - 7);
+
+    // Calculate last month using calendar month
     const lastMonth = new Date(currentDate);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
+    const lastMonthStart = new Date(lastMonth.getFullYear(), lastMonth.getMonth(), 1);
+    const lastMonthEnd = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1, 0);
+
     const lastYear = new Date(currentDate);
     lastYear.setFullYear(lastYear.getFullYear() - 1);
 
@@ -60,7 +65,7 @@ async function fetchMeshStats(githubToken) {
 
     const lastDayDownloads = await getDownloads(formatDate(lastDay), formatDate(currentDate));
     const lastWeekDownloads = await getDownloads(formatDate(lastWeek), formatDate(currentDate));
-    const lastMonthDownloads = await getDownloads(formatDate(lastMonth), formatDate(currentDate));
+    const lastMonthDownloads = await getDownloads(formatDate(lastMonthStart), formatDate(lastMonthEnd));
     const lastYearDownloads = await getDownloads(formatDate(lastYear), formatDate(currentDate));
     const reactPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/react');
     const transactionPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/transaction');
