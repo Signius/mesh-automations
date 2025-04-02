@@ -6,30 +6,6 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const TABLE_CONFIGS = {
-    monthlyStats: {
-        columns: [
-            { key: 'month', text: 'Month', width: 40, align: 'left' },
-            { key: 'downloads', text: 'Download Count', width: 15, align: 'right' },
-            { key: 'performance', text: 'Performance', width: 12, align: 'right' }
-        ]
-    },
-    packageStats: {
-        columns: [
-            { key: 'package', text: 'Package Name', width: 40, align: 'left' },
-            { key: 'downloads', text: 'Total Downloads', width: 15, align: 'right' },
-            { key: 'rating', text: 'Rating', width: 12, align: 'right' }
-        ]
-    },
-    githubStats: {
-        columns: [
-            { key: 'month', text: 'Month', width: 40, align: 'left' },
-            { key: 'projects', text: 'Projects', width: 15, align: 'right' },
-            { key: 'files', text: 'Files', width: 12, align: 'right' }
-        ]
-    }
-};
-
 async function fetchGitHubStats(githubToken) {
     // Search for @meshsdk/core in package.json
     const corePackageJsonResponse = await axios.get(
@@ -103,25 +79,6 @@ async function fetchMonthlyDownloads(packageName, year) {
     return downloads;
 }
 
-function calculateColumnPadding(text, targetWidth) {
-    const spaceNeeded = Math.max(0, targetWidth - text.length);
-    return '&nbsp;'.repeat(spaceNeeded);
-}
-
-function generateTableHeader(tableConfig) {
-    const headerRow = tableConfig.columns.map(col => {
-        const padding = calculateColumnPadding(col.text, col.width);
-        return `${col.text}${padding}`;
-    }).join(' | ');
-
-    const alignmentRow = tableConfig.columns.map(col => {
-        const dashes = '-'.repeat(col.width);
-        return col.align === 'right' ? `${dashes}:` : `:${dashes}`;
-    }).join(' | ');
-
-    return `| ${headerRow} |\n| ${alignmentRow} |`;
-}
-
 function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
     const monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -148,7 +105,8 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-${generateTableHeader(TABLE_CONFIGS.monthlyStats)}
+| Month${'&nbsp;'.repeat(35)} |   Download Count |   Performance |
+| :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const currentDate = new Date();
         const currentYear = currentDate.getFullYear();
@@ -167,18 +125,20 @@ ${monthlyDownloads.core.map(m => {
 
 ## 📦 Yearly Package Download Totals
 
-${generateTableHeader(TABLE_CONFIGS.packageStats)}
-| @meshsdk/core | ${yearlyTotals.core.toLocaleString()} | ${yearlyTotals.core > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/react | ${yearlyTotals.react.toLocaleString()} | ${yearlyTotals.react > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString()} | ${yearlyTotals.transaction > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/wallet | ${yearlyTotals.wallet.toLocaleString()} | ${yearlyTotals.wallet > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/provider | ${yearlyTotals.provider.toLocaleString()} | ${yearlyTotals.provider > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/core-csl | ${yearlyTotals.coreCsl.toLocaleString()} | ${yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/core-cst | ${yearlyTotals.coreCst.toLocaleString()} | ${yearlyTotals.coreCst > 50000 ? '🌟' : '⭐'} |
+| Package Name${'&nbsp;'.repeat(32)} |   Total Downloads |   Rating |
+| :---------------------------------------- | ---------------: | -------: |
+| @meshsdk/core | ${yearlyTotals.core.toLocaleString()} | ${yearlyTotals.core > 20000 ? '🌟' : '⭐'} |
+| @meshsdk/react | ${yearlyTotals.react.toLocaleString()} | ${yearlyTotals.react > 20000 ? '🌟' : '⭐'} |
+| @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString()} | ${yearlyTotals.transaction > 20000 ? '🌟' : '⭐'} |
+| @meshsdk/wallet | ${yearlyTotals.wallet.toLocaleString()} | ${yearlyTotals.wallet > 20000 ? '🌟' : '⭐'} |
+| @meshsdk/provider | ${yearlyTotals.provider.toLocaleString()} | ${yearlyTotals.provider > 20000 ? '🌟' : '⭐'} |
+| @meshsdk/core-csl | ${yearlyTotals.coreCsl.toLocaleString()} | ${yearlyTotals.coreCsl > 20000 ? '🌟' : '⭐'} |
+| @meshsdk/core-cst | ${yearlyTotals.coreCst.toLocaleString()} | ${yearlyTotals.coreCst > 20000 ? '🌟' : '⭐'} |
 
 ## 🔍 GitHub Usage Statistics
 
-${generateTableHeader(TABLE_CONFIGS.githubStats)}
+| Month${'&nbsp;'.repeat(62)} |   Projects |   Files |
+| :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
         return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
@@ -303,5 +263,4 @@ async function main() {
     }
 }
 
-main();
 main(); 
