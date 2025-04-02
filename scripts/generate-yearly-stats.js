@@ -36,8 +36,8 @@ async function fetchGitHubStats(githubToken) {
     );
 
     return {
-        core_in_package_json: corePackageJsonResponse.data.total_count,
-        core_in_any_file: coreAnyFileResponse.data.total_count
+        core_in_package_json: corePackageJsonResponse.data.total_count || 'not recorded',
+        core_in_any_file: coreAnyFileResponse.data.total_count || 'not recorded'
     };
 }
 
@@ -140,8 +140,9 @@ ${monthlyDownloads.core.map(m => {
 | Month${'&nbsp;'.repeat(62)} |   Projects |   Files |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
-        const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
-        return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
+        const monthStats = githubStats[month] || { core_in_package_json: 'not recorded', core_in_any_file: 'not recorded' };
+        const formatValue = (value) => value === 'not recorded' ? value : value.toLocaleString();
+        return `| ${month} | ${formatValue(monthStats.core_in_package_json)} | ${formatValue(monthStats.core_in_any_file)} |`;
     }).join('\n')}`;
 
     return markdown;
@@ -225,13 +226,15 @@ async function main() {
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
 
                 // Only update current month's stats if they've increased
-                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
+                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 'not recorded', core_in_any_file: 'not recorded' };
                 console.log(`Current month stats before update:`, currentMonthStats);
                 console.log(`New GitHub stats:`, currentGitHubStats);
 
-                if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
+                if (currentMonthStats.core_in_package_json === 'not recorded' ||
+                    currentMonthStats.core_in_any_file === 'not recorded' ||
+                    currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
                     currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
-                    console.log(`Updating stats for ${currentMonthName} as new numbers are higher`);
+                    console.log(`Updating stats for ${currentMonthName} as new numbers are higher or previous values were not recorded`);
                     monthlyGitHubStats[currentMonthName] = currentGitHubStats;
                 }
             }
