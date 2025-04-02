@@ -1,7 +1,7 @@
 {
   "github": {
     "core_in_package_json": 336,
-    "core_in_any_file": 1468
+    "core_in_any_file": 1328
   },
   "npm": {
     "downloads": {
@@ -17,7 +17,7 @@
     "core_csl_package_downloads": 5979,
     "core_cst_package_downloads": 10381,
     "latest_version": "1.9.0-beta.25",
-    "dependents_count": 275274
+    "dependents_count": 275275
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-02&to=2025-04-02",
