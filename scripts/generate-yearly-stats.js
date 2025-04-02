@@ -101,7 +101,13 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
     const maxMonth = monthlyDownloads.core.find(m => m.downloads === maxDownloads);
     const maxMonthName = monthNames[maxMonth.month - 1];
 
-    const markdown = `# 📊 Mesh SDK Usage Statistics ${year}
+    const markdown = `---
+title: ${year} Mesh SDK Usage Statistics
+description: Historical statistics and usage metrics for Mesh SDK packages in ${year}
+sidebarTitle: ${year} Stats
+---
+
+# 📊 Mesh SDK Usage Statistics ${year}
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 

@@ -206,7 +206,13 @@ function generateMarkdown(stats) {
         day: 'numeric'
     });
 
-    const markdown = `# 📊 Mesh SDK Usage Statistics
+    const markdown = `---
+title: Mesh SDK Usage Statistics
+description: Current statistics and usage metrics for Mesh SDK packages
+sidebarTitle: Current Stats
+---
+
+# 📊 Mesh SDK Usage Statistics
 Last updated: ${currentDate}
 
 ## 👥 GitHub Organization Contributor Statistics
