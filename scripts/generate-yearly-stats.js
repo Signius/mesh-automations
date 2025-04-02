@@ -105,7 +105,7 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month${'&nbsp;'.repeat(35)} |   Download Count |   Performance |
+| Month${'&nbsp;'.repeat(37)} |   Download Count |   Performance |
 | :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
@@ -118,19 +118,19 @@ ${monthlyDownloads.core.map(m => {
 
 ## 📦 Yearly Package Download Totals
 
-| Package Name${'&nbsp;'.repeat(29)} |   Total Downloads |   Rating |
+| Package Name${'&nbsp;'.repeat(30)} |   Total Downloads |   Rating |
 | :---------------------------------------- | ---------------: | -------: |
-| @meshsdk/core${'&nbsp;'.repeat(29)} | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/react${'&nbsp;'.repeat(28)} | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/transaction${'&nbsp;'.repeat(24)} | ${yearlyTotals.transaction.toLocaleString().padStart(15)} | ${(yearlyTotals.transaction > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/wallet${'&nbsp;'.repeat(28)} | ${yearlyTotals.wallet.toLocaleString().padStart(15)} | ${(yearlyTotals.wallet > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/provider${'&nbsp;'.repeat(26)} | ${yearlyTotals.provider.toLocaleString().padStart(15)} | ${(yearlyTotals.provider > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/core-csl${'&nbsp;'.repeat(26)} | ${yearlyTotals.coreCsl.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/core-cst${'&nbsp;'.repeat(26)} | ${yearlyTotals.coreCst.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCst > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/react | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString().padStart(15)} | ${(yearlyTotals.transaction > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/wallet | ${yearlyTotals.wallet.toLocaleString().padStart(15)} | ${(yearlyTotals.wallet > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/provider | ${yearlyTotals.provider.toLocaleString().padStart(15)} | ${(yearlyTotals.provider > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core-csl | ${yearlyTotals.coreCsl.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core-cst | ${yearlyTotals.coreCst.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCst > 50000 ? '🌟' : '⭐').padStart(7)} |
 
 ## 🔍 GitHub Usage Statistics
 
-| Month${'&nbsp;'.repeat(35)} |   Project Count |   File Count |
+| Month${'&nbsp;'.repeat(45)} |   Project Count |   File Count |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
@@ -214,19 +214,11 @@ async function main() {
             // Only fetch and update GitHub stats for current year and current month
             if (year === currentYear) {
                 console.log(`Fetching current GitHub stats for ${currentMonthName} ${year}`);
-                // Fetch current GitHub stats
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
 
-                // Only update current month's stats if they've increased
-                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
-                console.log(`Current month stats before update:`, currentMonthStats);
-                console.log(`New GitHub stats:`, currentGitHubStats);
-
-                if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
-                    currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
-                    console.log(`Updating stats for ${currentMonthName} as new numbers are higher`);
-                    monthlyGitHubStats[currentMonthName] = currentGitHubStats;
-                }
+                // Update only the current month's stats
+                monthlyGitHubStats[currentMonthName] = currentGitHubStats;
+                console.log(`Updated stats for current month (${currentMonthName}):`, currentGitHubStats);
             }
 
             // Fetch monthly downloads for all packages
