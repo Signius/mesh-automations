@@ -183,21 +183,21 @@ function generateMarkdown(stats) {
         day: 'numeric'
     });
 
-    const markdown = `# Mesh SDK Usage Statistics
+    const markdown = `# 📊 Mesh SDK Usage Statistics
 Last updated: ${currentDate}
 
-## GitHub Organization Contributor Statistics
+## 👥 GitHub Organization Contributor Statistics
 | Metric${'&nbsp;'.repeat(78)} |   Value |
 | :---------------------------------------- | ------: |
 | Total Unique Contributors in MeshJS        | ${stats.contributors.unique_count} |
 
-## GitHub Usage
+## 🔍 GitHub Usage
 | Repository Metric${'&nbsp;'.repeat(58)} |   Count |
 | :---------------------------------------- | ------: |
 | Public Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
 | Public Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
 
-## Monthly NPM Package Downloads
+## 📦 Monthly NPM Package Downloads
 | Package${'&nbsp;'.repeat(50)} |   Monthly Downloads |
 | :---------------------------------------- | -----------------: |
 | @meshsdk/core | ${stats.npm.downloads.last_month} |
@@ -208,7 +208,7 @@ Last updated: ${currentDate}
 | @meshsdk/core-csl | ${stats.npm.core_csl_package_downloads} |
 | @meshsdk/core-cst | ${stats.npm.core_cst_package_downloads} |
 
-## Download Statistics for @meshsdk/core
+## 📈 Download Statistics for @meshsdk/core
 | Time Period${'&nbsp;'.repeat(49)} |   Download Count |
 | :---------------------------------------- | --------------: |
 | Last 24 Hours | ${stats.npm.downloads.last_day} |
@@ -216,7 +216,7 @@ Last updated: ${currentDate}
 | Last Month | ${stats.npm.downloads.last_month} |
 | Last Year | ${stats.npm.downloads.last_year} |
 
-## Useful Links
+## 🔗 Useful Links
 - [NPM Stats Chart](${stats.urls.npm_stat_url})
 - [NPM Stats Comparison](${stats.urls.npm_stat_compare_url})
 `;
