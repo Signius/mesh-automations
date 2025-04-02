@@ -118,7 +118,7 @@ ${monthlyDownloads.core.map(m => {
 
 ## 📦 Yearly Package Download Totals
 
-| Package Name${'&nbsp;'.repeat(30)} |   Total Downloads |   Rating |
+| Package Name${'&nbsp;'.repeat(32)} |   Total Downloads |   Rating |
 | :---------------------------------------- | ---------------: | -------: |
 | @meshsdk/core | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
 | @meshsdk/react | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
@@ -130,7 +130,7 @@ ${monthlyDownloads.core.map(m => {
 
 ## 🔍 GitHub Usage Statistics
 
-| Month${'&nbsp;'.repeat(42)} |   Project Count |   File Count |
+| Month${'&nbsp;'.repeat(44)} |   Project Count |   File Count |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };

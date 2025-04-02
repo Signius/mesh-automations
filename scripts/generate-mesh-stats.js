@@ -187,12 +187,12 @@ function generateMarkdown(stats) {
 Last updated: ${currentDate}
 
 ## GitHub Organization Contributor Statistics
-| Metric${'&nbsp;'.repeat(75)} |   Value |
+| Metric${'&nbsp;'.repeat(78)} |   Value |
 | :---------------------------------------- | ------: |
 | Total Unique Contributors in MeshJS        | ${stats.contributors.unique_count} |
 
 ## GitHub Usage
-| Repository Metric${'&nbsp;'.repeat(40)} |   Count |
+| Repository Metric${'&nbsp;'.repeat(42)} |   Count |
 | :---------------------------------------- | ------: |
 | Public Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
 | Public Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
@@ -209,7 +209,7 @@ Last updated: ${currentDate}
 | @meshsdk/core-cst | ${stats.npm.core_cst_package_downloads} |
 
 ## Download Statistics for @meshsdk/core
-| Time Period${'&nbsp;'.repeat(50)} |   Download Count |
+| Time Period${'&nbsp;'.repeat(49)} |   Download Count |
 | :---------------------------------------- | --------------: |
 | Last 24 Hours | ${stats.npm.downloads.last_day} |
 | Last Week | ${stats.npm.downloads.last_week} |
