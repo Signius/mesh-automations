@@ -1,13 +1,13 @@
 {
   "github": {
     "core_in_package_json": 336,
-    "core_in_any_file": 1468
+    "core_in_any_file": 1328
   },
   "npm": {
     "downloads": {
       "last_day": 371,
       "last_week": 2532,
-      "last_month": 10460,
+      "last_month": 10808,
       "last_year": 68938
     },
     "react_package_downloads": 9655,
@@ -17,7 +17,7 @@
     "core_csl_package_downloads": 5979,
     "core_cst_package_downloads": 10381,
     "latest_version": "1.9.0-beta.25",
-    "dependents_count": 275290
+    "dependents_count": 275306
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-02&to=2025-04-02",
@@ -456,12 +456,12 @@
         },
         {
           "login": "QSchlegel",
-          "contributions": 40,
+          "contributions": 42,
           "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4"
         },
         {
           "login": "justinschreiner",
-          "contributions": 17,
+          "contributions": 22,
           "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4"
         },
         {
