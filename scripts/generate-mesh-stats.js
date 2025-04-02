@@ -187,19 +187,19 @@ function generateMarkdown(stats) {
 Last updated: ${currentDate}
 
 ## GitHub Organization Contributor Statistics
-| Metric                   | Count                  |
-|---------------------------|------------------------|
-| Total Unique Contributors in MeshJS | ${stats.contributors.unique_count} |
+| Metric                                     |   Value |
+| :---------------------------------------- | ------: |
+| Total Unique Contributors in MeshJS        | ${stats.contributors.unique_count} |
 
 ## GitHub Usage
-| Repository Metric         | Count                  |
-|---------------------------|------------------------|
+| Repository Metric                          |   Count |
+| :---------------------------------------- | ------: |
 | Public Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
 | Public Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
 
 ## Monthly NPM Package Downloads
-| Package                  | Monthly Downloads      |
-|---------------------------|------------------------|
+| Package                                    |   Monthly Downloads |
+| :---------------------------------------- | -----------------: |
 | @meshsdk/core | ${stats.npm.downloads.last_month} |
 | @meshsdk/react | ${stats.npm.react_package_downloads} |
 | @meshsdk/transaction | ${stats.npm.transaction_package_downloads} |
@@ -209,8 +209,8 @@ Last updated: ${currentDate}
 | @meshsdk/core-cst | ${stats.npm.core_cst_package_downloads} |
 
 ## Download Statistics for @meshsdk/core
-| Time Period              | Download Count         |
-|---------------------------|------------------------|
+| Time Period                                |   Download Count |
+| :---------------------------------------- | --------------: |
 | Last 24 Hours | ${stats.npm.downloads.last_day} |
 | Last Week | ${stats.npm.downloads.last_week} |
 | Last Month | ${stats.npm.downloads.last_month} |

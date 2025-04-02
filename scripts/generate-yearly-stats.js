@@ -105,36 +105,36 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month                   | Download Count         | Performance           |
-|------------------------|------------------------|----------------------|
+| Month                                      |   Download Count |   Performance |
+| :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
             m.downloads > monthlyDownloads.core[m.month - 2]?.downloads ? '📈' :
                 m.downloads < monthlyDownloads.core[m.month - 2]?.downloads ? '📉' : '➡️';
-        return `| ${monthNames[m.month - 1]} | ${m.downloads.toLocaleString()} | ${trend} |`;
+        return `| ${monthNames[m.month - 1].padEnd(40)} | ${m.downloads.toLocaleString().padStart(15)} | ${trend.padStart(11)} |`;
     }).join('\n')}
 
 **Peak Month**: ${maxMonthName} with ${maxDownloads.toLocaleString()} downloads
 
 ## 📦 Yearly Package Download Totals
 
-| Package Name           | Total Downloads        | Performance Rating    |
-|------------------------|------------------------|----------------------|
-| @meshsdk/core | ${yearlyTotals.core.toLocaleString()} | ${yearlyTotals.core > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/react | ${yearlyTotals.react.toLocaleString()} | ${yearlyTotals.react > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/transaction | ${yearlyTotals.transaction.toLocaleString()} | ${yearlyTotals.transaction > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/wallet | ${yearlyTotals.wallet.toLocaleString()} | ${yearlyTotals.wallet > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/provider | ${yearlyTotals.provider.toLocaleString()} | ${yearlyTotals.provider > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/core-csl | ${yearlyTotals.coreCsl.toLocaleString()} | ${yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐'} |
-| @meshsdk/core-cst | ${yearlyTotals.coreCst.toLocaleString()} | ${yearlyTotals.coreCst > 50000 ? '🌟' : '⭐'} |
+| Package Name                               |   Total Downloads |   Rating |
+| :---------------------------------------- | ---------------: | -------: |
+| @meshsdk/core                             | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/react                            | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/transaction                      | ${yearlyTotals.transaction.toLocaleString().padStart(15)} | ${(yearlyTotals.transaction > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/wallet                           | ${yearlyTotals.wallet.toLocaleString().padStart(15)} | ${(yearlyTotals.wallet > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/provider                         | ${yearlyTotals.provider.toLocaleString().padStart(15)} | ${(yearlyTotals.provider > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core-csl                         | ${yearlyTotals.coreCsl.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core-cst                         | ${yearlyTotals.coreCst.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCst > 50000 ? '🌟' : '⭐').padStart(7)} |
 
 ## 🔍 GitHub Usage Statistics
 
-| Month                   | Project References    | File References      |
-|------------------------|----------------------|---------------------|
+| Month                                      |   Project Count |   File Count |
+| :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
-        return `| ${month} | ${monthStats.core_in_package_json.toLocaleString()} | ${monthStats.core_in_any_file.toLocaleString()} |`;
+        return `| ${month.padEnd(40)} | ${monthStats.core_in_package_json.toLocaleString().padStart(14)} | ${monthStats.core_in_any_file.toLocaleString().padStart(11)} |`;
     }).join('\n')}`;
 
     return markdown;
