@@ -23,7 +23,7 @@ jobs:
       - name: Checkout target repository
         uses: actions/checkout@v4
         with:
-          repository: Andre-Diamond/mesh-governance
+          repository: Andre-Diamond/mesh-gov
           path: target
           token: ${{ secrets.PAT }}
           
