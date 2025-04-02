@@ -105,36 +105,36 @@ function generateYearlyMarkdown(year, monthlyDownloads, githubStats) {
 
 ## 📈 Monthly Download Statistics for @meshsdk/core
 
-| Month                                      |   Download Count |   Performance |
+| Month${'&nbsp;'.repeat(35)} |   Download Count |   Performance |
 | :---------------------------------------- | --------------: | -----------: |
 ${monthlyDownloads.core.map(m => {
         const trend = m.downloads === maxDownloads ? '🔥' :
             m.downloads > monthlyDownloads.core[m.month - 2]?.downloads ? '📈' :
                 m.downloads < monthlyDownloads.core[m.month - 2]?.downloads ? '📉' : '➡️';
-        return `| ${monthNames[m.month - 1].padEnd(40)} | ${m.downloads.toLocaleString().padStart(15)} | ${trend.padStart(11)} |`;
+        return `| ${monthNames[m.month - 1]}${'&nbsp;'.repeat(40 - monthNames[m.month - 1].length)} | ${m.downloads.toLocaleString().padStart(15)} | ${trend.padStart(11)} |`;
     }).join('\n')}
 
 **Peak Month**: ${maxMonthName} with ${maxDownloads.toLocaleString()} downloads
 
 ## 📦 Yearly Package Download Totals
 
-| Package Name                               |   Total Downloads |   Rating |
+| Package Name${'&nbsp;'.repeat(29)} |   Total Downloads |   Rating |
 | :---------------------------------------- | ---------------: | -------: |
-| @meshsdk/core                             | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/react                            | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/transaction                      | ${yearlyTotals.transaction.toLocaleString().padStart(15)} | ${(yearlyTotals.transaction > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/wallet                           | ${yearlyTotals.wallet.toLocaleString().padStart(15)} | ${(yearlyTotals.wallet > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/provider                         | ${yearlyTotals.provider.toLocaleString().padStart(15)} | ${(yearlyTotals.provider > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/core-csl                         | ${yearlyTotals.coreCsl.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐').padStart(7)} |
-| @meshsdk/core-cst                         | ${yearlyTotals.coreCst.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCst > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core${'&nbsp;'.repeat(29)} | ${yearlyTotals.core.toLocaleString().padStart(15)} | ${(yearlyTotals.core > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/react${'&nbsp;'.repeat(28)} | ${yearlyTotals.react.toLocaleString().padStart(15)} | ${(yearlyTotals.react > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/transaction${'&nbsp;'.repeat(24)} | ${yearlyTotals.transaction.toLocaleString().padStart(15)} | ${(yearlyTotals.transaction > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/wallet${'&nbsp;'.repeat(28)} | ${yearlyTotals.wallet.toLocaleString().padStart(15)} | ${(yearlyTotals.wallet > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/provider${'&nbsp;'.repeat(26)} | ${yearlyTotals.provider.toLocaleString().padStart(15)} | ${(yearlyTotals.provider > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core-csl${'&nbsp;'.repeat(26)} | ${yearlyTotals.coreCsl.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCsl > 50000 ? '🌟' : '⭐').padStart(7)} |
+| @meshsdk/core-cst${'&nbsp;'.repeat(26)} | ${yearlyTotals.coreCst.toLocaleString().padStart(15)} | ${(yearlyTotals.coreCst > 50000 ? '🌟' : '⭐').padStart(7)} |
 
 ## 🔍 GitHub Usage Statistics
 
-| Month                                      |   Project Count |   File Count |
+| Month${'&nbsp;'.repeat(35)} |   Project Count |   File Count |
 | :---------------------------------------- | -------------: | -----------: |
 ${monthNames.map(month => {
         const monthStats = githubStats[month] || { core_in_package_json: 0, core_in_any_file: 0 };
-        return `| ${month.padEnd(40)} | ${monthStats.core_in_package_json.toLocaleString().padStart(14)} | ${monthStats.core_in_any_file.toLocaleString().padStart(11)} |`;
+        return `| ${month}${'&nbsp;'.repeat(40 - month.length)} | ${monthStats.core_in_package_json.toLocaleString().padStart(14)} | ${monthStats.core_in_any_file.toLocaleString().padStart(11)} |`;
     }).join('\n')}`;
 
     return markdown;
