@@ -17,589 +17,654 @@
     "core_csl_package_downloads": 5915,
     "core_cst_package_downloads": 10148,
     "latest_version": "1.9.0-beta.25",
-    "dependents_count": 275438
+    "dependents_count": 275444
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-03&to=2025-04-03",
     "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-03&to=2025-04-03"
   },
   "contributors": {
-    "by_repository": {
-      "mesh": [
-        {
-          "login": "jinglescode",
-          "contributions": 867,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 393,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        },
-        {
-          "login": "abdelkrimdev",
-          "contributions": 384,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        },
-        {
-          "login": "twwu123",
-          "contributions": 300,
-          "avatar_url": "https://avatars.githubusercontent.com/u/45336147?v=4"
-        },
-        {
-          "login": "lisicky",
-          "contributions": 30,
-          "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4"
-        },
-        {
-          "login": "Temasar1",
-          "contributions": 18,
-          "avatar_url": "https://avatars.githubusercontent.com/u/178079919?v=4"
-        },
-        {
-          "login": "JustLeif",
-          "contributions": 16,
-          "avatar_url": "https://avatars.githubusercontent.com/u/69766831?v=4"
-        },
-        {
-          "login": "Zagita21",
-          "contributions": 12,
-          "avatar_url": "https://avatars.githubusercontent.com/u/86721028?v=4"
-        },
-        {
-          "login": "AlainMgz",
-          "contributions": 10,
-          "avatar_url": "https://avatars.githubusercontent.com/u/52154524?v=4"
-        },
-        {
-          "login": "AnsonSIDAN",
-          "contributions": 8,
-          "avatar_url": "https://avatars.githubusercontent.com/u/91122558?v=4"
-        },
-        {
-          "login": "leonlai257",
-          "contributions": 8,
-          "avatar_url": "https://avatars.githubusercontent.com/u/73750831?v=4"
-        },
-        {
-          "login": "fabianbormann",
-          "contributions": 8,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1525818?v=4"
-        },
-        {
-          "login": "d-Bharti001",
-          "contributions": 7,
-          "avatar_url": "https://avatars.githubusercontent.com/u/56690664?v=4"
-        },
-        {
-          "login": "saphst4r",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/92129752?v=4"
-        },
-        {
-          "login": "pablosymc",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/120895543?v=4"
-        },
-        {
-          "login": "PedroLucasnet",
-          "contributions": 4,
-          "avatar_url": "https://avatars.githubusercontent.com/u/3915618?v=4"
-        },
-        {
-          "login": "sourabhxyz",
-          "contributions": 4,
-          "avatar_url": "https://avatars.githubusercontent.com/u/29835247?v=4"
-        },
-        {
-          "login": "VladislavKudrin",
-          "contributions": 3,
-          "avatar_url": "https://avatars.githubusercontent.com/u/17981725?v=4"
-        },
-        {
-          "login": "jmagan",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/24716625?v=4"
-        },
-        {
-          "login": "Ryun1",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/44342099?v=4"
-        },
-        {
-          "login": "esot321c",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/86281023?v=4"
-        },
-        {
-          "login": "nelsonksh",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/150728524?v=4"
-        },
-        {
-          "login": "eltociear",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/22633385?v=4"
-        },
-        {
-          "login": "TrevorBenson",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/9167887?v=4"
-        },
-        {
-          "login": "invertalwaysinvert",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/51850412?v=4"
-        },
-        {
-          "login": "brian-atriumlab",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/110428175?v=4"
-        }
-      ],
-      "mesh-nextjs-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 9,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        },
-        {
-          "login": "abdelkrimdev",
-          "contributions": 4,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        },
-        {
-          "login": "rober-m",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/48034748?v=4"
-        }
-      ],
-      "starter-next-js-template": [
-        {
-          "login": "abdelkrimdev",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "minting-next-ts-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 9,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "abdelkrimdev",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        }
-      ],
-      "minting-next-js-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 8,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "abdelkrimdev",
-          "contributions": 4,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        }
-      ],
-      "staking-next-ts-template": [
-        {
-          "login": "abdelkrimdev",
-          "contributions": 10,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "staking-next-js-template": [
-        {
-          "login": "abdelkrimdev",
-          "contributions": 12,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "whitepaper": [
-        {
-          "login": "jinglescode",
-          "contributions": 3,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "abdelkrimdev",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        }
-      ],
-      "mesh.ai": [
-        {
-          "login": "jinglescode",
-          "contributions": 19,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "signin-next-ts-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "signin-next-js-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "aiken-next-ts-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 8,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "ecommerce-next-ts-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "marketplace-next-ts-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "abdelkrimdev",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4"
-        }
-      ],
-      "pluts-next-ts-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "personal-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "mesh.ai.chat": [
-        {
-          "login": "jinglescode",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "mesh-core": [
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 124,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        },
-        {
-          "login": "rober-m",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/48034748?v=4"
-        }
-      ],
-      "mesh-pbl-course-content": [
-        {
-          "login": "jinglescode",
-          "contributions": 3,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "Zagita21",
-          "contributions": 3,
-          "avatar_url": "https://avatars.githubusercontent.com/u/86721028?v=4"
-        },
-        {
-          "login": "workshop-maybe",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/68281861?v=4"
-        }
-      ],
-      "mesh-pbl": [
-        {
-          "login": "workshop-maybe",
-          "contributions": 34,
-          "avatar_url": "https://avatars.githubusercontent.com/u/68281861?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 23,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 21,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        },
-        {
-          "login": "leonlai257",
-          "contributions": 15,
-          "avatar_url": "https://avatars.githubusercontent.com/u/73750831?v=4"
-        },
-        {
-          "login": "nelsonksh",
-          "contributions": 10,
-          "avatar_url": "https://avatars.githubusercontent.com/u/150728524?v=4"
-        },
-        {
-          "login": "Zagita21",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/86721028?v=4"
-        },
-        {
-          "login": "nelson-ksh",
-          "contributions": 4,
-          "avatar_url": "https://avatars.githubusercontent.com/u/103506863?v=4"
-        }
-      ],
-      "mesh-pbl-student-library": [
-        {
-          "login": "workshop-maybe",
-          "contributions": 7,
-          "avatar_url": "https://avatars.githubusercontent.com/u/68281861?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        }
-      ],
-      "standalone-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "examples": [
-        {
-          "login": "jinglescode",
-          "contributions": 29,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "ErickRomeroDev",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/39284904?v=4"
-        },
-        {
-          "login": "TrevorBenson",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/9167887?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        },
-        {
-          "login": "karkigrishmin",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/46286762?v=4"
-        },
-        {
-          "login": "JustLeif",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/69766831?v=4"
-        }
-      ],
-      "mesh-aiken-template": [
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 14,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        }
-      ],
-      "multisig": [
-        {
-          "login": "jinglescode",
-          "contributions": 94,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "QSchlegel",
-          "contributions": 42,
-          "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4"
-        },
-        {
-          "login": "justinschreiner",
-          "contributions": 22,
-          "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4"
-        },
-        {
-          "login": "leonlai257",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/73750831?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 1,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        }
-      ],
-      "cardano-governance": [
-        {
-          "login": "Andre-Diamond",
-          "contributions": 47,
-          "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4"
-        },
-        {
-          "login": "Felix-at-Swarm",
-          "contributions": 39,
-          "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4"
-        },
-        {
-          "login": "github-actions[bot]",
-          "contributions": 11,
-          "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4"
-        }
-      ],
-      "funding": [
-        {
-          "login": "Felix-at-Swarm",
-          "contributions": 101,
-          "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 13,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "actions-user",
-          "contributions": 9,
-          "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4"
-        },
-        {
-          "login": "Andre-Diamond",
-          "contributions": 2,
-          "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4"
-        }
-      ],
-      "mesh-saas": [
-        {
-          "login": "leonlai257",
-          "contributions": 12,
-          "avatar_url": "https://avatars.githubusercontent.com/u/73750831?v=4"
-        },
-        {
-          "login": "jinglescode",
-          "contributions": 10,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "AnsonSIDAN",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/91122558?v=4"
-        },
-        {
-          "login": "HinsonSIDAN",
-          "contributions": 3,
-          "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4"
-        }
-      ],
-      "mesh-svelte-template": [
-        {
-          "login": "jinglescode",
-          "contributions": 6,
-          "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4"
-        },
-        {
-          "login": "JustLeif",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/69766831?v=4"
-        }
-      ],
-      "bounty-board": [
-        {
-          "login": "Felix-at-Swarm",
-          "contributions": 5,
-          "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4"
-        }
-      ]
-    },
     "unique_count": 37,
-    "unique_contributors": [
-      "jinglescode",
-      "HinsonSIDAN",
-      "abdelkrimdev",
-      "twwu123",
-      "lisicky",
-      "Temasar1",
-      "JustLeif",
-      "Zagita21",
-      "AlainMgz",
-      "AnsonSIDAN",
-      "leonlai257",
-      "fabianbormann",
-      "d-Bharti001",
-      "saphst4r",
-      "pablosymc",
-      "PedroLucasnet",
-      "sourabhxyz",
-      "VladislavKudrin",
-      "jmagan",
-      "Ryun1",
-      "esot321c",
-      "nelsonksh",
-      "eltociear",
-      "TrevorBenson",
-      "invertalwaysinvert",
-      "brian-atriumlab",
-      "rober-m",
-      "workshop-maybe",
-      "nelson-ksh",
-      "ErickRomeroDev",
-      "karkigrishmin",
-      "QSchlegel",
-      "justinschreiner",
-      "Andre-Diamond",
-      "Felix-at-Swarm",
-      "github-actions[bot]",
-      "actions-user"
+    "contributors": [
+      {
+        "login": "jinglescode",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
+        "contributions": 1145,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 867
+          },
+          {
+            "name": "multisig",
+            "contributions": 94
+          },
+          {
+            "name": "examples",
+            "contributions": 29
+          },
+          {
+            "name": "mesh-pbl",
+            "contributions": 23
+          },
+          {
+            "name": "mesh.ai",
+            "contributions": 19
+          },
+          {
+            "name": "funding",
+            "contributions": 13
+          },
+          {
+            "name": "mesh-saas",
+            "contributions": 10
+          },
+          {
+            "name": "mesh-nextjs-template",
+            "contributions": 9
+          },
+          {
+            "name": "minting-next-ts-template",
+            "contributions": 9
+          },
+          {
+            "name": "minting-next-js-template",
+            "contributions": 8
+          },
+          {
+            "name": "aiken-next-ts-template",
+            "contributions": 8
+          },
+          {
+            "name": "staking-next-ts-template",
+            "contributions": 6
+          },
+          {
+            "name": "marketplace-next-ts-template",
+            "contributions": 6
+          },
+          {
+            "name": "mesh-svelte-template",
+            "contributions": 6
+          },
+          {
+            "name": "starter-next-js-template",
+            "contributions": 5
+          },
+          {
+            "name": "staking-next-js-template",
+            "contributions": 5
+          },
+          {
+            "name": "ecommerce-next-ts-template",
+            "contributions": 5
+          },
+          {
+            "name": "mesh-pbl-student-library",
+            "contributions": 5
+          },
+          {
+            "name": "whitepaper",
+            "contributions": 3
+          },
+          {
+            "name": "mesh-pbl-course-content",
+            "contributions": 3
+          },
+          {
+            "name": "signin-next-ts-template",
+            "contributions": 2
+          },
+          {
+            "name": "signin-next-js-template",
+            "contributions": 2
+          },
+          {
+            "name": "pluts-next-ts-template",
+            "contributions": 2
+          },
+          {
+            "name": "personal-template",
+            "contributions": 2
+          },
+          {
+            "name": "mesh.ai.chat",
+            "contributions": 2
+          },
+          {
+            "name": "standalone-template",
+            "contributions": 1
+          },
+          {
+            "name": "mesh-aiken-template",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "HinsonSIDAN",
+        "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4",
+        "contributions": 564,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 393
+          },
+          {
+            "name": "mesh-core",
+            "contributions": 124
+          },
+          {
+            "name": "mesh-pbl",
+            "contributions": 21
+          },
+          {
+            "name": "mesh-aiken-template",
+            "contributions": 14
+          },
+          {
+            "name": "mesh-nextjs-template",
+            "contributions": 6
+          },
+          {
+            "name": "mesh-saas",
+            "contributions": 3
+          },
+          {
+            "name": "mesh-pbl-student-library",
+            "contributions": 1
+          },
+          {
+            "name": "examples",
+            "contributions": 1
+          },
+          {
+            "name": "multisig",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "abdelkrimdev",
+        "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4",
+        "contributions": 426,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 384
+          },
+          {
+            "name": "staking-next-js-template",
+            "contributions": 12
+          },
+          {
+            "name": "staking-next-ts-template",
+            "contributions": 10
+          },
+          {
+            "name": "starter-next-js-template",
+            "contributions": 5
+          },
+          {
+            "name": "minting-next-ts-template",
+            "contributions": 5
+          },
+          {
+            "name": "mesh-nextjs-template",
+            "contributions": 4
+          },
+          {
+            "name": "minting-next-js-template",
+            "contributions": 4
+          },
+          {
+            "name": "whitepaper",
+            "contributions": 1
+          },
+          {
+            "name": "marketplace-next-ts-template",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "twwu123",
+        "avatar_url": "https://avatars.githubusercontent.com/u/45336147?v=4",
+        "contributions": 300,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 300
+          }
+        ]
+      },
+      {
+        "login": "Felix-at-Swarm",
+        "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
+        "contributions": 145,
+        "repositories": [
+          {
+            "name": "funding",
+            "contributions": 101
+          },
+          {
+            "name": "cardano-governance",
+            "contributions": 39
+          },
+          {
+            "name": "bounty-board",
+            "contributions": 5
+          }
+        ]
+      },
+      {
+        "login": "Andre-Diamond",
+        "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
+        "contributions": 49,
+        "repositories": [
+          {
+            "name": "cardano-governance",
+            "contributions": 47
+          },
+          {
+            "name": "funding",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "workshop-maybe",
+        "avatar_url": "https://avatars.githubusercontent.com/u/68281861?v=4",
+        "contributions": 43,
+        "repositories": [
+          {
+            "name": "mesh-pbl",
+            "contributions": 34
+          },
+          {
+            "name": "mesh-pbl-student-library",
+            "contributions": 7
+          },
+          {
+            "name": "mesh-pbl-course-content",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "QSchlegel",
+        "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4",
+        "contributions": 42,
+        "repositories": [
+          {
+            "name": "multisig",
+            "contributions": 42
+          }
+        ]
+      },
+      {
+        "login": "leonlai257",
+        "avatar_url": "https://avatars.githubusercontent.com/u/73750831?v=4",
+        "contributions": 40,
+        "repositories": [
+          {
+            "name": "mesh-pbl",
+            "contributions": 15
+          },
+          {
+            "name": "mesh-saas",
+            "contributions": 12
+          },
+          {
+            "name": "mesh",
+            "contributions": 8
+          },
+          {
+            "name": "multisig",
+            "contributions": 5
+          }
+        ]
+      },
+      {
+        "login": "lisicky",
+        "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
+        "contributions": 30,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 30
+          }
+        ]
+      },
+      {
+        "login": "JustLeif",
+        "avatar_url": "https://avatars.githubusercontent.com/u/69766831?v=4",
+        "contributions": 22,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 16
+          },
+          {
+            "name": "mesh-svelte-template",
+            "contributions": 5
+          },
+          {
+            "name": "examples",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "justinschreiner",
+        "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4",
+        "contributions": 22,
+        "repositories": [
+          {
+            "name": "multisig",
+            "contributions": 22
+          }
+        ]
+      },
+      {
+        "login": "Zagita21",
+        "avatar_url": "https://avatars.githubusercontent.com/u/86721028?v=4",
+        "contributions": 21,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 12
+          },
+          {
+            "name": "mesh-pbl",
+            "contributions": 6
+          },
+          {
+            "name": "mesh-pbl-course-content",
+            "contributions": 3
+          }
+        ]
+      },
+      {
+        "login": "Temasar1",
+        "avatar_url": "https://avatars.githubusercontent.com/u/178079919?v=4",
+        "contributions": 18,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 18
+          }
+        ]
+      },
+      {
+        "login": "AnsonSIDAN",
+        "avatar_url": "https://avatars.githubusercontent.com/u/91122558?v=4",
+        "contributions": 13,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 8
+          },
+          {
+            "name": "mesh-saas",
+            "contributions": 5
+          }
+        ]
+      },
+      {
+        "login": "nelsonksh",
+        "avatar_url": "https://avatars.githubusercontent.com/u/150728524?v=4",
+        "contributions": 12,
+        "repositories": [
+          {
+            "name": "mesh-pbl",
+            "contributions": 10
+          },
+          {
+            "name": "mesh",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "github-actions[bot]",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "contributions": 11,
+        "repositories": [
+          {
+            "name": "cardano-governance",
+            "contributions": 11
+          }
+        ]
+      },
+      {
+        "login": "AlainMgz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/52154524?v=4",
+        "contributions": 10,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 10
+          }
+        ]
+      },
+      {
+        "login": "actions-user",
+        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
+        "contributions": 9,
+        "repositories": [
+          {
+            "name": "funding",
+            "contributions": 9
+          }
+        ]
+      },
+      {
+        "login": "fabianbormann",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1525818?v=4",
+        "contributions": 8,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 8
+          }
+        ]
+      },
+      {
+        "login": "d-Bharti001",
+        "avatar_url": "https://avatars.githubusercontent.com/u/56690664?v=4",
+        "contributions": 7,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 7
+          }
+        ]
+      },
+      {
+        "login": "saphst4r",
+        "avatar_url": "https://avatars.githubusercontent.com/u/92129752?v=4",
+        "contributions": 6,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 6
+          }
+        ]
+      },
+      {
+        "login": "pablosymc",
+        "avatar_url": "https://avatars.githubusercontent.com/u/120895543?v=4",
+        "contributions": 6,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 6
+          }
+        ]
+      },
+      {
+        "login": "PedroLucasnet",
+        "avatar_url": "https://avatars.githubusercontent.com/u/3915618?v=4",
+        "contributions": 4,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 4
+          }
+        ]
+      },
+      {
+        "login": "sourabhxyz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/29835247?v=4",
+        "contributions": 4,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 4
+          }
+        ]
+      },
+      {
+        "login": "rober-m",
+        "avatar_url": "https://avatars.githubusercontent.com/u/48034748?v=4",
+        "contributions": 4,
+        "repositories": [
+          {
+            "name": "mesh-nextjs-template",
+            "contributions": 2
+          },
+          {
+            "name": "mesh-core",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "nelson-ksh",
+        "avatar_url": "https://avatars.githubusercontent.com/u/103506863?v=4",
+        "contributions": 4,
+        "repositories": [
+          {
+            "name": "mesh-pbl",
+            "contributions": 4
+          }
+        ]
+      },
+      {
+        "login": "VladislavKudrin",
+        "avatar_url": "https://avatars.githubusercontent.com/u/17981725?v=4",
+        "contributions": 3,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 3
+          }
+        ]
+      },
+      {
+        "login": "jmagan",
+        "avatar_url": "https://avatars.githubusercontent.com/u/24716625?v=4",
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "Ryun1",
+        "avatar_url": "https://avatars.githubusercontent.com/u/44342099?v=4",
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "esot321c",
+        "avatar_url": "https://avatars.githubusercontent.com/u/86281023?v=4",
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "TrevorBenson",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9167887?v=4",
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 1
+          },
+          {
+            "name": "examples",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "eltociear",
+        "avatar_url": "https://avatars.githubusercontent.com/u/22633385?v=4",
+        "contributions": 1,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "invertalwaysinvert",
+        "avatar_url": "https://avatars.githubusercontent.com/u/51850412?v=4",
+        "contributions": 1,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "brian-atriumlab",
+        "avatar_url": "https://avatars.githubusercontent.com/u/110428175?v=4",
+        "contributions": 1,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "ErickRomeroDev",
+        "avatar_url": "https://avatars.githubusercontent.com/u/39284904?v=4",
+        "contributions": 1,
+        "repositories": [
+          {
+            "name": "examples",
+            "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "karkigrishmin",
+        "avatar_url": "https://avatars.githubusercontent.com/u/46286762?v=4",
+        "contributions": 1,
+        "repositories": [
+          {
+            "name": "examples",
+            "contributions": 1
+          }
+        ]
+      }
     ]
   }
 }
