@@ -1,6 +1,6 @@
-import { fetchMeshStats, fetchMeshContributors } from './fetch-mesh-data.js';
-import { saveMarkdown } from './generate-markdown.js';
-import { saveJson } from './generate-json.js';
+import { fetchMeshStats, fetchMeshContributors } from './fetch-mesh-stats-data.js';
+import { saveMarkdown } from './generate-mesh-stats-markdown.js';
+import { saveJson } from './generate-mesh-stats-json.js';
 
 // Configuration
 const CONFIG = {

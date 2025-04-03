@@ -22,10 +22,10 @@ jobs:
         run: npm install
       
       - name: Generate Current Stats
-        run: node scripts/generate-mesh-stats.js
+        run: node scripts/mesh-stats/generate-mesh-stats.js
         
       - name: Generate Yearly Stats
-        run: node scripts/generate-yearly-stats.js
+        run: node scripts/mesh-stats/generate-yearly-stats.js
         
       - name: Check for changes
         id: git-check
