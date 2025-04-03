@@ -3,8 +3,8 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { saveVotingJson } from '../generate-voting-json.js';
-import { generateYearlyMarkdown, updateAnnualRecords } from '../generate-voting-markdown.js';
+import { saveVotingJson } from '../drep-voting/generate-voting-json.js';
+import { generateYearlyMarkdown, updateAnnualRecords } from '../drep-voting/generate-voting-markdown.js';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
