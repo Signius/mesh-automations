@@ -3,10 +3,18 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { saveVotingJson } from './generate-voting-json.js';
+import { generateYearlyMarkdown, updateAnnualRecords } from './generate-voting-markdown.js';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Configuration
+const CONFIG = {
+    generateJson: true,      // Set to false to skip JSON generation
+    generateMarkdown: true,  // Set to false to skip markdown generation
+};
 
 // Read config file
 const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
@@ -118,124 +126,6 @@ async function getProposalDetails(drepId) {
     }
 }
 
-// Function to generate a single vote table
-function generateVoteTable(vote, proposalDetails, metadata) {
-    const voteEmoji = vote.vote === 'Yes' ? '✅' : vote.vote === 'No' ? '❌' : '⚪';
-    const voteText = `${voteEmoji}${vote.vote}`;
-
-    // Get proposal details
-    const proposal = proposalDetails[vote.proposalId] || {};
-
-    // Extract proposal title from proposal details first, then fallback to metadata and rationales.json
-    let proposalTitle = proposal.meta_json?.body?.title;
-    if (!proposalTitle && vote.proposalId) {
-        proposalTitle = missingRationales[vote.proposalId]?.title;
-    }
-    proposalTitle = proposalTitle || 'Unknown Proposal';
-
-    // Format dates
-    const submittedDate = vote.blockTime ? new Date(vote.blockTime).toLocaleDateString() : 'N/A';
-    const proposedEpoch = proposal.proposed_epoch || 'N/A';
-    const expirationEpoch = proposal.expiration || 'N/A';
-
-    // Get proposal type
-    const proposalType = proposal.proposal_type || 'Unknown';
-
-    // Process rationale text to prevent table disruption
-    let rationale = metadata?.body?.comment || metadata?.body?.rationale || 'No rationale available';
-
-    // Check for missing rationale in the rationales.json file
-    if (rationale === 'No rationale available' && vote.proposalId) {
-        const missingRationale = missingRationales[vote.proposalId];
-        if (missingRationale && missingRationale.rationale) {
-            rationale = missingRationale.rationale;
-        }
-    }
-
-    rationale = rationale.replace(/\n/g, ' ');
-    rationale = rationale.replace(/\s+/g, ' ');
-    rationale = rationale.replace(/\|/g, '\\|');
-    /*if (rationale.length > 500) {
-        rationale = rationale.substring(0, 497) + '...';
-    }*/
-
-    return `| ${organizationName}      | Cardano Governance Actions |
-| -------------- | ------------------------------------------------------- |
-| Proposal Title | [${proposalTitle}](https://adastat.net/governances/${vote.proposalTxHash || 'N/A'}) |
-| Hash           | ${vote.proposalTxHash || 'N/A'} |
-| Action ID      | ${vote.proposalId || 'N/A'} |
-| Type           | ${proposalType} |
-| Proposed Epoch | ${proposedEpoch} |
-| Expires Epoch  | ${expirationEpoch} |
-| Vote           | ${voteText} |
-| Vote Submitted | ${submittedDate} |
-| Rationale       | ${rationale} |
-| Link | [adastat tx link](https://adastat.net/transactions/${vote.voteTxHash || 'N/A'}) |`;
-}
-
-// Function to generate yearly markdown file
-function generateYearlyMarkdown(votes, year) {
-    const filePath = findFileForYear(year);
-    if (!filePath) {
-        console.error(`No file found for year ${year}`);
-        return;
-    }
-
-    // Read the existing front matter
-    const content = fs.readFileSync(filePath, 'utf8');
-    const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    const frontMatter = frontMatterMatch ? frontMatterMatch[0] : '';
-
-    let newContent = `${frontMatter}\n\n# DRep Voting History for ${year}\n\n`;
-
-    // Sort votes by submission date
-    votes.sort((a, b) => new Date(b.blockTime) - new Date(a.blockTime));
-
-    // Add each vote table with a separator
-    votes.forEach((vote, index) => {
-        if (index > 0) {
-            newContent += '\n\n---\n\n'; // Add separator between votes
-        }
-        newContent += vote.table + '\n';
-    });
-
-    fs.writeFileSync(filePath, newContent);
-    console.log(`Updated markdown file for year ${year}: ${filePath}`);
-}
-
-// Function to update Annual Records section in index file
-function updateAnnualRecords() {
-    const indexFilePath = path.join(votingHistoryDir, '1001.md');
-    try {
-        let content = fs.readFileSync(indexFilePath, 'utf8');
-
-        // Find all markdown files in the voting history directory
-        const files = fs.readdirSync(votingHistoryDir);
-        const yearFiles = files
-            .filter(file => file.endsWith('.md') && file !== '1001.md')
-            .map(file => {
-                const year = readFrontMatter(path.join(votingHistoryDir, file));
-                return { file, year };
-            })
-            .filter(({ year }) => year !== null)
-            .sort((a, b) => b.year - a.year); // Sort by year descending
-
-        // Generate the new Annual Records section
-        const annualRecordsSection = `## Annual Records\n\n${yearFiles
-            .map(({ file, year }) => `- [${year} Voting History](./${file})`)
-            .join('\n')}\n\n`;
-
-        // Replace the existing Annual Records section
-        content = content.replace(/## Annual Records\n\n[\s\S]*?(?=\n##|$)/, annualRecordsSection);
-
-        // Write the updated content back to the file
-        fs.writeFileSync(indexFilePath, content);
-        console.log('Updated Annual Records section in index file');
-    } catch (error) {
-        console.error('Error updating Annual Records section:', error.message);
-    }
-}
-
 async function getDRepVotes(drepId) {
     try {
         const apiKey = process.env.KOIOS_API_KEY;
@@ -293,8 +183,15 @@ async function getDRepVotes(drepId) {
                 metadata = await fetchMetadata(processedVote.metaUrl);
             }
 
-            // Generate vote table
-            processedVote.table = generateVoteTable(processedVote, proposalDetails, metadata);
+            // Get proposal details
+            const proposal = proposalDetails[vote.proposal_id] || {};
+
+            // Add proposal details to vote
+            processedVote.proposalTitle = proposal.meta_json?.body?.title || missingRationales[vote.proposal_id]?.title || 'Unknown Proposal';
+            processedVote.proposalType = proposal.proposal_type || 'Unknown';
+            processedVote.proposedEpoch = proposal.proposed_epoch || 'N/A';
+            processedVote.expirationEpoch = proposal.expiration || 'N/A';
+            processedVote.rationale = metadata?.body?.comment || metadata?.body?.rationale || missingRationales[vote.proposal_id]?.rationale || 'No rationale available';
 
             // Get year from blockTime
             const year = new Date(processedVote.blockTime).getFullYear();
@@ -306,13 +203,21 @@ async function getDRepVotes(drepId) {
             votesByYear[year].push(processedVote);
         }
 
-        // Generate markdown files for each year
+        // Generate outputs for each year based on configuration
         for (const [year, votes] of Object.entries(votesByYear)) {
-            generateYearlyMarkdown(votes, parseInt(year));
+            if (CONFIG.generateJson) {
+                saveVotingJson(votes, year);
+            }
+
+            if (CONFIG.generateMarkdown) {
+                generateYearlyMarkdown(votes, year, organizationName);
+            }
         }
 
-        // Update the Annual Records section after processing all votes
-        updateAnnualRecords();
+        // Update the Annual Records section if markdown is enabled
+        if (CONFIG.generateMarkdown) {
+            updateAnnualRecords(votingHistoryDir);
+        }
 
         console.log('All votes processed and organized by year successfully');
     } catch (error) {
