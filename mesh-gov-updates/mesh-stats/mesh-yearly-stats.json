@@ -1,0 +1,427 @@
+{
+  "year": 2025,
+  "yearlyTotals": {
+    "core": 24637,
+    "react": 23232,
+    "transaction": 23661,
+    "wallet": 24289,
+    "provider": 23133,
+    "coreCsl": 16875,
+    "coreCst": 24359
+  },
+  "monthlyDownloads": {
+    "core": [
+      {
+        "month": "January",
+        "downloads": 5912
+      },
+      {
+        "month": "February",
+        "downloads": 7458
+      },
+      {
+        "month": "March",
+        "downloads": 10635
+      },
+      {
+        "month": "April",
+        "downloads": 632
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ],
+    "react": [
+      {
+        "month": "January",
+        "downloads": 5616
+      },
+      {
+        "month": "February",
+        "downloads": 7162
+      },
+      {
+        "month": "March",
+        "downloads": 9843
+      },
+      {
+        "month": "April",
+        "downloads": 611
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ],
+    "transaction": [
+      {
+        "month": "January",
+        "downloads": 5439
+      },
+      {
+        "month": "February",
+        "downloads": 7255
+      },
+      {
+        "month": "March",
+        "downloads": 10305
+      },
+      {
+        "month": "April",
+        "downloads": 662
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ],
+    "wallet": [
+      {
+        "month": "January",
+        "downloads": 5365
+      },
+      {
+        "month": "February",
+        "downloads": 7243
+      },
+      {
+        "month": "March",
+        "downloads": 11005
+      },
+      {
+        "month": "April",
+        "downloads": 676
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ],
+    "provider": [
+      {
+        "month": "January",
+        "downloads": 5126
+      },
+      {
+        "month": "February",
+        "downloads": 7000
+      },
+      {
+        "month": "March",
+        "downloads": 10428
+      },
+      {
+        "month": "April",
+        "downloads": 579
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ],
+    "coreCsl": [
+      {
+        "month": "January",
+        "downloads": 5242
+      },
+      {
+        "month": "February",
+        "downloads": 5231
+      },
+      {
+        "month": "March",
+        "downloads": 5944
+      },
+      {
+        "month": "April",
+        "downloads": 458
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ],
+    "coreCst": [
+      {
+        "month": "January",
+        "downloads": 5555
+      },
+      {
+        "month": "February",
+        "downloads": 7540
+      },
+      {
+        "month": "March",
+        "downloads": 10587
+      },
+      {
+        "month": "April",
+        "downloads": 677
+      },
+      {
+        "month": "May",
+        "downloads": 0
+      },
+      {
+        "month": "June",
+        "downloads": 0
+      },
+      {
+        "month": "July",
+        "downloads": 0
+      },
+      {
+        "month": "August",
+        "downloads": 0
+      },
+      {
+        "month": "September",
+        "downloads": 0
+      },
+      {
+        "month": "October",
+        "downloads": 0
+      },
+      {
+        "month": "November",
+        "downloads": 0
+      },
+      {
+        "month": "December",
+        "downloads": 0
+      }
+    ]
+  },
+  "githubStats": [
+    {
+      "month": "January",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "February",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "March",
+      "projects": 332,
+      "files": 1180
+    },
+    {
+      "month": "April",
+      "projects": 336,
+      "files": 1528
+    },
+    {
+      "month": "May",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "June",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "July",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "August",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "September",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "October",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "November",
+      "projects": 0,
+      "files": 0
+    },
+    {
+      "month": "December",
+      "projects": 0,
+      "files": 0
+    }
+  ],
+  "lastUpdated": "2025-04-03T09:13:09.876Z"
+}
