@@ -22,7 +22,7 @@ const drepId = config.drepId;
 const organizationName = config.organizationName;
 
 // Read missing rationales file
-const missingRationalesPath = path.join(__dirname, '..', 'voting-history', 'missing-voting-rationales', 'rationales.json');
+const missingRationalesPath = path.join(__dirname, '..', '..', 'voting-history', 'missing-voting-rationales', 'rationales.json');
 let missingRationales = {};
 try {
     missingRationales = JSON.parse(fs.readFileSync(missingRationalesPath, 'utf8'));
@@ -41,7 +41,7 @@ if (!organizationName) {
 }
 
 // Define the base directory for voting history files
-const votingHistoryDir = path.join(__dirname, '..', 'apps', 'docs', 'src', 'pages', 'en', 'drep-voting');
+const votingHistoryDir = path.join(__dirname, '..', '..', 'apps', 'docs', 'src', 'pages', 'en', 'drep-voting');
 
 // Function to read front matter from a file
 function readFrontMatter(filePath) {
