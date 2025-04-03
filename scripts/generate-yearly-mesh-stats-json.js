@@ -8,7 +8,8 @@ export function generateYearlyStatsJson(year, monthlyDownloads, githubStats) {
 }
 
 export function saveStatsJson(statsData) {
-    const jsonPath = path.join('mesh-gov-updates', 'mesh-stats', 'mesh-yearly-stats.json');
+    const year = statsData.year;
+    const jsonPath = path.join('mesh-gov-updates', 'mesh-stats', `mesh-yearly-stats-${year}.json`);
     fs.writeFileSync(jsonPath, JSON.stringify(statsData, null, 2));
     console.log(`Saved stats JSON to ${jsonPath}`);
 } 
