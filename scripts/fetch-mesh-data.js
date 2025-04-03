@@ -148,8 +148,7 @@ export async function fetchMeshContributors(githubToken) {
         }
     );
 
-    const contributorsData = {};
-    const uniqueContributors = new Set();
+    const contributorsMap = new Map();
 
     for (const repo of reposResponse.data) {
         console.log(`Fetching contributors for ${repo.name}...`);
@@ -165,25 +164,44 @@ export async function fetchMeshContributors(githubToken) {
                 }
             );
 
-            contributorsData[repo.name] = contributorsResponse.data.map(contributor => ({
-                login: contributor.login,
-                contributions: contributor.contributions,
-                avatar_url: contributor.avatar_url
-            }));
-
-            // Add to unique contributors set
+            // Process each contributor
             contributorsResponse.data.forEach(contributor => {
-                uniqueContributors.add(contributor.login);
+                if (!contributorsMap.has(contributor.login)) {
+                    contributorsMap.set(contributor.login, {
+                        login: contributor.login,
+                        avatar_url: contributor.avatar_url,
+                        contributions: contributor.contributions,
+                        repositories: [{
+                            name: repo.name,
+                            contributions: contributor.contributions
+                        }]
+                    });
+                } else {
+                    // Add contributions to existing contributor
+                    const existingContributor = contributorsMap.get(contributor.login);
+                    existingContributor.contributions += contributor.contributions;
+                    existingContributor.repositories.push({
+                        name: repo.name,
+                        contributions: contributor.contributions
+                    });
+                }
             });
         } catch (error) {
             console.error(`Error fetching contributors for ${repo.name}:`, error.message);
-            contributorsData[repo.name] = [];
         }
     }
 
+    // Convert Map to array and sort by contribution count
+    const contributors = Array.from(contributorsMap.values())
+        .sort((a, b) => b.contributions - a.contributions);
+
+    // Sort repositories by contribution count for each contributor
+    contributors.forEach(contributor => {
+        contributor.repositories.sort((a, b) => b.contributions - a.contributions);
+    });
+
     return {
-        by_repository: contributorsData,
-        unique_count: uniqueContributors.size,
-        unique_contributors: Array.from(uniqueContributors)
+        unique_count: contributors.length,
+        contributors: contributors
     };
 } 
