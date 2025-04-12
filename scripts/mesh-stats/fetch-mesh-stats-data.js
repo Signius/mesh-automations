@@ -1,4 +1,6 @@
 import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
 
 export async function fetchMeshStats(githubToken) {
     console.log('Fetching GitHub statistics...');
@@ -31,6 +33,85 @@ export async function fetchMeshStats(githubToken) {
         }
     );
     console.log('GitHub total mentions:', coreAnyFileResponse.data.total_count);
+
+    // Fetch dependency data
+    const meshPackages = [
+        '@meshsdk/core',
+        '@meshsdk/react',
+        '@meshsdk/wallet',
+        '@meshsdk/transaction',
+        '@meshsdk/provider'
+    ];
+
+    const meshDependencies = {
+        total_dependents: 0,
+        dependents_by_package: {},
+        repositories: []
+    };
+
+    for (const pkg of meshPackages) {
+        try {
+            const response = await axios.get(
+                'https://api.github.com/search/code',
+                {
+                    params: {
+                        q: `"${pkg}" in:file filename:package.json`,
+                        per_page: 100
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${githubToken}`
+                    }
+                }
+            );
+
+            const dependents = response.data.total_count;
+            meshDependencies.dependents_by_package[pkg] = dependents;
+            meshDependencies.total_dependents += dependents;
+
+            const uniqueRepos = new Set();
+            response.data.items.forEach(item => {
+                uniqueRepos.add(item.repository.full_name);
+            });
+
+            for (const repoName of uniqueRepos) {
+                try {
+                    const repoResponse = await axios.get(
+                        `https://api.github.com/repos/${repoName}`,
+                        {
+                            headers: {
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Authorization': `token ${githubToken}`
+                            }
+                        }
+                    );
+
+                    meshDependencies.repositories.push({
+                        name: repoName,
+                        stars: repoResponse.data.stargazers_count,
+                        forks: repoResponse.data.forks_count,
+                        last_updated: repoResponse.data.updated_at,
+                        dependencies: [pkg]
+                    });
+                } catch (error) {
+                    console.error(`Error fetching details for ${repoName}:`, error.message);
+                }
+            }
+
+            console.log(`Found ${dependents} dependents for ${pkg}`);
+        } catch (error) {
+            console.error(`Error fetching data for ${pkg}:`, error.message);
+        }
+    }
+
+    meshDependencies.repositories.sort((a, b) => b.stars - a.stars);
+
+    // Read core in repositories data from file
+    const coreInReposPath = path.join('mesh-gov-updates', 'mesh-stats', 'core-in-repositories.json');
+    let coreInReposData = { last_updated: '', core_in_repositories: 0 };
+    if (fs.existsSync(coreInReposPath)) {
+        coreInReposData = JSON.parse(fs.readFileSync(coreInReposPath, 'utf8'));
+    }
 
     console.log('\nFetching NPM statistics...');
     // Get npm download stats
@@ -109,7 +190,9 @@ export async function fetchMeshStats(githubToken) {
     return {
         github: {
             core_in_package_json: corePackageJsonResponse.data.total_count,
-            core_in_any_file: coreAnyFileResponse.data.total_count
+            core_in_any_file: coreAnyFileResponse.data.total_count,
+            core_in_repositories: coreInReposData.core_in_repositories,
+            mesh_dependencies: meshDependencies
         },
         npm: {
             downloads: {
@@ -204,4 +287,86 @@ export async function fetchMeshContributors(githubToken) {
         unique_count: contributors.length,
         contributors: contributors
     };
+}
+
+export async function fetchMeshDependencies(githubToken) {
+    console.log('\nFetching GitHub dependency data...');
+
+    // Search for repositories that depend on Mesh packages
+    const meshPackages = [
+        '@meshsdk/core',
+        '@meshsdk/react',
+        '@meshsdk/wallet',
+        '@meshsdk/transaction',
+        '@meshsdk/provider'
+    ];
+
+    const dependencyData = {
+        total_dependents: 0,
+        dependents_by_package: {},
+        repositories: []
+    };
+
+    for (const pkg of meshPackages) {
+        try {
+            // Search for package.json files containing the dependency
+            const response = await axios.get(
+                'https://api.github.com/search/code',
+                {
+                    params: {
+                        q: `"${pkg}" in:file filename:package.json`,
+                        per_page: 100
+                    },
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${githubToken}`
+                    }
+                }
+            );
+
+            const dependents = response.data.total_count;
+            dependencyData.dependents_by_package[pkg] = dependents;
+            dependencyData.total_dependents += dependents;
+
+            // Get repository details for the first 100 dependents
+            const uniqueRepos = new Set();
+            response.data.items.forEach(item => {
+                uniqueRepos.add(item.repository.full_name);
+            });
+
+            // Fetch additional details for each repository
+            for (const repoName of uniqueRepos) {
+                try {
+                    const repoResponse = await axios.get(
+                        `https://api.github.com/repos/${repoName}`,
+                        {
+                            headers: {
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Authorization': `token ${githubToken}`
+                            }
+                        }
+                    );
+
+                    dependencyData.repositories.push({
+                        name: repoName,
+                        stars: repoResponse.data.stargazers_count,
+                        forks: repoResponse.data.forks_count,
+                        last_updated: repoResponse.data.updated_at,
+                        dependencies: [pkg]
+                    });
+                } catch (error) {
+                    console.error(`Error fetching details for ${repoName}:`, error.message);
+                }
+            }
+
+            console.log(`Found ${dependents} dependents for ${pkg}`);
+        } catch (error) {
+            console.error(`Error fetching data for ${pkg}:`, error.message);
+        }
+    }
+
+    // Sort repositories by stars
+    dependencyData.repositories.sort((a, b) => b.stars - a.stars);
+
+    return dependencyData;
 } 
