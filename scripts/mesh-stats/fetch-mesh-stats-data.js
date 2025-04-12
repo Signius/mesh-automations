@@ -1,8 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
-import { DOMParser } from 'xmldom';
-import xpath from 'xpath';
+import cheerio from 'cheerio';
 
 export async function fetchMeshStats(githubToken) {
   console.log('Fetching GitHub statistics...');
@@ -44,24 +43,25 @@ export async function fetchMeshStats(githubToken) {
     coreInReposData = JSON.parse(fs.readFileSync(coreInReposPath, 'utf8'));
   }
 
-  console.log('Fetching GitHub Dependents count from webpage...');
+  console.log('Fetching GitHub Dependents count from webpage using Cheerio...');
 
-  // Helper function to fetch the dependents count using XPath from the GitHub page.
+  // Helper function to fetch the dependents count using Cheerio.
   async function fetchDependentsCount() {
     try {
       const dependentsUrl = 'https://github.com/MeshJS/mesh/network/dependents?dependent_type=REPOSITORY&package_id=UGFja2FnZS0zNDczNjUyOTU4';
       const response = await axios.get(dependentsUrl, {
         headers: { 'User-Agent': 'Mozilla/5.0' }
       });
+      
       const html = response.data;
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      const nodes = xpath.select(
-        "/html/body/div[1]/div[5]/div/main/turbo-frame/div/div/div/div[2]/div/div[2]/div[1]/div/div[1]/a[1]/text()",
-        doc
-      );
-      if (nodes && nodes.length > 0) {
-        const countText = nodes[0].nodeValue.trim();
-        // Remove commas and convert to a number
+      const $ = cheerio.load(html);
+      
+      // Define the selector based on your original XPath.
+      // This selector might need updating if GitHub changes its HTML structure.
+      const selector = "body > div:nth-child(1) > div:nth-child(5) > div > main > turbo-frame > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(1) > a:nth-child(1)";
+      const countText = $(selector).text().trim();
+      
+      if (countText) {
         const dependentsCount = parseInt(countText.replace(/,/g, ''), 10);
         if (!isNaN(dependentsCount)) {
           return dependentsCount;
@@ -70,11 +70,11 @@ export async function fetchMeshStats(githubToken) {
           return null;
         }
       } else {
-        console.error('XPath did not return any nodes.');
+        console.error('CSS selector did not match any content.');
         return null;
       }
     } catch (error) {
-      console.error('Error fetching dependents count from webpage:', error.message);
+      console.error('Error fetching dependents count using Cheerio:', error.message);
       return null;
     }
   }
@@ -208,7 +208,7 @@ export async function fetchMeshStats(githubToken) {
 export async function fetchMeshContributors(githubToken) {
   console.log('\nFetching repository contributors...');
 
-  // First get all repositories from the MeshJS organization
+  // First get all repositories from MeshJS organization
   const reposResponse = await axios.get(
     'https://api.github.com/orgs/MeshJS/repos',
     {

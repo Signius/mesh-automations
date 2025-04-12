@@ -11,8 +11,7 @@
         "@google-cloud/bigquery": "^7.9.3",
         "@supabase/supabase-js": "^2.29.0",
         "axios": "^1.6.7",
-        "dotenv": "^16.4.7",
-        "xmldom": "^0.6.0",
-        "xpath": "^0.0.34"
+        "cheerio": "^1.0.0",
+        "dotenv": "^16.4.7"
     }
 }
