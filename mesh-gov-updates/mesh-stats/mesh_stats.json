@@ -1,27 +1,1975 @@
 {
   "github": {
-    "core_in_package_json": 354,
-    "core_in_any_file": 1236
+    "core_in_package_json": 378,
+    "core_in_any_file": 740,
+    "core_in_repositories": 689,
+    "mesh_dependencies": {
+      "total_dependents": 586,
+      "dependents_by_package": {
+        "@meshsdk/core": 378,
+        "@meshsdk/react": 176,
+        "@meshsdk/wallet": 8,
+        "@meshsdk/transaction": 13,
+        "@meshsdk/provider": 11
+      },
+      "repositories": [
+        {
+          "name": "aiken-lang/aiken",
+          "stars": 521,
+          "forks": 109,
+          "last_updated": "2025-04-12T00:25:18Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh",
+          "stars": 237,
+          "forks": 78,
+          "last_updated": "2025-04-12T01:22:33Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh",
+          "stars": 237,
+          "forks": 78,
+          "last_updated": "2025-04-12T01:22:33Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh",
+          "stars": 237,
+          "forks": 78,
+          "last_updated": "2025-04-12T01:22:33Z",
+          "dependencies": [
+            "@meshsdk/wallet"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh",
+          "stars": 237,
+          "forks": 78,
+          "last_updated": "2025-04-12T01:22:33Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh",
+          "stars": 237,
+          "forks": 78,
+          "last_updated": "2025-04-12T01:22:33Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "hyperledger-identus/.github",
+          "stars": 67,
+          "forks": 11,
+          "last_updated": "2025-04-10T12:26:31Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "web3batman/Social-Fi",
+          "stars": 35,
+          "forks": 36,
+          "last_updated": "2025-02-09T20:16:50Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "cardano-foundation/cardano-ibc-incubator",
+          "stars": 27,
+          "forks": 11,
+          "last_updated": "2025-03-16T16:51:52Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "eryxcoop/cardano-zk-proof-of-innocence",
+          "stars": 17,
+          "forks": 0,
+          "last_updated": "2025-04-10T15:33:56Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "sidan-lab/whisky",
+          "stars": 16,
+          "forks": 2,
+          "last_updated": "2025-04-12T03:59:48Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "cubist-labs/CubeSigner-TypeScript-SDK",
+          "stars": 14,
+          "forks": 5,
+          "last_updated": "2025-04-04T18:11:15Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/examples",
+          "stars": 12,
+          "forks": 8,
+          "last_updated": "2025-03-11T10:54:24Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/examples",
+          "stars": 12,
+          "forks": 8,
+          "last_updated": "2025-03-11T10:54:24Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "dfns/dfns-sdk-ts",
+          "stars": 10,
+          "forks": 6,
+          "last_updated": "2025-04-11T12:56:33Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "masumi-network/masumi-payment-service",
+          "stars": 8,
+          "forks": 5,
+          "last_updated": "2025-04-11T10:15:54Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "adalicious/aiken-gift-card",
+          "stars": 8,
+          "forks": 1,
+          "last_updated": "2024-12-09T12:55:41Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "adalicious/aiken-gift-card",
+          "stars": 8,
+          "forks": 1,
+          "last_updated": "2024-12-09T12:55:41Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "OSPsolutions/POCRE",
+          "stars": 6,
+          "forks": 3,
+          "last_updated": "2025-01-09T01:21:10Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "disconnect-ventures/governance.space",
+          "stars": 6,
+          "forks": 0,
+          "last_updated": "2025-04-11T15:32:28Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "OSPsolutions/POCRE",
+          "stars": 6,
+          "forks": 3,
+          "last_updated": "2025-01-09T01:21:10Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "disconnect-ventures/governance.space",
+          "stars": 6,
+          "forks": 0,
+          "last_updated": "2025-04-11T15:32:28Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "SkyProtocol-org/skyprotocol",
+          "stars": 5,
+          "forks": 2,
+          "last_updated": "2025-04-01T15:34:16Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Macro-Labz/realtimeAPI",
+          "stars": 5,
+          "forks": 3,
+          "last_updated": "2025-02-19T07:53:29Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "iog-edu-argentina-2024/cardano-dev-2024",
+          "stars": 5,
+          "forks": 4,
+          "last_updated": "2025-04-11T08:26:28Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "sidan-lab/hk-developer-series-student-examples",
+          "stars": 4,
+          "forks": 1,
+          "last_updated": "2024-11-06T13:19:14Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "masumi-network/masumi-registry-service",
+          "stars": 4,
+          "forks": 1,
+          "last_updated": "2025-04-08T12:20:59Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "coinecta/coinecta-frontend",
+          "stars": 4,
+          "forks": 6,
+          "last_updated": "2025-03-07T19:45:27Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "nilaysaha/cardano-scripts",
+          "stars": 4,
+          "forks": 0,
+          "last_updated": "2025-03-21T15:26:35Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/marketplace-next-ts-template",
+          "stars": 4,
+          "forks": 5,
+          "last_updated": "2024-08-11T23:54:33Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "BenElferink/badfoxmc-website",
+          "stars": 4,
+          "forks": 1,
+          "last_updated": "2024-12-07T14:15:31Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "michele-nuzzi/hello-pluts-react-final",
+          "stars": 4,
+          "forks": 0,
+          "last_updated": "2025-03-05T02:16:46Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/ecommerce-next-ts-template",
+          "stars": 4,
+          "forks": 1,
+          "last_updated": "2023-12-31T18:34:40Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/midnight",
+          "stars": 4,
+          "forks": 3,
+          "last_updated": "2025-04-11T01:35:27Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh-pbl-student-library",
+          "stars": 3,
+          "forks": 2,
+          "last_updated": "2024-08-30T06:25:56Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "sk1ppi-archived/cardano_meshjs_vue_elementplus",
+          "stars": 3,
+          "forks": 1,
+          "last_updated": "2024-03-06T07:37:35Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "gimbalabs/ppbl2024-front-end",
+          "stars": 3,
+          "forks": 20,
+          "last_updated": "2025-03-25T11:34:46Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "gimbalabs/ppbl2024-front-end",
+          "stars": 3,
+          "forks": 20,
+          "last_updated": "2025-03-25T11:34:46Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "elRaulito/drepfun",
+          "stars": 3,
+          "forks": 0,
+          "last_updated": "2024-11-08T22:50:51Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh-pbl-student-library",
+          "stars": 3,
+          "forks": 2,
+          "last_updated": "2024-08-30T06:25:56Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "gimbalabs/ppbl2024-front-end",
+          "stars": 3,
+          "forks": 20,
+          "last_updated": "2025-03-25T11:34:46Z",
+          "dependencies": [
+            "@meshsdk/wallet"
+          ]
+        },
+        {
+          "name": "gimbalabs/ppbl2024-front-end",
+          "stars": 3,
+          "forks": 20,
+          "last_updated": "2025-03-25T11:34:46Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "gimbalabs/ppbl2024-front-end",
+          "stars": 3,
+          "forks": 20,
+          "last_updated": "2025-03-25T11:34:46Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "Vaka-Consulting/vaka-js",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2024-12-16T10:21:32Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "VAR-META-Tech/hewego",
+          "stars": 2,
+          "forks": 2,
+          "last_updated": "2025-01-27T01:44:47Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "TranHuyHiep/UTCert-FE",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2023-06-19T03:16:52Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "devhalls/cardano-connect",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2025-01-06T12:21:12Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "luisantonioig/aiken-workshop",
+          "stars": 2,
+          "forks": 1,
+          "last_updated": "2024-12-11T17:35:04Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "IntersectMBO/council-toolkit-app",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2025-03-14T17:23:26Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Andamio-Platform/Andamio-NextJS-Starter",
+          "stars": 2,
+          "forks": 16,
+          "last_updated": "2023-12-11T10:47:18Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "mlabs-haskell/hydra-auction-frontend",
+          "stars": 2,
+          "forks": 1,
+          "last_updated": "2025-04-01T01:09:53Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "mlabs-haskell/hydra-auction-frontend",
+          "stars": 2,
+          "forks": 1,
+          "last_updated": "2025-04-01T01:09:53Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "IntersectMBO/council-toolkit-app",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2025-03-14T17:23:26Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/staking-next-ts-template",
+          "stars": 2,
+          "forks": 3,
+          "last_updated": "2023-02-09T04:23:11Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "ilap/adatag",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2024-09-20T17:14:24Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Vaka-Consulting/vaka-js",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2024-12-16T10:21:32Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/minting-next-js-template",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2024-01-12T18:46:30Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Andamio-Platform/Andamio-NextJS-Starter",
+          "stars": 2,
+          "forks": 16,
+          "last_updated": "2023-12-11T10:47:18Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "devhalls/cardano-connect",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2025-01-06T12:21:12Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "TranHuyHiep/UTCert-FE",
+          "stars": 2,
+          "forks": 0,
+          "last_updated": "2023-06-19T03:16:52Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "txpipe/telchar",
+          "stars": 1,
+          "forks": 1,
+          "last_updated": "2025-03-20T13:16:08Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "saigonbitmaster/bworks_2.0",
+          "stars": 1,
+          "forks": 2,
+          "last_updated": "2024-10-25T17:18:09Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/starter-next-js-template",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2023-01-29T22:18:22Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh-aiken-template",
+          "stars": 1,
+          "forks": 1,
+          "last_updated": "2024-12-07T06:40:11Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "independenceee/cip68generator",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-12-08T08:32:07Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "DCOneCrypto/cardano-connect-wallet-tools",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-02-06T08:57:09Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/pluts-next-ts-template",
+          "stars": 1,
+          "forks": 1,
+          "last_updated": "2023-05-23T03:18:42Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Birblewin/NFTMarket",
+          "stars": 1,
+          "forks": 4,
+          "last_updated": "2023-11-11T08:40:13Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Modulo-P/zk-mastermind-backend",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-04-02T12:17:07Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "awoyemivictora/Brightly",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2023-02-01T16:14:29Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "vault3-io/vault3-sdk",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-08-03T17:09:34Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "jmagan/cra-simple-mesh",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2023-09-13T23:52:39Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "logicalmechanism/cogno_v2",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-08-30T04:45:22Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "cardano-scaling/hydra-poll",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2023-11-16T12:28:14Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "tomjwells/supra-snapshot",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-12-04T15:40:32Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "g1BSsQ/ECOMAR",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-11-11T14:06:25Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "logicalmechanism/cogno_v2",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-08-30T04:45:22Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "nerdylist/tokengate",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2023-07-14T19:14:15Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "BenElferink/trtl-coin-labs",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-12-21T14:33:14Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "sempruijs/zoofpay",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-11-30T16:41:56Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Shred-der/sebs-project",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2023-09-02T16:12:56Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "treasuryguild/treasury-dashboard",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2025-03-28T07:14:06Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "vacuumlabs/bug-bounty",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2025-04-11T09:55:49Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "MeshJS/aiken-next-ts-template",
+          "stars": 1,
+          "forks": 4,
+          "last_updated": "2024-04-22T17:19:30Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "DCOneCrypto/cardano-connect-wallet-tools",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-02-06T08:57:09Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "ThaMacroMan/InfinityMint",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-08-29T01:34:09Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "nilscodes/reach-your-people",
+          "stars": 1,
+          "forks": 0,
+          "last_updated": "2024-09-18T08:21:25Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "AIQUANT-Tech/CardanoRnR",
+          "stars": 1,
+          "forks": 1,
+          "last_updated": "2025-04-11T06:35:20Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "Brave-source/Artboardz-Admin",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-03-20T00:06:48Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "g1BSsQ/Game-blockchain",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-26T11:05:30Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-core-cst",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:30:38Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "sempruijs/learn-aiken",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-04T20:54:41Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "surazen/123ainft",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-13T14:47:21Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Kammerlo/cardano-nft2nfc",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-06-30T15:33:52Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "scisamir/fractionalized-nft",
+          "stars": 0,
+          "forks": 1,
+          "last_updated": "2024-12-18T23:39:21Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "adagora/eboombox",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-23T17:10:20Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "ErickRomeroDev/aiken-example-node",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-06T17:12:57Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "adaEggs/demo",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-01-15T11:52:13Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "zunohoang/Hospital_Block",
+          "stars": 0,
+          "forks": 2,
+          "last_updated": "2024-09-17T12:00:08Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "WingRiders/parsing-education",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-20T12:54:53Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "UTCert/UTCert-web",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-07T14:30:53Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "stateralabs/statera-protocol",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-09T16:25:22Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "deltadefi-protocol/typescript-sdk",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-11T04:28:10Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "gimbalabs/mesh-asteria-demo-app",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-05-14T16:53:52Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "paulodiazz/artboardzAdmin-mesh",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-02-08T05:40:51Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Andre-Diamond/community-treasury-dapp",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-09-16T05:45:29Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "VladislavKudrin/hydra-playground",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-25T18:54:48Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "thanh2k3zz/OwnershipNFT",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-04-25T04:47:11Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "khairunas001/Belajar-Blockhcain-meshjs-module",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-14T04:07:17Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "sidan-lab/mesh-lower-level-api-demo",
+          "stars": 0,
+          "forks": 2,
+          "last_updated": "2023-12-06T10:36:21Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "twwu123/cardano-learning",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-05T08:20:11Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Ethernal-Tech/apex-web",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-07T10:29:39Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/signin-next-ts-template",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-02-15T12:23:55Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "BeginWallet/begin-website",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-03T03:07:32Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "apestchanker/token-aiken-prepro",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-01-27T23:23:06Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "tidvn/solana-signin-template",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-09-07T03:23:14Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "paulodiazz/artboardzbackup",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-03-16T18:58:32Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "thanhngoc541/cardano-agent-kit",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-03T07:06:29Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "bluezdot/cardano-handler",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-01-22T11:22:57Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "longdevbf/NCKH-2024",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-05T13:40:36Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Lynette7/silent_witness",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-07-08T04:34:05Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "kickico001/ada",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-15T16:56:26Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "anhphi3405/crypto-mart",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-23T17:40:37Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "blazarlabs-io/wine-app",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-05T17:58:24Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Solanki1Ravi/Project_repo",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-10T05:47:06Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Gentil-cizungu/app-genealogy",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-31T06:39:44Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "tapdano/app",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-08T13:24:17Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "sennykalidien/meshjs-react-example",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-20T09:56:15Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "WingRiders/rapid-dex",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-07T08:10:41Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "amodelschool/mca_cardano",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-02T15:02:42Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "PalmerEk/mesh-vite-test",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-13T10:47:25Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Anifie/CardanoDemoDApp",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-09T11:15:50Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "JustLeif/-meshsdk-svelte-proposal",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-11-26T00:46:25Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "nescampos/athala",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-22T19:48:22Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "nelsonksh/Handy-Project-Units",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-27T11:31:00Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "perseus8/solt-game-frontend",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-01-15T17:25:54Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "sidan-lab/sidan-gov",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-18T07:05:46Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "BenElferink/ape-nation-website",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-07T16:47:57Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "MeshJS/mesh-saas",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-04T14:07:13Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "nhatlapross/funfit",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-16T09:53:32Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Project-Catalyst/cauth-deliverables",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-31T20:26:05Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "dipanshuhappy/redapps",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-14T20:22:48Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Astodialo/GaitaNFT",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-03-02T12:35:07Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "Kammerlo/cardano-typescript-blueprint-generator",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-11-17T16:09:36Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "ErickRomeroDev/dtt-marketplace-v2",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-05-15T12:09:11Z",
+          "dependencies": [
+            "@meshsdk/core"
+          ]
+        },
+        {
+          "name": "treasuryguild/treasury-guild-dapp-research",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-25T07:23:12Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "anhphi3405/crypto-mart",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-23T17:40:37Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Andre-Diamond/test-new-meshjs-features",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-14T05:13:29Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "thanh2k3zz/OwnershipNFT",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-04-25T04:47:11Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "perseus8/solt-game-frontend",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-01-15T17:25:54Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "ErickRomeroDev/dtt-marketplace-v2",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-05-15T12:09:11Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "codanar/cdn-training-mesh-next",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-02-04T05:51:32Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-react",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:35:24Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "khairunas001/Belajar-Blockhcain-meshjs",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-14T04:01:45Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "sergi10/aiken-workshop",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-01T18:47:17Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "FranciscoAndaur/auth-app",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-11-23T01:27:14Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "gulla0/deploy-pellet-utxos",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-26T15:56:34Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "adaEggs/BLUNTFORCEWEBSITE",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-01-23T11:25:57Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "adaEggs/demo",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-01-15T11:52:13Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "sidan-lab/mesh-lower-level-api-demo",
+          "stars": 0,
+          "forks": 2,
+          "last_updated": "2023-12-06T10:36:21Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "bristinborah/birinaNFT",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-10-01T05:56:18Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "HarmonicLabs/nft-vending-machine-pluts",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-01-20T14:10:06Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "HelixLabsDev/eigenfi-cardano-dapp",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-23T06:19:04Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Lynette7/silent_witness",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-07-08T04:34:05Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "longdevbf/Heritage-Chain-Project",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-21T23:05:21Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Kammerlo/cardano-nft2nfc",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-06-30T15:33:52Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "twwu123/cardano-learning",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-05T08:20:11Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "TokeoPay/vesting",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-04T01:26:33Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "wstueve/snowbot-cardano",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-31T18:27:23Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Jet-Plane-DAO/velocity-tools",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-04T19:04:03Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "UTCert/UTCert-web",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-07T14:30:53Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Brave-source/artboardz-mesh",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-02-08T10:19:20Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Unity-ADA/unity-ada",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-09T23:51:10Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "BenElferink/badfoxmc-labs",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-15T09:24:57Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "HarmonicLabs/simple-minting-pluts",
+          "stars": 0,
+          "forks": 1,
+          "last_updated": "2025-01-20T14:10:56Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "gammahazard/CyberVerse-exchange",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-22T20:51:20Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "BenElferink/risk-wallet-connect",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-12-07T14:14:55Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "sennykalidien/meshjs-react-example",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-20T09:56:15Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "independenceee/cip68",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-25T15:09:33Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "SamJeffrey8/nuipx",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-02-20T03:52:58Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "ariady-putra-emurgo/mesh-minting-app",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-14T16:12:34Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "paulodiazz/artboardzbackup",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-03-16T18:58:32Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Brave-source/artboardz-deploy",
+          "stars": 0,
+          "forks": 1,
+          "last_updated": "2023-04-10T01:51:32Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "nelsonksh/Handy-Project-Units",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-27T11:31:00Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "nftmakerio/drep-watch-client",
+          "stars": 0,
+          "forks": 1,
+          "last_updated": "2025-03-05T14:40:37Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "chainindexchat/alpha",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-16T01:18:13Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "paluh/use-marlowe-raffle-hook",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-08-29T13:48:42Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "motoric-o/Cardano-MiniHackathon-2024",
+          "stars": 0,
+          "forks": 1,
+          "last_updated": "2025-01-04T10:20:45Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "kickico001/ada",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-15T16:56:26Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "reclaimprotocol/reclaim-pluts-sdk",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-10-17T13:00:35Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Modulo-P/zk-mastermind-webapp",
+          "stars": 0,
+          "forks": 1,
+          "last_updated": "2024-05-03T12:11:48Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "awoyemivictora/edueat-ecommerce-cardano-store",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-07-24T00:16:18Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "sidan-lab/next-stitches-mesh",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-09-09T06:31:23Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "Shivam-1M/loyalt",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-12-20T02:31:16Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "ErickRomeroDev/aiken-example-node",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-06T17:12:57Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "khairunas001/Belajar-Blockhcain-nextjs",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-09-14T04:03:28Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "saigonbitmaster/paas",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2023-12-07T08:22:27Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "granada-pool/CNCAla",
+          "stars": 0,
+          "forks": 2,
+          "last_updated": "2024-07-24T11:45:30Z",
+          "dependencies": [
+            "@meshsdk/react"
+          ]
+        },
+        {
+          "name": "TokeoPay/vesting",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-04T01:26:33Z",
+          "dependencies": [
+            "@meshsdk/wallet"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-react",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:35:24Z",
+          "dependencies": [
+            "@meshsdk/wallet"
+          ]
+        },
+        {
+          "name": "MeshJS/web3-sdk",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-11T06:02:52Z",
+          "dependencies": [
+            "@meshsdk/wallet"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-core",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:27:10Z",
+          "dependencies": [
+            "@meshsdk/wallet"
+          ]
+        },
+        {
+          "name": "WingRiders/rapid-dex",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-07T08:10:41Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "TokeoPay/vesting",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-04T01:26:33Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-react",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:35:24Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-transaction",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:36:49Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "WingRiders/parsing-education",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-20T12:54:53Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "nelsonksh/Handy-Project-Units",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-27T11:31:00Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-contract",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:25:41Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-core",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:27:10Z",
+          "dependencies": [
+            "@meshsdk/transaction"
+          ]
+        },
+        {
+          "name": "nelsonksh/Handy-Project-Units",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-27T11:31:00Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "TokeoPay/vesting",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-03-04T01:26:33Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-provider",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:32:33Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "rawvie-ngit/mesh-core",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2024-08-30T13:27:10Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        },
+        {
+          "name": "MeshJS/web3-sdk",
+          "stars": 0,
+          "forks": 0,
+          "last_updated": "2025-04-11T06:02:52Z",
+          "dependencies": [
+            "@meshsdk/provider"
+          ]
+        }
+      ]
+    }
   },
   "npm": {
     "downloads": {
       "last_day": 0,
-      "last_week": 2066,
+      "last_week": 2111,
       "last_month": 10635,
-      "last_year": 70100
+      "last_year": 70658
     },
-    "react_package_downloads": 9552,
-    "transaction_package_downloads": 10096,
-    "wallet_package_downloads": 10280,
-    "provider_package_downloads": 9984,
-    "core_csl_package_downloads": 5984,
-    "core_cst_package_downloads": 10294,
-    "latest_version": "1.9.0-beta.30",
-    "dependents_count": 276311
+    "react_package_downloads": 9338,
+    "transaction_package_downloads": 9917,
+    "wallet_package_downloads": 10099,
+    "provider_package_downloads": 9732,
+    "core_csl_package_downloads": 5526,
+    "core_cst_package_downloads": 10071,
+    "latest_version": "1.9.0-beta.32",
+    "dependents_count": 276594
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-10&to=2025-04-10",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-10&to=2025-04-10"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-12&to=2025-04-12",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-12&to=2025-04-12"
   },
   "contributors": {
     "unique_count": 37,
@@ -29,11 +1977,11 @@
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "contributions": 1168,
+        "contributions": 1179,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 890
+            "contributions": 901
           },
           {
             "name": "multisig",
@@ -144,11 +2092,11 @@
       {
         "login": "HinsonSIDAN",
         "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4",
-        "contributions": 567,
+        "contributions": 570,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 396
+            "contributions": 399
           },
           {
             "name": "mesh-core",
@@ -230,11 +2178,11 @@
       {
         "login": "twwu123",
         "avatar_url": "https://avatars.githubusercontent.com/u/45336147?v=4",
-        "contributions": 321,
+        "contributions": 336,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 321
+            "contributions": 336
           }
         ]
       },
@@ -254,6 +2202,17 @@
           {
             "name": "bounty-board",
             "contributions": 5
+          }
+        ]
+      },
+      {
+        "login": "lisicky",
+        "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
+        "contributions": 62,
+        "repositories": [
+          {
+            "name": "mesh",
+            "contributions": 62
           }
         ]
       },
@@ -326,13 +2285,13 @@
         ]
       },
       {
-        "login": "lisicky",
-        "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
-        "contributions": 31,
+        "login": "Temasar1",
+        "avatar_url": "https://avatars.githubusercontent.com/u/178079919?v=4",
+        "contributions": 28,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 31
+            "contributions": 28
           }
         ]
       },
@@ -382,17 +2341,6 @@
           {
             "name": "mesh-pbl-course-content",
             "contributions": 3
-          }
-        ]
-      },
-      {
-        "login": "Temasar1",
-        "avatar_url": "https://avatars.githubusercontent.com/u/178079919?v=4",
-        "contributions": 18,
-        "repositories": [
-          {
-            "name": "mesh",
-            "contributions": 18
           }
         ]
       },
