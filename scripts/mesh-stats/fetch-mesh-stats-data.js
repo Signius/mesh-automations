@@ -94,8 +94,8 @@ export async function fetchMeshStats(githubToken) {
     const latestVersion = packageInfo.data['dist-tags'].latest;
     console.log('Latest Version:', latestVersion);
 
-    // Get npm dependents count
-    const npmDependentsResponse = await axios.get(
+    // Get dependents count
+    const dependentsResponse = await axios.get(
         'https://registry.npmjs.org/-/v1/search',
         {
             params: {
@@ -104,45 +104,7 @@ export async function fetchMeshStats(githubToken) {
             }
         }
     );
-    console.log('NPM Dependents:', npmDependentsResponse.data.total);
-
-    // Get GitHub dependents count using GraphQL
-    const githubDependentsResponse = await axios.post(
-        'https://api.github.com/graphql',
-        {
-            query: `
-                query {
-                    search(query: "filename:package.json @meshsdk/core in:file", type: REPOSITORY, first: 100) {
-                        repositoryCount
-                        edges {
-                            node {
-                                ... on Repository {
-                                    nameWithOwner
-                                }
-                            }
-                        }
-                    }
-                }
-            `
-        },
-        {
-            headers: {
-                'Accept': 'application/vnd.github.v3+json',
-                'Authorization': `token ${githubToken}`
-            }
-        }
-    );
-
-    console.log('GitHub GraphQL Response:', JSON.stringify(githubDependentsResponse.data, null, 2));
-
-    let githubDependentsCount = 0;
-    if (githubDependentsResponse.data?.data?.search) {
-        githubDependentsCount = githubDependentsResponse.data.data.search.repositoryCount;
-    } else {
-        console.log('Could not get GitHub dependents count from GraphQL response');
-    }
-
-    console.log('GitHub Dependents:', githubDependentsCount);
+    console.log('Total Dependents:', dependentsResponse.data.total);
 
     // Create npm-stat URLs
     const currentDateStr = currentDate.toISOString().split('T')[0];
@@ -173,8 +135,7 @@ export async function fetchMeshStats(githubToken) {
             core_csl_package_downloads: coreCslPackageDownloads.data.downloads,
             core_cst_package_downloads: coreCstPackageDownloads.data.downloads,
             latest_version: latestVersion,
-            dependents_count: npmDependentsResponse.data.total,
-            github_dependents_count: githubDependentsCount
+            dependents_count: dependentsResponse.data.total
         },
         urls: {
             npm_stat_url: npmStatUrl,
