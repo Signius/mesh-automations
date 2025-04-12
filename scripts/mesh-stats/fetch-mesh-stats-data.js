@@ -112,8 +112,15 @@ export async function fetchMeshStats(githubToken) {
         {
             query: `
                 query {
-                    search(query: "filename:package.json @meshsdk/core", type: CODE, first: 100) {
-                        codeCount
+                    search(query: "filename:package.json @meshsdk/core in:file", type: REPOSITORY, first: 100) {
+                        repositoryCount
+                        edges {
+                            node {
+                                ... on Repository {
+                                    nameWithOwner
+                                }
+                            }
+                        }
                     }
                 }
             `
@@ -130,7 +137,7 @@ export async function fetchMeshStats(githubToken) {
 
     let githubDependentsCount = 0;
     if (githubDependentsResponse.data?.data?.search) {
-        githubDependentsCount = githubDependentsResponse.data.data.search.codeCount;
+        githubDependentsCount = githubDependentsResponse.data.data.search.repositoryCount;
     } else {
         console.log('Could not get GitHub dependents count from GraphQL response');
     }
