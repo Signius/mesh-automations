@@ -170,7 +170,7 @@ export async function fetchMeshStats(githubToken) {
 
   return {
     github: {
-      core_in_package_json: corePackageJsonResponse.data.total_count,
+      core_in_package_json: finalDependentsCount,
       core_in_any_file: coreAnyFileResponse.data.total_count,
       core_in_repositories: finalDependentsCount
     },
