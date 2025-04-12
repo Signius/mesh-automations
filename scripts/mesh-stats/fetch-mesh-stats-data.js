@@ -108,7 +108,7 @@ export async function fetchMeshStats(githubToken) {
 
     // Get GitHub dependents count
     const githubDependentsResponse = await axios.get(
-        'https://api.github.com/repos/MeshJS/mesh/network/dependents',
+        'https://api.github.com/repos/MeshJS/mesh/dependents',
         {
             headers: {
                 'Accept': 'application/vnd.github.v3+json',
