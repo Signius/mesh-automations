@@ -34,78 +34,6 @@ export async function fetchMeshStats(githubToken) {
     );
     console.log('GitHub total mentions:', coreAnyFileResponse.data.total_count);
 
-    // Fetch dependency data
-    const meshPackages = [
-        '@meshsdk/core',
-        '@meshsdk/react',
-        '@meshsdk/wallet',
-        '@meshsdk/transaction',
-        '@meshsdk/provider'
-    ];
-
-    const meshDependencies = {
-        total_dependents: 0,
-        dependents_by_package: {},
-        repositories: []
-    };
-
-    for (const pkg of meshPackages) {
-        try {
-            const response = await axios.get(
-                'https://api.github.com/search/code',
-                {
-                    params: {
-                        q: `"${pkg}" in:file filename:package.json`,
-                        per_page: 100
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Authorization': `token ${githubToken}`
-                    }
-                }
-            );
-
-            const dependents = response.data.total_count;
-            meshDependencies.dependents_by_package[pkg] = dependents;
-            meshDependencies.total_dependents += dependents;
-
-            const uniqueRepos = new Set();
-            response.data.items.forEach(item => {
-                uniqueRepos.add(item.repository.full_name);
-            });
-
-            for (const repoName of uniqueRepos) {
-                try {
-                    const repoResponse = await axios.get(
-                        `https://api.github.com/repos/${repoName}`,
-                        {
-                            headers: {
-                                'Accept': 'application/vnd.github.v3+json',
-                                'Authorization': `token ${githubToken}`
-                            }
-                        }
-                    );
-
-                    meshDependencies.repositories.push({
-                        name: repoName,
-                        stars: repoResponse.data.stargazers_count,
-                        forks: repoResponse.data.forks_count,
-                        last_updated: repoResponse.data.updated_at,
-                        dependencies: [pkg]
-                    });
-                } catch (error) {
-                    console.error(`Error fetching details for ${repoName}:`, error.message);
-                }
-            }
-
-            console.log(`Found ${dependents} dependents for ${pkg}`);
-        } catch (error) {
-            console.error(`Error fetching data for ${pkg}:`, error.message);
-        }
-    }
-
-    meshDependencies.repositories.sort((a, b) => b.stars - a.stars);
-
     // Read core in repositories data from file
     const coreInReposPath = path.join('mesh-gov-updates', 'mesh-stats', 'core-in-repositories.json');
     let coreInReposData = { last_updated: '', core_in_repositories: 0 };
@@ -166,8 +94,8 @@ export async function fetchMeshStats(githubToken) {
     const latestVersion = packageInfo.data['dist-tags'].latest;
     console.log('Latest Version:', latestVersion);
 
-    // Get dependents count
-    const dependentsResponse = await axios.get(
+    // Get npm dependents count
+    const npmDependentsResponse = await axios.get(
         'https://registry.npmjs.org/-/v1/search',
         {
             params: {
@@ -176,7 +104,19 @@ export async function fetchMeshStats(githubToken) {
             }
         }
     );
-    console.log('Total Dependents:', dependentsResponse.data.total);
+    console.log('NPM Dependents:', npmDependentsResponse.data.total);
+
+    // Get GitHub dependents count
+    const githubDependentsResponse = await axios.get(
+        'https://api.github.com/repos/MeshJS/mesh/network/dependents',
+        {
+            headers: {
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': `token ${githubToken}`
+            }
+        }
+    );
+    console.log('GitHub Dependents:', githubDependentsResponse.data.total_count);
 
     // Create npm-stat URLs
     const currentDateStr = currentDate.toISOString().split('T')[0];
@@ -191,8 +131,7 @@ export async function fetchMeshStats(githubToken) {
         github: {
             core_in_package_json: corePackageJsonResponse.data.total_count,
             core_in_any_file: coreAnyFileResponse.data.total_count,
-            core_in_repositories: coreInReposData.core_in_repositories,
-            mesh_dependencies: meshDependencies
+            core_in_repositories: coreInReposData.core_in_repositories
         },
         npm: {
             downloads: {
@@ -208,7 +147,8 @@ export async function fetchMeshStats(githubToken) {
             core_csl_package_downloads: coreCslPackageDownloads.data.downloads,
             core_cst_package_downloads: coreCstPackageDownloads.data.downloads,
             latest_version: latestVersion,
-            dependents_count: dependentsResponse.data.total
+            dependents_count: npmDependentsResponse.data.total,
+            github_dependents_count: githubDependentsResponse.data.total_count
         },
         urls: {
             npm_stat_url: npmStatUrl,
@@ -287,86 +227,4 @@ export async function fetchMeshContributors(githubToken) {
         unique_count: contributors.length,
         contributors: contributors
     };
-}
-
-export async function fetchMeshDependencies(githubToken) {
-    console.log('\nFetching GitHub dependency data...');
-
-    // Search for repositories that depend on Mesh packages
-    const meshPackages = [
-        '@meshsdk/core',
-        '@meshsdk/react',
-        '@meshsdk/wallet',
-        '@meshsdk/transaction',
-        '@meshsdk/provider'
-    ];
-
-    const dependencyData = {
-        total_dependents: 0,
-        dependents_by_package: {},
-        repositories: []
-    };
-
-    for (const pkg of meshPackages) {
-        try {
-            // Search for package.json files containing the dependency
-            const response = await axios.get(
-                'https://api.github.com/search/code',
-                {
-                    params: {
-                        q: `"${pkg}" in:file filename:package.json`,
-                        per_page: 100
-                    },
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Authorization': `token ${githubToken}`
-                    }
-                }
-            );
-
-            const dependents = response.data.total_count;
-            dependencyData.dependents_by_package[pkg] = dependents;
-            dependencyData.total_dependents += dependents;
-
-            // Get repository details for the first 100 dependents
-            const uniqueRepos = new Set();
-            response.data.items.forEach(item => {
-                uniqueRepos.add(item.repository.full_name);
-            });
-
-            // Fetch additional details for each repository
-            for (const repoName of uniqueRepos) {
-                try {
-                    const repoResponse = await axios.get(
-                        `https://api.github.com/repos/${repoName}`,
-                        {
-                            headers: {
-                                'Accept': 'application/vnd.github.v3+json',
-                                'Authorization': `token ${githubToken}`
-                            }
-                        }
-                    );
-
-                    dependencyData.repositories.push({
-                        name: repoName,
-                        stars: repoResponse.data.stargazers_count,
-                        forks: repoResponse.data.forks_count,
-                        last_updated: repoResponse.data.updated_at,
-                        dependencies: [pkg]
-                    });
-                } catch (error) {
-                    console.error(`Error fetching details for ${repoName}:`, error.message);
-                }
-            }
-
-            console.log(`Found ${dependents} dependents for ${pkg}`);
-        } catch (error) {
-            console.error(`Error fetching data for ${pkg}:`, error.message);
-        }
-    }
-
-    // Sort repositories by stars
-    dependencyData.repositories.sort((a, b) => b.stars - a.stars);
-
-    return dependencyData;
 } 
