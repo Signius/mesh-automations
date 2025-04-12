@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 
 export async function fetchMeshStats(githubToken) {
   console.log('Fetching GitHub statistics...');
@@ -208,7 +208,7 @@ export async function fetchMeshStats(githubToken) {
 export async function fetchMeshContributors(githubToken) {
   console.log('\nFetching repository contributors...');
 
-  // First get all repositories from MeshJS organization
+  // First get all repositories from the MeshJS organization
   const reposResponse = await axios.get(
     'https://api.github.com/orgs/MeshJS/repos',
     {
