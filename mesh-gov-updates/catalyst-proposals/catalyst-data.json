@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-04-03T09:57:53.190Z",
+  "timestamp": "2025-04-10T02:02:49.578Z",
   "projects": [
     {
       "projectDetails": {
@@ -127,7 +127,7 @@
         "status": "In Progress",
         "finished": ""
       },
-      "milestonesCompleted": 1
+      "milestonesCompleted": 2
     },
     {
       "projectDetails": {
