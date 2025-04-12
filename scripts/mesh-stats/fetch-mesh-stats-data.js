@@ -106,9 +106,20 @@ export async function fetchMeshStats(githubToken) {
     );
     console.log('NPM Dependents:', npmDependentsResponse.data.total);
 
-    // Get GitHub dependents count
-    const githubDependentsResponse = await axios.get(
-        'https://api.github.com/repos/MeshJS/mesh/dependents',
+    // Get GitHub dependents count using GraphQL
+    const githubDependentsResponse = await axios.post(
+        'https://api.github.com/graphql',
+        {
+            query: `
+                query {
+                    repository(owner: "MeshJS", name: "mesh") {
+                        dependents {
+                            totalCount
+                        }
+                    }
+                }
+            `
+        },
         {
             headers: {
                 'Accept': 'application/vnd.github.v3+json',
@@ -116,7 +127,7 @@ export async function fetchMeshStats(githubToken) {
             }
         }
     );
-    console.log('GitHub Dependents:', githubDependentsResponse.data.total_count);
+    console.log('GitHub Dependents:', githubDependentsResponse.data.data.repository.dependents.totalCount);
 
     // Create npm-stat URLs
     const currentDateStr = currentDate.toISOString().split('T')[0];
@@ -148,7 +159,7 @@ export async function fetchMeshStats(githubToken) {
             core_cst_package_downloads: coreCstPackageDownloads.data.downloads,
             latest_version: latestVersion,
             dependents_count: npmDependentsResponse.data.total,
-            github_dependents_count: githubDependentsResponse.data.total_count
+            github_dependents_count: githubDependentsResponse.data.data.repository.dependents.totalCount
         },
         urls: {
             npm_stat_url: npmStatUrl,
