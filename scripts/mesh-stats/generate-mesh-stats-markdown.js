@@ -29,7 +29,7 @@ Last updated: ${currentDate}
 ## 🔍 GitHub Usage
 | Repository Metric${'&nbsp;'.repeat(58)} |   Count |
 | :---------------------------------------- | ------: |
-| Public Projects using @meshsdk/core in package.json | ${stats.github.core_in_package_json} |
+| Repositories that depend on @meshsdk/core | ${stats.github.core_in_package_json} |
 | Public Files containing @meshsdk/core references | ${stats.github.core_in_any_file} |
 
 ## 📦 Monthly NPM Package Downloads
