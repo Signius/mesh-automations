@@ -10,9 +10,7 @@ export async function fetchMeshStats(githubToken) {
   const corePackageJsonResponse = await axios.get(
     'https://api.github.com/search/code',
     {
-      params: {
-        q: '"@meshsdk/core" in:file filename:package.json'
-      },
+      params: { q: '"@meshsdk/core" in:file filename:package.json' },
       headers: {
         'Accept': 'application/vnd.github.v3+json',
         'Authorization': `token ${githubToken}`
@@ -25,9 +23,7 @@ export async function fetchMeshStats(githubToken) {
   const coreAnyFileResponse = await axios.get(
     'https://api.github.com/search/code',
     {
-      params: {
-        q: '"@meshsdk/core"'
-      },
+      params: { q: '"@meshsdk/core"' },
       headers: {
         'Accept': 'application/vnd.github.v3+json',
         'Authorization': `token ${githubToken}`
@@ -52,17 +48,17 @@ export async function fetchMeshStats(githubToken) {
       const response = await axios.get(dependentsUrl, {
         headers: { 'User-Agent': 'Mozilla/5.0' }
       });
-      
       const html = response.data;
       const $ = cheerio.load(html);
       
-      // Define the selector based on your original XPath.
-      // This selector might need updating if GitHub changes its HTML structure.
-      const selector = "body > div:nth-child(1) > div:nth-child(5) > div > main > turbo-frame > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(1) > a:nth-child(1)";
+      // Use the selector from your screenshot. For example, if the element has an id "nwo-repo-filter":
+      const selector = '#nwo-repo-filter';
       const countText = $(selector).text().trim();
       
       if (countText) {
-        const dependentsCount = parseInt(countText.replace(/,/g, ''), 10);
+        // Example text: "689 Repositories" — we only need the number.
+        const [rawCount] = countText.split(' ');
+        const dependentsCount = parseInt(rawCount.replace(/,/g, ''), 10);
         if (!isNaN(dependentsCount)) {
           return dependentsCount;
         } else {
@@ -102,7 +98,6 @@ export async function fetchMeshStats(githubToken) {
   }
 
   console.log('\nFetching NPM statistics...');
-
   const currentDate = new Date();
   const lastDay = new Date(currentDate);
   lastDay.setDate(lastDay.getDate() - 1);
@@ -155,14 +150,11 @@ export async function fetchMeshStats(githubToken) {
   const latestVersion = packageInfo.data['dist-tags'].latest;
   console.log('Latest Version:', latestVersion);
 
-  // Get dependents count from the npm registry (this is separate from our scraped number)
+  // Get dependents count from the npm registry (separate from the scraped value)
   const dependentsResponse = await axios.get(
     'https://registry.npmjs.org/-/v1/search',
     {
-      params: {
-        text: 'dependencies:@meshsdk/core',
-        size: 1
-      }
+      params: { text: 'dependencies:@meshsdk/core', size: 1 }
     }
   );
   console.log('Total Dependents from npm:', dependentsResponse.data.total);
@@ -207,48 +199,32 @@ export async function fetchMeshStats(githubToken) {
 
 export async function fetchMeshContributors(githubToken) {
   console.log('\nFetching repository contributors...');
-
-  // First get all repositories from the MeshJS organization
-  const reposResponse = await axios.get(
-    'https://api.github.com/orgs/MeshJS/repos',
-    {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': `token ${githubToken}`
-      }
+  const reposResponse = await axios.get('https://api.github.com/orgs/MeshJS/repos', {
+    headers: {
+      'Accept': 'application/vnd.github.v3+json',
+      'Authorization': `token ${githubToken}`
     }
-  );
+  });
 
   const contributorsMap = new Map();
-
   for (const repo of reposResponse.data) {
     console.log(`Fetching contributors for ${repo.name}...`);
-
     try {
-      const contributorsResponse = await axios.get(
-        `https://api.github.com/repos/MeshJS/${repo.name}/contributors`,
-        {
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            'Authorization': `token ${githubToken}`
-          }
+      const contributorsResponse = await axios.get(`https://api.github.com/repos/MeshJS/${repo.name}/contributors`, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'Authorization': `token ${githubToken}`
         }
-      );
-
-      // Process each contributor
+      });
       contributorsResponse.data.forEach(contributor => {
         if (!contributorsMap.has(contributor.login)) {
           contributorsMap.set(contributor.login, {
             login: contributor.login,
             avatar_url: contributor.avatar_url,
             contributions: contributor.contributions,
-            repositories: [{
-              name: repo.name,
-              contributions: contributor.contributions
-            }]
+            repositories: [{ name: repo.name, contributions: contributor.contributions }]
           });
         } else {
-          // Add contributions to existing contributor
           const existingContributor = contributorsMap.get(contributor.login);
           existingContributor.contributions += contributor.contributions;
           existingContributor.repositories.push({
@@ -261,18 +237,10 @@ export async function fetchMeshContributors(githubToken) {
       console.error(`Error fetching contributors for ${repo.name}:`, error.message);
     }
   }
-
-  // Convert Map to array and sort by contribution count
   const contributors = Array.from(contributorsMap.values())
     .sort((a, b) => b.contributions - a.contributions);
-
-  // Sort repositories for each contributor by contribution count
   contributors.forEach(contributor => {
     contributor.repositories.sort((a, b) => b.contributions - a.contributions);
   });
-
-  return {
-    unique_count: contributors.length,
-    contributors: contributors
-  };
+  return { unique_count: contributors.length, contributors };
 }
