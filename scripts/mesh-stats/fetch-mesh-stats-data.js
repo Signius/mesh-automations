@@ -122,8 +122,14 @@ export async function fetchMeshStats(githubToken) {
     const currentDate = new Date();
     const lastDay = new Date(currentDate);
     lastDay.setDate(lastDay.getDate() - 1);
+
+    // Calculate last week using proper week boundaries (Monday to Sunday)
     const lastWeek = new Date(currentDate);
     lastWeek.setDate(lastWeek.getDate() - 7);
+    const lastWeekStart = new Date(lastWeek);
+    lastWeekStart.setDate(lastWeekStart.getDate() - lastWeekStart.getDay() + 1); // Set to Monday
+    const lastWeekEnd = new Date(lastWeekStart);
+    lastWeekEnd.setDate(lastWeekEnd.getDate() + 6); // Set to Sunday
 
     // Calculate last month using calendar month boundaries
     const lastMonth = new Date(currentDate);
@@ -131,8 +137,11 @@ export async function fetchMeshStats(githubToken) {
     const lastMonthStart = new Date(lastMonth.getFullYear(), lastMonth.getMonth(), 1);
     const lastMonthEnd = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1, 0);
 
+    // Calculate last year using calendar year boundaries
     const lastYear = new Date(currentDate);
     lastYear.setFullYear(lastYear.getFullYear() - 1);
+    const lastYearStart = new Date(lastYear.getFullYear(), 0, 1); // January 1st of last year
+    const lastYearEnd = new Date(lastYear.getFullYear(), 11, 31); // December 31st of last year
 
     const formatDate = date => date.toISOString().split('T')[0];
     const getDownloads = async (startDate, endDate) => {
@@ -143,9 +152,9 @@ export async function fetchMeshStats(githubToken) {
     };
 
     const lastDayDownloads = await getDownloads(formatDate(lastDay), formatDate(currentDate));
-    const lastWeekDownloads = await getDownloads(formatDate(lastWeek), formatDate(currentDate));
+    const lastWeekDownloads = await getDownloads(formatDate(lastWeekStart), formatDate(lastWeekEnd));
     const lastMonthDownloads = await getDownloads(formatDate(lastMonthStart), formatDate(lastMonthEnd));
-    const lastYearDownloads = await getDownloads(formatDate(lastYear), formatDate(currentDate));
+    const lastYearDownloads = await getDownloads(formatDate(lastYearStart), formatDate(lastYearEnd));
 
     const reactPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/react');
     const transactionPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/transaction');
