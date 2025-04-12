@@ -112,10 +112,8 @@ export async function fetchMeshStats(githubToken) {
         {
             query: `
                 query {
-                    repository(owner: "MeshJS", name: "mesh") {
-                        dependents {
-                            totalCount
-                        }
+                    search(query: "org:MeshJS", type: REPOSITORY, first: 100) {
+                        repositoryCount
                     }
                 }
             `
@@ -127,7 +125,17 @@ export async function fetchMeshStats(githubToken) {
             }
         }
     );
-    console.log('GitHub Dependents:', githubDependentsResponse.data.data.repository.dependents.totalCount);
+
+    console.log('GitHub GraphQL Response:', JSON.stringify(githubDependentsResponse.data, null, 2));
+
+    let githubDependentsCount = 0;
+    if (githubDependentsResponse.data?.data?.search) {
+        githubDependentsCount = githubDependentsResponse.data.data.search.repositoryCount;
+    } else {
+        console.log('Could not get GitHub dependents count from GraphQL response');
+    }
+
+    console.log('GitHub Dependents:', githubDependentsCount);
 
     // Create npm-stat URLs
     const currentDateStr = currentDate.toISOString().split('T')[0];
@@ -159,7 +167,7 @@ export async function fetchMeshStats(githubToken) {
             core_cst_package_downloads: coreCstPackageDownloads.data.downloads,
             latest_version: latestVersion,
             dependents_count: npmDependentsResponse.data.total,
-            github_dependents_count: githubDependentsResponse.data.data.repository.dependents.totalCount
+            github_dependents_count: githubDependentsCount
         },
         urls: {
             npm_stat_url: npmStatUrl,
