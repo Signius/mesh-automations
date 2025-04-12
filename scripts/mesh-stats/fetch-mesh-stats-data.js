@@ -51,12 +51,12 @@ export async function fetchMeshStats(githubToken) {
       const html = response.data;
       const $ = cheerio.load(html);
       
-      // Use the selector from your screenshot. For example, if the element has an id "nwo-repo-filter":
-      const selector = '#nwo-repo-filter';
+      // Use a selector targeting the anchor element with class "btn-link selected"
+      const selector = 'a.btn-link.selected';
       const countText = $(selector).text().trim();
       
       if (countText) {
-        // Example text: "689 Repositories" — we only need the number.
+        // For example, countText might be "689 Repositories"
         const [rawCount] = countText.split(' ');
         const dependentsCount = parseInt(rawCount.replace(/,/g, ''), 10);
         if (!isNaN(dependentsCount)) {
