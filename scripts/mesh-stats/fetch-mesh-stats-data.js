@@ -112,7 +112,7 @@ export async function fetchMeshStats(githubToken) {
         {
             query: `
                 query {
-                    search(query: "org:MeshJS", type: REPOSITORY, first: 100) {
+                    search(query: "dependency:MeshJS/mesh", type: REPOSITORY, first: 100) {
                         repositoryCount
                     }
                 }
