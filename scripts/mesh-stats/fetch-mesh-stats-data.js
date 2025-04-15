@@ -156,24 +156,26 @@ export async function fetchMeshStats(githubToken) {
     const lastMonthDownloads = await getDownloads(formatDate(lastMonthStart), formatDate(lastMonthEnd));
     const lastYearDownloads = await getDownloads(formatDate(lastYearStart), formatDate(lastYearEnd));
 
-    const reactPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/react');
-    const transactionPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/transaction');
-    const walletPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/wallet');
-    const providerPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/provider');
-    const coreCslPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core-csl');
-    const coreCstPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-month/@meshsdk/core-cst');
+    const corePackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/core');
+    const reactPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/react');
+    const transactionPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/transaction');
+    const walletPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/wallet');
+    const providerPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/provider');
+    const coreCslPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/core-csl');
+    const coreCstPackageDownloads = await axios.get('https://api.npmjs.org/downloads/point/last-year/@meshsdk/core-cst');
 
     console.log('NPM Downloads:');
     console.log('- Last 24 Hours:', lastDayDownloads);
     console.log('- Last Week:', lastWeekDownloads);
     console.log('- Last Month:', lastMonthDownloads);
     console.log('- Last Year:', lastYearDownloads);
-    console.log('- React Package Monthly:', reactPackageDownloads.data.downloads);
-    console.log('- Transaction Package Monthly:', transactionPackageDownloads.data.downloads);
-    console.log('- Wallet Package Monthly:', walletPackageDownloads.data.downloads);
-    console.log('- Provider Package Monthly:', providerPackageDownloads.data.downloads);
-    console.log('- Core CSL Package Monthly:', coreCslPackageDownloads.data.downloads);
-    console.log('- Core CST Package Monthly:', coreCstPackageDownloads.data.downloads);
+    console.log('- Core Package Last Year:', corePackageDownloads.data.downloads);
+    console.log('- React Package Last Year:', reactPackageDownloads.data.downloads);
+    console.log('- Transaction Package Last Year:', transactionPackageDownloads.data.downloads);
+    console.log('- Wallet Package Last Year:', walletPackageDownloads.data.downloads);
+    console.log('- Provider Package Last Year:', providerPackageDownloads.data.downloads);
+    console.log('- Core CSL Package Last Year:', coreCslPackageDownloads.data.downloads);
+    console.log('- Core CST Package Last Year:', coreCstPackageDownloads.data.downloads);
 
     // Get package version info
     const packageInfo = await axios.get('https://registry.npmjs.org/@meshsdk/core');
@@ -209,7 +211,8 @@ export async function fetchMeshStats(githubToken) {
                 last_day: lastDayDownloads,
                 last_week: lastWeekDownloads,
                 last_month: lastMonthDownloads,
-                last_year: lastYearDownloads
+                last_year: lastYearDownloads,
+                core_package_last_year: corePackageDownloads.data.downloads
             },
             react_package_downloads: reactPackageDownloads.data.downloads,
             transaction_package_downloads: transactionPackageDownloads.data.downloads,
