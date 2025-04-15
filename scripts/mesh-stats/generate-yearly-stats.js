@@ -154,7 +154,13 @@ async function main() {
                     currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file ||
                     currentGitHubStats.core_in_repositories > currentMonthStats.core_in_repositories) {
                     console.log(`Updating stats for ${currentMonthName} as new numbers are higher`);
-                    monthlyGitHubStats[currentMonthName] = currentGitHubStats;
+                    // Only update fields that have increased
+                    monthlyGitHubStats[currentMonthName] = {
+                        ...currentMonthStats,
+                        core_in_package_json: Math.max(currentMonthStats.core_in_package_json, currentGitHubStats.core_in_package_json),
+                        core_in_any_file: Math.max(currentMonthStats.core_in_any_file, currentGitHubStats.core_in_any_file),
+                        core_in_repositories: Math.max(currentMonthStats.core_in_repositories, currentGitHubStats.core_in_repositories)
+                    };
                 }
             }
 
