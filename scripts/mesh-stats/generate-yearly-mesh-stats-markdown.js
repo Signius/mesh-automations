@@ -47,7 +47,14 @@ ${processedData.githubStats.map(stat =>
 }
 
 export function saveMarkdownFile(year, markdown) {
-    const markdownPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
+    const markdownDir = path.join('mesh-gov-updates', 'mesh-stats', 'markdown');
+
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(markdownDir)) {
+        fs.mkdirSync(markdownDir, { recursive: true });
+    }
+
+    const markdownPath = path.join(markdownDir, `${year}.md`);
     fs.writeFileSync(markdownPath, markdown);
     console.log(`Saved markdown to ${markdownPath}`);
 }

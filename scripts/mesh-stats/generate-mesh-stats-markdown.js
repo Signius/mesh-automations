@@ -60,7 +60,14 @@ Last updated: ${currentDate}
 
 export function saveMarkdown(stats) {
     const markdown = generateMarkdown(stats);
-    const markdownPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', '2001.md');
+    const markdownDir = path.join('mesh-gov-updates', 'mesh-stats', 'markdown');
+
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(markdownDir)) {
+        fs.mkdirSync(markdownDir, { recursive: true });
+    }
+
+    const markdownPath = path.join(markdownDir, 'current.md');
     fs.writeFileSync(markdownPath, markdown);
     console.log(`Saved markdown to ${markdownPath}`);
 } 
