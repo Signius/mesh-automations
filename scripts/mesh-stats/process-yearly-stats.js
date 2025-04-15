@@ -36,12 +36,21 @@ export function processYearlyStats(year, monthlyDownloads, githubStats) {
     });
 
     // Process GitHub stats
-    const processedGithubStats = monthNames.map(month => ({
-        month,
-        projects: githubStats[month]?.core_in_package_json || 0,
-        files: githubStats[month]?.core_in_any_file || 0,
-        repositories: githubStats[month]?.core_in_repositories || 0
-    }));
+    const processedGithubStats = monthNames.map(month => {
+        // For the current month, use the latest stats from githubStats
+        // For all other months, use the existing stats or default to 0
+        const monthStats = githubStats[month] || {
+            core_in_package_json: 0,
+            core_in_any_file: 0,
+            core_in_repositories: 0
+        };
+        return {
+            month,
+            projects: monthStats.core_in_package_json,
+            files: monthStats.core_in_any_file,
+            repositories: monthStats.core_in_repositories
+        };
+    });
 
     // Find peak month
     const maxMonth = monthlyDownloads.core.find(m => m.downloads === maxDownloads);
