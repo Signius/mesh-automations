@@ -2,7 +2,6 @@ import axios from 'axios';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { generateYearlyMarkdown, saveMarkdownFile } from './generate-yearly-mesh-stats-markdown.js';
 import { generateYearlyStatsJson, saveStatsJson } from './generate-yearly-mesh-stats-json.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -83,37 +82,13 @@ async function fetchMonthlyDownloads(packageName, year) {
 
 async function loadPreviousStats(year) {
     try {
-        const statsPath = path.join('apps', 'docs', 'src', 'pages', 'en', 'mesh-stats', `${year}.md`);
+        const statsPath = path.join('mesh-gov-updates', 'mesh-stats', `mesh-yearly-stats-${year}.json`);
         console.log(`Attempting to load previous stats from: ${statsPath}`);
 
         if (fs.existsSync(statsPath)) {
             console.log(`Found existing stats file for ${year}`);
             const content = fs.readFileSync(statsPath, 'utf8');
-            // Extract GitHub stats from the markdown
-            const githubStatsMatch = content.match(/## 🔍 GitHub Usage Statistics\n\n\| Month(?:&nbsp;)*? *\| *Projects *\| *Files *\|\n\| *:[-]+ *\| *[-]+: *\| *[-]+: *\|\n([\s\S]*?)(?=\n\n|$)/);
-
-            if (githubStatsMatch) {
-                console.log(`Successfully matched GitHub stats section for ${year}`);
-                const rows = githubStatsMatch[1].split('\n').filter(row => row.trim());
-                const monthlyStats = {};
-
-                rows.forEach(row => {
-                    // Updated regex to handle comma-formatted numbers
-                    const match = row.match(/\| (.*?) \| ([\d,]+) \| ([\d,]+) \|/);
-                    if (match) {
-                        const [_, month, projects, files] = match;
-                        monthlyStats[month] = {
-                            core_in_package_json: parseInt(projects.replace(/,/g, '')),
-                            core_in_any_file: parseInt(files.replace(/,/g, ''))
-                        };
-                    }
-                });
-
-                console.log(`Loaded monthly stats for ${year}:`, monthlyStats);
-                return { github: monthlyStats };
-            } else {
-                console.log(`No GitHub stats section found in ${year} file`);
-            }
+            return JSON.parse(content);
         } else {
             console.log(`No existing stats file found for ${year}`);
         }
@@ -180,10 +155,6 @@ async function main() {
                 coreCsl: await fetchMonthlyDownloads('@meshsdk/core-csl', year),
                 coreCst: await fetchMonthlyDownloads('@meshsdk/core-cst', year)
             };
-
-            // Generate and save markdown
-            const markdown = generateYearlyMarkdown(year, monthlyDownloads, monthlyGitHubStats);
-            saveMarkdownFile(year, markdown);
 
             // Generate and save JSON stats
             const statsData = generateYearlyStatsJson(year, monthlyDownloads, monthlyGitHubStats);

@@ -1,10 +1,8 @@
 import { fetchMeshStats, fetchMeshContributors } from './fetch-mesh-stats-data.js';
-import { saveMarkdown } from './generate-mesh-stats-markdown.js';
 import { saveJson } from './generate-mesh-stats-json.js';
 
 // Configuration
 const CONFIG = {
-    generateMarkdown: true,  // Set to false to skip markdown generation
     generateJson: true,      // Set to false to skip JSON generation
 };
 
@@ -31,10 +29,6 @@ async function main() {
         // Generate outputs based on configuration
         if (CONFIG.generateJson) {
             saveJson(combinedStats);
-        }
-
-        if (CONFIG.generateMarkdown) {
-            saveMarkdown(combinedStats);
         }
 
         console.log('\nStats generated successfully!');
