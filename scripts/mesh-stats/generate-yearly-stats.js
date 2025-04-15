@@ -36,9 +36,17 @@ async function fetchGitHubStats(githubToken) {
         }
     );
 
+    // Read core_in_repositories data from file (fallback value)
+    const coreInReposPath = path.join('mesh-gov-updates', 'mesh-stats', 'core-in-repositories.json');
+    let coreInReposData = { last_updated: '', core_in_repositories: 0 };
+    if (fs.existsSync(coreInReposPath)) {
+        coreInReposData = JSON.parse(fs.readFileSync(coreInReposPath, 'utf8'));
+    }
+
     return {
         core_in_package_json: corePackageJsonResponse.data.total_count,
-        core_in_any_file: coreAnyFileResponse.data.total_count
+        core_in_any_file: coreAnyFileResponse.data.total_count,
+        core_in_repositories: coreInReposData.core_in_repositories
     };
 }
 
@@ -134,12 +142,17 @@ async function main() {
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
 
                 // Only update current month's stats if they've increased
-                const currentMonthStats = monthlyGitHubStats[currentMonthName] || { core_in_package_json: 0, core_in_any_file: 0 };
+                const currentMonthStats = monthlyGitHubStats[currentMonthName] || {
+                    core_in_package_json: 0,
+                    core_in_any_file: 0,
+                    core_in_repositories: 0
+                };
                 console.log(`Current month stats before update:`, currentMonthStats);
                 console.log(`New GitHub stats:`, currentGitHubStats);
 
                 if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
-                    currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file) {
+                    currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file ||
+                    currentGitHubStats.core_in_repositories > currentMonthStats.core_in_repositories) {
                     console.log(`Updating stats for ${currentMonthName} as new numbers are higher`);
                     monthlyGitHubStats[currentMonthName] = currentGitHubStats;
                 }
@@ -168,4 +181,4 @@ async function main() {
     }
 }
 
-main(); 
+main();

@@ -39,7 +39,8 @@ export function processYearlyStats(year, monthlyDownloads, githubStats) {
     const processedGithubStats = monthNames.map(month => ({
         month,
         projects: githubStats[month]?.core_in_package_json || 0,
-        files: githubStats[month]?.core_in_any_file || 0
+        files: githubStats[month]?.core_in_any_file || 0,
+        repositories: githubStats[month]?.core_in_repositories || 0
     }));
 
     // Find peak month
