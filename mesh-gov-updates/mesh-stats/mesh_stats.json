@@ -1,28 +1,28 @@
 {
   "github": {
-    "core_in_package_json": 689,
+    "core_in_package_json": 695,
     "core_in_any_file": 740,
-    "core_in_repositories": 689
+    "core_in_repositories": 695
   },
   "npm": {
     "downloads": {
-      "last_day": 397,
-      "last_week": 2386,
+      "last_day": 311,
+      "last_week": 2462,
       "last_month": 10635,
       "last_year": 56420
     },
-    "react_package_downloads": 9504,
-    "transaction_package_downloads": 10128,
-    "wallet_package_downloads": 10322,
-    "provider_package_downloads": 9892,
-    "core_csl_package_downloads": 5503,
-    "core_cst_package_downloads": 10293,
-    "latest_version": "1.9.0-beta.32",
-    "dependents_count": 276600
+    "react_package_downloads": 9426,
+    "transaction_package_downloads": 10064,
+    "wallet_package_downloads": 10337,
+    "provider_package_downloads": 9776,
+    "core_csl_package_downloads": 5362,
+    "core_cst_package_downloads": 10331,
+    "latest_version": "1.9.0-beta.35",
+    "dependents_count": 276970
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-12&to=2025-04-12",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-12&to=2025-04-12"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-15&to=2025-04-15",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-15&to=2025-04-15"
   },
   "contributors": {
     "unique_count": 37,
@@ -30,15 +30,15 @@
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "contributions": 1179,
+        "contributions": 1182,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 901
+            "contributions": 903
           },
           {
             "name": "multisig",
-            "contributions": 94
+            "contributions": 95
           },
           {
             "name": "examples",
@@ -145,11 +145,11 @@
       {
         "login": "HinsonSIDAN",
         "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4",
-        "contributions": 570,
+        "contributions": 573,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 399
+            "contributions": 402
           },
           {
             "name": "mesh-core",
@@ -242,15 +242,15 @@
       {
         "login": "Felix-at-Swarm",
         "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
-        "contributions": 146,
+        "contributions": 150,
         "repositories": [
           {
             "name": "funding",
-            "contributions": 102
+            "contributions": 104
           },
           {
             "name": "cardano-governance",
-            "contributions": 39
+            "contributions": 41
           },
           {
             "name": "bounty-board",
@@ -261,26 +261,37 @@
       {
         "login": "lisicky",
         "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
-        "contributions": 62,
+        "contributions": 63,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 62
+            "contributions": 63
           }
         ]
       },
       {
         "login": "Andre-Diamond",
         "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
-        "contributions": 49,
+        "contributions": 54,
         "repositories": [
           {
             "name": "cardano-governance",
-            "contributions": 47
+            "contributions": 52
           },
           {
             "name": "funding",
             "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "QSchlegel",
+        "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4",
+        "contributions": 47,
+        "repositories": [
+          {
+            "name": "multisig",
+            "contributions": 47
           }
         ]
       },
@@ -304,17 +315,6 @@
         ]
       },
       {
-        "login": "QSchlegel",
-        "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4",
-        "contributions": 42,
-        "repositories": [
-          {
-            "name": "multisig",
-            "contributions": 42
-          }
-        ]
-      },
-      {
         "login": "leonlai257",
         "avatar_url": "https://avatars.githubusercontent.com/u/73750831?v=4",
         "contributions": 40,
@@ -334,6 +334,17 @@
           {
             "name": "multisig",
             "contributions": 5
+          }
+        ]
+      },
+      {
+        "login": "justinschreiner",
+        "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4",
+        "contributions": 37,
+        "repositories": [
+          {
+            "name": "multisig",
+            "contributions": 37
           }
         ]
       },
@@ -364,17 +375,6 @@
           {
             "name": "examples",
             "contributions": 1
-          }
-        ]
-      },
-      {
-        "login": "justinschreiner",
-        "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4",
-        "contributions": 22,
-        "repositories": [
-          {
-            "name": "multisig",
-            "contributions": 22
           }
         ]
       },
@@ -413,6 +413,17 @@
         ]
       },
       {
+        "login": "github-actions[bot]",
+        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "contributions": 13,
+        "repositories": [
+          {
+            "name": "cardano-governance",
+            "contributions": 13
+          }
+        ]
+      },
+      {
         "login": "nelsonksh",
         "avatar_url": "https://avatars.githubusercontent.com/u/150728524?v=4",
         "contributions": 12,
@@ -428,12 +439,12 @@
         ]
       },
       {
-        "login": "github-actions[bot]",
-        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+        "login": "actions-user",
+        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
         "contributions": 11,
         "repositories": [
           {
-            "name": "cardano-governance",
+            "name": "funding",
             "contributions": 11
           }
         ]
@@ -445,17 +456,6 @@
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 10
-          }
-        ]
-      },
-      {
-        "login": "actions-user",
-        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-        "contributions": 10,
-        "repositories": [
-          {
-            "name": "funding",
             "contributions": 10
           }
         ]
