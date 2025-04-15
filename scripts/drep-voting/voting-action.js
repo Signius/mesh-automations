@@ -41,7 +41,7 @@ if (!organizationName) {
 }
 
 // Define the base directory for voting history files
-const votingHistoryDir = path.join(__dirname, '..', '..', 'apps', 'docs', 'src', 'pages', 'en', 'drep-voting');
+const votingHistoryDir = path.join('mesh-gov-updates', 'drep-voting', 'markdown');
 
 // Function to read front matter from a file
 function readFrontMatter(filePath) {

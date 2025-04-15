@@ -35,7 +35,7 @@ export function generateVoteTable(vote, organizationName) {
 }
 
 export function generateYearlyMarkdown(votes, year, organizationName) {
-    const markdownDir = path.join('apps', 'docs', 'src', 'pages', 'en', 'drep-voting');
+    const markdownDir = path.join('mesh-gov-updates', 'drep-voting', 'markdown');
     const markdownPath = path.join(markdownDir, `${year}.md`);
 
     // Create directory if it doesn't exist
@@ -71,7 +71,7 @@ sidebarTitle: ${year} Votes
 }
 
 export function updateAnnualRecords(votingHistoryDir) {
-    const indexFilePath = path.join(votingHistoryDir, '1001.md');
+    const indexFilePath = path.join(votingHistoryDir, 'index.md');
     try {
         let content = fs.readFileSync(indexFilePath, 'utf8');
 
