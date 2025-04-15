@@ -40,17 +40,17 @@ export function processYearlyStats(year, monthlyDownloads, githubStats) {
         // For each month, use the existing stats from githubStats
         // If no stats exist for a month, use 0
         const monthStats = githubStats[month] || {
-            core_in_package_json: 0,
-            core_in_any_file: 0,
-            core_in_repositories: 0
+            projects: 0,
+            files: 0,
+            repositories: 0
         };
 
-        // Return the stats for this month, preserving all existing data
+        // Return the stats for this month in the correct format
         return {
             month,
-            projects: monthStats.core_in_package_json,
-            files: monthStats.core_in_any_file,
-            repositories: monthStats.core_in_repositories
+            projects: monthStats.projects,
+            files: monthStats.files,
+            repositories: monthStats.repositories
         };
     });
 

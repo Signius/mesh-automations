@@ -133,10 +133,14 @@ async function main() {
 
             // Initialize monthlyGitHubStats with previous stats
             const monthlyGitHubStats = {};
-            if (previousStats?.github) {
-                // Preserve all previous months' data
-                Object.entries(previousStats.github).forEach(([month, stats]) => {
-                    monthlyGitHubStats[month] = { ...stats };
+            if (previousStats?.githubStats) {
+                // Convert array format to object format for easier updates
+                previousStats.githubStats.forEach(monthData => {
+                    monthlyGitHubStats[monthData.month] = {
+                        projects: monthData.projects,
+                        files: monthData.files,
+                        repositories: monthData.repositories
+                    };
                 });
             }
 
@@ -148,24 +152,23 @@ async function main() {
 
                 // Only update current month's stats if they've increased
                 const currentMonthStats = monthlyGitHubStats[currentMonthName] || {
-                    core_in_package_json: 0,
-                    core_in_any_file: 0,
-                    core_in_repositories: 0
+                    projects: 0,
+                    files: 0,
+                    repositories: 0
                 };
                 console.log(`Current month stats before update:`, currentMonthStats);
                 console.log(`New GitHub stats:`, currentGitHubStats);
 
                 // Only update if it's the current month
                 if (currentMonth === new Date().getMonth()) {
-                    if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
-                        currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file ||
-                        currentGitHubStats.core_in_repositories > currentMonthStats.core_in_repositories) {
+                    if (currentGitHubStats.core_in_package_json > currentMonthStats.projects ||
+                        currentGitHubStats.core_in_any_file > currentMonthStats.files ||
+                        currentGitHubStats.core_in_repositories > currentMonthStats.repositories) {
                         console.log(`Updating current month stats for ${currentMonthName} as new numbers are higher`);
                         monthlyGitHubStats[currentMonthName] = {
-                            ...currentMonthStats,
-                            core_in_package_json: currentGitHubStats.core_in_package_json,
-                            core_in_any_file: currentGitHubStats.core_in_any_file,
-                            core_in_repositories: currentGitHubStats.core_in_repositories
+                            projects: currentGitHubStats.core_in_package_json,
+                            files: currentGitHubStats.core_in_any_file,
+                            repositories: currentGitHubStats.core_in_repositories
                         };
                     }
                 }
