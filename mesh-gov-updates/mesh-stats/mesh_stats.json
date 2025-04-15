@@ -9,16 +9,17 @@
       "last_day": 311,
       "last_week": 2462,
       "last_month": 10635,
-      "last_year": 56420
+      "last_year": 56420,
+      "core_package_last_12_months": 71528
     },
-    "react_package_downloads": 9426,
-    "transaction_package_downloads": 10064,
-    "wallet_package_downloads": 10337,
-    "provider_package_downloads": 9776,
-    "core_csl_package_downloads": 5362,
-    "core_cst_package_downloads": 10331,
+    "react_package_downloads": 55975,
+    "transaction_package_downloads": 49029,
+    "wallet_package_downloads": 49172,
+    "provider_package_downloads": 46510,
+    "core_csl_package_downloads": 41929,
+    "core_cst_package_downloads": 53008,
     "latest_version": "1.9.0-beta.35",
-    "dependents_count": 276968
+    "dependents_count": 276971
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-15&to=2025-04-15",
