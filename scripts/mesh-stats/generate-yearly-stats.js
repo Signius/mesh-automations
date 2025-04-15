@@ -141,13 +141,29 @@ async function main() {
                 // Fetch current GitHub stats
                 const currentGitHubStats = await fetchGitHubStats(githubToken);
 
-                // Only update current month's stats
-                monthlyGitHubStats[currentMonthName] = {
-                    core_in_package_json: currentGitHubStats.core_in_package_json,
-                    core_in_any_file: currentGitHubStats.core_in_any_file,
-                    core_in_repositories: currentGitHubStats.core_in_repositories
+                // Only update current month's stats if they've increased
+                const currentMonthStats = monthlyGitHubStats[currentMonthName] || {
+                    core_in_package_json: 0,
+                    core_in_any_file: 0,
+                    core_in_repositories: 0
                 };
-                console.log(`Updated stats for ${currentMonthName}:`, monthlyGitHubStats[currentMonthName]);
+                console.log(`Current month stats before update:`, currentMonthStats);
+                console.log(`New GitHub stats:`, currentGitHubStats);
+
+                // Only update if it's the current month
+                if (currentMonth === new Date().getMonth()) {
+                    if (currentGitHubStats.core_in_package_json > currentMonthStats.core_in_package_json ||
+                        currentGitHubStats.core_in_any_file > currentMonthStats.core_in_any_file ||
+                        currentGitHubStats.core_in_repositories > currentMonthStats.core_in_repositories) {
+                        console.log(`Updating current month stats for ${currentMonthName} as new numbers are higher`);
+                        monthlyGitHubStats[currentMonthName] = {
+                            ...currentMonthStats,
+                            core_in_package_json: currentGitHubStats.core_in_package_json,
+                            core_in_any_file: currentGitHubStats.core_in_any_file,
+                            core_in_repositories: currentGitHubStats.core_in_repositories
+                        };
+                    }
+                }
             }
 
             // Fetch monthly downloads for all packages
