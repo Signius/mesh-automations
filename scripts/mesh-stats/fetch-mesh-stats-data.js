@@ -212,7 +212,7 @@ export async function fetchMeshStats(githubToken) {
                 last_week: lastWeekDownloads,
                 last_month: lastMonthDownloads,
                 last_year: lastYearDownloads,
-                core_package_last_year: corePackageDownloads.data.downloads
+                core_package_last_12_months: corePackageDownloads.data.downloads
             },
             react_package_downloads: reactPackageDownloads.data.downloads,
             transaction_package_downloads: transactionPackageDownloads.data.downloads,
