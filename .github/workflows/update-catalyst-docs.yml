@@ -1,4 +1,4 @@
-name: Update Catalyst Proposal Documentation
+name: Update Catalyst Proposal Data
 
 on:
   schedule:
@@ -13,7 +13,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  update-catalyst-docs:
+  update-catalyst-data:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_SUPABASE_URL2: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL2 }}
@@ -37,13 +37,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
-      - name: Update Catalyst Proposal Files
+      - name: Update Catalyst Data
         run: npm run update-catalyst-docs
         
       - name: Commit and push if changed
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add mesh-gov-updates/catalyst-proposals/markdown/*.md
           git add mesh-gov-updates/catalyst-proposals/*.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update MeshJS Catalyst Proposal Files and Data" && git push) 
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update MeshJS Catalyst Proposal Data" && git push) 

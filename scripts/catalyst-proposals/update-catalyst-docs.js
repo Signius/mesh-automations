@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { PROJECTS_INFO } from './mockData.js';
-import { updateFundFile, updateOverviewFile } from './generate-catalyst-markdown.js';
 import { saveCatalystData } from './save-catalyst-data.js';
 
 // Initialize constants
@@ -123,7 +122,7 @@ async function fetchSnapshotData(projectId) {
  * Main function.
  */
 async function main() {
-    console.log('Generating markdown files...');
+    console.log('Processing Catalyst data...');
     console.log('Using mock data:', USE_MOCK_DATA);
 
     // Group projects by fund
@@ -162,21 +161,11 @@ async function main() {
         }
     }
 
-    // Update each fund file
-    for (const [fundNumber, projects] of Object.entries(projectsByFund)) {
-        if (projects.length > 0) {
-            await updateFundFile(fundNumber, projects);
-        }
-    }
-
-    // Update overview file
-    const allProjects = Object.values(projectsByFund).flat();
-    await updateOverviewFile(allProjects);
-
     // Save the data as JSON
+    const allProjects = Object.values(projectsByFund).flat();
     await saveCatalystData(allProjects);
 
-    console.log('All markdown files have been updated and data has been saved.');
+    console.log('Catalyst data has been processed and saved.');
 }
 
 main().catch(error => {
