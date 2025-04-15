@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1nd3t833j7v5sz65k3tp9yyvztw60sjcjgcgjr37682s3m7frwrusqmd2k80",
+    "proposalTxHash": "9b62b3c632f329016a968ac25211825bb4f84b12461121c7da3aa11df92370f900",
+    "proposalIndex": 0,
+    "voteTxHash": "97286d801834e523e53c16ae2fc255f233ba8a1651eb0cf379e5d5f8ae22bd1f",
+    "blockTime": "2025-04-14T14:37:06.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "2025 Net Change Limit",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 547,
+    "expirationEpoch": 554,
+    "rationale": "No rationale available"
+  },
+  {
     "proposalId": "gov_action12meeq4r43udremwpm6fzt4nt7fctvt0ah7798x036m2r4nhlccmqqhmr9wx",
     "proposalTxHash": "56f39054758f1a3cedc1de9225d66bf270b62dfdbfbc5399f1d6d43aceffc63600",
     "proposalIndex": 0,

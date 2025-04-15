@@ -7,9 +7,9 @@
   "npm": {
     "downloads": {
       "last_day": 397,
-      "last_week": 2508,
+      "last_week": 2386,
       "last_month": 10635,
-      "last_year": 71055
+      "last_year": 56420
     },
     "react_package_downloads": 9504,
     "transaction_package_downloads": 10128,
@@ -18,7 +18,7 @@
     "core_csl_package_downloads": 5503,
     "core_cst_package_downloads": 10293,
     "latest_version": "1.9.0-beta.32",
-    "dependents_count": 276598
+    "dependents_count": 276600
   },
   "urls": {
     "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-12&to=2025-04-12",
