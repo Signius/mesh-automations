@@ -37,13 +37,15 @@ export function processYearlyStats(year, monthlyDownloads, githubStats) {
 
     // Process GitHub stats
     const processedGithubStats = monthNames.map(month => {
-        // For the current month, use the latest stats from githubStats
-        // For all other months, use the existing stats or default to 0
+        // For each month, use the existing stats from githubStats
+        // If no stats exist for a month, use 0
         const monthStats = githubStats[month] || {
             core_in_package_json: 0,
             core_in_any_file: 0,
             core_in_repositories: 0
         };
+
+        // Return the stats for this month, preserving all existing data
         return {
             month,
             projects: monthStats.core_in_package_json,

@@ -131,9 +131,14 @@ async function main() {
             const previousStats = await loadPreviousStats(year);
             console.log(`Previous stats loaded for ${year}:`, previousStats);
 
-            // Keep all previous GitHub stats exactly as they are
-            const monthlyGitHubStats = { ...previousStats?.github };
-            console.log(`Monthly GitHub stats after loading:`, monthlyGitHubStats);
+            // Initialize monthlyGitHubStats with previous stats
+            const monthlyGitHubStats = {};
+            if (previousStats?.github) {
+                // Preserve all previous months' data
+                Object.entries(previousStats.github).forEach(([month, stats]) => {
+                    monthlyGitHubStats[month] = { ...stats };
+                });
+            }
 
             // Only fetch and update GitHub stats for current year and current month
             if (year === currentYear) {
