@@ -4,7 +4,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { saveVotingJson } from '../drep-voting/generate-voting-json.js';
-import { generateYearlyMarkdown, updateAnnualRecords } from '../drep-voting/generate-voting-markdown.js';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -12,8 +11,7 @@ const __dirname = path.dirname(__filename);
 
 // Configuration
 const CONFIG = {
-    generateJson: true,      // Set to false to skip JSON generation
-    generateMarkdown: true,  // Set to false to skip markdown generation
+    generateJson: true      // Set to false to skip JSON generation
 };
 
 // Read config file
@@ -208,15 +206,6 @@ async function getDRepVotes(drepId) {
             if (CONFIG.generateJson) {
                 saveVotingJson(votes, year);
             }
-
-            if (CONFIG.generateMarkdown) {
-                generateYearlyMarkdown(votes, year, organizationName);
-            }
-        }
-
-        // Update the Annual Records section if markdown is enabled
-        if (CONFIG.generateMarkdown) {
-            updateAnnualRecords(votingHistoryDir);
         }
 
         console.log('All votes processed and organized by year successfully');

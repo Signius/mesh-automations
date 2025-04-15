@@ -36,7 +36,7 @@ jobs:
           cd target
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add apps/docs/src/pages mesh-gov-updates/drep-voting/markdown
+          git add apps/docs/src/pages
           if git diff --quiet && git diff --staged --quiet; then
             echo "changes=false" >> $GITHUB_OUTPUT
           else
