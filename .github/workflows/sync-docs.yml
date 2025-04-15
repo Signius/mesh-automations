@@ -1,17 +1,16 @@
 name: Sync Docs to Mesh Gov Test
 
 on:
-  workflow_run:
-    workflows: ["Update Catalyst Proposal Documentation", "DRep Voting Action"] # , "Mesh SDK Usage Stats"
-    types:
-      - completed
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Sync documentation from mesh-automations to mesh-governance'
+        required: true
+        default: 'Sync documentation from mesh-automations to mesh-governance'
 
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
       - name: Checkout source repository
@@ -37,7 +36,7 @@ jobs:
           cd target
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add apps/docs/src/pages
+          git add apps/docs/src/pages mesh-gov-updates/drep-voting/markdown
           if git diff --quiet && git diff --staged --quiet; then
             echo "changes=false" >> $GITHUB_OUTPUT
           else

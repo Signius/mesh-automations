@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const MILESTONES_BASE_URL = process.env.NEXT_PUBLIC_MILESTONES_URL || 'https://milestones.projectcatalyst.io';
-const DOCS_DIR = 'apps/docs/src/pages/en/catalyst-proposals';
+const DOCS_DIR = 'mesh-gov-updates/catalyst-proposals/markdown';
 
 /**
  * Formats a text to ensure it doesn't exceed the maximum length.
