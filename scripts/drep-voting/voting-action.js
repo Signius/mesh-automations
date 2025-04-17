@@ -128,7 +128,7 @@ async function getProposalDetails(drepId) {
 async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
     try {
         const baseUrl = 'https://raw.githubusercontent.com/Andre-Diamond/mesh-governance/refs/heads/main/vote-context';
-
+        console.log(`\nFetching rationale for proposal ${proposalId} (year: ${year}, epoch: ${epoch})`);
         // If we have year and epoch, try the direct path first
         if (year && epoch) {
             const directUrl = `${baseUrl}/${year}/${epoch}/Vote_Context.jsonId`;
@@ -260,15 +260,19 @@ async function getDRepVotes(drepId) {
             let rationale = null;
             if (metadata?.body?.comment) {
                 rationale = metadata.body.comment;
+                console.log(`Fetching rationale from metadata: ${rationale}`);
             } else if (metadata?.body?.rationale) {
                 rationale = metadata.body.rationale;
+                console.log(`Fetching rationale from metadata: ${rationale}`);
             } else if (missingRationales[vote.proposal_id]?.rationale) {
                 rationale = missingRationales[vote.proposal_id].rationale;
+                console.log(`Fetching rationale from missing rationales: ${rationale}`);
             } else {
                 // Try to fetch from governance repository as last resort
                 const year = new Date(processedVote.blockTime).getFullYear();
                 const epoch = proposal.proposed_epoch;
                 rationale = await fetchGovernanceRationale(vote.proposal_id, year, epoch);
+                console.log(`Fetching rationale from governance repository: ${rationale}`);
             }
 
             // Add proposal details to vote
