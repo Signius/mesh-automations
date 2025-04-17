@@ -195,7 +195,7 @@ async function getDRepVotes(drepId) {
 
     // New `vote_list` endpoint with PostgREST filter
     const base = 'https://api.koios.rest/api/v1/vote_list';
-    const url = `${base}?drep_id=eq.${encodeURIComponent(drepId)}`;
+    const url = `${base}?voter_id=eq.${encodeURIComponent(drepId)}`;
 
     const resp = await axios.get(url, { headers: { api_key: apiKey } });
     const rawVotes = Array.isArray(resp.data) ? resp.data : [];
