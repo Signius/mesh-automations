@@ -127,7 +127,7 @@ async function getProposalDetails(drepId) {
 // Function to fetch rationale from Cardano governance repository
 async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
     try {
-        const baseUrl = 'https://raw.githubusercontent.com/MeshJS/cardano-governance/refs/heads/main/vote-context';
+        const baseUrl = 'https://raw.githubusercontent.com/Andre-Diamond/mesh-governance/refs/heads/main/vote-context';
 
         // If we have year and epoch, try the direct path first
         if (year && epoch) {
