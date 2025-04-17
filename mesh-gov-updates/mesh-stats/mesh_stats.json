@@ -1,12 +1,12 @@
 {
   "github": {
     "core_in_package_json": 695,
-    "core_in_any_file": 740,
+    "core_in_any_file": 984,
     "core_in_repositories": 695
   },
   "npm": {
     "downloads": {
-      "last_day": 311,
+      "last_day": 0,
       "last_week": 2462,
       "last_month": 10635,
       "last_year": 56420,
@@ -18,12 +18,12 @@
     "provider_package_downloads": 46510,
     "core_csl_package_downloads": 41929,
     "core_cst_package_downloads": 53008,
-    "latest_version": "1.9.0-beta.35",
-    "dependents_count": 276982
+    "latest_version": "1.9.0-beta.36",
+    "dependents_count": 277399
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-15&to=2025-04-15",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-15&to=2025-04-15"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-17&to=2025-04-17",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-17&to=2025-04-17"
   },
   "contributors": {
     "unique_count": 37,
@@ -31,11 +31,11 @@
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "contributions": 1182,
+        "contributions": 1184,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 903
+            "contributions": 905
           },
           {
             "name": "multisig",
