@@ -129,9 +129,13 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
     try {
         const baseUrl = 'https://raw.githubusercontent.com/Andre-Diamond/mesh-governance/refs/heads/main/vote-context';
         console.log(`\nFetching rationale for proposal ${proposalId} (year: ${year}, epoch: ${epoch})`);
+
+        // Extract the shortened ID (last 4 characters) from the proposal ID
+        const shortenedId = proposalId.slice(-4);
+
         // If we have year and epoch, try the direct path first
         if (year && epoch) {
-            const directUrl = `${baseUrl}/${year}/${epoch}/Vote_Context.jsonId`;
+            const directUrl = `${baseUrl}/${year}/${epoch}_${shortenedId}/Vote_Context.jsonId`;
             try {
                 const response = await axios.get(directUrl);
                 if (response.data?.body?.comment) {
@@ -151,7 +155,7 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
             // If we have a specific epoch, try that first
             if (epochs.length > 0) {
                 for (const currentEpoch of epochs) {
-                    const searchUrl = `${baseUrl}/${currentYear}/${currentEpoch}/Vote_Context.jsonId`;
+                    const searchUrl = `${baseUrl}/${currentYear}/${currentEpoch}_${shortenedId}/Vote_Context.jsonId`;
                     try {
                         const response = await axios.get(searchUrl);
                         if (response.data?.body?.comment) {
