@@ -124,6 +124,78 @@ async function getProposalDetails(drepId) {
     }
 }
 
+// Function to fetch rationale from Cardano governance repository
+async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
+    try {
+        const baseUrl = 'https://raw.githubusercontent.com/MeshJS/cardano-governance/refs/heads/main/vote-context';
+
+        // If we have year and epoch, try the direct path first
+        if (year && epoch) {
+            const directUrl = `${baseUrl}/${year}/${epoch}/Vote_Context.jsonId`;
+            try {
+                const response = await axios.get(directUrl);
+                if (response.data?.body?.comment) {
+                    return response.data.body.comment;
+                }
+            } catch (error) {
+                console.warn(`Direct path not found for proposal ${proposalId}, trying year folders`);
+            }
+        }
+
+        // If direct path failed or we don't have year/epoch, search through year folders
+        const currentYear = new Date().getFullYear();
+        const years = year ? [year] : [currentYear]; // Only search current year if no year provided
+        const epochs = epoch ? [epoch] : []; // If no epoch provided, we'll search all epochs in the year folders
+
+        for (const currentYear of years) {
+            // If we have a specific epoch, try that first
+            if (epochs.length > 0) {
+                for (const currentEpoch of epochs) {
+                    const searchUrl = `${baseUrl}/${currentYear}/${currentEpoch}/Vote_Context.jsonId`;
+                    try {
+                        const response = await axios.get(searchUrl);
+                        if (response.data?.body?.comment) {
+                            return response.data.body.comment;
+                        }
+                    } catch (error) {
+                        // Continue to next combination
+                        continue;
+                    }
+                }
+            }
+
+            // If no specific epoch or if specific epoch search failed, try to list all epochs in the year folder
+            try {
+                const yearUrl = `${baseUrl}/${currentYear}`;
+                const response = await axios.get(yearUrl);
+                if (response.data) {
+                    // Assuming the response contains a list of epoch folders
+                    const epochFolders = response.data.filter(item => item.type === 'dir');
+                    for (const folder of epochFolders) {
+                        const searchUrl = `${baseUrl}/${currentYear}/${folder.name}/Vote_Context.jsonId`;
+                        try {
+                            const rationaleResponse = await axios.get(searchUrl);
+                            if (rationaleResponse.data?.body?.comment) {
+                                return rationaleResponse.data.body.comment;
+                            }
+                        } catch (error) {
+                            continue;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.warn(`Could not list epochs for year ${currentYear}:`, error.message);
+                continue;
+            }
+        }
+
+        return null;
+    } catch (error) {
+        console.warn(`Could not fetch rationale from governance repository for proposal ${proposalId}:`, error.message);
+        return null;
+    }
+}
+
 async function getDRepVotes(drepId) {
     try {
         const apiKey = process.env.KOIOS_API_KEY;
@@ -184,12 +256,27 @@ async function getDRepVotes(drepId) {
             // Get proposal details
             const proposal = proposalDetails[vote.proposal_id] || {};
 
+            // Try to get rationale from multiple sources in order of preference
+            let rationale = null;
+            if (metadata?.body?.comment) {
+                rationale = metadata.body.comment;
+            } else if (metadata?.body?.rationale) {
+                rationale = metadata.body.rationale;
+            } else if (missingRationales[vote.proposal_id]?.rationale) {
+                rationale = missingRationales[vote.proposal_id].rationale;
+            } else {
+                // Try to fetch from governance repository as last resort
+                const year = new Date(processedVote.blockTime).getFullYear();
+                const epoch = proposal.proposed_epoch;
+                rationale = await fetchGovernanceRationale(vote.proposal_id, year, epoch);
+            }
+
             // Add proposal details to vote
             processedVote.proposalTitle = proposal.meta_json?.body?.title || missingRationales[vote.proposal_id]?.title || 'Unknown Proposal';
             processedVote.proposalType = proposal.proposal_type || 'Unknown';
             processedVote.proposedEpoch = proposal.proposed_epoch || 'N/A';
             processedVote.expirationEpoch = proposal.expiration || 'N/A';
-            processedVote.rationale = metadata?.body?.comment || metadata?.body?.rationale || missingRationales[vote.proposal_id]?.rationale || 'No rationale available';
+            processedVote.rationale = rationale || 'No rationale available';
 
             // Get year from blockTime
             const year = new Date(processedVote.blockTime).getFullYear();
