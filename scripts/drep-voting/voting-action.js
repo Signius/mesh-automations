@@ -258,17 +258,23 @@ async function getDRepVotes(drepId) {
 
             // Try to get rationale from multiple sources in order of preference
             let rationale = null;
-            if (metadata?.body?.comment) {
-                rationale = metadata.body.comment;
-                console.log(`Fetching rationale from metadata: ${rationale}`);
-            } else if (metadata?.body?.rationale) {
-                rationale = metadata.body.rationale;
-                console.log(`Fetching rationale from metadata: ${rationale}`);
-            } else if (missingRationales[vote.proposal_id]?.rationale) {
+
+            // First try the missing rationales file
+            if (missingRationales[vote.proposal_id]?.rationale) {
                 rationale = missingRationales[vote.proposal_id].rationale;
                 console.log(`Fetching rationale from missing rationales: ${rationale}`);
-            } else {
-                // Try to fetch from governance repository as last resort
+            }
+            // Then try metadata
+            else if (metadata?.body?.comment) {
+                rationale = metadata.body.comment;
+                console.log(`Fetching rationale from metadata: ${rationale}`);
+            }
+            else if (metadata?.body?.rationale) {
+                rationale = metadata.body.rationale;
+                console.log(`Fetching rationale from metadata: ${rationale}`);
+            }
+            // Finally try governance repository as last resort
+            else {
                 const year = new Date(processedVote.blockTime).getFullYear();
                 const epoch = proposal.proposed_epoch;
                 rationale = await fetchGovernanceRationale(vote.proposal_id, year, epoch);
