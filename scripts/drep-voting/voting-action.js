@@ -128,7 +128,6 @@ async function getProposalDetails(drepId) {
 async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
     try {
         const baseUrl = 'https://raw.githubusercontent.com/Andre-Diamond/mesh-governance/refs/heads/main/vote-context';
-        const apiBaseUrl = 'https://api.github.com/repos/Andre-Diamond/mesh-governance/contents/vote-context';
         console.log(`\nFetching rationale for proposal ${proposalId} (year: ${year}, epoch: ${epoch})`);
 
         // Extract the shortened ID (last 4 characters) from the proposal ID
@@ -147,10 +146,10 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
             }
         }
 
-        // If direct path failed or we don't have year/epoch, search through year folders
+        // If direct path failed or we don't have year/epoch, try all possible combinations
         const currentYear = new Date().getFullYear();
         const years = year ? [year] : [currentYear]; // Only search current year if no year provided
-        const epochs = epoch ? [epoch] : []; // If no epoch provided, we'll search all epochs in the year folders
+        const epochs = epoch ? [epoch] : []; // If no epoch provided, we'll try a range of epochs
 
         for (const currentYear of years) {
             // If we have a specific epoch, try that first
@@ -169,28 +168,21 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
                 }
             }
 
-            // If no specific epoch or if specific epoch search failed, try to list all epochs in the year folder
-            try {
-                const yearUrl = `${apiBaseUrl}/${currentYear}`;
-                const response = await axios.get(yearUrl);
-                if (response.data) {
-                    // Assuming the response contains a list of epoch folders
-                    const epochFolders = response.data.filter(item => item.type === 'dir' && item.name.endsWith(shortenedId));
-                    for (const folder of epochFolders) {
-                        const searchUrl = `${baseUrl}/${currentYear}/${folder.name}/Vote_Context.jsonId`;
-                        try {
-                            const rationaleResponse = await axios.get(searchUrl);
-                            if (rationaleResponse.data?.body?.comment) {
-                                return rationaleResponse.data.body.comment;
-                            }
-                        } catch (error) {
-                            continue;
-                        }
+            // If no specific epoch or if specific epoch search failed, try a range of epochs
+            const startEpoch = epoch || 500; // Start from epoch 500 if no specific epoch
+            const endEpoch = epoch || 600;   // End at epoch 600 if no specific epoch
+
+            for (let currentEpoch = startEpoch; currentEpoch <= endEpoch; currentEpoch++) {
+                const searchUrl = `${baseUrl}/${currentYear}/${currentEpoch}_${shortenedId}/Vote_Context.jsonId`;
+                try {
+                    const response = await axios.get(searchUrl);
+                    if (response.data?.body?.comment) {
+                        return response.data.body.comment;
                     }
+                } catch (error) {
+                    // Continue to next epoch
+                    continue;
                 }
-            } catch (error) {
-                console.warn(`Could not list epochs for year ${currentYear}:`, error.message);
-                continue;
             }
         }
 
