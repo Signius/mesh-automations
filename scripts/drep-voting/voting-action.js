@@ -175,7 +175,7 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
                 const response = await axios.get(yearUrl);
                 if (response.data) {
                     // Assuming the response contains a list of epoch folders
-                    const epochFolders = response.data.filter(item => item.type === 'dir');
+                    const epochFolders = response.data.filter(item => item.type === 'dir' && item.name.endsWith(shortenedId));
                     for (const folder of epochFolders) {
                         const searchUrl = `${baseUrl}/${currentYear}/${folder.name}/Vote_Context.jsonId`;
                         try {
