@@ -18,5 +18,13 @@
     "gov_action1js2s9v92zpxg2rge0y3jt9zy626he2m67x9kx9phw4r942kvsn6sqfym0d7": {
         "title": "Decrease Treasury Tax from 20% to 10%",
         "rationale": "While we generally agree to reduce treasury spending and think that reducing the allocation to the Treasury is a effective way to achieve lower spending capacities, we yet see that we lack research on how such changes will impact the SPO ecosystem and deem that we currently should not change treasury income before we have better insights"
+    },
+    "gov_action1nd3t833j7v5sz65k3tp9yyvztw60sjcjgcgjr37682s3m7frwrusqmd2k80": {
+        "title": "2025 Net Change Limit",
+        "rationale": "We see the NCL of 350M Ada for 2025 as a relatively high, yet acceptable metric which is likely to cover all most relevant funding to core operations within the Cardano Ecosystem. Good enough to agree with. Lets then make sure that we effectively allocate budgets up to 350m ADA in 2025 and not waste funds with projects no one needs."
+    },
+    "gov_action10ueqgzwenxr39le68n0se9peu92r7gm2846xwehh3u0ahc0qd0uqqyljxu5": {
+        "title": "Set 2025 Net Change Limit of 300M ADA, 2026 Net Change Limit of 250M ADA",
+        "rationale": "We see the alternative '2025 Net-Change-Limit' (gov_action1nd3t833j7v5sz65k3tp9yyvztw60sjcjgcgjr37682s3m7frwrusqmd2k80) proposal as a more robust and clear proposal, since it focuses on 2025 solely instead of 2025+2026, we vote NO on this proposal and YES on the alternative. We see the NCL of 350M Ada for 2025 as a relatively high, yet acceptable metric which is likely to cover all most relevant funding to core operations within the Cardano Ecosystem"
     }
 }
