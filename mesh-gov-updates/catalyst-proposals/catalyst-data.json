@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-04-15T10:19:10.590Z",
+  "timestamp": "2025-04-17T02:04:21.319Z",
   "projects": [
     {
       "projectDetails": {
@@ -39,7 +39,7 @@
         "title": "Mesh Software as a Service",
         "budget": 100000,
         "milestones_qty": 5,
-        "funds_distributed": 36000,
+        "funds_distributed": 56000,
         "project_id": 1200148,
         "name": "Mesh Software as a Service",
         "category": "F12: Cardano Use Cases: Concept",
@@ -87,7 +87,7 @@
         "title": "Mesh: Hydra Tools for administrating & interacting with Hydra Heads",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 72000,
+        "funds_distributed": 112000,
         "project_id": 1300135,
         "name": "Mesh: Hydra Tools for administrating & interacting with Hydra Heads",
         "category": "F13: Cardano Open: Developers",
@@ -119,7 +119,7 @@
         "title": "Maintain Mesh and Build Developer Community",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 72000,
+        "funds_distributed": 112000,
         "project_id": 1300130,
         "name": "Maintain Mesh and Build Developer Community",
         "category": "F13: Cardano Open: Developers",
@@ -151,7 +151,7 @@
         "title": "Cardano Builder Fest Asia by Mesh, Socious, SIDAN, Vietnam Cardano",
         "budget": 99016,
         "milestones_qty": 4,
-        "funds_distributed": 53469,
+        "funds_distributed": 84164,
         "project_id": 1300036,
         "name": "Cardano Builder Fest Asia by Mesh, Socious, SIDAN, Vietnam Cardano",
         "category": "F13: Cardano Open: Ecosystem",
