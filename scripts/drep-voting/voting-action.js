@@ -128,6 +128,7 @@ async function getProposalDetails(drepId) {
 async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
     try {
         const baseUrl = 'https://raw.githubusercontent.com/Andre-Diamond/mesh-governance/refs/heads/main/vote-context';
+        const apiBaseUrl = 'https://api.github.com/repos/Andre-Diamond/mesh-governance/contents/vote-context';
         console.log(`\nFetching rationale for proposal ${proposalId} (year: ${year}, epoch: ${epoch})`);
 
         // Extract the shortened ID (last 4 characters) from the proposal ID
@@ -170,7 +171,7 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
 
             // If no specific epoch or if specific epoch search failed, try to list all epochs in the year folder
             try {
-                const yearUrl = `${baseUrl}/${currentYear}`;
+                const yearUrl = `${apiBaseUrl}/${currentYear}`;
                 const response = await axios.get(yearUrl);
                 if (response.data) {
                     // Assuming the response contains a list of epoch folders
