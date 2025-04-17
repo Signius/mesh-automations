@@ -138,8 +138,16 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
             const directUrl = `${baseUrl}/${year}/${epoch}_${shortenedId}/Vote_Context.jsonId`;
             try {
                 const response = await axios.get(directUrl);
-                if (response.data?.body?.comment) {
-                    return response.data.body.comment;
+                if (response.data) {
+                    try {
+                        // Try to parse the response data if it's a string
+                        const parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                        if (parsedData?.body?.comment) {
+                            return parsedData.body.comment;
+                        }
+                    } catch (parseError) {
+                        console.warn(`Failed to parse response for proposal ${proposalId}:`, parseError.message);
+                    }
                 }
             } catch (error) {
                 console.warn(`Direct path not found for proposal ${proposalId}, trying year folders`);
@@ -149,7 +157,7 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
         // If direct path failed or we don't have year/epoch, try all possible combinations
         const currentYear = new Date().getFullYear();
         const years = year ? [year] : [currentYear]; // Only search current year if no year provided
-        const epochs = epoch ? [epoch] : []; // If no epoch provided, we'll try a range of epochs
+        const epochs = epoch ? [epoch] : [];
 
         for (const currentYear of years) {
             // If we have a specific epoch, try that first
@@ -158,8 +166,17 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
                     const searchUrl = `${baseUrl}/${currentYear}/${currentEpoch}_${shortenedId}/Vote_Context.jsonId`;
                     try {
                         const response = await axios.get(searchUrl);
-                        if (response.data?.body?.comment) {
-                            return response.data.body.comment;
+                        if (response.data) {
+                            try {
+                                // Try to parse the response data if it's a string
+                                const parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                                if (parsedData?.body?.comment) {
+                                    return parsedData.body.comment;
+                                }
+                            } catch (parseError) {
+                                console.warn(`Failed to parse response for proposal ${proposalId}:`, parseError.message);
+                                continue;
+                            }
                         }
                     } catch (error) {
                         // Continue to next combination
@@ -176,8 +193,17 @@ async function fetchGovernanceRationale(proposalId, year = null, epoch = null) {
                 const searchUrl = `${baseUrl}/${currentYear}/${currentEpoch}_${shortenedId}/Vote_Context.jsonId`;
                 try {
                     const response = await axios.get(searchUrl);
-                    if (response.data?.body?.comment) {
-                        return response.data.body.comment;
+                    if (response.data) {
+                        try {
+                            // Try to parse the response data if it's a string
+                            const parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                            if (parsedData?.body?.comment) {
+                                return parsedData.body.comment;
+                            }
+                        } catch (parseError) {
+                            console.warn(`Failed to parse response for proposal ${proposalId}:`, parseError.message);
+                            continue;
+                        }
                     }
                 } catch (error) {
                     // Continue to next epoch
