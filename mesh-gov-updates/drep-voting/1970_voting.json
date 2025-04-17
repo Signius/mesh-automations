@@ -1,0 +1,79 @@
+[
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-16T21:45:23.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  },
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-16T19:43:43.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  },
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-15T03:14:38.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  },
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-14T07:16:31.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  },
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-13T17:01:56.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  },
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-09T22:06:32.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  },
+  {
+    "proposalTxHash": "undefined00",
+    "blockTime": "1970-05-09T03:28:45.000Z",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "Unknown",
+    "proposedEpoch": "N/A",
+    "expirationEpoch": "N/A",
+    "rationale": "No rationale available"
+  }
+]
