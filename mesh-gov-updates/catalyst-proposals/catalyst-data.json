@@ -1,4 +1,165 @@
 {
-  "timestamp": "2025-04-18T10:42:27.364Z",
-  "projects": []
+  "timestamp": "2025-04-18T10:45:04.899Z",
+  "projects": [
+    {
+      "projectDetails": {
+        "id": 173,
+        "title": "MeshJS SDK Operations: Supporting Open-Source Library Development, Developer Resources & Builder Community",
+        "budget": 169413,
+        "milestones_qty": 5,
+        "funds_distributed": 135528,
+        "project_id": 1000107,
+        "name": "MeshJS SDK Operations: Supporting Open-Source Library Development, Developer Resources & Builder Community",
+        "category": "F10: OSDE: Open Source Dev Ecosystem",
+        "url": "https://projectcatalyst.io/funds/10/f10-osde-open-source-dev-ecosystem/meshjs-sdk-operations-supporting-open-source-library-development-developer-resources-and-builder-community",
+        "status": "In Progress",
+        "finished": "September, 2024"
+      },
+      "milestonesCompleted": 4
+    },
+    {
+      "projectDetails": {
+        "id": 529,
+        "title": "Sustain & Maintain MeshJS",
+        "budget": 150000,
+        "milestones_qty": 5,
+        "funds_distributed": 150000,
+        "project_id": 1100271,
+        "name": "Sustain & Maintain MeshJS",
+        "category": "F11: Cardano Open: Developers",
+        "url": "https://projectcatalyst.io/funds/11/cardano-open-developers/sustain-and-maintain-meshjs",
+        "status": "Completed",
+        "finished": "September 15, 2024"
+      },
+      "milestonesCompleted": 5
+    },
+    {
+      "projectDetails": {
+        "id": 706,
+        "title": "Mesh Software as a Service",
+        "budget": 100000,
+        "milestones_qty": 5,
+        "funds_distributed": 56000,
+        "project_id": 1200148,
+        "name": "Mesh Software as a Service",
+        "category": "F12: Cardano Use Cases: Concept",
+        "url": "https://projectcatalyst.io/funds/12/f12-cardano-use-cases-concept/mesh-software-as-a-service",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 3
+    },
+    {
+      "projectDetails": {
+        "id": 705,
+        "title": "Mesh New Features to Improve Developer experience and Cardano Adoption",
+        "budget": 200000,
+        "milestones_qty": 5,
+        "funds_distributed": 170000,
+        "project_id": 1200147,
+        "name": "Mesh New Features to Improve Developer experience and Cardano Adoption",
+        "category": "F12: Cardano Open: Developers",
+        "url": "https://projectcatalyst.io/funds/12/f12-cardano-open-developers/mesh-new-features-to-improve-developer-experience-and-cardano-adoption",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 4
+    },
+    {
+      "projectDetails": {
+        "id": 778,
+        "title": "Sustain and Maintain Mesh SDK",
+        "budget": 200000,
+        "milestones_qty": 5,
+        "funds_distributed": 200000,
+        "project_id": 1200220,
+        "name": "Sustain and Maintain Mesh SDK",
+        "category": "F12: Cardano Open: Developers",
+        "url": "https://projectcatalyst.io/funds/12/f12-cardano-open-developers/sustain-and-maintain-mesh-sdk",
+        "status": "Completed",
+        "finished": ""
+      },
+      "milestonesCompleted": 5
+    },
+    {
+      "projectDetails": {
+        "id": 951,
+        "title": "Mesh: Hydra Tools for administrating & interacting with Hydra Heads",
+        "budget": 200000,
+        "milestones_qty": 5,
+        "funds_distributed": 112000,
+        "project_id": 1300135,
+        "name": "Mesh: Hydra Tools for administrating & interacting with Hydra Heads",
+        "category": "F13: Cardano Open: Developers",
+        "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/mesh-hydra-tools-for-administrating-and-interacting-with-hydra-heads",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 2
+    },
+    {
+      "projectDetails": {
+        "id": 950,
+        "title": "Mesh: Cquisitor - Transaction Investigation Tool",
+        "budget": 200000,
+        "milestones_qty": 5,
+        "funds_distributed": 32000,
+        "project_id": 1300134,
+        "name": "Mesh: Cquisitor - Transaction Investigation Tool",
+        "category": "F13: Cardano Open: Developers",
+        "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/mesh-cquisitor-transaction-investigation-tool",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 0
+    },
+    {
+      "projectDetails": {
+        "id": 946,
+        "title": "Maintain Mesh and Build Developer Community",
+        "budget": 200000,
+        "milestones_qty": 5,
+        "funds_distributed": 112000,
+        "project_id": 1300130,
+        "name": "Maintain Mesh and Build Developer Community",
+        "category": "F13: Cardano Open: Developers",
+        "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/maintain-mesh-and-build-developer-community",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 2
+    },
+    {
+      "projectDetails": {
+        "id": 866,
+        "title": "Cardano Multisig Platform by Mesh, Clarity DAO & Fluid Tokens",
+        "budget": 500000,
+        "milestones_qty": 6,
+        "funds_distributed": 155000,
+        "project_id": 1300050,
+        "name": "Cardano Multisig Platform by Mesh, Clarity DAO & Fluid Tokens",
+        "category": "F13: Cardano Use Cases: Product",
+        "url": "https://projectcatalyst.io/funds/10/f13-cardano-use-cases-product/cardano-multisig-platform-by-mesh-clarity-dao-and-fluid-tokens",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 1
+    },
+    {
+      "projectDetails": {
+        "id": 852,
+        "title": "Cardano Builder Fest Asia by Mesh, Socious, SIDAN, Vietnam Cardano",
+        "budget": 99016,
+        "milestones_qty": 4,
+        "funds_distributed": 84164,
+        "project_id": 1300036,
+        "name": "Cardano Builder Fest Asia by Mesh, Socious, SIDAN, Vietnam Cardano",
+        "category": "F13: Cardano Open: Ecosystem",
+        "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-ecosystem/cardano-builder-fest-asia-by-mesh-socious-sidan-vietnam-cardano",
+        "status": "In Progress",
+        "finished": ""
+      },
+      "milestonesCompleted": 3
+    }
+  ]
 }
