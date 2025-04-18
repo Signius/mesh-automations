@@ -3,117 +3,197 @@
     "earliest_epoch": 531,
     "current_epoch": 552,
     "total_delegations": 6,
-    "total_amount_ada": 1003644.89265,
+    "total_amount_ada": 898889.902906,
     "epochs": {
+      "522": {
+        "voting_power_lovelace": "308757729830",
+        "total_delegators": 0
+      },
+      "523": {
+        "voting_power_lovelace": "320873537132",
+        "total_delegators": 0
+      },
+      "524": {
+        "voting_power_lovelace": "480170923993",
+        "total_delegators": 0
+      },
+      "525": {
+        "voting_power_lovelace": "479322683408",
+        "total_delegators": 0
+      },
+      "526": {
+        "voting_power_lovelace": "485492615229",
+        "total_delegators": 0
+      },
+      "527": {
+        "voting_power_lovelace": "485606066269",
+        "total_delegators": 0
+      },
+      "528": {
+        "voting_power_lovelace": "493744189997",
+        "total_delegators": 0
+      },
+      "529": {
+        "voting_power_lovelace": "581575652375",
+        "total_delegators": 0
+      },
+      "530": {
+        "voting_power_lovelace": "581574604413",
+        "total_delegators": 0
+      },
       "531": {
         "new_delegations": 1,
         "new_amount_lovelace": "100097164027",
-        "cumulative_amount_lovelace": "100097164027"
+        "cumulative_amount_lovelace": "100097164027",
+        "voting_power_lovelace": "581601901379",
+        "total_delegators": 0
       },
       "532": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100097164027"
+        "cumulative_amount_lovelace": "100097164027",
+        "voting_power_lovelace": "685992447797",
+        "total_delegators": 0
       },
       "533": {
         "new_delegations": 1,
         "new_amount_lovelace": "34236236",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "671185172479",
+        "total_delegators": 0
       },
       "534": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "671302181764",
+        "total_delegators": 0
       },
       "535": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "783537368249",
+        "total_delegators": 0
       },
       "536": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "742209609422",
+        "total_delegators": 0
       },
       "537": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "742385017298",
+        "total_delegators": 0
       },
       "538": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "787041447391",
+        "total_delegators": 0
       },
       "539": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "787251180357",
+        "total_delegators": 0
       },
       "540": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "841517567032",
+        "total_delegators": 0
       },
       "541": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "824436299098",
+        "total_delegators": 0
       },
       "542": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "797122074309",
+        "total_delegators": 0
       },
       "543": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "844932685167",
+        "total_delegators": 0
       },
       "544": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "805223687788",
+        "total_delegators": 0
       },
       "545": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "100131400263"
+        "cumulative_amount_lovelace": "100131400263",
+        "voting_power_lovelace": "805431234714",
+        "total_delegators": 0
       },
       "546": {
         "new_delegations": 4,
         "new_amount_lovelace": "903513492387",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "924795603390",
+        "total_delegators": 0
       },
       "547": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "937642082716",
+        "total_delegators": 0
       },
       "548": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "910773361444",
+        "total_delegators": 0
       },
       "549": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "898004026137",
+        "total_delegators": 0
       },
       "550": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "898194241095",
+        "total_delegators": 0
       },
       "551": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "898347789446",
+        "total_delegators": 0
       },
       "552": {
         "new_delegations": 0,
         "new_amount_lovelace": "0",
-        "cumulative_amount_lovelace": "1003644892650"
+        "cumulative_amount_lovelace": "1003644892650",
+        "voting_power_lovelace": "898889902906",
+        "total_delegators": 6
       },
       "572": {
         "new_delegations": 0,
@@ -152,7 +232,8 @@
         "epoch_no": 552,
         "amount_lovelace": "100097164027"
       }
-    ]
+    ],
+    "total_delegators": 6
   },
   "drepInfo": {
     "drepId": "drep1yv4uesaj92wk8ljlsh4p7jzndnzrflchaz5fzug3zxg4naqkpeas3",
@@ -160,6 +241,6 @@
     "active": true,
     "registered": true,
     "expires_epoch_no": 572,
-    "last_updated": "2025-04-18T05:27:10.235Z"
+    "last_updated": "2025-04-18T05:50:52.419Z"
   }
 }
