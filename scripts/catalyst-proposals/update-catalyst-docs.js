@@ -4,7 +4,7 @@ import { saveCatalystData } from './save-catalyst-data.js';
 import { fetchProposalFromChallenge } from './fetch-proposal-from-challenge.js';
 
 // Environment checks
-const buildId      = 'pJZYf0Bzp4nPDQmwjxLiJ';
+const buildId      = process.env.NEXT_PUBLIC_BUILD_ID;
 const supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL2;
 const supabaseKey  = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY2;
 const USE_MOCK_DATA = !supabaseUrl || !supabaseKey;
@@ -19,11 +19,12 @@ if (!USE_MOCK_DATA) {
   supabase = createClient(supabaseUrl, supabaseKey);
 }
 
-// Determine which projects to process
+// Determine which project identifiers to process (
+// these correspond to the blockchain "proposal ID" == _fundingId
 const README_PROJECT_IDS = process.env.README_PROJECT_IDS;
 const PROJECT_IDS = README_PROJECT_IDS
   ? README_PROJECT_IDS.split(',').map(id => id.trim())
-  : PROJECTS_INFO.map(p => p.id);
+  : PROJECTS_INFO.map(p => p._fundingId || p.id);
 
 /**
  * Retrieves the basic proposal details from Supabase or mock data.
@@ -112,25 +113,31 @@ async function main() {
       ? PROJECTS_INFO.find(p => p.id === projectId)?.milestonesCompleted || 0
       : snapshot.filter(m => m.som_signoff_count > 0 && m.poa_signoff_count > 0).length;
 
-    // Extract fund, challengeSlug from the URL
-    const { pathname } = new URL(details.url);
-    const [, , fundStr, challengeSlug] = pathname.split('/');
+    // Extract fund & challengeSlug from URL
+    let fundStr, challengeSlug;
+    try {
+      const { pathname } = new URL(details.url);
+      [, , fundStr, challengeSlug] = pathname.split('/');
+    } catch {
+      console.warn('Bad URL for project', details.url);
+      continue;
+    }
     if (!fundStr || !challengeSlug) {
-      console.warn('Unexpected URL:', details.url);
+      console.warn('Unexpected URL format:', details.url);
       continue;
     }
 
-    // Fetch the full proposal object (with voting) by _fundingId
+    // Fetch the full proposal object (with voting) by matching _fundingId
     let proposalObj = null;
     try {
       proposalObj = await fetchProposalFromChallenge({
         buildId,
         fundId: fundStr,
         challengeSlug,
-        fundingId: String(projectId)
+        fundingId: projectId
       });
     } catch (err) {
-      console.error(`Error fetching proposalObj for ${projectId}:`, err);
+      console.error(`Error fetching proposal ${projectId}:`, err);
     }
 
     const voting = proposalObj?.voting ?? {};
