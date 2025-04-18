@@ -144,7 +144,7 @@ async function main() {
 
     let voting = {};
     try {
-      voting = await fetchVotingResults({ buildId, fundId: fundStr, challengeSlug, projectSlug });
+      voting = await fetchVotingResults({ buildId: 'pJZYf0Bzp4nPDQmwjxLiJ', fundId: fundStr, challengeSlug, projectSlug });
     } catch (err) {
       console.error(`Voting error for ${projectSlug}:`, err);
     }
