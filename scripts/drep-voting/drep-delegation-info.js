@@ -85,9 +85,38 @@ async function getDRepInfo(drepId) {
     }
 }
 
+async function getCurrentEpoch() {
+    try {
+        const apiKey = process.env.KOIOS_API_KEY;
+        if (!apiKey) {
+            throw new Error('KOIOS_API_KEY environment variable is not set');
+        }
+
+        const response = await axios.get('https://api.koios.rest/api/v1/tip', {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'accept': 'application/json'
+            }
+        });
+
+        if (!Array.isArray(response.data) || response.data.length === 0) {
+            throw new Error('Invalid response format from tip endpoint');
+        }
+
+        return response.data[0].epoch_no;
+    } catch (error) {
+        console.error('Error fetching current epoch:', error.message);
+        if (error.response) {
+            console.error('API Response:', error.response.data);
+        }
+        return 0;
+    }
+}
+
 async function main() {
     const delegators = await getDRepDelegators(drepId);
     const drepInfo = await getDRepInfo(drepId);
+    const currentEpoch = await getCurrentEpoch();
 
     // Calculate total delegation amount from delegators
     const totalDelegationFromDelegators = delegators.reduce((sum, delegator) => {
@@ -96,7 +125,7 @@ async function main() {
 
     // Read existing JSON file
     const outputPath = path.join(__dirname, '..', '..', 'mesh-gov-updates', 'drep-voting', 'drep-delegation-info.json');
-    let existingData = { timeline: { epochs: {}, delegations: [] } };
+    let existingData = { timeline: { epochs: {}, delegations: [] }, drepInfo: null };
     try {
         if (fs.existsSync(outputPath)) {
             existingData = JSON.parse(fs.readFileSync(outputPath, 'utf8'));
@@ -104,9 +133,6 @@ async function main() {
     } catch (error) {
         console.error('Error reading existing JSON file:', error.message);
     }
-
-    // Get current epoch
-    const currentEpoch = drepInfo?.expires_epoch_no || 0;
 
     // Calculate new delegations and removals
     const existingDelegations = new Map(
@@ -156,16 +182,32 @@ async function main() {
         amount_lovelace: d.amount
     }));
 
+    // Update DRep info
+    existingData.drepInfo = {
+        drepId: drepId,
+        amount: drepInfo?.amount || 'N/A',
+        active: drepInfo?.active || false,
+        registered: drepInfo?.registered || false,
+        expires_epoch_no: drepInfo?.expires_epoch_no || 0,
+        last_updated: new Date().toISOString()
+    };
+
     // Save to JSON file
     fs.writeFileSync(outputPath, JSON.stringify(existingData, null, 2));
     console.log(`\nDelegation information saved to ${outputPath}`);
 
     // Log summary
     console.log('\nDelegation Summary:');
+    console.log(`- Current Epoch: ${currentEpoch}`);
     console.log(`- Total Delegators: ${delegators.length}`);
     console.log(`- New Delegations: ${newDelegations.length}`);
     console.log(`- Removed Delegations: ${removedDelegations.length}`);
     console.log(`- Total Delegation Amount: ${totalDelegationFromDelegators.toString()}`);
+    console.log('\nDRep Info:');
+    console.log(`- DRep ID: ${drepId}`);
+    console.log(`- Active: ${drepInfo?.active || false}`);
+    console.log(`- Registered: ${drepInfo?.registered || false}`);
+    console.log(`- Expires Epoch: ${drepInfo?.expires_epoch_no || 0}`);
 }
 
 main(); 
