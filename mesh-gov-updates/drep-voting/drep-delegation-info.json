@@ -1,0 +1,152 @@
+{
+    "timeline": {
+        "earliest_epoch": 531,
+        "current_epoch": 552,
+        "total_delegations": 6,
+        "total_amount_ada": 1003644.89265,
+        "epochs": {
+            "531": {
+                "new_delegations": 1,
+                "new_amount_lovelace": "100097164027",
+                "cumulative_amount_lovelace": "100097164027"
+            },
+            "532": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100097164027"
+            },
+            "533": {
+                "new_delegations": 1,
+                "new_amount_lovelace": "34236236",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "534": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "535": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "536": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "537": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "538": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "539": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "540": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "541": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "542": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "543": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "544": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "545": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "100131400263"
+            },
+            "546": {
+                "new_delegations": 4,
+                "new_amount_lovelace": "903513492387",
+                "cumulative_amount_lovelace": "1003644892650"
+            },
+            "547": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "1003644892650"
+            },
+            "548": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "1003644892650"
+            },
+            "549": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "1003644892650"
+            },
+            "550": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "1003644892650"
+            },
+            "551": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "1003644892650"
+            },
+            "552": {
+                "new_delegations": 0,
+                "new_amount_lovelace": "0",
+                "cumulative_amount_lovelace": "1003644892650"
+            }
+        },
+        "delegations": [
+            {
+                "stake_address": "stake1u8qg7q55at26k7hqee28rh2gwqrery5hh22jxzhj9uj72agv45wv8",
+                "epoch_no": 546,
+                "amount_lovelace": "512815874418"
+            },
+            {
+                "stake_address": "stake1u9ng9m2wvcldpryt860hr29gflr3y9nh72k4k6h3dzu36pqprkt36",
+                "epoch_no": 546,
+                "amount_lovelace": "384291250934"
+            },
+            {
+                "stake_address": "stake1u9qj0v7kfj4actd7x25stvfxz3uu8tynz9m0fspglp7x6hqfdqsml",
+                "epoch_no": 546,
+                "amount_lovelace": "1551883434"
+            },
+            {
+                "stake_address": "stake1uyzmqrrtnxsn4d3hd57x4p55mtrlwynt42qw8nnf2pdq05g4995kn",
+                "epoch_no": 546,
+                "amount_lovelace": "4854483601"
+            },
+            {
+                "stake_address": "stake1uy5hu8az62kh4vqttnrf6x6kymp3pvsdrvdgepvfw7j5c4qmz5rer",
+                "epoch_no": 533,
+                "amount_lovelace": "34236236"
+            },
+            {
+                "stake_address": "stake1u9cp73p6uzffacjp5l4fmda5tqeuu6h2um6wl0jzdqf333qqfzjk9",
+                "epoch_no": 531,
+                "amount_lovelace": "100097164027"
+            }
+        ]
+    }
+}

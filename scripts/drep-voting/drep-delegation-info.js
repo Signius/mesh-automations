@@ -94,27 +94,78 @@ async function main() {
         return sum + BigInt(delegator.amount);
     }, BigInt(0));
 
-    // Prepare the data to save
-    const delegationData = {
-        timestamp: new Date().toISOString(),
-        drepId: drepId,
-        totalDelegators: delegators.length,
-        totalDelegationFromDelegators: totalDelegationFromDelegators.toString(),
-        totalAmountDelegatedToDRep: drepInfo?.amount || 'N/A',
-        drepInfo: drepInfo,
-        delegators: delegators
+    // Read existing JSON file
+    const outputPath = path.join(__dirname, '..', '..', 'mesh-gov-updates', 'drep-voting', 'drep-delegation-info.json');
+    let existingData = { timeline: { epochs: {}, delegations: [] } };
+    try {
+        if (fs.existsSync(outputPath)) {
+            existingData = JSON.parse(fs.readFileSync(outputPath, 'utf8'));
+        }
+    } catch (error) {
+        console.error('Error reading existing JSON file:', error.message);
+    }
+
+    // Get current epoch
+    const currentEpoch = drepInfo?.expires_epoch_no || 0;
+
+    // Calculate new delegations and removals
+    const existingDelegations = new Map(
+        existingData.timeline.delegations.map(d => [d.stake_address, d])
+    );
+    const currentDelegations = new Map(
+        delegators.map(d => [d.stake_address, d])
+    );
+
+    // Find new delegations and removals
+    const newDelegations = [];
+    const removedDelegations = [];
+
+    for (const [stakeAddress, delegator] of currentDelegations) {
+        if (!existingDelegations.has(stakeAddress)) {
+            newDelegations.push({
+                stake_address: stakeAddress,
+                epoch_no: currentEpoch,
+                amount_lovelace: delegator.amount
+            });
+        }
+    }
+
+    for (const [stakeAddress, delegator] of existingDelegations) {
+        if (!currentDelegations.has(stakeAddress)) {
+            removedDelegations.push(delegator);
+        }
+    }
+
+    // Update timeline data
+    const newEpochData = {
+        new_delegations: newDelegations.length,
+        new_amount_lovelace: newDelegations.reduce((sum, d) => sum + BigInt(d.amount_lovelace), BigInt(0)).toString(),
+        cumulative_amount_lovelace: totalDelegationFromDelegators.toString()
     };
 
+    // Update the timeline
+    existingData.timeline.epochs[currentEpoch] = newEpochData;
+    existingData.timeline.current_epoch = currentEpoch;
+    existingData.timeline.total_delegations = delegators.length;
+    existingData.timeline.total_amount_ada = Number(totalDelegationFromDelegators) / 1000000;
+
+    // Update delegations list
+    existingData.timeline.delegations = delegators.map(d => ({
+        stake_address: d.stake_address,
+        epoch_no: currentEpoch,
+        amount_lovelace: d.amount
+    }));
+
     // Save to JSON file
-    const outputPath = path.join(__dirname, '..', '..', 'mesh-gov-updates', 'drep-voting', 'drep-delegation-info.json');
-    fs.writeFileSync(outputPath, JSON.stringify(delegationData, null, 2));
+    fs.writeFileSync(outputPath, JSON.stringify(existingData, null, 2));
     console.log(`\nDelegation information saved to ${outputPath}`);
 
     // Log summary
     console.log('\nDelegation Summary:');
     console.log(`- Total Delegators: ${delegators.length}`);
-    console.log(`- Total Delegation from Delegators: ${totalDelegationFromDelegators.toString()}`);
-    console.log(`- Total Amount Delegated to DRep: ${drepInfo?.amount || 'N/A'}`);
+    console.log(`- New Delegations: ${newDelegations.length}`);
+    console.log(`- Removed Delegations: ${removedDelegations.length}`);
+    console.log(`- Total Delegation Amount: ${totalDelegationFromDelegators.toString()}`);
 }
 
 main(); 
