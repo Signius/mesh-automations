@@ -1,35 +1,4 @@
 {
-  "timestamp": "2025-04-18T10:39:41.416Z",
-  "projects": [
-    {
-      "milestonesCompleted": 4
-    },
-    {
-      "milestonesCompleted": 2
-    },
-    {
-      "milestonesCompleted": 0
-    },
-    {
-      "milestonesCompleted": 2
-    },
-    {
-      "milestonesCompleted": 1
-    },
-    {
-      "milestonesCompleted": 3
-    },
-    {
-      "milestonesCompleted": 5
-    },
-    {
-      "milestonesCompleted": 3
-    },
-    {
-      "milestonesCompleted": 4
-    },
-    {
-      "milestonesCompleted": 5
-    }
-  ]
+  "timestamp": "2025-04-18T10:42:27.364Z",
+  "projects": []
 }
