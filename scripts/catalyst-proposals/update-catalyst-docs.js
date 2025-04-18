@@ -123,53 +123,53 @@ async function fetchSnapshotData(projectId) {
  * Main function.
  */
 async function main() {
-  console.log('Processing Catalyst data...');
-  console.log('Using mock data:', USE_MOCK_DATA);
+    console.log('Processing Catalyst data...');
+    console.log('Using mock data:', USE_MOCK_DATA);
 
-  const projectsByFund = { '10': [], '11': [], '12': [], '13': [] };
+    // Group projects by fund
+    const projectsByFund = {
+        '10': [],
+        '11': [],
+        '12': [],
+        '13': []
+    };
 
-  for (const projectId of PROJECT_IDS) {
-    const projectDetails = await getProposalDetails(projectId);
-    if (!projectDetails) continue;
+    // Process each project
+    for (const projectId of PROJECT_IDS) {
+        const projectDetails = await getProposalDetails(projectId);
+        if (!projectDetails) continue;
 
-    // 1️⃣ fetch snapshot / milestones as before
-    const snapshotData = await fetchSnapshotData(projectId);
-    const milestonesCompleted = USE_MOCK_DATA
-      ? PROJECTS_INFO.find((p) => p.id === projectId)?.milestonesCompleted || 0
-      : snapshotData.filter(
-          (ms) => ms.som_signoff_count > 0 && ms.poa_signoff_count > 0
-        ).length;
+        const snapshotData = await fetchSnapshotData(projectId);
 
-    // 2️⃣ fetch the voting numbers
-    const {
-      votesCast,
-      yesAmount,
-      noAmount,
-      abstainAmount
-    } = await fetchProposalVotes(projectDetails.url);
+        // Get milestones completed data
+        let milestonesCompleted;
+        if (USE_MOCK_DATA) {
+            const mockProject = PROJECTS_INFO.find(p => p.id === projectId);
+            milestonesCompleted = mockProject?.milestonesCompleted || 0;
+        } else {
+            milestonesCompleted = snapshotData.filter(
+                milestone => milestone.som_signoff_count > 0 && milestone.poa_signoff_count > 0
+            ).length;
+        }
 
-    // 3️⃣ determine fund round by stripping first two digits of projectId
-    const fundNumber = String(projectId).substring(0, 2);
-    if (projectsByFund[fundNumber]) {
-      projectsByFund[fundNumber].push({
-        projectDetails,
-        milestonesCompleted,
-        votesCast,
-        yesAmount,
-        noAmount,
-        abstainAmount
-      });
+        // Add to fund group
+        const fundNumber = String(projectId).substring(0, 2);
+        if (projectsByFund[fundNumber]) {
+            projectsByFund[fundNumber].push({
+                projectDetails,
+                milestonesCompleted
+            });
+        }
     }
-  }
 
-  // Save everything out
-  const allProjects = Object.values(projectsByFund).flat();
-  await saveCatalystData(allProjects);
+    // Save the data as JSON
+    const allProjects = Object.values(projectsByFund).flat();
+    await saveCatalystData(allProjects);
 
-  console.log('Catalyst data has been processed and saved.');
+    console.log('Catalyst data has been processed and saved.');
 }
 
-main().catch((err) => {
-  console.error('Script failed:', err);
-  process.exit(1);
-});
+main().catch(error => {
+    console.error('Script failed:', error);
+    process.exit(1);
+}); 
