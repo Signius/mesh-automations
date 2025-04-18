@@ -17,6 +17,35 @@ if (!drepId) {
     process.exit(1);
 }
 
+async function getDRepVotingPowerHistory(drepId) {
+    try {
+        const apiKey = process.env.KOIOS_API_KEY;
+        if (!apiKey) {
+            throw new Error('KOIOS_API_KEY environment variable is not set');
+        }
+
+        const response = await axios.get(`https://api.koios.rest/api/v1/drep_voting_power_history?_drep_id=${drepId}`, {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'accept': 'application/json'
+            }
+        });
+
+        if (!Array.isArray(response.data)) {
+            throw new Error('Invalid response format: expected an array');
+        }
+
+        console.log(`Found voting power history for ${response.data.length} epochs`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching DRep voting power history:', error.message);
+        if (error.response) {
+            console.error('API Response:', error.response.data);
+        }
+        return [];
+    }
+}
+
 async function getDRepDelegators(drepId) {
     try {
         const apiKey = process.env.KOIOS_API_KEY;
@@ -35,7 +64,7 @@ async function getDRepDelegators(drepId) {
             throw new Error('Invalid response format: expected an array');
         }
 
-        console.log(`Found ${response.data.length} delegators for DRep ${drepId}`);
+        console.log(`Found ${response.data.length} current delegators for DRep ${drepId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching DRep delegators:', error.message);
@@ -114,18 +143,14 @@ async function getCurrentEpoch() {
 }
 
 async function main() {
-    const delegators = await getDRepDelegators(drepId);
+    const votingPowerHistory = await getDRepVotingPowerHistory(drepId);
+    const currentDelegators = await getDRepDelegators(drepId);
     const drepInfo = await getDRepInfo(drepId);
     const currentEpoch = await getCurrentEpoch();
 
-    // Calculate total delegation amount from delegators
-    const totalDelegationFromDelegators = delegators.reduce((sum, delegator) => {
-        return sum + BigInt(delegator.amount);
-    }, BigInt(0));
-
     // Read existing JSON file
     const outputPath = path.join(__dirname, '..', '..', 'mesh-gov-updates', 'drep-voting', 'drep-delegation-info.json');
-    let existingData = { timeline: { epochs: {}, delegations: [] }, drepInfo: null };
+    let existingData = { timeline: { epochs: {} }, drepInfo: null };
     try {
         if (fs.existsSync(outputPath)) {
             existingData = JSON.parse(fs.readFileSync(outputPath, 'utf8'));
@@ -134,53 +159,22 @@ async function main() {
         console.error('Error reading existing JSON file:', error.message);
     }
 
-    // Calculate new delegations and removals
-    const existingDelegations = new Map(
-        existingData.timeline.delegations.map(d => [d.stake_address, d])
-    );
-    const currentDelegations = new Map(
-        delegators.map(d => [d.stake_address, d])
-    );
+    // Update timeline with voting power history
+    votingPowerHistory.forEach(epochData => {
+        const epochNo = epochData.epoch_no;
+        existingData.timeline.epochs[epochNo] = {
+            ...existingData.timeline.epochs[epochNo],
+            voting_power_lovelace: epochData.amount,
+            // Only update delegator count for current epoch
+            total_delegators: epochNo === currentEpoch ? currentDelegators.length :
+                (existingData.timeline.epochs[epochNo]?.total_delegators || 0)
+        };
+    });
 
-    // Find new delegations and removals
-    const newDelegations = [];
-    const removedDelegations = [];
-
-    for (const [stakeAddress, delegator] of currentDelegations) {
-        if (!existingDelegations.has(stakeAddress)) {
-            newDelegations.push({
-                stake_address: stakeAddress,
-                epoch_no: currentEpoch,
-                amount_lovelace: delegator.amount
-            });
-        }
-    }
-
-    for (const [stakeAddress, delegator] of existingDelegations) {
-        if (!currentDelegations.has(stakeAddress)) {
-            removedDelegations.push(delegator);
-        }
-    }
-
-    // Update timeline data
-    const newEpochData = {
-        new_delegations: newDelegations.length,
-        new_amount_lovelace: newDelegations.reduce((sum, d) => sum + BigInt(d.amount_lovelace), BigInt(0)).toString(),
-        cumulative_amount_lovelace: totalDelegationFromDelegators.toString()
-    };
-
-    // Update the timeline
-    existingData.timeline.epochs[currentEpoch] = newEpochData;
+    // Update current epoch with latest delegator count
     existingData.timeline.current_epoch = currentEpoch;
-    existingData.timeline.total_delegations = delegators.length;
-    existingData.timeline.total_amount_ada = Number(totalDelegationFromDelegators) / 1000000;
-
-    // Update delegations list
-    existingData.timeline.delegations = delegators.map(d => ({
-        stake_address: d.stake_address,
-        epoch_no: currentEpoch,
-        amount_lovelace: d.amount
-    }));
+    existingData.timeline.total_delegators = currentDelegators.length;
+    existingData.timeline.total_amount_ada = Number(votingPowerHistory[0]?.amount || 0) / 1000000;
 
     // Update DRep info
     existingData.drepInfo = {
@@ -199,10 +193,9 @@ async function main() {
     // Log summary
     console.log('\nDelegation Summary:');
     console.log(`- Current Epoch: ${currentEpoch}`);
-    console.log(`- Total Delegators: ${delegators.length}`);
-    console.log(`- New Delegations: ${newDelegations.length}`);
-    console.log(`- Removed Delegations: ${removedDelegations.length}`);
-    console.log(`- Total Delegation Amount: ${totalDelegationFromDelegators.toString()}`);
+    console.log(`- Total Delegators: ${currentDelegators.length}`);
+    console.log(`- Current Voting Power: ${votingPowerHistory[0]?.amount || 0} lovelace`);
+    console.log(`- Historical Epochs Tracked: ${votingPowerHistory.length}`);
     console.log('\nDRep Info:');
     console.log(`- DRep ID: ${drepId}`);
     console.log(`- Active: ${drepInfo?.active || false}`);
