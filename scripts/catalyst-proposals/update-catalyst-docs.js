@@ -1,126 +1,101 @@
 import axios from 'axios';
 import { PROJECTS_INFO } from './mockData.js';
 import { saveCatalystData } from './save-catalyst-data.js';
-import { fetchVotingResults } from './fetch-voting-results.js';
+import { fetchProposalFromChallenge } from './fetch-proposal-from-challenge.js';
 
-// Initialize constants
-const MILESTONES_BASE_URL = process.env.NEXT_PUBLIC_MILESTONES_URL || 'https://milestones.projectcatalyst.io';
-
-// Get project IDs from environment variable
-const README_PROJECT_IDS = process.env.README_PROJECT_IDS;
-console.log('Project IDs from environment:', README_PROJECT_IDS);
-
-// Supabase credentials check - we'll use mock data if they're missing
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL2;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY2;
+// Environment checks
+const buildId      = 'pJZYf0Bzp4nPDQmwjxLiJ';
+const supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL2;
+const supabaseKey  = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY2;
 const USE_MOCK_DATA = !supabaseUrl || !supabaseKey;
+
+if (!buildId) {
+  throw new Error('Environment variable NEXT_PUBLIC_BUILD_ID is required');
+}
 
 let supabase;
 if (!USE_MOCK_DATA) {
-    const { createClient } = await import('@supabase/supabase-js');
-    supabase = createClient(supabaseUrl, supabaseKey);
+  const { createClient } = await import('@supabase/supabase-js');
+  supabase = createClient(supabaseUrl, supabaseKey);
 }
 
-// Extract just the project IDs
-// Use environment variable project IDs if available, otherwise use the ones from PROJECTS_INFO
+// Determine which projects to process
+const README_PROJECT_IDS = process.env.README_PROJECT_IDS;
 const PROJECT_IDS = README_PROJECT_IDS
-    ? README_PROJECT_IDS.split(',').map(id => id.trim())
-    : PROJECTS_INFO.map(project => project.id);
+  ? README_PROJECT_IDS.split(',').map(id => id.trim())
+  : PROJECTS_INFO.map(p => p.id);
 
 /**
- * Retrieves the proposal details.
+ * Retrieves the basic proposal details from Supabase or mock data.
  */
 async function getProposalDetails(projectId) {
-    console.log(`Getting proposal details for project ${projectId}`);
-
-    if (USE_MOCK_DATA) {
-        // Use mock data from our predefined array
-        const mockProject = PROJECTS_INFO.find(p => p.id === projectId);
-        if (mockProject) {
-            console.log(`Using mock data for project ${projectId}`);
-            return {
-                id: mockProject.id,
-                title: mockProject.name,
-                budget: mockProject.budget,
-                milestones_qty: mockProject.milestones_qty,
-                funds_distributed: mockProject.funds_distributed,
-                project_id: mockProject.id,
-                name: mockProject.name,
-                category: mockProject.category,
-                url: mockProject.url,
-                status: mockProject.status,
-                finished: mockProject.finished
-            };
-        }
-        return null;
-    }
-
-    // Real data from Supabase
-    const { data, error } = await supabase
-        .from('proposals')
-        .select(`
-      id,
-      title,
-      budget,
-      milestones_qty,
-      funds_distributed,
-      project_id
-    `)
-        .eq('project_id', projectId)
-        .single();
-
-    if (error) {
-        console.error(`Error fetching proposal details for project ${projectId}:`, error);
-        return null;
-    }
-
-    // Find supplementary info from our predefined array
-    const supplementaryInfo = PROJECTS_INFO.find(p => p.id === projectId);
-
-    const enhancedData = {
-        ...data,
-        name: supplementaryInfo?.name || data.title,
-        category: supplementaryInfo?.category || '',
-        url: supplementaryInfo?.url || '',
-        status: supplementaryInfo?.status || 'In Progress',
-        finished: supplementaryInfo?.finished || ''
+  if (USE_MOCK_DATA) {
+    const mock = PROJECTS_INFO.find(p => p.id === projectId);
+    if (!mock) return null;
+    return {
+      id: mock.id,
+      title: mock.name,
+      budget: mock.budget,
+      milestones_qty: mock.milestones_qty,
+      funds_distributed: mock.funds_distributed,
+      project_id: mock.id,
+      name: mock.name,
+      category: mock.category,
+      url: mock.url,
+      status: mock.status,
+      finished: mock.finished
     };
+  }
 
-    console.log(`Found proposal details for project ${projectId}:`, enhancedData);
-    return enhancedData;
+  const { data, error } = await supabase
+    .from('proposals')
+    .select(`id, title, budget, milestones_qty, funds_distributed, project_id`)
+    .eq('project_id', projectId)
+    .single();
+
+  if (error) {
+    console.error(`Error fetching proposal ${projectId}:`, error);
+    return null;
+  }
+
+  const sup = PROJECTS_INFO.find(p => p.id === projectId) ?? {};
+  return {
+    ...data,
+    name: sup.name || data.title,
+    category: sup.category || '',
+    url: sup.url || '',
+    status: sup.status || 'In Progress',
+    finished: sup.finished || ''
+  };
 }
 
 /**
- * Fetches milestone snapshot data.
+ * Retrieves snapshot data (milestones) via Supabase function or mock.
  */
 async function fetchSnapshotData(projectId) {
-    if (USE_MOCK_DATA) {
-        // Return empty array for mock data as we'll use hardcoded completion values
-        return [];
-    }
-
-    try {
-        const response = await axios({
-            method: 'POST',
-            url: `${supabaseUrl}/rest/v1/rpc/getproposalsnapshot`,
-            headers: {
-                'apikey': supabaseKey,
-                'Authorization': `Bearer ${supabaseKey}`,
-                'Content-Type': 'application/json',
-                'Content-Profile': 'public',
-                'x-client-info': 'supabase-js/2.2.3'
-            },
-            data: { _project_id: projectId }
-        });
-        return response.data;
-    } catch (error) {
-        console.error(`Error fetching snapshot data for project ${projectId}:`, error);
-        return [];
-    }
+  if (USE_MOCK_DATA) return [];
+  try {
+    const res = await axios.post(
+      `${supabaseUrl}/rest/v1/rpc/getproposalsnapshot`,
+      { _project_id: projectId },
+      { headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+          'Content-Profile': 'public',
+          'x-client-info': 'supabase-js/2.2.3'
+        }
+      }
+    );
+    return res.data;
+  } catch (err) {
+    console.error(`Snapshot fetch error for ${projectId}:`, err);
+    return [];
+  }
 }
 
 /**
- * Main function.
+ * Main processing function.
  */
 async function main() {
   console.log('Processing Catalyst data...');
@@ -137,26 +112,43 @@ async function main() {
       ? PROJECTS_INFO.find(p => p.id === projectId)?.milestonesCompleted || 0
       : snapshot.filter(m => m.som_signoff_count > 0 && m.poa_signoff_count > 0).length;
 
-    // parse URL for fund, challengeSlug, projectSlug
-    const urlObj = new URL(details.url);
-    const [, , fundStr, challengeSlug, projectSlug] = urlObj.pathname.split('/');
-    if (!fundStr || !challengeSlug || !projectSlug) continue;
-
-    let voting = {};
-    try {
-      voting = await fetchVotingResults({ buildId: 'pJZYf0Bzp4nPDQmwjxLiJ', fundId: fundStr, challengeSlug, projectSlug });
-    } catch (err) {
-      console.error(`Voting error for ${projectSlug}:`, err);
+    // Extract fund, challengeSlug from the URL
+    const { pathname } = new URL(details.url);
+    const [, , fundStr, challengeSlug] = pathname.split('/');
+    if (!fundStr || !challengeSlug) {
+      console.warn('Unexpected URL:', details.url);
+      continue;
     }
 
+    // Fetch the full proposal object (with voting) by _fundingId
+    let proposalObj = null;
+    try {
+      proposalObj = await fetchProposalFromChallenge({
+        buildId,
+        fundId: fundStr,
+        challengeSlug,
+        fundingId: String(projectId)
+      });
+    } catch (err) {
+      console.error(`Error fetching proposalObj for ${projectId}:`, err);
+    }
+
+    const voting = proposalObj?.voting ?? {};
+
+    // Group by fund
     if (projectsByFund[fundStr]) {
-      projectsByFund[fundStr].push({ details, milestonesCompleted, voting });
+      projectsByFund[fundStr].push({
+        details,
+        milestonesCompleted,
+        voting
+      });
     }
   }
 
-  const all = Object.values(projectsByFund).flat();
-  await saveCatalystData(all);
-  console.log('Catalyst data has been processed and saved.');
+  // Save final result
+  const allProjects = Object.values(projectsByFund).flat();
+  await saveCatalystData(allProjects);
+  console.log('Catalyst data saved.');
 }
 
 main().catch(err => {
