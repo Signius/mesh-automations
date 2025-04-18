@@ -19,19 +19,18 @@ if (!USE_MOCK_DATA) {
   supabase = createClient(supabaseUrl, supabaseKey);
 }
 
-// Determine which project identifiers to process (
-// these correspond to the blockchain "proposal ID" == _fundingId
+// Determine which project identifiers to process (proposal IDs == _fundingId)
 const README_PROJECT_IDS = process.env.README_PROJECT_IDS;
 const PROJECT_IDS = README_PROJECT_IDS
   ? README_PROJECT_IDS.split(',').map(id => id.trim())
-  : PROJECTS_INFO.map(p => p._fundingId || p.id);
+  : PROJECTS_INFO.map(p => String(p._fundingId || p.id));
 
 /**
  * Retrieves the basic proposal details from Supabase or mock data.
  */
 async function getProposalDetails(projectId) {
   if (USE_MOCK_DATA) {
-    const mock = PROJECTS_INFO.find(p => p.id === projectId);
+    const mock = PROJECTS_INFO.find(p => String(p._fundingId) === projectId);
     if (!mock) return null;
     return {
       id: mock.id,
@@ -59,7 +58,7 @@ async function getProposalDetails(projectId) {
     return null;
   }
 
-  const sup = PROJECTS_INFO.find(p => p.id === projectId) ?? {};
+  const sup = PROJECTS_INFO.find(p => String(p._fundingId) === String(projectId)) ?? {};
   return {
     ...data,
     name: sup.name || data.title,
@@ -110,7 +109,7 @@ async function main() {
 
     const snapshot = await fetchSnapshotData(projectId);
     const milestonesCompleted = USE_MOCK_DATA
-      ? PROJECTS_INFO.find(p => p.id === projectId)?.milestonesCompleted || 0
+      ? PROJECTS_INFO.find(p => String(p._fundingId) === projectId)?.milestonesCompleted || 0
       : snapshot.filter(m => m.som_signoff_count > 0 && m.poa_signoff_count > 0).length;
 
     // Extract fund & challengeSlug from URL

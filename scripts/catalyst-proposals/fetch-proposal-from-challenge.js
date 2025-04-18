@@ -9,7 +9,7 @@ import axios from 'axios';
  * @param {string} params.buildId       – NEXT_PUBLIC_BUILD_ID
  * @param {string} params.fundId        – Funding round (e.g. '11')
  * @param {string} params.challengeSlug – Challenge slug (e.g. 'cardano-open-developers')
- * @param {string} params.fundingId     – Proposal’s _fundingId (e.g. '1100271')
+ * @param {string|number} params.fundingId     – Proposal’s _fundingId (e.g. '1100271')
  * @returns {Promise<Object|null>}      – The proposal object or null if not found
  */
 export async function fetchProposalFromChallenge({ buildId, fundId, challengeSlug, fundingId }) {
@@ -22,13 +22,16 @@ export async function fetchProposalFromChallenge({ buildId, fundId, challengeSlu
   const res = await axios.get(url, { headers: { Accept: 'application/json' } });
   if (res.status !== 200) throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
 
-  // Projects list can live under pageProps.projects or pageProps.data.projects
-  const projects =
-    res.data?.pageProps?.projects ??
-    res.data?.pageProps?.data?.projects ??
-    [];
+  // The projects array lives under pageProps.data.projects
+  const projects = res.data?.pageProps?.data?.projects ?? [];
+  if (!Array.isArray(projects)) {
+    console.warn('Unexpected challenge JSON structure, no projects array');
+    return null;
+  }
 
-  const project = projects.find(p => p._fundingId === fundingId);
+  // Ensure matching as strings in case types differ
+  const targetId = String(fundingId);
+  const project = projects.find(p => String(p._fundingId) === targetId);
   if (!project) {
     console.warn(`_fundingId ${fundingId} not found in challenge ${challengeSlug}`);
     return null;
