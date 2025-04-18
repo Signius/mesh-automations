@@ -1,7 +1,7 @@
 {
   "timeline": {
     "earliest_epoch": 531,
-    "current_epoch": 572,
+    "current_epoch": 552,
     "total_delegations": 6,
     "total_amount_ada": 1003644.89265,
     "epochs": {
@@ -124,34 +124,42 @@
     "delegations": [
       {
         "stake_address": "stake1u8qg7q55at26k7hqee28rh2gwqrery5hh22jxzhj9uj72agv45wv8",
-        "epoch_no": 572,
+        "epoch_no": 552,
         "amount_lovelace": "512815874418"
       },
       {
         "stake_address": "stake1u9ng9m2wvcldpryt860hr29gflr3y9nh72k4k6h3dzu36pqprkt36",
-        "epoch_no": 572,
+        "epoch_no": 552,
         "amount_lovelace": "384291250934"
       },
       {
         "stake_address": "stake1u9qj0v7kfj4actd7x25stvfxz3uu8tynz9m0fspglp7x6hqfdqsml",
-        "epoch_no": 572,
+        "epoch_no": 552,
         "amount_lovelace": "1551883434"
       },
       {
         "stake_address": "stake1uyzmqrrtnxsn4d3hd57x4p55mtrlwynt42qw8nnf2pdq05g4995kn",
-        "epoch_no": 572,
+        "epoch_no": 552,
         "amount_lovelace": "4854483601"
       },
       {
         "stake_address": "stake1uy5hu8az62kh4vqttnrf6x6kymp3pvsdrvdgepvfw7j5c4qmz5rer",
-        "epoch_no": 572,
+        "epoch_no": 552,
         "amount_lovelace": "34236236"
       },
       {
         "stake_address": "stake1u9cp73p6uzffacjp5l4fmda5tqeuu6h2um6wl0jzdqf333qqfzjk9",
-        "epoch_no": 572,
+        "epoch_no": 552,
         "amount_lovelace": "100097164027"
       }
     ]
+  },
+  "drepInfo": {
+    "drepId": "drep1yv4uesaj92wk8ljlsh4p7jzndnzrflchaz5fzug3zxg4naqkpeas3",
+    "amount": "898889902906",
+    "active": true,
+    "registered": true,
+    "expires_epoch_no": 572,
+    "last_updated": "2025-04-18T05:27:10.235Z"
   }
 }
