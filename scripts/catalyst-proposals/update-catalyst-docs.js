@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PROJECTS_INFO } from './mockData.js';
 import { saveCatalystData } from './save-catalyst-data.js';
-import { fetchProposalVotes } from './fetch-catalyst-votes.js'; 
+import { fetchVotingResults } from './fetch-voting-results.js';
 
 // Initialize constants
 const MILESTONES_BASE_URL = process.env.NEXT_PUBLIC_MILESTONES_URL || 'https://milestones.projectcatalyst.io';
@@ -123,53 +123,43 @@ async function fetchSnapshotData(projectId) {
  * Main function.
  */
 async function main() {
-    console.log('Processing Catalyst data...');
-    console.log('Using mock data:', USE_MOCK_DATA);
+  console.log('Processing Catalyst data...');
+  console.log('Using mock data:', USE_MOCK_DATA);
 
-    // Group projects by fund
-    const projectsByFund = {
-        '10': [],
-        '11': [],
-        '12': [],
-        '13': []
-    };
+  const projectsByFund = { '10': [], '11': [], '12': [], '13': [] };
 
-    // Process each project
-    for (const projectId of PROJECT_IDS) {
-        const projectDetails = await getProposalDetails(projectId);
-        if (!projectDetails) continue;
+  for (const projectId of PROJECT_IDS) {
+    const details = await getProposalDetails(projectId);
+    if (!details) continue;
 
-        const snapshotData = await fetchSnapshotData(projectId);
+    const snapshot = await fetchSnapshotData(projectId);
+    const milestonesCompleted = USE_MOCK_DATA
+      ? PROJECTS_INFO.find(p => p.id === projectId)?.milestonesCompleted || 0
+      : snapshot.filter(m => m.som_signoff_count > 0 && m.poa_signoff_count > 0).length;
 
-        // Get milestones completed data
-        let milestonesCompleted;
-        if (USE_MOCK_DATA) {
-            const mockProject = PROJECTS_INFO.find(p => p.id === projectId);
-            milestonesCompleted = mockProject?.milestonesCompleted || 0;
-        } else {
-            milestonesCompleted = snapshotData.filter(
-                milestone => milestone.som_signoff_count > 0 && milestone.poa_signoff_count > 0
-            ).length;
-        }
+    // parse URL for fund, challengeSlug, projectSlug
+    const urlObj = new URL(details.url);
+    const [, , fundStr, challengeSlug, projectSlug] = urlObj.pathname.split('/');
+    if (!fundStr || !challengeSlug || !projectSlug) continue;
 
-        // Add to fund group
-        const fundNumber = String(projectId).substring(0, 2);
-        if (projectsByFund[fundNumber]) {
-            projectsByFund[fundNumber].push({
-                projectDetails,
-                milestonesCompleted
-            });
-        }
+    let voting = {};
+    try {
+      voting = await fetchVotingResults({ buildId, fundId: fundStr, challengeSlug, projectSlug });
+    } catch (err) {
+      console.error(`Voting error for ${projectSlug}:`, err);
     }
 
-    // Save the data as JSON
-    const allProjects = Object.values(projectsByFund).flat();
-    await saveCatalystData(allProjects);
+    if (projectsByFund[fundStr]) {
+      projectsByFund[fundStr].push({ details, milestonesCompleted, voting });
+    }
+  }
 
-    console.log('Catalyst data has been processed and saved.');
+  const all = Object.values(projectsByFund).flat();
+  await saveCatalystData(all);
+  console.log('Catalyst data has been processed and saved.');
 }
 
-main().catch(error => {
-    console.error('Script failed:', error);
-    process.exit(1);
-}); 
+main().catch(err => {
+  console.error('Script failed:', err);
+  process.exit(1);
+});
