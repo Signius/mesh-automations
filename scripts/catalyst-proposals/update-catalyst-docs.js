@@ -131,10 +131,15 @@ async function main() {
     const projectDetails = await getProposalDetails(projectId);
     if (!projectDetails) continue;
 
-    // === NEW: fetch voting metrics via lidonation API ===
-    // parse fund number from the URL
-    const fundMatch = projectDetails.url.match(/\/funds\/(\d+)\//);
-    const fundNumber = fundMatch ? fundMatch[1] : null;
+    // === UPDATED: determine fund number from category or URL ===
+    let fundNumber = null;
+    const catMatch = projectDetails.category.match(/^F(\d+)/i);
+    if (catMatch) {
+      fundNumber = catMatch[1];
+    } else {
+      const urlMatch = projectDetails.url.match(/\/f(\d+)-/i);
+      fundNumber = urlMatch ? urlMatch[1] : null;
+    }
 
     if (fundNumber && projectDetails.title) {
       try {
@@ -149,7 +154,7 @@ async function main() {
         projectDetails.voting = null;
       }
     }
-    // === end new section ===
+    // === end updated section ===
 
     const snapshotData = await fetchSnapshotData(projectId);
 
@@ -163,8 +168,7 @@ async function main() {
       ).length;
     }
 
-    // Group by fund number from projectId prefix
-    const fundKey = String(projectId).substring(0, 2);
+    const fundKey = fundNumber || String(projectId).substring(0, 2);
     if (projectsByFund[fundKey]) {
       projectsByFund[fundKey].push({ projectDetails, milestonesCompleted });
     }
