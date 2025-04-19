@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-04-19T08:44:18.565Z",
+  "timestamp": "2025-04-19T08:55:08.748Z",
   "projects": [
     {
       "projectDetails": {
@@ -129,7 +129,13 @@
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/mesh-hydra-tools-for-administrating-and-interacting-with-hydra-heads",
         "status": "In Progress",
         "finished": "",
-        "voting": null
+        "voting": {
+          "proposalId": 22076,
+          "yes_votes_count": 397724327,
+          "no_votes_count": null,
+          "abstain_votes_count": 40848436,
+          "unique_wallets": 484
+        }
       },
       "milestonesCompleted": 2
     },
@@ -146,7 +152,13 @@
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/mesh-cquisitor-transaction-investigation-tool",
         "status": "In Progress",
         "finished": "",
-        "voting": null
+        "voting": {
+          "proposalId": 22010,
+          "yes_votes_count": 277289416,
+          "no_votes_count": null,
+          "abstain_votes_count": 31878396,
+          "unique_wallets": 316
+        }
       },
       "milestonesCompleted": 0
     },
@@ -163,7 +175,13 @@
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/maintain-mesh-and-build-developer-community",
         "status": "In Progress",
         "finished": "",
-        "voting": null
+        "voting": {
+          "proposalId": 22031,
+          "yes_votes_count": 334937604,
+          "no_votes_count": null,
+          "abstain_votes_count": 35740609,
+          "unique_wallets": 316
+        }
       },
       "milestonesCompleted": 2
     },
@@ -180,7 +198,13 @@
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-use-cases-product/cardano-multisig-platform-by-mesh-clarity-dao-and-fluid-tokens",
         "status": "In Progress",
         "finished": "",
-        "voting": null
+        "voting": {
+          "proposalId": 20776,
+          "yes_votes_count": 296052504,
+          "no_votes_count": null,
+          "abstain_votes_count": 51465045,
+          "unique_wallets": 428
+        }
       },
       "milestonesCompleted": 1
     },
@@ -197,7 +221,13 @@
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-ecosystem/cardano-builder-fest-asia-by-mesh-socious-sidan-vietnam-cardano",
         "status": "In Progress",
         "finished": "",
-        "voting": null
+        "voting": {
+          "proposalId": 20990,
+          "yes_votes_count": 332835647,
+          "no_votes_count": null,
+          "abstain_votes_count": 32208642,
+          "unique_wallets": 328
+        }
       },
       "milestonesCompleted": 3
     }
