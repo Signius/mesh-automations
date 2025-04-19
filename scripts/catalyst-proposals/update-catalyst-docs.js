@@ -200,7 +200,21 @@ async function main() {
     }
 
     const allProjects = Object.values(projectsByFund).flat();
-    await saveCatalystData(allProjects);
+
+    // Merge existing voting data with new data
+    const mergedProjects = allProjects.map(newProject => {
+        const existingProject = existingData.projects.find(
+            p => p.projectDetails.project_id === newProject.projectDetails.project_id
+        );
+
+        if (existingProject?.projectDetails.voting && !newProject.projectDetails.voting) {
+            console.log(`[Metrics] Preserving existing voting data for project "${newProject.projectDetails.title}"`);
+            newProject.projectDetails.voting = existingProject.projectDetails.voting;
+        }
+        return newProject;
+    });
+
+    await saveCatalystData(mergedProjects);
 
     console.log('Catalyst data has been processed and saved.');
 }
