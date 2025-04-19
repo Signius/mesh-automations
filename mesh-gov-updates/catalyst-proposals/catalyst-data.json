@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-04-19T07:13:56.831Z",
+  "timestamp": "2025-04-19T08:44:18.565Z",
   "projects": [
     {
       "projectDetails": {
@@ -13,7 +13,14 @@
         "category": "F10: OSDE: Open Source Dev Ecosystem",
         "url": "https://projectcatalyst.io/funds/10/f10-osde-open-source-dev-ecosystem/meshjs-sdk-operations-supporting-open-source-library-development-developer-resources-and-builder-community",
         "status": "In Progress",
-        "finished": "September, 2024"
+        "finished": "September, 2024",
+        "voting": {
+          "proposalId": 9614,
+          "yes_votes_count": 224703900,
+          "no_votes_count": 29330905,
+          "abstain_votes_count": null,
+          "unique_wallets": 313
+        }
       },
       "milestonesCompleted": 4
     },
@@ -29,7 +36,14 @@
         "category": "F11: Cardano Open: Developers",
         "url": "https://projectcatalyst.io/funds/11/cardano-open-developers/sustain-and-maintain-meshjs",
         "status": "Completed",
-        "finished": "September 15, 2024"
+        "finished": "September 15, 2024",
+        "voting": {
+          "proposalId": 12755,
+          "yes_votes_count": 102517529,
+          "no_votes_count": null,
+          "abstain_votes_count": 16163455,
+          "unique_wallets": 409
+        }
       },
       "milestonesCompleted": 5
     },
@@ -45,7 +59,14 @@
         "category": "F12: Cardano Use Cases: Concept",
         "url": "https://projectcatalyst.io/funds/12/f12-cardano-use-cases-concept/mesh-software-as-a-service",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": {
+          "proposalId": 13911,
+          "yes_votes_count": 94715061,
+          "no_votes_count": null,
+          "abstain_votes_count": 38790652,
+          "unique_wallets": 262
+        }
       },
       "milestonesCompleted": 3
     },
@@ -61,7 +82,14 @@
         "category": "F12: Cardano Open: Developers",
         "url": "https://projectcatalyst.io/funds/12/f12-cardano-open-developers/mesh-new-features-to-improve-developer-experience-and-cardano-adoption",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": {
+          "proposalId": 13817,
+          "yes_votes_count": 125403290,
+          "no_votes_count": null,
+          "abstain_votes_count": 30596277,
+          "unique_wallets": 388
+        }
       },
       "milestonesCompleted": 4
     },
@@ -77,7 +105,14 @@
         "category": "F12: Cardano Open: Developers",
         "url": "https://projectcatalyst.io/funds/12/f12-cardano-open-developers/sustain-and-maintain-mesh-sdk",
         "status": "Completed",
-        "finished": ""
+        "finished": "",
+        "voting": {
+          "proposalId": 14026,
+          "yes_votes_count": 101077318,
+          "no_votes_count": null,
+          "abstain_votes_count": 84922658,
+          "unique_wallets": 382
+        }
       },
       "milestonesCompleted": 5
     },
@@ -93,7 +128,8 @@
         "category": "F13: Cardano Open: Developers",
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/mesh-hydra-tools-for-administrating-and-interacting-with-hydra-heads",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": null
       },
       "milestonesCompleted": 2
     },
@@ -109,7 +145,8 @@
         "category": "F13: Cardano Open: Developers",
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/mesh-cquisitor-transaction-investigation-tool",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": null
       },
       "milestonesCompleted": 0
     },
@@ -125,7 +162,8 @@
         "category": "F13: Cardano Open: Developers",
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-developers/maintain-mesh-and-build-developer-community",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": null
       },
       "milestonesCompleted": 2
     },
@@ -141,7 +179,8 @@
         "category": "F13: Cardano Use Cases: Product",
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-use-cases-product/cardano-multisig-platform-by-mesh-clarity-dao-and-fluid-tokens",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": null
       },
       "milestonesCompleted": 1
     },
@@ -157,7 +196,8 @@
         "category": "F13: Cardano Open: Ecosystem",
         "url": "https://projectcatalyst.io/funds/10/f13-cardano-open-ecosystem/cardano-builder-fest-asia-by-mesh-socious-sidan-vietnam-cardano",
         "status": "In Progress",
-        "finished": ""
+        "finished": "",
+        "voting": null
       },
       "milestonesCompleted": 3
     }
