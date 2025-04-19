@@ -1,9 +1,14 @@
+// index.js
 import axios from 'axios';
 import { PROJECTS_INFO } from './mockData.js';
 import { saveCatalystData } from './save-catalyst-data.js';
+// ← NEW: import your voting helper
+import { getProjectVotingResults } from './get-catalyst-vote-results.js';
 
 // Initialize constants
-const MILESTONES_BASE_URL = process.env.NEXT_PUBLIC_MILESTONES_URL || 'https://milestones.projectcatalyst.io';
+const MILESTONES_BASE_URL =
+  process.env.NEXT_PUBLIC_MILESTONES_URL ||
+  'https://milestones.projectcatalyst.io';
 
 // Get project IDs from environment variable
 const README_PROJECT_IDS = process.env.README_PROJECT_IDS;
@@ -16,48 +21,46 @@ const USE_MOCK_DATA = !supabaseUrl || !supabaseKey;
 
 let supabase;
 if (!USE_MOCK_DATA) {
-    const { createClient } = await import('@supabase/supabase-js');
-    supabase = createClient(supabaseUrl, supabaseKey);
+  const { createClient } = await import('@supabase/supabase-js');
+  supabase = createClient(supabaseUrl, supabaseKey);
 }
 
 // Extract just the project IDs
 // Use environment variable project IDs if available, otherwise use the ones from PROJECTS_INFO
 const PROJECT_IDS = README_PROJECT_IDS
-    ? README_PROJECT_IDS.split(',').map(id => id.trim())
-    : PROJECTS_INFO.map(project => project.id);
+  ? README_PROJECT_IDS.split(',').map((id) => id.trim())
+  : PROJECTS_INFO.map((project) => project.id);
 
 /**
  * Retrieves the proposal details.
  */
 async function getProposalDetails(projectId) {
-    console.log(`Getting proposal details for project ${projectId}`);
+  console.log(`Getting proposal details for project ${projectId}`);
 
-    if (USE_MOCK_DATA) {
-        // Use mock data from our predefined array
-        const mockProject = PROJECTS_INFO.find(p => p.id === projectId);
-        if (mockProject) {
-            console.log(`Using mock data for project ${projectId}`);
-            return {
-                id: mockProject.id,
-                title: mockProject.name,
-                budget: mockProject.budget,
-                milestones_qty: mockProject.milestones_qty,
-                funds_distributed: mockProject.funds_distributed,
-                project_id: mockProject.id,
-                name: mockProject.name,
-                category: mockProject.category,
-                url: mockProject.url,
-                status: mockProject.status,
-                finished: mockProject.finished
-            };
-        }
-        return null;
+  if (USE_MOCK_DATA) {
+    const mockProject = PROJECTS_INFO.find((p) => p.id === projectId);
+    if (mockProject) {
+      console.log(`Using mock data for project ${projectId}`);
+      return {
+        id: mockProject.id,
+        title: mockProject.name,
+        budget: mockProject.budget,
+        milestones_qty: mockProject.milestones_qty,
+        funds_distributed: mockProject.funds_distributed,
+        project_id: mockProject.id,
+        name: mockProject.name,
+        category: mockProject.category,
+        url: mockProject.url,
+        status: mockProject.status,
+        finished: mockProject.finished,
+      };
     }
+    return null;
+  }
 
-    // Real data from Supabase
-    const { data, error } = await supabase
-        .from('proposals')
-        .select(`
+  const { data, error } = await supabase
+    .from('proposals')
+    .select(`
       id,
       title,
       budget,
@@ -65,110 +68,144 @@ async function getProposalDetails(projectId) {
       funds_distributed,
       project_id
     `)
-        .eq('project_id', projectId)
-        .single();
+    .eq('project_id', projectId)
+    .single();
 
-    if (error) {
-        console.error(`Error fetching proposal details for project ${projectId}:`, error);
-        return null;
-    }
+  if (error) {
+    console.error(
+      `Error fetching proposal details for project ${projectId}:`,
+      error
+    );
+    return null;
+  }
 
-    // Find supplementary info from our predefined array
-    const supplementaryInfo = PROJECTS_INFO.find(p => p.id === projectId);
+  const supplementaryInfo = PROJECTS_INFO.find((p) => p.id === projectId);
 
-    const enhancedData = {
-        ...data,
-        name: supplementaryInfo?.name || data.title,
-        category: supplementaryInfo?.category || '',
-        url: supplementaryInfo?.url || '',
-        status: supplementaryInfo?.status || 'In Progress',
-        finished: supplementaryInfo?.finished || ''
-    };
-
-    console.log(`Found proposal details for project ${projectId}:`, enhancedData);
-    return enhancedData;
+  return {
+    ...data,
+    name: supplementaryInfo?.name || data.title,
+    category: supplementaryInfo?.category || '',
+    url: supplementaryInfo?.url || '',
+    status: supplementaryInfo?.status || 'In Progress',
+    finished: supplementaryInfo?.finished || '',
+  };
 }
 
 /**
  * Fetches milestone snapshot data.
  */
 async function fetchSnapshotData(projectId) {
-    if (USE_MOCK_DATA) {
-        // Return empty array for mock data as we'll use hardcoded completion values
-        return [];
-    }
-
-    try {
-        const response = await axios({
-            method: 'POST',
-            url: `${supabaseUrl}/rest/v1/rpc/getproposalsnapshot`,
-            headers: {
-                'apikey': supabaseKey,
-                'Authorization': `Bearer ${supabaseKey}`,
-                'Content-Type': 'application/json',
-                'Content-Profile': 'public',
-                'x-client-info': 'supabase-js/2.2.3'
-            },
-            data: { _project_id: projectId }
-        });
-        return response.data;
-    } catch (error) {
-        console.error(`Error fetching snapshot data for project ${projectId}:`, error);
-        return [];
-    }
+  if (USE_MOCK_DATA) {
+    return [];
+  }
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: `${supabaseUrl}/rest/v1/rpc/getproposalsnapshot`,
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+        'Content-Profile': 'public',
+        'x-client-info': 'supabase-js/2.2.3',
+      },
+      data: { _project_id: projectId },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      `Error fetching snapshot data for project ${projectId}:`,
+      error
+    );
+    return [];
+  }
 }
 
 /**
  * Main function.
  */
 async function main() {
-    console.log('Processing Catalyst data...');
-    console.log('Using mock data:', USE_MOCK_DATA);
+  console.log('Processing Catalyst data...');
+  console.log('Using mock data:', USE_MOCK_DATA);
 
-    // Group projects by fund
-    const projectsByFund = {
-        '10': [],
-        '11': [],
-        '12': [],
-        '13': []
-    };
+  const projectsByFund = {
+    '10': [],
+    '11': [],
+    '12': [],
+    '13': [],
+  };
 
-    // Process each project
-    for (const projectId of PROJECT_IDS) {
-        const projectDetails = await getProposalDetails(projectId);
-        if (!projectDetails) continue;
+  for (const projectId of PROJECT_IDS) {
+    const projectDetails = await getProposalDetails(projectId);
+    if (!projectDetails) continue;
 
-        const snapshotData = await fetchSnapshotData(projectId);
+    // 1) snapshot for milestones
+    const snapshotData = await fetchSnapshotData(projectId);
+    const milestonesCompleted = USE_MOCK_DATA
+      ? PROJECTS_INFO.find((p) => p.id === projectId)
+          ?.milestonesCompleted || 0
+      : snapshotData.filter(
+          (m) => m.som_signoff_count > 0 && m.poa_signoff_count > 0
+        ).length;
 
-        // Get milestones completed data
-        let milestonesCompleted;
-        if (USE_MOCK_DATA) {
-            const mockProject = PROJECTS_INFO.find(p => p.id === projectId);
-            milestonesCompleted = mockProject?.milestonesCompleted || 0;
-        } else {
-            milestonesCompleted = snapshotData.filter(
-                milestone => milestone.som_signoff_count > 0 && milestone.poa_signoff_count > 0
-            ).length;
-        }
-
-        // Add to fund group
-        const fundNumber = String(projectId).substring(0, 2);
-        if (projectsByFund[fundNumber]) {
-            projectsByFund[fundNumber].push({
-                projectDetails,
-                milestonesCompleted
-            });
-        }
+    // 2) parse fundId & challengeSlug from the project URL
+    //    e.g. /funds/10/f10-osde-open-source-dev-ecosystem/...
+    let fundIdFromUrl, challengeSlug;
+    try {
+      const url = new URL(projectDetails.url);
+      const segments = url.pathname.split('/').filter(Boolean);
+      // ["funds","10","f10-osde-open-source-dev-ecosystem", ...]
+      fundIdFromUrl = segments[1];
+      const rawSegment = segments[2] || '';
+      // strip the leading `f<fundId>-`
+      challengeSlug =
+        rawSegment.replace(new RegExp(`^f${fundIdFromUrl}-`), '') || '';
+    } catch (e) {
+      console.warn(
+        `Could not parse URL for project ${projectId}, skipping voting fetch:`,
+        e
+      );
     }
 
-    // Save the data as JSON
-    const allProjects = Object.values(projectsByFund).flat();
-    await saveCatalystData(allProjects);
+    // 3) fetch voting results
+    let voting = null;
+    if (fundIdFromUrl && challengeSlug) {
+      try {
+        voting = await getProjectVotingResults({
+          fundId: fundIdFromUrl,
+          challengeSlug,
+          fundingId: projectId,
+        });
+      } catch (err) {
+        console.error(
+          `Error fetching voting for project ${projectId}:`,
+          err
+        );
+      }
+    }
 
-    console.log('Catalyst data has been processed and saved.');
+    // 4) push into our grouped data
+    const fundGroup = projectsByFund[fundIdFromUrl];
+    if (fundGroup) {
+      fundGroup.push({
+        projectDetails: {
+          ...projectDetails,
+          // inject voting key (will be null if we failed)
+          voting,
+        },
+        milestonesCompleted,
+      });
+    }
+  }
+
+  // Save everything out
+  const allProjects = Object.values(projectsByFund).flat();
+  await saveCatalystData(allProjects);
+
+  console.log('Catalyst data has been processed and saved.');
 }
 
-main().catch(error => {
-    console.error('Script failed:', error);
-    process.exit(1);
-}); 
+main().catch((err) => {
+  console.error('Script failed:', err);
+  process.exit(1);
+});
