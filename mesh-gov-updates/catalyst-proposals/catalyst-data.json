@@ -3,29 +3,6 @@
   "projects": [
     {
       "projectDetails": {
-        "id": 173,
-        "title": "MeshJS SDK Operations: Supporting Open-Source Library Development, Developer Resources & Builder Community",
-        "budget": 169413,
-        "milestones_qty": 5,
-        "funds_distributed": 135528,
-        "project_id": 1000107,
-        "name": "MeshJS SDK Operations: Supporting Open-Source Library Development, Developer Resources & Builder Community",
-        "category": "F10: OSDE: Open Source Dev Ecosystem",
-        "url": "https://projectcatalyst.io/funds/10/f10-osde-open-source-dev-ecosystem/meshjs-sdk-operations-supporting-open-source-library-development-developer-resources-and-builder-community",
-        "status": "In Progress",
-        "finished": "September, 2024",
-        "voting": {
-          "proposalId": 9614,
-          "yes_votes_count": 224703900,
-          "no_votes_count": 29330905,
-          "abstain_votes_count": null,
-          "unique_wallets": 313
-        }
-      },
-      "milestonesCompleted": 4
-    },
-    {
-      "projectDetails": {
         "id": 529,
         "title": "Sustain & Maintain MeshJS",
         "budget": 150000,
