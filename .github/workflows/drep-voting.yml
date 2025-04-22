@@ -48,6 +48,7 @@ jobs:
         branch: ${{ github.ref }}
 
   fetch-delegation-info:
+    needs: fetch-drep-info
     runs-on: ubuntu-latest
     
     steps:
