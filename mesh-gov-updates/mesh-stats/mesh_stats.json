@@ -1,37 +1,37 @@
 {
   "github": {
-    "core_in_package_json": 706,
-    "core_in_any_file": 1060,
-    "core_in_repositories": 706
+    "core_in_package_json": 708,
+    "core_in_any_file": 1056,
+    "core_in_repositories": 708
   },
   "npm": {
     "downloads": {
-      "last_day": 136,
+      "last_day": 0,
       "last_week": 1738,
       "last_month": 10635,
       "last_year": 56420,
-      "core_package_last_12_months": 72175
+      "core_package_last_12_months": 72660
     },
-    "react_package_downloads": 56933,
-    "transaction_package_downloads": 50626,
-    "wallet_package_downloads": 50860,
-    "provider_package_downloads": 47878,
-    "core_csl_package_downloads": 42687,
-    "core_cst_package_downloads": 54614,
-    "latest_version": "1.9.0-beta.37",
-    "dependents_count": 277912
+    "react_package_downloads": 57504,
+    "transaction_package_downloads": 51320,
+    "wallet_package_downloads": 51556,
+    "provider_package_downloads": 48533,
+    "core_csl_package_downloads": 43067,
+    "core_cst_package_downloads": 55354,
+    "latest_version": "1.9.0-beta-38",
+    "dependents_count": 278485
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-21&to=2025-04-21",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-21&to=2025-04-21"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-24&to=2025-04-24",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-24&to=2025-04-24"
   },
   "contributors": {
-    "unique_count": 37,
+    "unique_count": 39,
     "contributors": [
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "contributions": 1192,
+        "contributions": 1199,
         "repositories": [
           {
             "name": "mesh",
@@ -76,6 +76,10 @@
           {
             "name": "aiken-next-ts-template",
             "contributions": 8
+          },
+          {
+            "name": "polkadot",
+            "contributions": 7
           },
           {
             "name": "staking-next-ts-template",
@@ -232,29 +236,29 @@
       {
         "login": "twwu123",
         "avatar_url": "https://avatars.githubusercontent.com/u/45336147?v=4",
-        "contributions": 336,
+        "contributions": 341,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 336
+            "contributions": 341
           }
         ]
       },
       {
         "login": "Felix-at-Swarm",
         "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
-        "contributions": 152,
+        "contributions": 116,
         "repositories": [
           {
             "name": "funding",
             "contributions": 106
           },
           {
-            "name": "cardano-governance",
-            "contributions": 41
+            "name": "bounty-board",
+            "contributions": 5
           },
           {
-            "name": "bounty-board",
+            "name": "polkadot",
             "contributions": 5
           }
         ]
@@ -262,11 +266,11 @@
       {
         "login": "lisicky",
         "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
-        "contributions": 68,
+        "contributions": 71,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 65
+            "contributions": 68
           },
           {
             "name": "mesh-saas",
@@ -275,17 +279,13 @@
         ]
       },
       {
-        "login": "Andre-Diamond",
-        "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
-        "contributions": 55,
+        "login": "AltiMario",
+        "avatar_url": "https://avatars.githubusercontent.com/u/598726?v=4",
+        "contributions": 57,
         "repositories": [
           {
-            "name": "cardano-governance",
-            "contributions": 53
-          },
-          {
-            "name": "funding",
-            "contributions": 2
+            "name": "polkadot",
+            "contributions": 57
           }
         ]
       },
@@ -403,17 +403,6 @@
         ]
       },
       {
-        "login": "github-actions[bot]",
-        "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
-        "contributions": 14,
-        "repositories": [
-          {
-            "name": "cardano-governance",
-            "contributions": 14
-          }
-        ]
-      },
-      {
         "login": "AnsonSIDAN",
         "avatar_url": "https://avatars.githubusercontent.com/u/91122558?v=4",
         "contributions": 13,
@@ -446,11 +435,11 @@
       {
         "login": "actions-user",
         "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-        "contributions": 11,
+        "contributions": 12,
         "repositories": [
           {
             "name": "funding",
-            "contributions": 11
+            "contributions": 12
           }
         ]
       },
@@ -461,6 +450,17 @@
         "repositories": [
           {
             "name": "mesh",
+            "contributions": 10
+          }
+        ]
+      },
+      {
+        "login": "nazrhom",
+        "avatar_url": "https://avatars.githubusercontent.com/u/6810908?v=4",
+        "contributions": 10,
+        "repositories": [
+          {
+            "name": "polkadot",
             "contributions": 10
           }
         ]
@@ -613,6 +613,28 @@
           {
             "name": "examples",
             "contributions": 1
+          }
+        ]
+      },
+      {
+        "login": "Andre-Diamond",
+        "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "funding",
+            "contributions": 2
+          }
+        ]
+      },
+      {
+        "login": "turbobot-temp",
+        "avatar_url": "https://avatars.githubusercontent.com/u/145653950?v=4",
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "polkadot",
+            "contributions": 2
           }
         ]
       },
