@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // 1. Fetch the voting history markdown files from all years
     const years = await fetchAvailableYears();
-    console.log("Available years:", years);
+    console.log("Available years: ", years);
 
     // 2. Fetch the proposals.json file
     const proposalsUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/vote-context/proposals.json`;
