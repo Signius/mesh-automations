@@ -65,6 +65,13 @@ client.once('ready', async () => {
     }
 
     data[yearMonth] = { memberCount, totalMessages }
+
+    // Ensure directory exists before writing file
+    const outputDir = path.dirname(OUTPUT_FILE)
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true })
+    }
+
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(data, null, 2))
     console.log(`📊 Wrote stats for ${yearMonth}`)
 
