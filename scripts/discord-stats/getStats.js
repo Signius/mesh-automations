@@ -14,12 +14,8 @@ if (!DISCORD_TOKEN || !GUILD_ID) {
 }
 
 // ——— Backfill toggle ———
-// Set to `true` to backfill January 2025 → last full month;
-// set to `false` to run the “last month only” logic.
-const BACKFILL      = false
-
-// Year to backfill from January 1st of (only used if BACKFILL = true)
-const BACKFILL_YEAR = 2025
+const BACKFILL      = false      // ← flip to false once your one-off is done
+const BACKFILL_YEAR = 2025      // ← year to backfill from January
 
 const client = new Client({
   intents: [
@@ -30,71 +26,59 @@ const client = new Client({
 
 client.once('ready', async () => {
   console.log(`✅ Logged in as ${client.user.tag}`)
-  const guild = await client.guilds.fetch(GUILD_ID)
+  const guild       = await client.guilds.fetch(GUILD_ID)
   const memberCount = guild.memberCount
 
-  // grab all text‐channels we can read
-  const channels = guild.channels.cache.filter(
-    c => c.isTextBased() && c.viewable
-  ).values()
-
+  // collect or load existing stats
   let data = {}
   if (fs.existsSync(OUTPUT_FILE)) {
     data = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'))
   }
 
-  if (BACKFILL) {
-    // —— backfill mode ——
-    console.log('🔄 Running one‐off backfill for all of 2025 up to last month')
-    const buckets = {}
+  const channels = guild.channels.cache.filter(c => c.isTextBased() && c.viewable).values()
+  const now      = new Date()
 
-    const now       = new Date()
-    const startDate = new Date(BACKFILL_YEAR, 0, 1)             // Jan 1, 2025
+  if (BACKFILL) {
+    console.log('🔄 Backfilling Jan → last full month of', BACKFILL_YEAR)
+    const buckets   = {}
+    const startDate = new Date(BACKFILL_YEAR, 0, 1)              // Jan 1, BACKFILL_YEAR
     const endDate   = new Date(now.getFullYear(), now.getMonth(), 1) // 1st of current month
 
-    // scan every channel once, bucket by YYYY-MM
     for (const channel of channels) {
       let lastId = null
 
       outer: while (true) {
-        const opts     = { limit: 100, before: lastId }
-        const messages = await channel.messages.fetch(opts)
-        if (messages.size === 0) break
+        const msgs = await channel.messages.fetch({ limit: 100, before: lastId })
+        if (msgs.size === 0) break
 
-        for (const msg of messages.values()) {
+        for (const msg of msgs.values()) {
           const ts = msg.createdAt
-
-          if (ts < startDate) {
-            // we’ve gone past Jan 1, 2025 → stop this channel
-            break outer
-          }
+          if (ts < startDate) break outer
           if (ts < endDate) {
-            const ym = `${ts.getFullYear()}-${String(ts.getMonth() + 1).padStart(2, '0')}`
-            buckets[ym] = (buckets[ym] || 0) + 1
+            const key = `${ts.getFullYear()}-${String(ts.getMonth() + 1).padStart(2, '0')}`
+            buckets[key] = (buckets[key] || 0) + 1
           }
         }
 
-        lastId = messages.last()?.id
+        lastId = msgs.last()?.id
         if (!lastId) break
-        // pause to respect rate-limits
         await new Promise(r => setTimeout(r, 500))
       }
     }
 
-    // write each month’s stats
-    for (let month = 0; month < now.getMonth(); month++) {
-      const dt  = new Date(BACKFILL_YEAR, month, 1)
+    // populate data object for each month of the year up to last full month
+    for (let m = 0; m < now.getMonth(); m++) {
+      const dt  = new Date(BACKFILL_YEAR, m, 1)
       const key = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`
-
       data[key] = {
         memberCount,
         totalMessages: buckets[key] || 0
       }
       console.log(`  → ${key}: ${data[key].totalMessages} msgs, ${memberCount} members`)
     }
+
   } else {
-    // —— normal “last month only” mode ——
-    const now        = new Date()
+    // last-month only
     const monthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1)
     const monthEnd   = new Date(now.getFullYear(), now.getMonth(),    1)
     const key        = `${monthStart.getFullYear()}-${String(monthStart.getMonth() + 1).padStart(2, '0')}`
@@ -103,17 +87,16 @@ client.once('ready', async () => {
     for (const channel of channels) {
       let lastId = null
       while (true) {
-        const opts     = { limit: 100, before: lastId }
-        const messages = await channel.messages.fetch(opts)
-        if (messages.size === 0) break
+        const msgs = await channel.messages.fetch({ limit: 100, before: lastId })
+        if (msgs.size === 0) break
 
-        for (const msg of messages.values()) {
+        for (const msg of msgs.values()) {
           const ts = msg.createdAt
           if (ts >= monthStart && ts < monthEnd) totalMessages++
-          if (ts < monthStart) { messages.clear(); break }
+          if (ts < monthStart) { msgs.clear(); break }
         }
 
-        lastId = messages.last()?.id
+        lastId = msgs.last()?.id
         if (!lastId) break
         await new Promise(r => setTimeout(r, 500))
       }
@@ -123,13 +106,18 @@ client.once('ready', async () => {
     console.log(`📊 Wrote stats for ${key}: ${totalMessages} msgs, ${memberCount} members`)
   }
 
-  // ensure output folder exists
-  const outDir = path.dirname(OUTPUT_FILE)
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true })
-  }
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(data, null, 2))
+  // sort keys chronologically before writing
+  const ordered = {}
+  Object.keys(data)
+    .sort()                   // e.g. ['2025-01', '2025-02', …]
+    .forEach(k => { ordered[k] = data[k] })
 
+  // ensure folder exists
+  const outDir = path.dirname(OUTPUT_FILE)
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
+
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(ordered, null, 2))
+  console.log(`✅ Stats written to ${OUTPUT_FILE}`)
   process.exit(0)
 })
 
