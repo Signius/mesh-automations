@@ -2,5 +2,17 @@
   "2025-04": {
     "memberCount": 7,
     "totalMessages": 53
+  },
+  "2025-01": {
+    "memberCount": 7,
+    "totalMessages": 0
+  },
+  "2025-02": {
+    "memberCount": 7,
+    "totalMessages": 0
+  },
+  "2025-03": {
+    "memberCount": 7,
+    "totalMessages": 107
   }
 }
