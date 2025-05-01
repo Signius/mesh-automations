@@ -1,41 +1,41 @@
 {
   "github": {
-    "core_in_package_json": 708,
-    "core_in_any_file": 1056,
-    "core_in_repositories": 708
+    "core_in_package_json": 735,
+    "core_in_any_file": 1248,
+    "core_in_repositories": 735
   },
   "npm": {
     "downloads": {
       "last_day": 0,
-      "last_week": 1738,
-      "last_month": 10635,
+      "last_week": 1785,
+      "last_month": 8197,
       "last_year": 56420,
-      "core_package_last_12_months": 72660
+      "core_package_last_12_months": 72644
     },
-    "react_package_downloads": 57504,
-    "transaction_package_downloads": 51320,
-    "wallet_package_downloads": 51556,
-    "provider_package_downloads": 48533,
-    "core_csl_package_downloads": 43067,
-    "core_cst_package_downloads": 55354,
-    "latest_version": "1.9.0-beta-38",
-    "dependents_count": 278485
+    "react_package_downloads": 58421,
+    "transaction_package_downloads": 52771,
+    "wallet_package_downloads": 53005,
+    "provider_package_downloads": 49881,
+    "core_csl_package_downloads": 43866,
+    "core_cst_package_downloads": 56862,
+    "latest_version": "1.9.0-beta-39",
+    "dependents_count": 279359
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-04-24&to=2025-04-24",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-04-24&to=2025-04-24"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-05-01&to=2025-05-01",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-05-01&to=2025-05-01"
   },
   "contributors": {
-    "unique_count": 39,
+    "unique_count": 38,
     "contributors": [
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "contributions": 1199,
+        "contributions": 1203,
         "repositories": [
           {
             "name": "mesh",
-            "contributions": 912
+            "contributions": 916
           },
           {
             "name": "multisig",
@@ -245,13 +245,13 @@
         ]
       },
       {
-        "login": "Felix-at-Swarm",
+        "login": "Technosophorso",
         "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
-        "contributions": 116,
+        "contributions": 118,
         "repositories": [
           {
             "name": "funding",
-            "contributions": 106
+            "contributions": 108
           },
           {
             "name": "bounty-board",
@@ -403,6 +403,17 @@
         ]
       },
       {
+        "login": "actions-user",
+        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
+        "contributions": 14,
+        "repositories": [
+          {
+            "name": "funding",
+            "contributions": 14
+          }
+        ]
+      },
+      {
         "login": "AnsonSIDAN",
         "avatar_url": "https://avatars.githubusercontent.com/u/91122558?v=4",
         "contributions": 13,
@@ -429,17 +440,6 @@
           {
             "name": "mesh",
             "contributions": 2
-          }
-        ]
-      },
-      {
-        "login": "actions-user",
-        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-        "contributions": 12,
-        "repositories": [
-          {
-            "name": "funding",
-            "contributions": 12
           }
         ]
       },
@@ -488,8 +488,8 @@
         ]
       },
       {
-        "login": "saphst4r",
-        "avatar_url": "https://avatars.githubusercontent.com/u/92129752?v=4",
+        "login": "pablosymc",
+        "avatar_url": "https://avatars.githubusercontent.com/u/120895543?v=4",
         "contributions": 6,
         "repositories": [
           {
@@ -499,8 +499,8 @@
         ]
       },
       {
-        "login": "pablosymc",
-        "avatar_url": "https://avatars.githubusercontent.com/u/120895543?v=4",
+        "login": "saphst4r",
+        "avatar_url": "https://avatars.githubusercontent.com/u/92129752?v=4",
         "contributions": 6,
         "repositories": [
           {
@@ -635,17 +635,6 @@
           {
             "name": "polkadot",
             "contributions": 2
-          }
-        ]
-      },
-      {
-        "login": "eltociear",
-        "avatar_url": "https://avatars.githubusercontent.com/u/22633385?v=4",
-        "contributions": 1,
-        "repositories": [
-          {
-            "name": "mesh",
-            "contributions": 1
           }
         ]
       },
