@@ -16,7 +16,7 @@ if (!DISCORD_TOKEN || !GUILD_ID) {
 // ——— Backfill toggle ———
 // Set to `true` to backfill January 2025 → last full month;
 // set to `false` to run the “last month only” logic.
-const BACKFILL      = true
+const BACKFILL      = false
 
 // Year to backfill from January 1st of (only used if BACKFILL = true)
 const BACKFILL_YEAR = 2025
