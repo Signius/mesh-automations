@@ -1,6 +1,6 @@
 // Configuration: repository details
 const owner = 'MeshJS';
-const repo = 'cardano-governance';
+const repo = 'governance';
 
 // When the DOM is loaded, start processing.
 document.addEventListener("DOMContentLoaded", async () => {
