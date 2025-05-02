@@ -14,8 +14,8 @@ if (!DISCORD_TOKEN || !GUILD_ID) {
 }
 
 // ——— Backfill toggle ———
-const BACKFILL      = false     // ← flip to false once your one-off is done
-const BACKFILL_YEAR = 2025      // ← year to backfill from January
+const BACKFILL      = true     // ← flip to false once your one-off is done
+const BACKFILL_YEAR = 2025     // ← year to backfill from January
 
 const client = new Client({
   intents: [
@@ -40,9 +40,10 @@ client.once('ready', async () => {
 
   if (BACKFILL) {
     console.log('🔄 Backfilling Jan → last full month of', BACKFILL_YEAR)
+    /** map YYYY-MM → { totalMessages, visitors:Set<userId> } **/
     const buckets   = {}
-    const startDate = new Date(BACKFILL_YEAR, 0, 1)              // Jan 1, BACKFILL_YEAR
-    const endDate   = new Date(now.getFullYear(), now.getMonth(), 1) // 1st of current month
+    const startDate = new Date(BACKFILL_YEAR, 0, 1)                          // Jan 1, BACKFILL_YEAR
+    const endDate   = new Date(now.getFullYear(), now.getMonth(), 1)         // 1st of current month
 
     for (const channel of channels) {
       let lastId = null
@@ -56,7 +57,11 @@ client.once('ready', async () => {
           if (ts < startDate) break outer
           if (ts < endDate) {
             const key = `${ts.getFullYear()}-${String(ts.getMonth() + 1).padStart(2, '0')}`
-            buckets[key] = (buckets[key] || 0) + 1
+            if (!buckets[key]) {
+              buckets[key] = { totalMessages: 0, visitors: new Set() }
+            }
+            buckets[key].totalMessages++
+            if (!msg.author.bot) buckets[key].visitors.add(msg.author.id)
           }
         }
 
@@ -66,15 +71,17 @@ client.once('ready', async () => {
       }
     }
 
-    // populate data object for each month of the year up to last full month
+    // populate data object for each month up to last full month
     for (let m = 0; m < now.getMonth(); m++) {
       const dt  = new Date(BACKFILL_YEAR, m, 1)
       const key = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`
+      const monthStats = buckets[key] || { totalMessages: 0, visitors: new Set() }
       data[key] = {
         memberCount,
-        totalMessages: buckets[key] || 0
+        totalMessages: monthStats.totalMessages,
+        visitorCount: monthStats.visitors.size
       }
-      console.log(`  → ${key}: ${data[key].totalMessages} msgs, ${memberCount} members`)
+      console.log(`  → ${key}: ${monthStats.totalMessages} msgs, ${monthStats.visitors.size} visitors, ${memberCount} members`)
     }
 
   } else {
@@ -84,6 +91,8 @@ client.once('ready', async () => {
     const key        = `${monthStart.getFullYear()}-${String(monthStart.getMonth() + 1).padStart(2, '0')}`
 
     let totalMessages = 0
+    const visitorSet  = new Set()
+
     for (const channel of channels) {
       let lastId = null
       while (true) {
@@ -92,7 +101,10 @@ client.once('ready', async () => {
 
         for (const msg of msgs.values()) {
           const ts = msg.createdAt
-          if (ts >= monthStart && ts < monthEnd) totalMessages++
+          if (ts >= monthStart && ts < monthEnd) {
+            totalMessages++
+            if (!msg.author.bot) visitorSet.add(msg.author.id)
+          }
           if (ts < monthStart) { msgs.clear(); break }
         }
 
@@ -102,8 +114,12 @@ client.once('ready', async () => {
       }
     }
 
-    data[key] = { memberCount, totalMessages }
-    console.log(`📊 Wrote stats for ${key}: ${totalMessages} msgs, ${memberCount} members`)
+    data[key] = {
+      memberCount,
+      totalMessages,
+      visitorCount: visitorSet.size
+    }
+    console.log(`📊 Wrote stats for ${key}: ${totalMessages} msgs, ${visitorSet.size} visitors, ${memberCount} members`)
   }
 
   // sort keys chronologically before writing
