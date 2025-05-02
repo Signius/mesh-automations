@@ -14,7 +14,7 @@ if (!DISCORD_TOKEN || !GUILD_ID) {
 }
 
 // ——— Backfill toggle ———
-const BACKFILL      = true     // ← flip to false once your one-off is done
+const BACKFILL      = false     // ← flip to false once your one-off is done
 const BACKFILL_YEAR = 2025     // ← year to backfill from January
 
 const client = new Client({
