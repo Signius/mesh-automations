@@ -1,18 +1,22 @@
 {
   "2025-01": {
-    "memberCount": 720,
-    "totalMessages": 39
+    "memberCount": 730,
+    "totalMessages": 39,
+    "visitorCount": 4
   },
   "2025-02": {
-    "memberCount": 723,
-    "totalMessages": 264
+    "memberCount": 730,
+    "totalMessages": 264,
+    "visitorCount": 6
   },
   "2025-03": {
-    "memberCount": 727,
-    "totalMessages": 46
+    "memberCount": 730,
+    "totalMessages": 34,
+    "visitorCount": 7
   },
   "2025-04": {
     "memberCount": 730,
-    "totalMessages": 756
+    "totalMessages": 748,
+    "visitorCount": 31
   }
 }
