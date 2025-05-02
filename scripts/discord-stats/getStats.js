@@ -20,9 +20,7 @@ const BACKFILL_YEAR = 2025     // ← year to backfill from January
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,    // ensure you can read messages
-    GatewayIntentBits.GuildMembers       // if you later want per-month memberCount
+    GatewayIntentBits.GuildMessages      // if you later want per-month memberCount
   ]
 })
 
