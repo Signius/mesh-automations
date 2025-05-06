@@ -305,51 +305,41 @@ export async function fetchMeshContributors(githubToken) {
                             const timestamp = commit.commit.author.date;
 
                             if (!contributorsMap.has(login)) {
+                                const repoData = {};
+                                repoData[repo.name] = {
+                                    commits: 1,
+                                    pull_requests: 0,
+                                    contributions: 1,
+                                    commit_timestamps: [timestamp],
+                                    pr_timestamps: []
+                                };
+
                                 contributorsMap.set(login, {
                                     login: login,
                                     avatar_url: commit.author.avatar_url,
                                     commits: 1,
                                     pull_requests: 0,
                                     contributions: 1,
-                                    repositories: [{
-                                        name: repo.name,
-                                        commits: 1,
-                                        pull_requests: 0,
-                                        contributions: 1
-                                    }],
-                                    commit_history: [{
-                                        repo: repo.name,
-                                        sha: commit.sha,
-                                        timestamp: timestamp,
-                                        message: commit.commit.message
-                                    }],
-                                    pr_history: []
+                                    repositories: repoData
                                 });
                             } else {
                                 const existingContributor = contributorsMap.get(login);
                                 existingContributor.commits += 1;
                                 existingContributor.contributions += 1;
 
-                                // Add commit to history
-                                existingContributor.commit_history.push({
-                                    repo: repo.name,
-                                    sha: commit.sha,
-                                    timestamp: timestamp,
-                                    message: commit.commit.message
-                                });
-
                                 // Check if contributor already has this repository
-                                const existingRepo = existingContributor.repositories.find(r => r.name === repo.name);
-                                if (existingRepo) {
-                                    existingRepo.commits += 1;
-                                    existingRepo.contributions += 1;
+                                if (existingContributor.repositories[repo.name]) {
+                                    existingContributor.repositories[repo.name].commits += 1;
+                                    existingContributor.repositories[repo.name].contributions += 1;
+                                    existingContributor.repositories[repo.name].commit_timestamps.push(timestamp);
                                 } else {
-                                    existingContributor.repositories.push({
-                                        name: repo.name,
+                                    existingContributor.repositories[repo.name] = {
                                         commits: 1,
                                         pull_requests: 0,
-                                        contributions: 1
-                                    });
+                                        contributions: 1,
+                                        commit_timestamps: [timestamp],
+                                        pr_timestamps: []
+                                    };
                                 }
                             }
                         }
@@ -505,32 +495,26 @@ export async function fetchMeshContributors(githubToken) {
                 if (!pr.merged_at) return;
 
                 const login = pr.user.login;
-                // Create PR info object with timestamps
-                const prInfo = {
-                    repo: repo.name,
-                    number: pr.number,
-                    title: pr.title,
-                    created_at: pr.created_at,
-                    merged_at: pr.merged_at,
-                    url: pr.html_url
-                };
+                const timestamp = pr.merged_at;
 
                 if (!contributorsMap.has(login)) {
                     // If this user isn't a contributor yet, add them
+                    const repoData = {};
+                    repoData[repo.name] = {
+                        commits: 0,
+                        pull_requests: 1,
+                        contributions: 1,
+                        commit_timestamps: [],
+                        pr_timestamps: [timestamp]
+                    };
+
                     contributorsMap.set(login, {
                         login: login,
                         avatar_url: pr.user.avatar_url,
                         commits: 0,
                         pull_requests: 1,
-                        contributions: 1, // Total of commits + PRs
-                        repositories: [{
-                            name: repo.name,
-                            commits: 0,
-                            pull_requests: 1,
-                            contributions: 1 // Total of commits + PRs
-                        }],
-                        commit_history: [],
-                        pr_history: [prInfo]
+                        contributions: 1,
+                        repositories: repoData
                     });
                 } else {
                     // User exists, increment PR count
@@ -538,21 +522,19 @@ export async function fetchMeshContributors(githubToken) {
                     contributor.pull_requests += 1;
                     contributor.contributions += 1;
 
-                    // Add PR to history
-                    contributor.pr_history.push(prInfo);
-
-                    // Find or create repository entry
-                    const repoEntry = contributor.repositories.find(r => r.name === repo.name);
-                    if (repoEntry) {
-                        repoEntry.pull_requests += 1;
-                        repoEntry.contributions += 1;
+                    // Update repository data
+                    if (contributor.repositories[repo.name]) {
+                        contributor.repositories[repo.name].pull_requests += 1;
+                        contributor.repositories[repo.name].contributions += 1;
+                        contributor.repositories[repo.name].pr_timestamps.push(timestamp);
                     } else {
-                        contributor.repositories.push({
-                            name: repo.name,
+                        contributor.repositories[repo.name] = {
                             commits: 0,
                             pull_requests: 1,
-                            contributions: 1
-                        });
+                            contributions: 1,
+                            commit_timestamps: [],
+                            pr_timestamps: [timestamp]
+                        };
                     }
                 }
             });
@@ -561,32 +543,30 @@ export async function fetchMeshContributors(githubToken) {
         }
     }
 
-    // Convert to array and sort
-    const contributors = Array.from(contributorsMap.values())
-        .sort((a, b) => {
-            // Primary sort by total contributions
-            return b.contributions - a.contributions;
+    // Convert repositories from object to array for each contributor
+    const contributors = Array.from(contributorsMap.values()).map(contributor => {
+        // Convert repositories object to array
+        const reposArray = Object.entries(contributor.repositories).map(([repoName, repoData]) => {
+            return {
+                name: repoName,
+                ...repoData,
+                // Sort timestamps in descending order (newest first)
+                commit_timestamps: repoData.commit_timestamps.sort((a, b) => new Date(b) - new Date(a)),
+                pr_timestamps: repoData.pr_timestamps.sort((a, b) => new Date(b) - new Date(a))
+            };
         });
 
-    // Sort repositories for each contributor
-    contributors.forEach(contributor => {
-        contributor.repositories.sort((a, b) => {
-            return b.contributions - a.contributions;
-        });
+        // Sort repos by total contributions
+        reposArray.sort((a, b) => b.contributions - a.contributions);
 
-        // Sort histories by timestamp
-        if (contributor.commit_history) {
-            contributor.commit_history.sort((a, b) => {
-                return new Date(b.timestamp) - new Date(a.timestamp);
-            });
-        }
-
-        if (contributor.pr_history) {
-            contributor.pr_history.sort((a, b) => {
-                return new Date(b.merged_at) - new Date(a.merged_at);
-            });
-        }
+        return {
+            ...contributor,
+            repositories: reposArray
+        };
     });
+
+    // Sort contributors by total contributions
+    contributors.sort((a, b) => b.contributions - a.contributions);
 
     return {
         unique_count: contributors.length,
