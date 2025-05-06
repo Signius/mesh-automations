@@ -275,48 +275,98 @@ export async function fetchMeshContributors(githubToken) {
     for (const repo of allRepos) {
         console.log(`Fetching contributors for ${repo.name}...`);
         try {
-            // Fetch commits contributors
-            const contributorsResponse = await axios.get(`https://api.github.com/repos/MeshJS/${repo.name}/contributors`, {
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': `token ${githubToken}`
-                }
-            });
-            contributorsResponse.data.forEach(contributor => {
-                if (!contributorsMap.has(contributor.login)) {
-                    contributorsMap.set(contributor.login, {
-                        login: contributor.login,
-                        avatar_url: contributor.avatar_url,
-                        commits: contributor.contributions,
-                        pull_requests: 0,
-                        contributions: contributor.contributions,
-                        repositories: [{
-                            name: repo.name,
-                            commits: contributor.contributions,
-                            pull_requests: 0,
-                            contributions: contributor.contributions
-                        }]
-                    });
-                } else {
-                    const existingContributor = contributorsMap.get(contributor.login);
-                    existingContributor.commits += contributor.contributions;
-                    existingContributor.contributions += contributor.contributions;
+            // Fetch commits with timestamps
+            console.log(`Fetching commits with timestamps for ${repo.name}...`);
+            let commitsPage = 1;
+            let hasMoreCommits = true;
 
-                    // Check if contributor already has this repository
-                    const existingRepo = existingContributor.repositories.find(r => r.name === repo.name);
-                    if (existingRepo) {
-                        existingRepo.commits += contributor.contributions;
-                        existingRepo.contributions += contributor.contributions;
+            while (hasMoreCommits) {
+                try {
+                    const commitsResponse = await axios.get(`https://api.github.com/repos/MeshJS/${repo.name}/commits`, {
+                        params: {
+                            per_page: 100,
+                            page: commitsPage
+                        },
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Authorization': `token ${githubToken}`
+                        }
+                    });
+
+                    if (commitsResponse.data.length === 0) {
+                        hasMoreCommits = false;
                     } else {
-                        existingContributor.repositories.push({
-                            name: repo.name,
-                            commits: contributor.contributions,
-                            pull_requests: 0,
-                            contributions: contributor.contributions
-                        });
+                        console.log(`  - Processing ${commitsResponse.data.length} commits on page ${commitsPage}`);
+
+                        for (const commit of commitsResponse.data) {
+                            if (!commit.author || !commit.author.login) continue;
+
+                            const login = commit.author.login;
+                            const timestamp = commit.commit.author.date;
+
+                            if (!contributorsMap.has(login)) {
+                                contributorsMap.set(login, {
+                                    login: login,
+                                    avatar_url: commit.author.avatar_url,
+                                    commits: 1,
+                                    pull_requests: 0,
+                                    contributions: 1,
+                                    repositories: [{
+                                        name: repo.name,
+                                        commits: 1,
+                                        pull_requests: 0,
+                                        contributions: 1
+                                    }],
+                                    commit_history: [{
+                                        repo: repo.name,
+                                        sha: commit.sha,
+                                        timestamp: timestamp,
+                                        message: commit.commit.message
+                                    }],
+                                    pr_history: []
+                                });
+                            } else {
+                                const existingContributor = contributorsMap.get(login);
+                                existingContributor.commits += 1;
+                                existingContributor.contributions += 1;
+
+                                // Add commit to history
+                                existingContributor.commit_history.push({
+                                    repo: repo.name,
+                                    sha: commit.sha,
+                                    timestamp: timestamp,
+                                    message: commit.commit.message
+                                });
+
+                                // Check if contributor already has this repository
+                                const existingRepo = existingContributor.repositories.find(r => r.name === repo.name);
+                                if (existingRepo) {
+                                    existingRepo.commits += 1;
+                                    existingRepo.contributions += 1;
+                                } else {
+                                    existingContributor.repositories.push({
+                                        name: repo.name,
+                                        commits: 1,
+                                        pull_requests: 0,
+                                        contributions: 1
+                                    });
+                                }
+                            }
+                        }
+
+                        commitsPage++;
                     }
+                } catch (error) {
+                    if (error.response && error.response.status === 404) {
+                        console.warn(`Repository ${repo.name} might be private or not exist. Skipping commits.`);
+                    } else if (error.response && error.response.status === 403) {
+                        console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping commits.`);
+                    } else {
+                        console.error(`Error fetching commits for ${repo.name} page ${commitsPage}:`, error.message);
+                    }
+                    hasMoreCommits = false;
                 }
-            });
+            }
 
             // Fetch pull requests for this repo
             console.log(`Fetching merged pull requests for ${repo.name}...`);
@@ -447,7 +497,7 @@ export async function fetchMeshContributors(githubToken) {
             });
             console.log(`PR authors for ${repo.name}:`, prAuthorsCount);
 
-            // Count PRs by user
+            // Count PRs by user and store timestamps
             pullsData.forEach(pr => {
                 if (!pr.user || !pr.user.login) return;
 
@@ -455,8 +505,18 @@ export async function fetchMeshContributors(githubToken) {
                 if (!pr.merged_at) return;
 
                 const login = pr.user.login;
+                // Create PR info object with timestamps
+                const prInfo = {
+                    repo: repo.name,
+                    number: pr.number,
+                    title: pr.title,
+                    created_at: pr.created_at,
+                    merged_at: pr.merged_at,
+                    url: pr.html_url
+                };
+
                 if (!contributorsMap.has(login)) {
-                    // If this user isn't a commit contributor yet, add them
+                    // If this user isn't a contributor yet, add them
                     contributorsMap.set(login, {
                         login: login,
                         avatar_url: pr.user.avatar_url,
@@ -468,13 +528,18 @@ export async function fetchMeshContributors(githubToken) {
                             commits: 0,
                             pull_requests: 1,
                             contributions: 1 // Total of commits + PRs
-                        }]
+                        }],
+                        commit_history: [],
+                        pr_history: [prInfo]
                     });
                 } else {
                     // User exists, increment PR count
                     const contributor = contributorsMap.get(login);
                     contributor.pull_requests += 1;
                     contributor.contributions += 1;
+
+                    // Add PR to history
+                    contributor.pr_history.push(prInfo);
 
                     // Find or create repository entry
                     const repoEntry = contributor.repositories.find(r => r.name === repo.name);
@@ -508,6 +573,19 @@ export async function fetchMeshContributors(githubToken) {
         contributor.repositories.sort((a, b) => {
             return b.contributions - a.contributions;
         });
+
+        // Sort histories by timestamp
+        if (contributor.commit_history) {
+            contributor.commit_history.sort((a, b) => {
+                return new Date(b.timestamp) - new Date(a.timestamp);
+            });
+        }
+
+        if (contributor.pr_history) {
+            contributor.pr_history.sort((a, b) => {
+                return new Date(b.merged_at) - new Date(a.merged_at);
+            });
+        }
     });
 
     return {
