@@ -243,6 +243,7 @@ export async function fetchMeshContributors(githubToken) {
     for (const repo of reposResponse.data) {
         console.log(`Fetching contributors for ${repo.name}...`);
         try {
+            // Fetch commits contributors
             const contributorsResponse = await axios.get(`https://api.github.com/repos/MeshJS/${repo.name}/contributors`, {
                 headers: {
                     'Accept': 'application/vnd.github.v3+json',
@@ -255,25 +256,125 @@ export async function fetchMeshContributors(githubToken) {
                         login: contributor.login,
                         avatar_url: contributor.avatar_url,
                         contributions: contributor.contributions,
-                        repositories: [{ name: repo.name, contributions: contributor.contributions }]
+                        pull_requests: 0,
+                        repositories: [{
+                            name: repo.name,
+                            contributions: contributor.contributions,
+                            pull_requests: 0
+                        }]
                     });
                 } else {
                     const existingContributor = contributorsMap.get(contributor.login);
                     existingContributor.contributions += contributor.contributions;
-                    existingContributor.repositories.push({
-                        name: repo.name,
-                        contributions: contributor.contributions
+
+                    // Check if contributor already has this repository
+                    const existingRepo = existingContributor.repositories.find(r => r.name === repo.name);
+                    if (existingRepo) {
+                        existingRepo.contributions += contributor.contributions;
+                    } else {
+                        existingContributor.repositories.push({
+                            name: repo.name,
+                            contributions: contributor.contributions,
+                            pull_requests: 0
+                        });
+                    }
+                }
+            });
+
+            // Fetch pull requests for this repo
+            console.log(`Fetching pull requests for ${repo.name}...`);
+            let page = 1;
+            let pullsData = [];
+            let hasMorePulls = true;
+
+            while (hasMorePulls) {
+                const pullsResponse = await axios.get(
+                    `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
+                    {
+                        params: {
+                            state: 'all',
+                            per_page: 100,
+                            page: page
+                        },
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Authorization': `token ${githubToken}`
+                        }
+                    }
+                );
+
+                if (pullsResponse.data.length === 0) {
+                    hasMorePulls = false;
+                } else {
+                    pullsData = pullsData.concat(pullsResponse.data);
+                    page++;
+                }
+            }
+
+            // Count PRs by user
+            pullsData.forEach(pr => {
+                if (!pr.user || !pr.user.login) return;
+
+                const login = pr.user.login;
+                if (!contributorsMap.has(login)) {
+                    // If this user isn't a commit contributor yet, add them
+                    contributorsMap.set(login, {
+                        login: login,
+                        avatar_url: pr.user.avatar_url,
+                        contributions: 0,
+                        pull_requests: 1,
+                        repositories: [{
+                            name: repo.name,
+                            contributions: 0,
+                            pull_requests: 1
+                        }]
                     });
+                } else {
+                    // User exists, increment PR count
+                    const contributor = contributorsMap.get(login);
+                    contributor.pull_requests += 1;
+
+                    // Find or create repository entry
+                    const repoEntry = contributor.repositories.find(r => r.name === repo.name);
+                    if (repoEntry) {
+                        repoEntry.pull_requests += 1;
+                    } else {
+                        contributor.repositories.push({
+                            name: repo.name,
+                            contributions: 0,
+                            pull_requests: 1
+                        });
+                    }
                 }
             });
         } catch (error) {
-            console.error(`Error fetching contributors for ${repo.name}:`, error.message);
+            console.error(`Error fetching data for ${repo.name}:`, error.message);
         }
     }
+
+    // Convert to array and sort
     const contributors = Array.from(contributorsMap.values())
-        .sort((a, b) => b.contributions - a.contributions);
+        .sort((a, b) => {
+            // Primary sort by total contributions
+            const totalA = a.contributions + a.pull_requests;
+            const totalB = b.contributions + b.pull_requests;
+            return totalB - totalA;
+        });
+
+    // Sort repositories for each contributor
     contributors.forEach(contributor => {
-        contributor.repositories.sort((a, b) => b.contributions - a.contributions);
+        contributor.repositories.sort((a, b) => {
+            const totalA = a.contributions + a.pull_requests;
+            const totalB = b.contributions + b.pull_requests;
+            return totalB - totalA;
+        });
     });
-    return { unique_count: contributors.length, contributors };
+
+    return {
+        unique_count: contributors.length,
+        contributors,
+        total_pull_requests: contributors.reduce((sum, c) => sum + c.pull_requests, 0),
+        total_commits: contributors.reduce((sum, c) => sum + c.contributions, 0),
+        total_contributions: contributors.reduce((sum, c) => sum + c.contributions + c.pull_requests, 0)
+    };
 }
