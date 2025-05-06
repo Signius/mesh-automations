@@ -319,19 +319,19 @@ export async function fetchMeshContributors(githubToken) {
             });
 
             // Fetch pull requests for this repo
-            console.log(`Fetching pull requests for ${repo.name}...`);
+            console.log(`Fetching merged pull requests for ${repo.name}...`);
             let page = 1;
             let pullsData = [];
             let hasMorePulls = true;
 
-            // First get open PRs
+            // First get merged PRs via pulls endpoint
             while (hasMorePulls) {
                 try {
                     const pullsResponse = await axios.get(
                         `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
                         {
                             params: {
-                                state: 'all',  // Get all PRs: open, closed, and merged
+                                state: 'closed',  // Get closed PRs (merged ones are a subset of closed)
                                 per_page: 100,
                                 page: page
                             },
@@ -345,8 +345,10 @@ export async function fetchMeshContributors(githubToken) {
                     if (pullsResponse.data.length === 0) {
                         hasMorePulls = false;
                     } else {
-                        console.log(`  - Found ${pullsResponse.data.length} PRs on page ${page}`);
-                        pullsData = pullsData.concat(pullsResponse.data);
+                        // Filter to only include merged PRs
+                        const mergedPRs = pullsResponse.data.filter(pr => pr.merged_at !== null);
+                        console.log(`  - Found ${mergedPRs.length} merged PRs on page ${page}`);
+                        pullsData = pullsData.concat(mergedPRs);
                         page++;
                     }
                 } catch (error) {
@@ -362,7 +364,7 @@ export async function fetchMeshContributors(githubToken) {
             }
 
             // Also try the issues endpoint which can sometimes catch PRs missed by the pulls endpoint
-            console.log(`Fetching PRs via issues endpoint for ${repo.name}...`);
+            console.log(`Fetching merged PRs via issues endpoint for ${repo.name}...`);
             page = 1;
             hasMorePulls = true;
 
@@ -407,11 +409,13 @@ export async function fetchMeshContributors(githubToken) {
                                         }
                                     );
 
-                                    // Check if we already have this PR and add it if not
-                                    const existingPrNumbers = new Set(pullsData.map(pr => pr.number));
-                                    if (!existingPrNumbers.has(fullPrResponse.data.number)) {
-                                        pullsData.push(fullPrResponse.data);
-                                        console.log(`  - Added PR #${fullPrResponse.data.number} by ${fullPrResponse.data.user?.login || 'unknown'}`);
+                                    // Check if the PR is merged and we already have this PR
+                                    if (fullPrResponse.data.merged_at) {
+                                        const existingPrNumbers = new Set(pullsData.map(pr => pr.number));
+                                        if (!existingPrNumbers.has(fullPrResponse.data.number)) {
+                                            pullsData.push(fullPrResponse.data);
+                                            console.log(`  - Added merged PR #${fullPrResponse.data.number} by ${fullPrResponse.data.user?.login || 'unknown'}`);
+                                        }
                                     }
                                 } catch (error) {
                                     console.error(`Error fetching full PR data for issue #${prIssue.number}:`, error.message);
@@ -433,7 +437,7 @@ export async function fetchMeshContributors(githubToken) {
                 }
             }
 
-            console.log(`Total PRs found for ${repo.name}: ${pullsData.length}`);
+            console.log(`Total merged PRs found for ${repo.name}: ${pullsData.length}`);
 
             // Log PR authors for debugging
             const prAuthors = pullsData.map(pr => pr.user?.login).filter(Boolean);
@@ -447,6 +451,9 @@ export async function fetchMeshContributors(githubToken) {
             pullsData.forEach(pr => {
                 if (!pr.user || !pr.user.login) return;
 
+                // Only count merged PRs (this should be redundant now but keeping as a safeguard)
+                if (!pr.merged_at) return;
+
                 const login = pr.user.login;
                 if (!contributorsMap.has(login)) {
                     // If this user isn't a commit contributor yet, add them
@@ -455,12 +462,12 @@ export async function fetchMeshContributors(githubToken) {
                         avatar_url: pr.user.avatar_url,
                         commits: 0,
                         pull_requests: 1,
-                        contributions: 1,
+                        contributions: 1, // Total of commits + PRs
                         repositories: [{
                             name: repo.name,
                             commits: 0,
                             pull_requests: 1,
-                            contributions: 1
+                            contributions: 1 // Total of commits + PRs
                         }]
                     });
                 } else {
@@ -484,58 +491,6 @@ export async function fetchMeshContributors(githubToken) {
                     }
                 }
             });
-
-            // Also fetch merged PRs specifically to ensure we don't miss any
-            console.log(`Fetching merged pull requests for ${repo.name}...`);
-            page = 1;
-            hasMorePulls = true;
-
-            while (hasMorePulls) {
-                try {
-                    const mergedPullsResponse = await axios.get(
-                        `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
-                        {
-                            params: {
-                                state: 'closed',
-                                per_page: 100,
-                                page: page
-                            },
-                            headers: {
-                                'Accept': 'application/vnd.github.v3+json',
-                                'Authorization': `token ${githubToken}`
-                            }
-                        }
-                    );
-
-                    if (mergedPullsResponse.data.length === 0) {
-                        hasMorePulls = false;
-                    } else {
-                        // Filter to only include merged PRs, not just closed ones
-                        const mergedPRs = mergedPullsResponse.data.filter(pr => pr.merged_at !== null);
-                        console.log(`  - Found ${mergedPRs.length} merged PRs on page ${page}`);
-
-                        // Add only PRs that aren't already in pullsData
-                        const existingPrNumbers = new Set(pullsData.map(pr => pr.number));
-                        const newMergedPRs = mergedPRs.filter(pr => !existingPrNumbers.has(pr.number));
-
-                        if (newMergedPRs.length > 0) {
-                            console.log(`  - Adding ${newMergedPRs.length} new merged PRs`);
-                            pullsData = pullsData.concat(newMergedPRs);
-                        }
-
-                        page++;
-                    }
-                } catch (error) {
-                    if (error.response && error.response.status === 404) {
-                        console.warn(`Repository ${repo.name} might be private or not exist. Skipping merged PRs.`);
-                    } else if (error.response && error.response.status === 403) {
-                        console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping merged PRs.`);
-                    } else {
-                        console.error(`Error fetching merged PRs for ${repo.name} page ${page}:`, error.message);
-                    }
-                    hasMorePulls = false;
-                }
-            }
         } catch (error) {
             console.error(`Error fetching data for ${repo.name}:`, error.message);
         }
