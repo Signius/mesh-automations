@@ -233,17 +233,6 @@ export async function fetchMeshStats(githubToken) {
 export async function fetchMeshContributors(githubToken) {
     console.log('\nFetching repository contributors...');
 
-    // Define the known repositories to check
-    const knownRepos = [
-        'mesh', 'mesh-core', 'mesh-react', 'mesh-react-hooks',
-        'mesh-wallet', 'mesh-transaction', 'mesh-provider',
-        'mesh-docs', 'mesh-website', 'mesh-nextjs-template',
-        'mesh-pbl'
-        // Add any other repositories you know of here
-    ];
-
-    console.log(`Will check the following repositories: ${knownRepos.join(', ')}`);
-
     // Get all repositories with pagination
     let allRepos = [];
     let page = 1;
@@ -280,36 +269,6 @@ export async function fetchMeshContributors(githubToken) {
     allRepos.forEach(repo => {
         console.log(`- ${repo.name} (${repo.private ? 'private' : 'public'}${repo.fork ? ', fork' : ''})`);
     });
-
-    // Check which known repos were not found
-    const fetchedRepoNames = allRepos.map(repo => repo.name);
-    const missingRepos = knownRepos.filter(name => !fetchedRepoNames.includes(name));
-
-    if (missingRepos.length > 0) {
-        console.log(`Missing known repositories: ${missingRepos.join(', ')}`);
-
-        // Try to fetch each missing repo directly
-        for (const repoName of missingRepos) {
-            try {
-                console.log(`Attempting to fetch missing repository: ${repoName}`);
-                const missingRepoResponse = await axios.get(`https://api.github.com/repos/MeshJS/${repoName}`, {
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Authorization': `token ${githubToken}`
-                    }
-                });
-
-                if (missingRepoResponse.data) {
-                    console.log(`Found missing repository: ${repoName}`);
-                    allRepos.push(missingRepoResponse.data);
-                }
-            } catch (error) {
-                console.error(`Could not fetch missing repository ${repoName}: ${error.message}`);
-            }
-        }
-    } else {
-        console.log('All known repositories were found.');
-    }
 
     const contributorsMap = new Map();
 
