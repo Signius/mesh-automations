@@ -1,41 +1,34 @@
 name: Update Discord Stats
-
 on:
   schedule:
-    - cron: '0 2 1 * *'      # at 02:00 UTC on the 1st of every month
-  workflow_dispatch:         # allow manual runs
+    - cron: '0 2 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write      # allow GITHUB_TOKEN to push
 
 jobs:
-  build:
+  stats:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Run Discord-Stats Action
+        uses: Signius/discord-stats-action@1.0.0
         with:
-          node-version: '18'
+          discord-token: ${{ secrets.DISCORD_TOKEN }}
+          guild-id:       ${{ secrets.GUILD_ID }}
+          output-file:    mesh-gov-updates/discord-stats/stats.json
+          backfill:       'false'
+          backfill-year:  '2025'
 
-      - name: Install dependencies
-        run: npm install discord.js
-
-      - name: Run stats script
-        env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          GUILD_ID:       ${{ secrets.GUILD_ID }}
-        run: node scripts/discord-stats/getStats.js
-
-      - name: Configure Git
+      - name: Commit stats.json
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-      
-      - name: Commit changes
-        run: |
-          git add .
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add mesh-gov-updates/discord-stats/stats.json
           git commit -m "chore: monthly Discord stats" || echo "No changes to commit"
-          
+
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
