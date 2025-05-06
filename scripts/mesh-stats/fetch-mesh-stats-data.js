@@ -287,29 +287,124 @@ export async function fetchMeshContributors(githubToken) {
             let pullsData = [];
             let hasMorePulls = true;
 
+            // First get open PRs
             while (hasMorePulls) {
-                const pullsResponse = await axios.get(
-                    `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
-                    {
-                        params: {
-                            state: 'all',
-                            per_page: 100,
-                            page: page
-                        },
-                        headers: {
-                            'Accept': 'application/vnd.github.v3+json',
-                            'Authorization': `token ${githubToken}`
+                try {
+                    const pullsResponse = await axios.get(
+                        `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
+                        {
+                            params: {
+                                state: 'all',  // Get all PRs: open, closed, and merged
+                                per_page: 100,
+                                page: page
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Authorization': `token ${githubToken}`
+                            }
                         }
-                    }
-                );
+                    );
 
-                if (pullsResponse.data.length === 0) {
+                    if (pullsResponse.data.length === 0) {
+                        hasMorePulls = false;
+                    } else {
+                        console.log(`  - Found ${pullsResponse.data.length} PRs on page ${page}`);
+                        pullsData = pullsData.concat(pullsResponse.data);
+                        page++;
+                    }
+                } catch (error) {
+                    if (error.response && error.response.status === 404) {
+                        console.warn(`Repository ${repo.name} might be private or not exist. Skipping regular PRs.`);
+                    } else if (error.response && error.response.status === 403) {
+                        console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping regular PRs.`);
+                    } else {
+                        console.error(`Error fetching PRs for ${repo.name} page ${page}:`, error.message);
+                    }
                     hasMorePulls = false;
-                } else {
-                    pullsData = pullsData.concat(pullsResponse.data);
-                    page++;
                 }
             }
+
+            // Also try the issues endpoint which can sometimes catch PRs missed by the pulls endpoint
+            console.log(`Fetching PRs via issues endpoint for ${repo.name}...`);
+            page = 1;
+            hasMorePulls = true;
+
+            while (hasMorePulls) {
+                try {
+                    // Use the issues endpoint which also lists PRs
+                    const issuesResponse = await axios.get(
+                        `https://api.github.com/repos/MeshJS/${repo.name}/issues`,
+                        {
+                            params: {
+                                state: 'all',
+                                filter: 'all',
+                                per_page: 100,
+                                page: page
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Authorization': `token ${githubToken}`
+                            }
+                        }
+                    );
+
+                    if (issuesResponse.data.length === 0) {
+                        hasMorePulls = false;
+                    } else {
+                        // Filter to only include pull requests from issues
+                        const prsFromIssues = issuesResponse.data.filter(issue => issue.pull_request);
+                        console.log(`  - Found ${prsFromIssues.length} PRs from issues on page ${page}`);
+
+                        if (prsFromIssues.length > 0) {
+                            // For each PR from issues, fetch full PR data to get required info
+                            for (const prIssue of prsFromIssues) {
+                                try {
+                                    const pullUrl = prIssue.pull_request.url;
+                                    const fullPrResponse = await axios.get(
+                                        pullUrl,
+                                        {
+                                            headers: {
+                                                'Accept': 'application/vnd.github.v3+json',
+                                                'Authorization': `token ${githubToken}`
+                                            }
+                                        }
+                                    );
+
+                                    // Check if we already have this PR and add it if not
+                                    const existingPrNumbers = new Set(pullsData.map(pr => pr.number));
+                                    if (!existingPrNumbers.has(fullPrResponse.data.number)) {
+                                        pullsData.push(fullPrResponse.data);
+                                        console.log(`  - Added PR #${fullPrResponse.data.number} by ${fullPrResponse.data.user?.login || 'unknown'}`);
+                                    }
+                                } catch (error) {
+                                    console.error(`Error fetching full PR data for issue #${prIssue.number}:`, error.message);
+                                }
+                            }
+                        }
+
+                        page++;
+                    }
+                } catch (error) {
+                    if (error.response && error.response.status === 404) {
+                        console.warn(`Repository ${repo.name} might be private or not exist. Skipping issues PRs.`);
+                    } else if (error.response && error.response.status === 403) {
+                        console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping issues PRs.`);
+                    } else {
+                        console.error(`Error fetching issues/PRs for ${repo.name} page ${page}:`, error.message);
+                    }
+                    hasMorePulls = false;
+                }
+            }
+
+            console.log(`Total PRs found for ${repo.name}: ${pullsData.length}`);
+
+            // Log PR authors for debugging
+            const prAuthors = pullsData.map(pr => pr.user?.login).filter(Boolean);
+            const prAuthorsCount = {};
+            prAuthors.forEach(author => {
+                prAuthorsCount[author] = (prAuthorsCount[author] || 0) + 1;
+            });
+            console.log(`PR authors for ${repo.name}:`, prAuthorsCount);
 
             // Count PRs by user
             pullsData.forEach(pr => {
@@ -347,6 +442,58 @@ export async function fetchMeshContributors(githubToken) {
                     }
                 }
             });
+
+            // Also fetch merged PRs specifically to ensure we don't miss any
+            console.log(`Fetching merged pull requests for ${repo.name}...`);
+            page = 1;
+            hasMorePulls = true;
+
+            while (hasMorePulls) {
+                try {
+                    const mergedPullsResponse = await axios.get(
+                        `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
+                        {
+                            params: {
+                                state: 'closed',
+                                per_page: 100,
+                                page: page
+                            },
+                            headers: {
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Authorization': `token ${githubToken}`
+                            }
+                        }
+                    );
+
+                    if (mergedPullsResponse.data.length === 0) {
+                        hasMorePulls = false;
+                    } else {
+                        // Filter to only include merged PRs, not just closed ones
+                        const mergedPRs = mergedPullsResponse.data.filter(pr => pr.merged_at !== null);
+                        console.log(`  - Found ${mergedPRs.length} merged PRs on page ${page}`);
+
+                        // Add only PRs that aren't already in pullsData
+                        const existingPrNumbers = new Set(pullsData.map(pr => pr.number));
+                        const newMergedPRs = mergedPRs.filter(pr => !existingPrNumbers.has(pr.number));
+
+                        if (newMergedPRs.length > 0) {
+                            console.log(`  - Adding ${newMergedPRs.length} new merged PRs`);
+                            pullsData = pullsData.concat(newMergedPRs);
+                        }
+
+                        page++;
+                    }
+                } catch (error) {
+                    if (error.response && error.response.status === 404) {
+                        console.warn(`Repository ${repo.name} might be private or not exist. Skipping merged PRs.`);
+                    } else if (error.response && error.response.status === 403) {
+                        console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping merged PRs.`);
+                    } else {
+                        console.error(`Error fetching merged PRs for ${repo.name} page ${page}:`, error.message);
+                    }
+                    hasMorePulls = false;
+                }
+            }
         } catch (error) {
             console.error(`Error fetching data for ${repo.name}:`, error.message);
         }
