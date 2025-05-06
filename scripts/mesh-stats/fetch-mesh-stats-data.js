@@ -287,27 +287,32 @@ export async function fetchMeshContributors(githubToken) {
                     contributorsMap.set(contributor.login, {
                         login: contributor.login,
                         avatar_url: contributor.avatar_url,
-                        contributions: contributor.contributions,
+                        commits: contributor.contributions,
                         pull_requests: 0,
+                        contributions: contributor.contributions,
                         repositories: [{
                             name: repo.name,
-                            contributions: contributor.contributions,
-                            pull_requests: 0
+                            commits: contributor.contributions,
+                            pull_requests: 0,
+                            contributions: contributor.contributions
                         }]
                     });
                 } else {
                     const existingContributor = contributorsMap.get(contributor.login);
+                    existingContributor.commits += contributor.contributions;
                     existingContributor.contributions += contributor.contributions;
 
                     // Check if contributor already has this repository
                     const existingRepo = existingContributor.repositories.find(r => r.name === repo.name);
                     if (existingRepo) {
+                        existingRepo.commits += contributor.contributions;
                         existingRepo.contributions += contributor.contributions;
                     } else {
                         existingContributor.repositories.push({
                             name: repo.name,
-                            contributions: contributor.contributions,
-                            pull_requests: 0
+                            commits: contributor.contributions,
+                            pull_requests: 0,
+                            contributions: contributor.contributions
                         });
                     }
                 }
@@ -448,28 +453,33 @@ export async function fetchMeshContributors(githubToken) {
                     contributorsMap.set(login, {
                         login: login,
                         avatar_url: pr.user.avatar_url,
-                        contributions: 0,
+                        commits: 0,
                         pull_requests: 1,
+                        contributions: 1,
                         repositories: [{
                             name: repo.name,
-                            contributions: 0,
-                            pull_requests: 1
+                            commits: 0,
+                            pull_requests: 1,
+                            contributions: 1
                         }]
                     });
                 } else {
                     // User exists, increment PR count
                     const contributor = contributorsMap.get(login);
                     contributor.pull_requests += 1;
+                    contributor.contributions += 1;
 
                     // Find or create repository entry
                     const repoEntry = contributor.repositories.find(r => r.name === repo.name);
                     if (repoEntry) {
                         repoEntry.pull_requests += 1;
+                        repoEntry.contributions += 1;
                     } else {
                         contributor.repositories.push({
                             name: repo.name,
-                            contributions: 0,
-                            pull_requests: 1
+                            commits: 0,
+                            pull_requests: 1,
+                            contributions: 1
                         });
                     }
                 }
@@ -535,17 +545,13 @@ export async function fetchMeshContributors(githubToken) {
     const contributors = Array.from(contributorsMap.values())
         .sort((a, b) => {
             // Primary sort by total contributions
-            const totalA = a.contributions + a.pull_requests;
-            const totalB = b.contributions + b.pull_requests;
-            return totalB - totalA;
+            return b.contributions - a.contributions;
         });
 
     // Sort repositories for each contributor
     contributors.forEach(contributor => {
         contributor.repositories.sort((a, b) => {
-            const totalA = a.contributions + a.pull_requests;
-            const totalB = b.contributions + b.pull_requests;
-            return totalB - totalA;
+            return b.contributions - a.contributions;
         });
     });
 
@@ -553,7 +559,7 @@ export async function fetchMeshContributors(githubToken) {
         unique_count: contributors.length,
         contributors,
         total_pull_requests: contributors.reduce((sum, c) => sum + c.pull_requests, 0),
-        total_commits: contributors.reduce((sum, c) => sum + c.contributions, 0),
-        total_contributions: contributors.reduce((sum, c) => sum + c.contributions + c.pull_requests, 0)
+        total_commits: contributors.reduce((sum, c) => sum + c.commits, 0),
+        total_contributions: contributors.reduce((sum, c) => sum + c.commits + c.pull_requests, 0)
     };
 }
