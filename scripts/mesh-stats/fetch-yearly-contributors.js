@@ -164,13 +164,15 @@ export async function fetchYearlyContributors(githubToken) {
                     }
                 }
 
-                // Fetch pull requests
+                // Fetch pull requests from both pulls and issues endpoints
                 let page = 1;
                 let pullsData = [];
                 let hasMorePulls = true;
+                let processedPRs = new Set(); // Track processed PRs to avoid duplicates
 
                 while (hasMorePulls) {
                     try {
+                        // First try the pulls endpoint
                         const pullsResponse = await axios.get(
                             `https://api.github.com/repos/MeshJS/${repo.name}/pulls`,
                             {
@@ -194,7 +196,14 @@ export async function fetchYearlyContributors(githubToken) {
                                 const prDate = new Date(pr.merged_at);
                                 return prDate.getFullYear() === year;
                             });
-                            pullsData = pullsData.concat(mergedPRs);
+
+                            // Add to processed set and pulls data
+                            mergedPRs.forEach(pr => {
+                                if (!processedPRs.has(pr.number)) {
+                                    processedPRs.add(pr.number);
+                                    pullsData.push(pr);
+                                }
+                            });
                             page++;
                         }
                     } catch (error) {
@@ -204,6 +213,74 @@ export async function fetchYearlyContributors(githubToken) {
                             console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping PRs.`);
                         } else {
                             console.error(`Error fetching PRs for ${repo.name} page ${page}:`, error.message);
+                        }
+                        hasMorePulls = false;
+                    }
+                }
+
+                // Now check the issues endpoint for pull requests
+                page = 1;
+                hasMorePulls = true;
+
+                while (hasMorePulls) {
+                    try {
+                        const issuesResponse = await axios.get(
+                            `https://api.github.com/repos/MeshJS/${repo.name}/issues`,
+                            {
+                                params: {
+                                    state: 'closed',
+                                    per_page: 100,
+                                    page: page
+                                },
+                                headers: {
+                                    'Accept': 'application/vnd.github.v3+json',
+                                    'Authorization': `token ${githubToken}`
+                                }
+                            }
+                        );
+
+                        if (issuesResponse.data.length === 0) {
+                            hasMorePulls = false;
+                        } else {
+                            // Filter for pull requests (issues with pull_request field)
+                            const prsFromIssues = issuesResponse.data.filter(issue =>
+                                issue.pull_request &&
+                                !processedPRs.has(issue.number)
+                            );
+
+                            // Fetch additional PR details for each PR from issues
+                            for (const prIssue of prsFromIssues) {
+                                try {
+                                    const prDetails = await axios.get(
+                                        `https://api.github.com/repos/MeshJS/${repo.name}/pulls/${prIssue.number}`,
+                                        {
+                                            headers: {
+                                                'Accept': 'application/vnd.github.v3+json',
+                                                'Authorization': `token ${githubToken}`
+                                            }
+                                        }
+                                    );
+
+                                    if (prDetails.data.merged_at) {
+                                        const prDate = new Date(prDetails.data.merged_at);
+                                        if (prDate.getFullYear() === year) {
+                                            processedPRs.add(prIssue.number);
+                                            pullsData.push(prDetails.data);
+                                        }
+                                    }
+                                } catch (error) {
+                                    console.warn(`Could not fetch details for PR #${prIssue.number}: ${error.message}`);
+                                }
+                            }
+                            page++;
+                        }
+                    } catch (error) {
+                        if (error.response && error.response.status === 404) {
+                            console.warn(`Repository ${repo.name} might be private or not exist. Skipping issues.`);
+                        } else if (error.response && error.response.status === 403) {
+                            console.warn(`API rate limit exceeded or insufficient permissions for ${repo.name}. Skipping issues.`);
+                        } else {
+                            console.error(`Error fetching issues for ${repo.name} page ${page}:`, error.message);
                         }
                         hasMorePulls = false;
                     }
