@@ -15,6 +15,7 @@ export async function fetchYearlyContributors(githubToken) {
     let allRepos = [];
     let page = 1;
     let hasMoreRepos = true;
+    let earliestYear = new Date().getFullYear(); // Initialize with current year
 
     while (hasMoreRepos) {
         try {
@@ -34,6 +35,13 @@ export async function fetchYearlyContributors(githubToken) {
             if (reposResponse.data.length === 0) {
                 hasMoreRepos = false;
             } else {
+                // Find the earliest repository creation date
+                reposResponse.data.forEach(repo => {
+                    const createdYear = new Date(repo.created_at).getFullYear();
+                    if (createdYear < earliestYear) {
+                        earliestYear = createdYear;
+                    }
+                });
                 allRepos = allRepos.concat(reposResponse.data);
                 page++;
             }
@@ -44,6 +52,7 @@ export async function fetchYearlyContributors(githubToken) {
     }
 
     console.log(`Found ${allRepos.length} repositories in the MeshJS organization`);
+    console.log(`Earliest repository creation year: ${earliestYear}`);
 
     // Get existing yearly files
     const existingYears = new Set();
@@ -58,7 +67,13 @@ export async function fetchYearlyContributors(githubToken) {
     }
 
     const currentYear = new Date().getFullYear();
-    const yearsToUpdate = existingYears.size === 0 ? [currentYear] : [currentYear];
+    // If we have existing years, only update the current year
+    // Otherwise, process all years from earliest to current
+    const yearsToUpdate = existingYears.size > 0 ?
+        [currentYear] :
+        Array.from({ length: currentYear - earliestYear + 1 }, (_, i) => earliestYear + i);
+
+    console.log(`Years to process: ${yearsToUpdate.join(', ')}`);
 
     // Process each year
     for (const year of yearsToUpdate) {
