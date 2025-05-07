@@ -302,16 +302,13 @@ export async function fetchMeshContributors(githubToken) {
                             if (!commit.author || !commit.author.login) continue;
 
                             const login = commit.author.login;
-                            const timestamp = commit.commit.author.date;
 
                             if (!contributorsMap.has(login)) {
                                 const repoData = {};
                                 repoData[repo.name] = {
                                     commits: 1,
                                     pull_requests: 0,
-                                    contributions: 1,
-                                    commit_timestamps: [timestamp],
-                                    pr_timestamps: []
+                                    contributions: 1
                                 };
 
                                 contributorsMap.set(login, {
@@ -331,14 +328,11 @@ export async function fetchMeshContributors(githubToken) {
                                 if (existingContributor.repositories[repo.name]) {
                                     existingContributor.repositories[repo.name].commits += 1;
                                     existingContributor.repositories[repo.name].contributions += 1;
-                                    existingContributor.repositories[repo.name].commit_timestamps.push(timestamp);
                                 } else {
                                     existingContributor.repositories[repo.name] = {
                                         commits: 1,
                                         pull_requests: 0,
-                                        contributions: 1,
-                                        commit_timestamps: [timestamp],
-                                        pr_timestamps: []
+                                        contributions: 1
                                     };
                                 }
                             }
@@ -503,9 +497,7 @@ export async function fetchMeshContributors(githubToken) {
                     repoData[repo.name] = {
                         commits: 0,
                         pull_requests: 1,
-                        contributions: 1,
-                        commit_timestamps: [],
-                        pr_timestamps: [timestamp]
+                        contributions: 1
                     };
 
                     contributorsMap.set(login, {
@@ -526,14 +518,11 @@ export async function fetchMeshContributors(githubToken) {
                     if (contributor.repositories[repo.name]) {
                         contributor.repositories[repo.name].pull_requests += 1;
                         contributor.repositories[repo.name].contributions += 1;
-                        contributor.repositories[repo.name].pr_timestamps.push(timestamp);
                     } else {
                         contributor.repositories[repo.name] = {
                             commits: 0,
                             pull_requests: 1,
-                            contributions: 1,
-                            commit_timestamps: [],
-                            pr_timestamps: [timestamp]
+                            contributions: 1
                         };
                     }
                 }
@@ -549,10 +538,7 @@ export async function fetchMeshContributors(githubToken) {
         const reposArray = Object.entries(contributor.repositories).map(([repoName, repoData]) => {
             return {
                 name: repoName,
-                ...repoData,
-                // Sort timestamps in descending order (newest first)
-                commit_timestamps: repoData.commit_timestamps.sort((a, b) => new Date(b) - new Date(a)),
-                pr_timestamps: repoData.pr_timestamps.sort((a, b) => new Date(b) - new Date(a))
+                ...repoData
             };
         });
 
