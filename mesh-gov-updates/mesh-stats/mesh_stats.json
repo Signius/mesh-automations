@@ -1,12 +1,12 @@
 {
   "github": {
-    "core_in_package_json": 753,
-    "core_in_any_file": 1340,
-    "core_in_repositories": 753
+    "core_in_package_json": 754,
+    "core_in_any_file": 1736,
+    "core_in_repositories": 754
   },
   "npm": {
     "downloads": {
-      "last_day": 516,
+      "last_day": 0,
       "last_week": 1463,
       "last_month": 8551,
       "last_year": 56420,
@@ -19,11 +19,11 @@
     "core_csl_package_downloads": 44912,
     "core_cst_package_downloads": 58942,
     "latest_version": "1.9.0-beta.42",
-    "dependents_count": 280306
+    "dependents_count": 280431
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-05-07&to=2025-05-07",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-05-07&to=2025-05-07"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-05-08&to=2025-05-08",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-05-08&to=2025-05-08"
   },
   "contributors": {
     "unique_count": 48,

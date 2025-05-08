@@ -99,8 +99,8 @@
     {
       "month": "May",
       "projects": 360,
-      "files": 1340,
-      "repositories": 753
+      "files": 1736,
+      "repositories": 754
     },
     {
       "month": "June",
@@ -149,5 +149,5 @@
     "name": "March",
     "downloads": 10635
   },
-  "lastUpdated": "2025-05-07T06:06:23.607Z"
+  "lastUpdated": "2025-05-08T01:09:19.469Z"
 }
