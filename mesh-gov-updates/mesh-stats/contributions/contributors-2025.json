@@ -1,20 +1,21 @@
 {
   "year": 2025,
-  "unique_count": 21,
+  "unique_count": 22,
   "contributors": [
     {
       "login": "jinglescode",
       "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-      "commits": 349,
+      "commits": 346,
       "pull_requests": 59,
-      "contributions": 408,
+      "contributions": 405,
       "repositories": [
         {
           "name": "mesh",
-          "commits": 182,
+          "commits": 183,
           "pull_requests": 28,
-          "contributions": 210,
+          "contributions": 211,
           "commit_timestamps": [
+            "2025-05-11T00:32:55Z",
             "2025-05-06T13:22:28Z",
             "2025-05-06T13:03:31Z",
             "2025-05-04T06:02:26Z",
@@ -448,10 +449,11 @@
         },
         {
           "name": "governance",
-          "commits": 10,
+          "commits": 11,
           "pull_requests": 1,
-          "contributions": 11,
+          "contributions": 12,
           "commit_timestamps": [
+            "2025-05-09T04:21:09Z",
             "2025-05-06T05:05:08Z",
             "2025-04-28T17:32:08Z",
             "2025-04-22T05:29:37Z",
@@ -466,20 +468,6 @@
           "pr_timestamps": [
             "2025-04-14T12:54:03Z"
           ]
-        },
-        {
-          "name": "funding",
-          "commits": 5,
-          "pull_requests": 0,
-          "contributions": 5,
-          "commit_timestamps": [
-            "2025-03-21T02:06:01Z",
-            "2025-03-21T02:05:29Z",
-            "2025-03-21T01:48:50Z",
-            "2025-03-21T01:46:26Z",
-            "2025-03-21T01:40:31Z"
-          ],
-          "pr_timestamps": []
         },
         {
           "name": "examples",
@@ -517,16 +505,19 @@
     {
       "login": "twwu123",
       "avatar_url": "https://avatars.githubusercontent.com/u/45336147?v=4",
-      "commits": 166,
-      "pull_requests": 25,
-      "contributions": 191,
+      "commits": 169,
+      "pull_requests": 26,
+      "contributions": 195,
       "repositories": [
         {
           "name": "mesh",
-          "commits": 166,
-          "pull_requests": 25,
-          "contributions": 191,
+          "commits": 169,
+          "pull_requests": 26,
+          "contributions": 195,
           "commit_timestamps": [
+            "2025-05-08T12:38:40Z",
+            "2025-05-08T10:09:41Z",
+            "2025-05-08T10:06:03Z",
             "2025-05-06T04:15:07Z",
             "2025-05-06T04:08:01Z",
             "2025-05-06T04:06:49Z",
@@ -695,6 +686,7 @@
             "2025-01-13T03:00:22Z"
           ],
           "pr_timestamps": [
+            "2025-05-08T12:38:40Z",
             "2025-04-22T01:36:43Z",
             "2025-04-07T02:28:00Z",
             "2025-04-04T16:53:16Z",
@@ -869,16 +861,35 @@
     {
       "login": "Andre-Diamond",
       "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
-      "commits": 63,
-      "pull_requests": 6,
-      "contributions": 69,
+      "commits": 80,
+      "pull_requests": 7,
+      "contributions": 87,
       "repositories": [
         {
           "name": "governance",
-          "commits": 61,
-          "pull_requests": 6,
-          "contributions": 67,
+          "commits": 80,
+          "pull_requests": 7,
+          "contributions": 87,
           "commit_timestamps": [
+            "2025-05-09T05:35:56Z",
+            "2025-05-09T04:05:53Z",
+            "2025-05-09T04:05:02Z",
+            "2025-05-08T11:00:01Z",
+            "2025-05-08T10:59:10Z",
+            "2025-05-08T07:23:55Z",
+            "2025-05-08T06:02:55Z",
+            "2025-05-08T05:01:29Z",
+            "2025-05-07T10:34:34Z",
+            "2025-05-07T10:33:13Z",
+            "2025-05-07T08:38:01Z",
+            "2025-05-06T08:51:25Z",
+            "2025-05-06T08:50:03Z",
+            "2025-05-06T08:44:38Z",
+            "2025-05-06T08:26:33Z",
+            "2025-05-06T08:15:02Z",
+            "2025-05-06T08:01:57Z",
+            "2025-05-06T07:17:16Z",
+            "2025-05-06T06:31:08Z",
             "2025-05-06T04:56:42Z",
             "2025-05-06T04:50:16Z",
             "2025-05-06T04:46:41Z",
@@ -942,6 +953,7 @@
             "2025-03-21T10:38:07Z"
           ],
           "pr_timestamps": [
+            "2025-05-09T04:21:09Z",
             "2025-05-06T05:05:08Z",
             "2025-04-22T05:29:37Z",
             "2025-04-14T07:41:58Z",
@@ -949,35 +961,28 @@
             "2025-04-04T04:09:22Z",
             "2025-03-28T08:04:40Z"
           ]
-        },
-        {
-          "name": "funding",
-          "commits": 2,
-          "pull_requests": 0,
-          "contributions": 2,
-          "commit_timestamps": [
-            "2025-03-17T10:08:51Z",
-            "2025-03-17T10:03:39Z"
-          ],
-          "pr_timestamps": []
         }
       ]
     },
     {
       "login": "QSchlegel",
       "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4",
-      "commits": 51,
-      "pull_requests": 13,
-      "contributions": 64,
+      "commits": 55,
+      "pull_requests": 14,
+      "contributions": 69,
       "repositories": [
         {
           "name": "multisig",
-          "commits": 51,
-          "pull_requests": 13,
-          "contributions": 64,
+          "commits": 55,
+          "pull_requests": 14,
+          "contributions": 69,
           "commit_timestamps": [
+            "2025-05-09T08:12:50Z",
+            "2025-05-09T06:59:31Z",
+            "2025-05-07T13:54:45Z",
             "2025-05-03T09:06:23Z",
             "2025-05-03T09:04:29Z",
+            "2025-05-03T08:57:43Z",
             "2025-04-16T12:09:57Z",
             "2025-04-16T11:58:07Z",
             "2025-04-14T16:54:27Z",
@@ -1029,6 +1034,7 @@
             "2025-01-10T12:43:29Z"
           ],
           "pr_timestamps": [
+            "2025-05-09T08:12:50Z",
             "2025-04-15T00:31:10Z",
             "2025-03-20T07:48:34Z",
             "2025-03-20T07:48:32Z",
@@ -1127,16 +1133,17 @@
     {
       "login": "justinschreiner",
       "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4",
-      "commits": 51,
-      "pull_requests": 5,
-      "contributions": 56,
+      "commits": 52,
+      "pull_requests": 6,
+      "contributions": 58,
       "repositories": [
         {
           "name": "multisig",
-          "commits": 51,
-          "pull_requests": 5,
-          "contributions": 56,
+          "commits": 52,
+          "pull_requests": 6,
+          "contributions": 58,
           "commit_timestamps": [
+            "2025-05-08T21:32:55Z",
             "2025-04-28T22:17:50Z",
             "2025-04-28T21:37:51Z",
             "2025-04-07T22:53:48Z",
@@ -1190,6 +1197,7 @@
             "2025-03-06T21:17:57Z"
           ],
           "pr_timestamps": [
+            "2025-05-09T06:59:31Z",
             "2025-05-03T09:06:23Z",
             "2025-04-15T00:31:09Z",
             "2025-04-02T08:50:22Z",
@@ -1281,108 +1289,11 @@
       ]
     },
     {
-      "login": "Technosophorso",
-      "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
-      "commits": 50,
-      "pull_requests": 1,
-      "contributions": 51,
-      "repositories": [
-        {
-          "name": "funding",
-          "commits": 39,
-          "pull_requests": 0,
-          "contributions": 39,
-          "commit_timestamps": [
-            "2025-04-30T23:14:51Z",
-            "2025-04-30T22:34:24Z",
-            "2025-04-20T07:41:04Z",
-            "2025-04-20T07:40:15Z",
-            "2025-04-15T09:01:28Z",
-            "2025-04-14T04:23:41Z",
-            "2025-04-07T15:55:06Z",
-            "2025-04-01T07:45:48Z",
-            "2025-03-24T16:11:33Z",
-            "2025-03-24T16:08:30Z",
-            "2025-03-13T12:46:46Z",
-            "2025-03-13T08:48:00Z",
-            "2025-03-07T12:42:41Z",
-            "2025-03-07T12:40:04Z",
-            "2025-02-28T12:43:41Z",
-            "2025-02-28T12:43:07Z",
-            "2025-02-28T11:41:17Z",
-            "2025-02-28T11:40:46Z",
-            "2025-02-28T11:35:43Z",
-            "2025-02-25T18:53:26Z",
-            "2025-02-18T06:00:05Z",
-            "2025-02-17T10:40:25Z",
-            "2025-02-17T08:59:05Z",
-            "2025-02-17T08:50:02Z",
-            "2025-02-15T06:30:24Z",
-            "2025-02-15T06:20:09Z",
-            "2025-02-15T05:35:17Z",
-            "2025-02-15T05:31:05Z",
-            "2025-01-02T09:34:57Z",
-            "2025-01-02T09:34:13Z",
-            "2025-01-02T09:33:34Z",
-            "2025-01-02T09:32:39Z",
-            "2025-01-02T09:31:55Z",
-            "2025-01-02T09:31:04Z",
-            "2025-01-02T09:29:43Z",
-            "2025-01-02T09:27:00Z",
-            "2025-01-02T09:14:28Z",
-            "2025-01-02T09:12:54Z",
-            "2025-01-02T09:11:25Z"
-          ],
-          "pr_timestamps": []
-        },
-        {
-          "name": "polkadot",
-          "commits": 5,
-          "pull_requests": 0,
-          "contributions": 5,
-          "commit_timestamps": [
-            "2025-03-07T07:18:15Z",
-            "2025-03-07T07:16:17Z",
-            "2025-01-30T06:21:47Z",
-            "2025-01-30T06:19:52Z",
-            "2025-01-14T11:33:41Z"
-          ],
-          "pr_timestamps": []
-        },
-        {
-          "name": "governance",
-          "commits": 4,
-          "pull_requests": 1,
-          "contributions": 5,
-          "commit_timestamps": [
-            "2025-05-06T09:13:07Z",
-            "2025-04-28T07:13:47Z",
-            "2025-04-28T06:53:14Z",
-            "2025-04-28T06:48:33Z"
-          ],
-          "pr_timestamps": [
-            "2025-04-28T17:32:08Z"
-          ]
-        },
-        {
-          "name": "bounty-board",
-          "commits": 2,
-          "pull_requests": 0,
-          "contributions": 2,
-          "commit_timestamps": [
-            "2025-03-11T08:01:23Z",
-            "2025-02-26T19:13:09Z"
-          ],
-          "pr_timestamps": []
-        }
-      ]
-    },
-    {
       "login": "ErickRomeroDev",
       "avatar_url": "https://avatars.githubusercontent.com/u/39284904?v=4",
-      "commits": 22,
+      "commits": 24,
       "pull_requests": 10,
-      "contributions": 32,
+      "contributions": 34,
       "repositories": [
         {
           "name": "midnight",
@@ -1425,6 +1336,17 @@
             "2025-03-24T00:28:21Z",
             "2025-03-20T15:36:27Z"
           ]
+        },
+        {
+          "name": "midnight-starter-template",
+          "commits": 2,
+          "pull_requests": 0,
+          "contributions": 2,
+          "commit_timestamps": [
+            "2025-05-11T18:34:45Z",
+            "2025-05-11T18:34:18Z"
+          ],
+          "pr_timestamps": []
         }
       ]
     },
@@ -1575,35 +1497,33 @@
       ]
     },
     {
-      "login": "actions-user",
-      "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-      "commits": 15,
-      "pull_requests": 0,
-      "contributions": 15,
+      "login": "abdelkrimdev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4",
+      "commits": 11,
+      "pull_requests": 1,
+      "contributions": 12,
       "repositories": [
         {
-          "name": "funding",
-          "commits": 15,
-          "pull_requests": 0,
-          "contributions": 15,
+          "name": "mesh",
+          "commits": 11,
+          "pull_requests": 1,
+          "contributions": 12,
           "commit_timestamps": [
-            "2025-05-05T00:52:37Z",
-            "2025-04-30T00:49:22Z",
-            "2025-04-28T00:51:02Z",
-            "2025-04-22T00:47:57Z",
-            "2025-04-14T00:51:01Z",
-            "2025-04-07T00:49:22Z",
-            "2025-03-31T00:50:22Z",
-            "2025-03-24T00:48:00Z",
-            "2025-03-19T04:01:03Z",
-            "2025-03-18T09:23:51Z",
-            "2025-03-18T07:21:34Z",
-            "2025-03-17T12:35:35Z",
-            "2025-03-17T12:24:01Z",
-            "2025-03-17T12:05:26Z",
-            "2025-03-17T10:09:14Z"
+            "2025-05-09T14:37:30Z",
+            "2025-05-09T14:14:36Z",
+            "2025-05-09T10:45:03Z",
+            "2025-04-28T15:21:27Z",
+            "2025-04-23T11:30:09Z",
+            "2025-04-23T11:24:34Z",
+            "2025-04-21T15:16:19Z",
+            "2025-04-21T10:46:25Z",
+            "2025-04-21T10:02:51Z",
+            "2025-04-21T09:56:19Z",
+            "2025-04-18T10:51:51Z"
           ],
-          "pr_timestamps": []
+          "pr_timestamps": [
+            "2025-05-11T00:32:55Z"
+          ]
         }
       ]
     },
@@ -1634,6 +1554,44 @@
           "pr_timestamps": [
             "2025-04-11T16:39:59Z",
             "2025-03-25T00:16:07Z"
+          ]
+        }
+      ]
+    },
+    {
+      "login": "Technosophorso",
+      "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
+      "commits": 9,
+      "pull_requests": 1,
+      "contributions": 10,
+      "repositories": [
+        {
+          "name": "polkadot",
+          "commits": 5,
+          "pull_requests": 0,
+          "contributions": 5,
+          "commit_timestamps": [
+            "2025-03-07T07:18:15Z",
+            "2025-03-07T07:16:17Z",
+            "2025-01-30T06:21:47Z",
+            "2025-01-30T06:19:52Z",
+            "2025-01-14T11:33:41Z"
+          ],
+          "pr_timestamps": []
+        },
+        {
+          "name": "governance",
+          "commits": 4,
+          "pull_requests": 1,
+          "contributions": 5,
+          "commit_timestamps": [
+            "2025-05-06T09:13:07Z",
+            "2025-04-28T07:13:47Z",
+            "2025-04-28T06:53:14Z",
+            "2025-04-28T06:48:33Z"
+          ],
+          "pr_timestamps": [
+            "2025-04-28T17:32:08Z"
           ]
         }
       ]
@@ -1684,6 +1642,28 @@
           ],
           "pr_timestamps": [
             "2025-05-05T11:39:25Z"
+          ]
+        }
+      ]
+    },
+    {
+      "login": "nelsonksh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/150728524?v=4",
+      "commits": 2,
+      "pull_requests": 1,
+      "contributions": 3,
+      "repositories": [
+        {
+          "name": "mesh",
+          "commits": 2,
+          "pull_requests": 1,
+          "contributions": 3,
+          "commit_timestamps": [
+            "2025-05-09T10:19:14Z",
+            "2025-05-08T17:09:10Z"
+          ],
+          "pr_timestamps": [
+            "2025-05-09T10:45:03Z"
           ]
         }
       ]
@@ -1770,7 +1750,7 @@
       ]
     }
   ],
-  "total_pull_requests": 168,
-  "total_commits": 1035,
-  "total_contributions": 1203
+  "total_pull_requests": 174,
+  "total_commits": 1016,
+  "total_contributions": 1190
 }
