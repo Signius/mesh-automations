@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action10k0unljvaej0kd89w7pn0zkgdx59c7xkl0x5q78dzvdtd73u0kmqq5xl5y5",
+    "proposalTxHash": "7d9fc9fe4cee64fb34e57783378ac869a85c78d6fbcd4078ed131ab6fa3c7db600",
+    "proposalIndex": 0,
+    "voteTxHash": "d7b13ea9b79ef883ea74210583d1a0333e32953e988bbbfc182cbfa69d05e1de",
+    "blockTime": "2025-05-13T08:09:20.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "2025 Cardano NCL",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 554,
+    "expirationEpoch": 561,
+    "rationale": "No rationale available"
+  },
+  {
     "proposalId": "gov_action10ueqgzwenxr39le68n0se9peu92r7gm2846xwehh3u0ahc0qd0uqqyljxu5",
     "proposalTxHash": "7f320409d9998712ff3a3cdf0c9439e1543f236a3d746766f78f1fdbe1e06bf800",
     "proposalIndex": 0,
