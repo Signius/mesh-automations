@@ -1,13 +1,13 @@
-name: DRep Voting Action
+name: DRep Delegation Action
 
 on:
   schedule:
-    - cron: '0 0 * * 1'  # Runs at midnight UTC every Monday
-    - cron: '0 0 * * 4'  # Runs at midnight UTC every Thursday
+    - cron: '20 0 * * 1'  # Runs at 00:20 UTC every Monday
+    - cron: '20 0 * * 4'  # Runs at 00:20 UTC every Thursday
   workflow_dispatch:
 
 jobs:
-  fetch-drep-info:
+  fetch-delegation-info:
     runs-on: ubuntu-latest
     
     steps:
@@ -21,10 +21,10 @@ jobs:
     - name: Install dependencies
       run: npm install
       
-    - name: Run voting action script
+    - name: Run delegation info script
       env:
         KOIOS_API_KEY: ${{ secrets.KOIOS_API_KEY }}
-      run: node scripts/drep-voting/voting-action.js
+      run: node scripts/drep-voting/drep-delegation-info.js
 
     - name: Check for changes
       id: git-check
@@ -37,12 +37,12 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add mesh-gov-updates/drep-voting/*.json
-        git commit -m "Update DRep voting history"
+        git add mesh-gov-updates/drep-voting/drep-delegation-info.json
+        git commit -m "Update DRep delegation information"
         
     - name: Push changes
       if: steps.git-check.outputs.changes > 0
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        branch: ${{ github.ref }} 
