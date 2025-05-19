@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-05-16T02:15:05.632Z",
+  "timestamp": "2025-05-19T02:19:56.305Z",
   "projects": [
     {
       "projectDetails": {
@@ -22,7 +22,7 @@
           "unique_wallets": 313
         }
       },
-      "milestonesCompleted": 4
+      "milestonesCompleted": 5
     },
     {
       "projectDetails": {
@@ -53,7 +53,7 @@
         "title": "Mesh Software as a Service",
         "budget": 100000,
         "milestones_qty": 5,
-        "funds_distributed": 56000,
+        "funds_distributed": 80000,
         "project_id": 1200148,
         "name": "Mesh Software as a Service",
         "category": "F12: Cardano Use Cases: Concept",
