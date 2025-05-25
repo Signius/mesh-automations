@@ -1,6 +1,22 @@
 {
   "timeline": {
     "epochs": {
+      "518": {
+        "voting_power_lovelace": "0",
+        "total_delegators": 0
+      },
+      "519": {
+        "voting_power_lovelace": "0",
+        "total_delegators": 0
+      },
+      "520": {
+        "voting_power_lovelace": "0",
+        "total_delegators": 0
+      },
+      "521": {
+        "voting_power_lovelace": "0",
+        "total_delegators": 0
+      },
       "522": {
         "voting_power_lovelace": "308757729830",
         "total_delegators": 0
@@ -152,18 +168,22 @@
       "559": {
         "voting_power_lovelace": "984373658567",
         "total_delegators": 9
+      },
+      "560": {
+        "voting_power_lovelace": "21286849812423",
+        "total_delegators": 11
       }
     },
-    "current_epoch": 559,
-    "total_delegators": 9,
-    "total_amount_ada": 984373.658567
+    "current_epoch": 560,
+    "total_delegators": 11,
+    "total_amount_ada": 21286849.812423
   },
   "drepInfo": {
     "drepId": "drep1yv4uesaj92wk8ljlsh4p7jzndnzrflchaz5fzug3zxg4naqkpeas3",
-    "amount": "984373658567",
+    "amount": "21286849812423",
     "active": true,
     "registered": true,
     "expires_epoch_no": 577,
-    "last_updated": "2025-05-22T02:17:13.403Z"
+    "last_updated": "2025-05-25T09:05:11.752Z"
   }
 }
