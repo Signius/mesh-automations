@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-05-28T02:15:59.216Z",
+  "timestamp": "2025-05-29T03:56:20.010Z",
   "projects": [
     {
       "projectDetails": {
@@ -7,7 +7,7 @@
         "title": "MeshJS SDK Operations: Supporting Open-Source Library Development, Developer Resources & Builder Community",
         "budget": 169413,
         "milestones_qty": 5,
-        "funds_distributed": 135528,
+        "funds_distributed": 169413,
         "project_id": 1000107,
         "name": "MeshJS SDK Operations: Supporting Open-Source Library Development, Developer Resources & Builder Community",
         "category": "F10: OSDE: Open Source Dev Ecosystem",
@@ -145,7 +145,7 @@
         "title": "Mesh: Cquisitor - Transaction Investigation Tool",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 32000,
+        "funds_distributed": 72000,
         "project_id": 1300134,
         "name": "Mesh: Cquisitor - Transaction Investigation Tool",
         "category": "F13: Cardano Open: Developers",
@@ -168,7 +168,7 @@
         "title": "Maintain Mesh and Build Developer Community",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 112000,
+        "funds_distributed": 152000,
         "project_id": 1300130,
         "name": "Maintain Mesh and Build Developer Community",
         "category": "F13: Cardano Open: Developers",
