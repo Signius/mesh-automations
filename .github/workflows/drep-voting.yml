@@ -3,6 +3,7 @@ name: DRep Voting Action
 on:
   schedule:
     - cron: '0 3 * * *'  # Runs at 3 AM UTC every day
+    - cron: '0 15 * * *'  # Runs at 3 PM UTC every day
   workflow_dispatch:
 
 jobs:
