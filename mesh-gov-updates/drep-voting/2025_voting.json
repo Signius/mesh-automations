@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1u9x73kwufaxa70lfy59g4ynwyrcsaxdcd0gxzzmh67s9fxq4j8hqqk2phgh",
+    "proposalTxHash": "e14de8d9dc4f4ddf3fe9250a8a926e20f10e99b86bd0610b77d7a054981591ee00",
+    "proposalIndex": 0,
+    "voteTxHash": "a77ce4a6648f6693ace082ac212e049b463806699beb212fd301730d67da5f35",
+    "blockTime": "2025-06-01T13:54:30.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Cardano Blockchain Ecosystem Budget - 275M ada Administered by Intersect",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 557,
+    "expirationEpoch": 564,
+    "rationale": "No rationale available"
+  },
+  {
     "proposalId": "gov_action10k0unljvaej0kd89w7pn0zkgdx59c7xkl0x5q78dzvdtd73u0kmqq5xl5y5",
     "proposalTxHash": "7d9fc9fe4cee64fb34e57783378ac869a85c78d6fbcd4078ed131ab6fa3c7db600",
     "proposalIndex": 0,
