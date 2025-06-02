@@ -1,4 +1,4 @@
-name: DRep Voting Action
+name: Update Voting Rationales
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  fetch-drep-info:
+  update-rationales:
     runs-on: ubuntu-latest
     
     steps:
@@ -21,10 +21,10 @@ jobs:
     - name: Install dependencies
       run: npm install
       
-    - name: Run voting action script
+    - name: Run update rationales script
       env:
         KOIOS_API_KEY: ${{ secrets.KOIOS_API_KEY }}
-      run: node scripts/drep-voting/voting-action.js
+      run: node scripts/drep-voting/update-rationales.js
 
     - name: Check for changes
       id: git-check
@@ -37,12 +37,12 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add mesh-gov-updates/drep-voting/*.json
-        git commit -m "Update DRep voting history"
+        git add voting-history/missing-voting-rationales/rationales.json
+        git commit -m "Update voting rationales"
         
     - name: Push changes
       if: steps.git-check.outputs.changes > 0
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        branch: ${{ github.ref }} 
