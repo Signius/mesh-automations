@@ -95,11 +95,12 @@ async function fetchVoteContext(epoch, shortId) {
                 }
 
                 if (parsedData?.body?.comment) {
-                    // Clean up the comment text
+                    // Clean up the comment text while preserving formatting
                     const comment = parsedData.body.comment
                         .replace(/\\n/g, '\n') // Convert escaped newlines back
                         .replace(/\\r/g, '\r') // Convert escaped carriage returns back
                         .replace(/\\t/g, '\t') // Convert escaped tabs back
+                        .replace(/\n{3,}/g, '\n\n') // Replace 3 or more newlines with 2
                         .trim(); // Remove any leading/trailing whitespace
 
                     return comment;
@@ -156,16 +157,9 @@ async function updateMissingRationales() {
         let updated = false;
         for (const [proposalId, data] of Object.entries(newRationales)) {
             if (!missingRationales[proposalId]) {
-                // Format the rationale text to preserve line breaks and spacing
-                const formattedRationale = data.rationale
-                    .replace(/\n\n/g, '\n') // Remove double line breaks
-                    .replace(/\n/g, '\\n') // Escape single line breaks
-                    .replace(/\r/g, '\\r') // Escape carriage returns
-                    .replace(/\t/g, '\\t'); // Escape tabs
-
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: formattedRationale
+                    rationale: data.rationale
                 };
                 updated = true;
                 console.log(`Added new rationale for proposal ${proposalId}`);
@@ -174,22 +168,15 @@ async function updateMissingRationales() {
 
         // Save updated rationales if changes were made
         if (updated) {
-            // Convert the rationales back to readable format before saving
-            const formattedRationales = {};
-            for (const [proposalId, data] of Object.entries(missingRationales)) {
-                formattedRationales[proposalId] = {
-                    title: data.title,
-                    rationale: data.rationale
-                        .replace(/\\n/g, '\n') // Convert escaped newlines back
-                        .replace(/\\r/g, '\r') // Convert escaped carriage returns back
-                        .replace(/\\t/g, '\t') // Convert escaped tabs back
-                };
-            }
+            // Format the JSON string to preserve newlines
+            const jsonString = JSON.stringify(missingRationales, null, 4);
+            const formattedJson = jsonString
+                .replace(/"rationale": "([^"]*)"/g, (match, p1) => {
+                    // Preserve newlines in the rationale field
+                    return `"rationale": ${JSON.stringify(p1)}`;
+                });
 
-            fs.writeFileSync(
-                missingRationalesPath,
-                JSON.stringify(formattedRationales, null, 4)
-            );
+            fs.writeFileSync(missingRationalesPath, formattedJson);
             console.log('Updated missing rationales file');
         } else {
             console.log('No new rationales to add');
