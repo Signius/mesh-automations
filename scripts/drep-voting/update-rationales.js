@@ -62,21 +62,22 @@ async function fetchVoteContext(epoch, shortId) {
       raw = JSON.stringify(raw);
     }
 
-    // Normalize CRLF → LF and strip out non-printable control characters,
+    // Normalize CRLF → LF, strip out non-printable control characters (including 2028/2029 and BOM),
     // but do not collapse multiple '\n' or trim away blank lines.
     const cleaned = raw
       .replace(/\r\n/g, '\n')
       .replace(/\r/g, '\n')
-      .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F]/g, '');
+      .replace(
+        /[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F\u2028\u2029\uFEFF]/g,
+        ''
+      );
     const parsedData = JSON.parse(cleaned);
 
     if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
       const comment = parsedData.body.comment;
 
       // Only standardize line endings inside the comment; do not collapse blank lines.
-      return comment
-        .replace(/\r\n/g, '\n')
-        .replace(/\r/g, '\n');
+      return comment.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     }
   } catch (error) {
     if (error.response?.status !== 404) {
