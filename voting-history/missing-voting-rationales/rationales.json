@@ -30,9 +30,5 @@
     "gov_action1nd3t833j7v5sz65k3tp9yyvztw60sjcjgcgjr37682s3m7frwrusqmd2k80": {
         "title": "2025 Net Change Limit",
         "rationale": "We see the NCL of 350M Ada for 2025 as a relatively high, yet acceptable metric which is likely to cover all most relevant funding to core operations within the Cardano Ecosystem. Good enough to agree with. Lets then make sure that we effectively allocate budgets up to 350m ADA in 2025 and not waste funds with projects no one needs. "
-    },
-    "gov_action1u9x73kwufaxa70lfy59g4ynwyrcsaxdcd0gxzzmh67s9fxq4j8hqqk2phgh": {
-        "title": "Cardano Blockchain Ecosystem Budget - 275M ada Administered by Intersect",
-        "rationale": "CIP100:comment"
     }
 }
