@@ -82,19 +82,25 @@ async function fetchVoteContext(epoch, shortId) {
                 // First try to parse as is
                 let parsedData;
                 try {
-                    // Parse the JSON but preserve the original string for the comment
-                    const rawData = typeof response.data === 'string' ? response.data : JSON.stringify(response.data);
-                    parsedData = JSON.parse(rawData);
+                    // Clean the string first to handle control characters
+                    const cleanedData = response.data
+                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
+                        .replace(/\r\n/g, '\n') // Normalize line endings
+                        .replace(/\n/g, '\\n') // Escape newlines
+                        .replace(/\r/g, '\\r') // Escape carriage returns
+                        .replace(/\t/g, '\\t'); // Escape tabs
 
-                    // Extract the comment directly from the raw string to preserve formatting
-                    const commentMatch = rawData.match(/"comment":\s*"([^"]*)"/);
-                    if (commentMatch) {
-                        return commentMatch[1]
-                            .replace(/\\n/g, '\n') // Convert escaped newlines to actual newlines
-                            .replace(/\n/g, '\\n'); // Convert actual newlines to \n
-                    }
+                    parsedData = JSON.parse(cleanedData);
                 } catch (parseError) {
                     console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
+                    return null;
+                }
+
+                if (parsedData?.body?.comment) {
+                    // Return the comment with explicit \n characters
+                    return parsedData.body.comment
+                        .replace(/\\n/g, '\n') // Convert escaped newlines to actual newlines
+                        .replace(/\n/g, '\\n'); // Convert actual newlines to \n
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
