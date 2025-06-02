@@ -163,8 +163,9 @@ async function updateMissingRationales() {
             // Create a custom replacer function for JSON.stringify
             const replacer = (key, value) => {
                 if (key === 'rationale') {
-                    // For rationale fields, just escape newlines and quotes
+                    // For rationale fields, preserve the original formatting
                     return value
+                        .replace(/\r\n/g, '\n') // Normalize line endings
                         .replace(/\n/g, '\\n') // Convert newlines to \n
                         .replace(/"/g, '\\"'); // Escape quotes
                 }
@@ -172,7 +173,8 @@ async function updateMissingRationales() {
             };
 
             // Stringify with custom replacer and proper indentation
-            const jsonString = JSON.stringify(missingRationales, replacer, 4);
+            const jsonString = JSON.stringify(missingRationales, replacer, 4)
+                .replace(/\\n/g, '\n'); // Convert escaped newlines back to actual newlines
 
             // Write to file
             fs.writeFileSync(missingRationalesPath, jsonString);
