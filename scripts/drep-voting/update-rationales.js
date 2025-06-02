@@ -79,9 +79,30 @@ async function fetchVoteContext(epoch, shortId) {
 
         if (response.data) {
             try {
-                const parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                // First try to parse as is
+                let parsedData;
+                try {
+                    parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                } catch (parseError) {
+                    // If that fails, try to clean the string first
+                    const cleanedData = response.data
+                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
+                        .replace(/\n/g, '\\n') // Escape newlines
+                        .replace(/\r/g, '\\r') // Escape carriage returns
+                        .replace(/\t/g, '\\t'); // Escape tabs
+
+                    parsedData = JSON.parse(cleanedData);
+                }
+
                 if (parsedData?.body?.comment) {
-                    return parsedData.body.comment;
+                    // Clean up the comment text
+                    const comment = parsedData.body.comment
+                        .replace(/\\n/g, '\n') // Convert escaped newlines back
+                        .replace(/\\r/g, '\r') // Convert escaped carriage returns back
+                        .replace(/\\t/g, '\t') // Convert escaped tabs back
+                        .trim(); // Remove any leading/trailing whitespace
+
+                    return comment;
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
