@@ -60,16 +60,17 @@ async function fetchVoteContext(epoch, shortId) {
     // Normalize CRLF → LF and CR → LF
     raw = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-    // Use a multiline-aware regex to capture everything between
-    // "comment": "   ← opening quote
-    // ... (any characters, including blank lines) ...
-    // "         ← closing quote that comes before a comma or closing brace
-    const commentRegex = /"comment"\s*:\s*"([\s\S]*?)"\s*(?:,|\})/;
-    const match = raw.match(commentRegex);
+    // 1) Extract the body block (everything between `"body": {` and the next `}, "hashAlgorithm"`)
+    const bodyBlockMatch = raw.match(/"body"\s*:\s*\{([\s\S]*?)\}\s*,\s*"hashAlgorithm"/);
+    if (bodyBlockMatch && bodyBlockMatch[1] !== undefined) {
+      const bodyContent = bodyBlockMatch[1];
 
-    if (match && match[1] !== undefined) {
-      // match[1] is the raw comment text (with literal newlines and spacing)
-      return match[1];
+      // 2) Within that body block, find `"comment": " ... "` (multiline)
+      const commentMatch = bodyContent.match(/"comment"\s*:\s*"([\s\S]*?)"/);
+      if (commentMatch && commentMatch[1] !== undefined) {
+        // commentMatch[1] contains the full comment text (with literal newlines)
+        return commentMatch[1];
+      }
     }
   } catch (error) {
     if (error.response?.status !== 404) {
