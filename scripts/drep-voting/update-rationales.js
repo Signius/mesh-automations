@@ -38,13 +38,12 @@ async function getAvailableVoteContextFolders() {
         const response = await axios.get(url, {
             headers: {
                 'Accept': 'application/vnd.github.v3+json'
-                // Add Authorization header if hitting rate limits
             }
         });
 
         return response.data
             .filter(item => item.type === 'dir')
-            .map(item => item.name); // e.g., ["506_phgh", "507_r9wx"]
+            .map(item => item.name);
     } catch (error) {
         console.error('Failed to fetch vote-context folders:', error.message);
         return [];
@@ -57,16 +56,24 @@ async function fetchVoteContext(epoch, shortId) {
     try {
         const response = await axios.get(url, { responseType: 'text' });
 
-        let parsedData;
-        try {
-            parsedData = JSON.parse(response.data);
-        } catch (parseError) {
-            const cleaned = response.data.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
-            parsedData = JSON.parse(cleaned);
+        let raw = response.data;
+        if (typeof raw !== 'string') {
+            raw = JSON.stringify(raw);
         }
 
+        const cleaned = raw.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+        const parsedData = JSON.parse(cleaned);
+
         if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
-            return parsedData.body.comment.trim();
+            const comment = parsedData.body.comment;
+
+            // Normalize newlines and clean up excessive whitespace
+            return comment
+                .replace(/\r\n/g, '\n')
+                .replace(/\r/g, '\n')
+                .replace(/[ ]{2,}/g, ' ')
+                .replace(/\n{3,}/g, '\n\n')
+                .trim();
         }
     } catch (error) {
         if (error.response?.status !== 404) {
@@ -134,10 +141,10 @@ async function scanVoteContexts(proposalMap) {
             if (rationale) {
                 newRationales[proposalId] = {
                     title: proposalData.title,
-                    rationale // ← Let JSON.stringify handle line breaks
+                    rationale
                 };
                 processedIds.add(proposalId);
-                break; // Stop checking more folders for this proposal
+                break;
             }
         }
     }
@@ -159,7 +166,7 @@ async function updateMissingRationales() {
             if (!missingRationales[proposalId]) {
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: data.rationale // 👈 Let JSON.stringify preserve `\n`
+                    rationale: data.rationale
                 };
                 updated = true;
                 console.log(`✅ Added new rationale for proposal ${proposalId}`);
