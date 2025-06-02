@@ -70,23 +70,23 @@ async function fetchVoteContext(epoch, shortId) {
     const url = `${BASE_URL}/${CURRENT_YEAR}/${epoch}_${shortId}/Vote_Context.jsonId`;
 
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, { responseType: 'text' });
 
         let parsedData;
         try {
-            parsedData = typeof response.data === 'string'
-                ? JSON.parse(response.data)
-                : response.data;
+            // If JSON string, parse
+            parsedData = JSON.parse(response.data);
         } catch (parseError) {
-            const cleanedData = response.data.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
-            parsedData = JSON.parse(cleanedData);
+            // Fallback: clean up invalid control characters, parse again
+            const cleaned = response.data.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+            parsedData = JSON.parse(cleaned);
         }
 
-        if (parsedData?.body?.comment) {
-            return parsedData.body.comment;
+        if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
+            return parsedData.body.comment.trim(); // keep formatting
         }
     } catch (error) {
-        // Likely a 404 or bad JSON
+        console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
     }
 
     return null;
