@@ -82,22 +82,20 @@ async function fetchVoteContext(epoch, shortId) {
                 // First try to parse as is
                 let parsedData;
                 try {
-                    // Clean the string first to handle control characters while preserving newlines
+                    parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                } catch (parseError) {
+                    // If that fails, try to clean the string first
                     const cleanedData = response.data
-                        .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F]/g, '') // Remove control chars except \n and \r
-                        .replace(/\r\n/g, '\n') // Normalize line endings to \n
-                        .replace(/\r/g, '\n'); // Convert remaining \r to \n
+                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
+                        .replace(/\n/g, '\\n') // Escape newlines
+                        .replace(/\r/g, '\\r') // Escape carriage returns
+                        .replace(/\t/g, '\\t'); // Escape tabs
 
                     parsedData = JSON.parse(cleanedData);
-                } catch (parseError) {
-                    console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
-                    return null;
                 }
 
                 if (parsedData?.body?.comment) {
-                    // Preserve the original formatting by converting newlines to \n
-                    return parsedData.body.comment
-                        .replace(/\n/g, '\\n'); // Convert actual newlines to \n
+                    return parsedData.body.comment;
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
@@ -151,7 +149,6 @@ async function updateMissingRationales() {
         let updated = false;
         for (const [proposalId, data] of Object.entries(newRationales)) {
             if (!missingRationales[proposalId]) {
-                // Store rationale with explicit \n characters
                 missingRationales[proposalId] = {
                     title: data.title,
                     rationale: data.rationale
@@ -163,8 +160,21 @@ async function updateMissingRationales() {
 
         // Save updated rationales if changes were made
         if (updated) {
-            // Write to file with standard JSON stringify, preserving \n characters
-            const jsonString = JSON.stringify(missingRationales, null, 4);
+            // Create a custom replacer function for JSON.stringify
+            const replacer = (key, value) => {
+                if (key === 'rationale') {
+                    // For rationale fields, just escape newlines and quotes
+                    return value
+                        .replace(/\n/g, '\\n') // Convert newlines to \n
+                        .replace(/"/g, '\\"'); // Escape quotes
+                }
+                return value;
+            };
+
+            // Stringify with custom replacer and proper indentation
+            const jsonString = JSON.stringify(missingRationales, replacer, 4);
+
+            // Write to file
             fs.writeFileSync(missingRationalesPath, jsonString);
             console.log('Updated missing rationales file');
         } else {
