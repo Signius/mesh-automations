@@ -168,15 +168,23 @@ async function updateMissingRationales() {
 
         // Save updated rationales if changes were made
         if (updated) {
-            // Format the JSON string to preserve newlines
-            const jsonString = JSON.stringify(missingRationales, null, 4);
-            const formattedJson = jsonString
-                .replace(/"rationale": "([^"]*)"/g, (match, p1) => {
-                    // Preserve newlines in the rationale field
-                    return `"rationale": ${JSON.stringify(p1)}`;
-                });
+            // Create a custom replacer function for JSON.stringify
+            const replacer = (key, value) => {
+                if (key === 'rationale') {
+                    // For rationale fields, preserve newlines and handle quotes properly
+                    return value
+                        .replace(/\n/g, '\\n') // Convert newlines to \n
+                        .replace(/"/g, '\\"') // Escape quotes
+                        .replace(/\\n{2,}/g, '\\n\\n'); // Normalize multiple newlines
+                }
+                return value;
+            };
 
-            fs.writeFileSync(missingRationalesPath, formattedJson);
+            // Stringify with custom replacer and proper indentation
+            const jsonString = JSON.stringify(missingRationales, replacer, 4);
+
+            // Write to file
+            fs.writeFileSync(missingRationalesPath, jsonString);
             console.log('Updated missing rationales file');
         } else {
             console.log('No new rationales to add');
