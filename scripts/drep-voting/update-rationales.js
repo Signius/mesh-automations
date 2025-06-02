@@ -13,6 +13,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 const CONFIG_PATH = path.join(__dirname, '..', '..', 'config.json');
 const missingRationalesPath = path.join(__dirname, '..', '..', 'voting-history', 'missing-voting-rationales', 'rationales.json');
 
+// Load config
 const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 const drepId = config.drepId;
 
@@ -27,6 +28,14 @@ try {
     missingRationales = JSON.parse(fs.readFileSync(missingRationalesPath, 'utf8'));
 } catch (error) {
     console.warn('Could not read missing rationales file:', error.message);
+}
+
+// Normalize line breaks for consistent escaped `\n`
+function normalizeNewlines(str) {
+    return str
+        .replace(/\r\n/g, '\n') // Windows -> Unix
+        .replace(/\r/g, '\n')   // Mac -> Unix
+        .replace(/\n/g, '\\n'); // Escape newlines
 }
 
 async function getProposalList() {
@@ -74,16 +83,14 @@ async function fetchVoteContext(epoch, shortId) {
 
         let parsedData;
         try {
-            // If JSON string, parse
             parsedData = JSON.parse(response.data);
         } catch (parseError) {
-            // Fallback: clean up invalid control characters, parse again
             const cleaned = response.data.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
             parsedData = JSON.parse(cleaned);
         }
 
         if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
-            return parsedData.body.comment.trim(); // keep formatting
+            return parsedData.body.comment.trim(); // Preserve structure
         }
     } catch (error) {
         console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
@@ -130,7 +137,7 @@ async function updateMissingRationales() {
             if (!missingRationales[proposalId]) {
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: data.rationale
+                    rationale: normalizeNewlines(data.rationale)
                 };
                 updated = true;
                 console.log(`Added new rationale for proposal ${proposalId}`);
@@ -140,13 +147,13 @@ async function updateMissingRationales() {
         if (updated) {
             const jsonString = JSON.stringify(missingRationales, null, 4);
             fs.writeFileSync(missingRationalesPath, jsonString, { encoding: 'utf8' });
-            console.log('Updated missing rationales file');
+            console.log('✅ Updated missing rationales file');
         } else {
             console.log('No new rationales to add');
         }
 
     } catch (error) {
-        console.error('Error updating missing rationales:', error.message);
+        console.error('❌ Error updating missing rationales:', error.message);
         process.exit(1);
     }
 }
