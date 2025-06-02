@@ -82,13 +82,11 @@ async function fetchVoteContext(epoch, shortId) {
                 // First try to parse as is
                 let parsedData;
                 try {
-                    // Clean the string first to handle control characters
+                    // Clean the string first to handle control characters while preserving newlines
                     const cleanedData = response.data
-                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
-                        .replace(/\r\n/g, '\n') // Normalize line endings
-                        .replace(/\n/g, '\\n') // Escape newlines
-                        .replace(/\r/g, '\\r') // Escape carriage returns
-                        .replace(/\t/g, '\\t'); // Escape tabs
+                        .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F]/g, '') // Remove control chars except \n and \r
+                        .replace(/\r\n/g, '\n') // Normalize line endings to \n
+                        .replace(/\r/g, '\n'); // Convert remaining \r to \n
 
                     parsedData = JSON.parse(cleanedData);
                 } catch (parseError) {
@@ -97,9 +95,8 @@ async function fetchVoteContext(epoch, shortId) {
                 }
 
                 if (parsedData?.body?.comment) {
-                    // Return the comment with explicit \n characters
+                    // Preserve the original formatting by converting newlines to \n
                     return parsedData.body.comment
-                        .replace(/\\n/g, '\n') // Convert escaped newlines to actual newlines
                         .replace(/\n/g, '\\n'); // Convert actual newlines to \n
                 }
             } catch (parseError) {
@@ -166,7 +163,7 @@ async function updateMissingRationales() {
 
         // Save updated rationales if changes were made
         if (updated) {
-            // Write to file with standard JSON stringify
+            // Write to file with standard JSON stringify, preserving \n characters
             const jsonString = JSON.stringify(missingRationales, null, 4);
             fs.writeFileSync(missingRationalesPath, jsonString);
             console.log('Updated missing rationales file');
