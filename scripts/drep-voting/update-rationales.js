@@ -77,6 +77,26 @@ async function getProposalList() {
     }
 }
 
+async function getAvailableVoteContextFolders() {
+    const url = 'https://api.github.com/repos/MeshJS/governance/contents/vote-context/2025';
+
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                'Accept': 'application/vnd.github.v3+json'
+                // Add Authorization header if hitting rate limits
+            }
+        });
+
+        return response.data
+            .filter(item => item.type === 'dir')
+            .map(item => item.name); // e.g., ["506_phgh", "507_r9wx"]
+    } catch (error) {
+        console.error('Failed to fetch vote-context folders:', error.message);
+        return [];
+    }
+}
+
 async function fetchVoteContext(epoch, shortId) {
     const url = `${BASE_URL}/${CURRENT_YEAR}/${epoch}_${shortId}/Vote_Context.jsonId`;
 
@@ -95,29 +115,38 @@ async function fetchVoteContext(epoch, shortId) {
             return parsedData.body.comment.trim();
         }
     } catch (error) {
-        console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
+        if (error.response?.status !== 404) {
+            console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
+        }
     }
 
     return null;
 }
 
 async function scanVoteContexts(proposalMap) {
+    const availableFolders = await getAvailableVoteContextFolders();
+
     const newRationales = {};
     const processedIds = new Set();
 
-    for (let epoch = 500; epoch <= 600; epoch++) {
+    for (const folderName of availableFolders) {
+        const match = folderName.match(/^(\d+)_(\w{4})$/);
+        if (!match) continue;
+
+        const [_, epoch, shortId] = match;
+
         for (const [proposalId, proposalData] of Object.entries(proposalMap)) {
             if (processedIds.has(proposalId)) continue;
+            if (!proposalId.endsWith(shortId)) continue;
 
-            const shortId = proposalId.slice(-4);
             const rationale = await fetchVoteContext(epoch, shortId);
-
             if (rationale) {
                 newRationales[proposalId] = {
                     title: proposalData.title,
                     rationale
                 };
                 processedIds.add(proposalId);
+                break; // Stop checking more folders once matched
             }
         }
     }
@@ -142,7 +171,7 @@ async function updateMissingRationales() {
                     rationale: escapeForJSON(data.rationale)
                 };
                 updated = true;
-                console.log(`Added new rationale for proposal ${proposalId}`);
+                console.log(`✅ Added new rationale for proposal ${proposalId}`);
             }
         }
 
