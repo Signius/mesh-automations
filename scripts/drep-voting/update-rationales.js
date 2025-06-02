@@ -95,15 +95,7 @@ async function fetchVoteContext(epoch, shortId) {
                 }
 
                 if (parsedData?.body?.comment) {
-                    // Clean up the comment text while preserving formatting
-                    const comment = parsedData.body.comment
-                        .replace(/\\n/g, '\n') // Convert escaped newlines back
-                        .replace(/\\r/g, '\r') // Convert escaped carriage returns back
-                        .replace(/\\t/g, '\t') // Convert escaped tabs back
-                        .replace(/\n{3,}/g, '\n\n') // Replace 3 or more newlines with 2
-                        .trim(); // Remove any leading/trailing whitespace
-
-                    return comment;
+                    return parsedData.body.comment;
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
@@ -171,11 +163,10 @@ async function updateMissingRationales() {
             // Create a custom replacer function for JSON.stringify
             const replacer = (key, value) => {
                 if (key === 'rationale') {
-                    // For rationale fields, preserve newlines and handle quotes properly
+                    // For rationale fields, just escape newlines and quotes
                     return value
                         .replace(/\n/g, '\\n') // Convert newlines to \n
-                        .replace(/"/g, '\\"') // Escape quotes
-                        .replace(/\\n{2,}/g, '\\n\\n'); // Normalize multiple newlines
+                        .replace(/"/g, '\\"'); // Escape quotes
                 }
                 return value;
             };
