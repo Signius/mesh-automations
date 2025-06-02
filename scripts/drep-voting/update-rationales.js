@@ -30,53 +30,7 @@ try {
     console.warn('Could not read missing rationales file:', error.message);
 }
 
-// Escape function to preserve formatting safely
-function escapeForJSON(str) {
-    return str
-        .replace(/\\/g, '\\\\')   // Escape backslashes
-        .replace(/"/g, '\\"')     // Escape double quotes
-        .replace(/\r\n/g, '\n')   // Normalize CRLF to LF
-        .replace(/\r/g, '\n')     // Normalize CR to LF
-        .replace(/\n/g, '\\n');   // Escape newlines
-}
-
-async function getProposalList() {
-    try {
-        const apiKey = process.env.KOIOS_API_KEY;
-        if (!apiKey) throw new Error('KOIOS_API_KEY environment variable is not set');
-
-        const response = await axios.get(
-            `https://api.koios.rest/api/v1/voter_proposal_list?_voter_id=${drepId}`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'accept': 'application/json'
-                }
-            }
-        );
-
-        if (!Array.isArray(response.data)) {
-            throw new Error('Invalid response format: expected an array');
-        }
-
-        const proposalMap = response.data.reduce((acc, proposal) => {
-            if (!proposal.proposal_id) return acc;
-            acc[proposal.proposal_id] = {
-                title: proposal.meta_json?.body?.title || 'Unknown Proposal',
-                proposal
-            };
-            return acc;
-        }, {});
-
-        console.log(`Successfully mapped ${Object.keys(proposalMap).length} proposals`);
-        return proposalMap;
-    } catch (error) {
-        console.error('Error fetching proposal list:', error.message);
-        if (error.response) console.error('API Response:', error.response.data);
-        return {};
-    }
-}
-
+// Fetch available folders like 506_phgh, 507_r9wx
 async function getAvailableVoteContextFolders() {
     const url = 'https://api.github.com/repos/MeshJS/governance/contents/vote-context/2025';
 
@@ -123,6 +77,43 @@ async function fetchVoteContext(epoch, shortId) {
     return null;
 }
 
+async function getProposalList() {
+    try {
+        const apiKey = process.env.KOIOS_API_KEY;
+        if (!apiKey) throw new Error('KOIOS_API_KEY environment variable is not set');
+
+        const response = await axios.get(
+            `https://api.koios.rest/api/v1/voter_proposal_list?_voter_id=${drepId}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'accept': 'application/json'
+                }
+            }
+        );
+
+        if (!Array.isArray(response.data)) {
+            throw new Error('Invalid response format: expected an array');
+        }
+
+        const proposalMap = response.data.reduce((acc, proposal) => {
+            if (!proposal.proposal_id) return acc;
+            acc[proposal.proposal_id] = {
+                title: proposal.meta_json?.body?.title || 'Unknown Proposal',
+                proposal
+            };
+            return acc;
+        }, {});
+
+        console.log(`Successfully mapped ${Object.keys(proposalMap).length} proposals`);
+        return proposalMap;
+    } catch (error) {
+        console.error('Error fetching proposal list:', error.message);
+        if (error.response) console.error('API Response:', error.response.data);
+        return {};
+    }
+}
+
 async function scanVoteContexts(proposalMap) {
     const availableFolders = await getAvailableVoteContextFolders();
 
@@ -143,10 +134,10 @@ async function scanVoteContexts(proposalMap) {
             if (rationale) {
                 newRationales[proposalId] = {
                     title: proposalData.title,
-                    rationale
+                    rationale // ← Let JSON.stringify handle line breaks
                 };
                 processedIds.add(proposalId);
-                break; // Stop checking more folders once matched
+                break; // Stop checking more folders for this proposal
             }
         }
     }
@@ -168,7 +159,7 @@ async function updateMissingRationales() {
             if (!missingRationales[proposalId]) {
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: escapeForJSON(data.rationale)
+                    rationale: data.rationale // 👈 Let JSON.stringify preserve `\n`
                 };
                 updated = true;
                 console.log(`✅ Added new rationale for proposal ${proposalId}`);
