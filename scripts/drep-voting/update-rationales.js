@@ -156,7 +156,17 @@ async function updateMissingRationales() {
         let updated = false;
         for (const [proposalId, data] of Object.entries(newRationales)) {
             if (!missingRationales[proposalId]) {
-                missingRationales[proposalId] = data;
+                // Format the rationale text to preserve line breaks and spacing
+                const formattedRationale = data.rationale
+                    .replace(/\n\n/g, '\n') // Remove double line breaks
+                    .replace(/\n/g, '\\n') // Escape single line breaks
+                    .replace(/\r/g, '\\r') // Escape carriage returns
+                    .replace(/\t/g, '\\t'); // Escape tabs
+
+                missingRationales[proposalId] = {
+                    title: data.title,
+                    rationale: formattedRationale
+                };
                 updated = true;
                 console.log(`Added new rationale for proposal ${proposalId}`);
             }
@@ -164,9 +174,21 @@ async function updateMissingRationales() {
 
         // Save updated rationales if changes were made
         if (updated) {
+            // Convert the rationales back to readable format before saving
+            const formattedRationales = {};
+            for (const [proposalId, data] of Object.entries(missingRationales)) {
+                formattedRationales[proposalId] = {
+                    title: data.title,
+                    rationale: data.rationale
+                        .replace(/\\n/g, '\n') // Convert escaped newlines back
+                        .replace(/\\r/g, '\r') // Convert escaped carriage returns back
+                        .replace(/\\t/g, '\t') // Convert escaped tabs back
+                };
+            }
+
             fs.writeFileSync(
                 missingRationalesPath,
-                JSON.stringify(missingRationales, null, 4)
+                JSON.stringify(formattedRationales, null, 4)
             );
             console.log('Updated missing rationales file');
         } else {
