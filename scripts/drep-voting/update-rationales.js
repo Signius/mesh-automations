@@ -1,3 +1,5 @@
+// scripts/drep-voting/update-rationales.js
+
 import 'dotenv/config';
 import axios from 'axios';
 import fs from 'fs';
@@ -18,173 +20,175 @@ const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 const drepId = config.drepId;
 
 if (!drepId) {
-    console.error('DRep ID not found in config.json');
-    process.exit(1);
+  console.error('DRep ID not found in config.json');
+  process.exit(1);
 }
 
 // Load existing rationales
 let missingRationales = {};
 try {
-    missingRationales = JSON.parse(fs.readFileSync(missingRationalesPath, 'utf8'));
+  missingRationales = JSON.parse(fs.readFileSync(missingRationalesPath, 'utf8'));
 } catch (error) {
-    console.warn('Could not read missing rationales file:', error.message);
+  console.warn('Could not read missing rationales file:', error.message);
 }
 
 // Fetch available folders like 506_phgh, 507_r9wx
 async function getAvailableVoteContextFolders() {
-    const url = 'https://api.github.com/repos/MeshJS/governance/contents/vote-context/2025';
+  const url = 'https://api.github.com/repos/MeshJS/governance/contents/vote-context/2025';
 
-    try {
-        const response = await axios.get(url, {
-            headers: {
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
 
-        return response.data
-            .filter(item => item.type === 'dir')
-            .map(item => item.name);
-    } catch (error) {
-        console.error('Failed to fetch vote-context folders:', error.message);
-        return [];
-    }
+    return response.data
+      .filter(item => item.type === 'dir')
+      .map(item => item.name);
+  } catch (error) {
+    console.error('Failed to fetch vote-context folders:', error.message);
+    return [];
+  }
 }
 
 async function fetchVoteContext(epoch, shortId) {
-    const url = `${BASE_URL}/${CURRENT_YEAR}/${epoch}_${shortId}/Vote_Context.jsonId`;
+  const url = `${BASE_URL}/${CURRENT_YEAR}/${epoch}_${shortId}/Vote_Context.jsonId`;
 
-    try {
-        const response = await axios.get(url, { responseType: 'text' });
-
-        let raw = response.data;
-        if (typeof raw !== 'string') {
-            raw = JSON.stringify(raw);
-        }
-
-        const cleaned = raw.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
-        const parsedData = JSON.parse(cleaned);
-
-        if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
-            const comment = parsedData.body.comment;
-
-            // Normalize newlines and clean up excessive whitespace
-            return comment
-                .replace(/\r\n/g, '\n')
-                .replace(/\r/g, '\n')
-                .replace(/[ ]{2,}/g, ' ')
-                .replace(/\n{3,}/g, '\n\n')
-                .trim();
-        }
-    } catch (error) {
-        if (error.response?.status !== 404) {
-            console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
-        }
+  try {
+    const response = await axios.get(url, { responseType: 'text' });
+    let raw = response.data;
+    if (typeof raw !== 'string') {
+      raw = JSON.stringify(raw);
     }
 
-    return null;
+    // Normalize CRLF → LF and strip out non-printable control characters,
+    // but do not collapse multiple '\n' or trim away blank lines.
+    const cleaned = raw
+      .replace(/\r\n/g, '\n')
+      .replace(/\r/g, '\n')
+      .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F]/g, '');
+    const parsedData = JSON.parse(cleaned);
+
+    if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
+      const comment = parsedData.body.comment;
+
+      // Only standardize line endings inside the comment; do not collapse blank lines.
+      return comment
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n');
+    }
+  } catch (error) {
+    if (error.response?.status !== 404) {
+      console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
+    }
+  }
+
+  return null;
 }
 
 async function getProposalList() {
-    try {
-        const apiKey = process.env.KOIOS_API_KEY;
-        if (!apiKey) throw new Error('KOIOS_API_KEY environment variable is not set');
+  try {
+    const apiKey = process.env.KOIOS_API_KEY;
+    if (!apiKey) throw new Error('KOIOS_API_KEY environment variable is not set');
 
-        const response = await axios.get(
-            `https://api.koios.rest/api/v1/voter_proposal_list?_voter_id=${drepId}`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'accept': 'application/json'
-                }
-            }
-        );
-
-        if (!Array.isArray(response.data)) {
-            throw new Error('Invalid response format: expected an array');
+    const response = await axios.get(
+      `https://api.koios.rest/api/v1/voter_proposal_list?_voter_id=${drepId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'accept': 'application/json'
         }
+      }
+    );
 
-        const proposalMap = response.data.reduce((acc, proposal) => {
-            if (!proposal.proposal_id) return acc;
-            acc[proposal.proposal_id] = {
-                title: proposal.meta_json?.body?.title || 'Unknown Proposal',
-                proposal
-            };
-            return acc;
-        }, {});
-
-        console.log(`Successfully mapped ${Object.keys(proposalMap).length} proposals`);
-        return proposalMap;
-    } catch (error) {
-        console.error('Error fetching proposal list:', error.message);
-        if (error.response) console.error('API Response:', error.response.data);
-        return {};
+    if (!Array.isArray(response.data)) {
+      throw new Error('Invalid response format: expected an array');
     }
+
+    const proposalMap = response.data.reduce((acc, proposal) => {
+      if (!proposal.proposal_id) return acc;
+      acc[proposal.proposal_id] = {
+        title: proposal.meta_json?.body?.title || 'Unknown Proposal',
+        proposal
+      };
+      return acc;
+    }, {});
+
+    console.log(`Successfully mapped ${Object.keys(proposalMap).length} proposals`);
+    return proposalMap;
+  } catch (error) {
+    console.error('Error fetching proposal list:', error.message);
+    if (error.response) console.error('API Response:', error.response.data);
+    return {};
+  }
 }
 
 async function scanVoteContexts(proposalMap) {
-    const availableFolders = await getAvailableVoteContextFolders();
+  const availableFolders = await getAvailableVoteContextFolders();
 
-    const newRationales = {};
-    const processedIds = new Set();
+  const newRationales = {};
+  const processedIds = new Set();
 
-    for (const folderName of availableFolders) {
-        const match = folderName.match(/^(\d+)_(\w{4})$/);
-        if (!match) continue;
+  for (const folderName of availableFolders) {
+    const match = folderName.match(/^(\d+)_(\w{4})$/);
+    if (!match) continue;
 
-        const [_, epoch, shortId] = match;
+    const [_, epoch, shortId] = match;
 
-        for (const [proposalId, proposalData] of Object.entries(proposalMap)) {
-            if (processedIds.has(proposalId)) continue;
-            if (!proposalId.endsWith(shortId)) continue;
+    for (const [proposalId, proposalData] of Object.entries(proposalMap)) {
+      if (processedIds.has(proposalId)) continue;
+      if (!proposalId.endsWith(shortId)) continue;
 
-            const rationale = await fetchVoteContext(epoch, shortId);
-            if (rationale) {
-                newRationales[proposalId] = {
-                    title: proposalData.title,
-                    rationale
-                };
-                processedIds.add(proposalId);
-                break;
-            }
-        }
+      const rationale = await fetchVoteContext(epoch, shortId);
+      if (rationale) {
+        newRationales[proposalId] = {
+          title: proposalData.title,
+          rationale
+        };
+        processedIds.add(proposalId);
+        break;
+      }
     }
+  }
 
-    return newRationales;
+  return newRationales;
 }
 
 async function updateMissingRationales() {
-    try {
-        const proposalMap = await getProposalList();
-        console.log(`Found ${Object.keys(proposalMap).length} proposals`);
+  try {
+    const proposalMap = await getProposalList();
+    console.log(`Found ${Object.keys(proposalMap).length} proposals`);
 
-        const newRationales = await scanVoteContexts(proposalMap);
-        console.log(`Found ${Object.keys(newRationales).length} new rationales`);
+    const newRationales = await scanVoteContexts(proposalMap);
+    console.log(`Found ${Object.keys(newRationales).length} new rationales`);
 
-        let updated = false;
+    let updated = false;
 
-        for (const [proposalId, data] of Object.entries(newRationales)) {
-            if (!missingRationales[proposalId]) {
-                missingRationales[proposalId] = {
-                    title: data.title,
-                    rationale: data.rationale
-                };
-                updated = true;
-                console.log(`✅ Added new rationale for proposal ${proposalId}`);
-            }
-        }
-
-        if (updated) {
-            const jsonString = JSON.stringify(missingRationales, null, 4);
-            fs.writeFileSync(missingRationalesPath, jsonString, { encoding: 'utf8' });
-            console.log('✅ Updated missing rationales file');
-        } else {
-            console.log('No new rationales to add');
-        }
-
-    } catch (error) {
-        console.error('❌ Error updating missing rationales:', error.message);
-        process.exit(1);
+    for (const [proposalId, data] of Object.entries(newRationales)) {
+      if (!missingRationales[proposalId]) {
+        missingRationales[proposalId] = {
+          title: data.title,
+          rationale: data.rationale
+        };
+        updated = true;
+        console.log(`✅ Added new rationale for proposal ${proposalId}`);
+      }
     }
+
+    if (updated) {
+      // JSON.stringify will escape '\n' as '\\n' in the file,
+      // preserving every line break when parsed later.
+      const jsonString = JSON.stringify(missingRationales, null, 4);
+      fs.writeFileSync(missingRationalesPath, jsonString, { encoding: 'utf8' });
+      console.log('✅ Updated missing rationales file');
+    } else {
+      console.log('No new rationales to add');
+    }
+  } catch (error) {
+    console.error('❌ Error updating missing rationales:', error.message);
+    process.exit(1);
+  }
 }
 
 updateMissingRationales();
