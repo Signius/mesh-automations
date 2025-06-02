@@ -55,23 +55,21 @@ async function fetchVoteContext(epoch, shortId) {
 
   try {
     const response = await axios.get(url, { responseType: 'text' });
-    const raw = response.data;
+    let raw = response.data;
 
-    // Standardize line endings: CRLF → LF, CR → LF
-    const normalized = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    // Normalize CRLF → LF and CR → LF
+    raw = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-    // Use a regex to extract the entire "comment" string (including literal newlines).
-    // This pattern finds:
-    //   "comment": " ... (any characters, including newlines, non-greedily) ..."
-    // It ensures we stop at the first unescaped quote after the opening "comment": "
-    const commentRegex = /"comment"\s*:\s*"((?:\\.|[\s\S])*?)"/;
-    const match = normalized.match(commentRegex);
+    // Use a multiline-aware regex to capture everything between
+    // "comment": "   ← opening quote
+    // ... (any characters, including blank lines) ...
+    // "         ← closing quote that comes before a comma or closing brace
+    const commentRegex = /"comment"\s*:\s*"([\s\S]*?)"\s*(?:,|\})/;
+    const match = raw.match(commentRegex);
 
-    if (match && match[1]) {
-      // match[1] is the raw comment content, exactly as it appears between the quotes.
-      // We still normalize any stray CRLF or CR inside the captured comment.
-      const comment = match[1].replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-      return comment;
+    if (match && match[1] !== undefined) {
+      // match[1] is the raw comment text (with literal newlines and spacing)
+      return match[1];
     }
   } catch (error) {
     if (error.response?.status !== 404) {
@@ -172,8 +170,8 @@ async function updateMissingRationales() {
     }
 
     if (updated) {
-      // JSON.stringify will escape '\n' as '\\n' in the file,
-      // preserving every line break when parsed later.
+      // JSON.stringify escapes '\n' as '\\n' in the file,
+      // preserving every literal newline when parsed later.
       const jsonString = JSON.stringify(missingRationales, null, 4);
       fs.writeFileSync(missingRationalesPath, jsonString, { encoding: 'utf8' });
       console.log('✅ Updated missing rationales file');
