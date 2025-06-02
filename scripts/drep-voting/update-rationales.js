@@ -30,12 +30,14 @@ try {
     console.warn('Could not read missing rationales file:', error.message);
 }
 
-// Normalize line breaks for consistent escaped `\n`
-function normalizeNewlines(str) {
+// Escape function to preserve formatting safely
+function escapeForJSON(str) {
     return str
-        .replace(/\r\n/g, '\n') // Windows -> Unix
-        .replace(/\r/g, '\n')   // Mac -> Unix
-        .replace(/\n/g, '\\n'); // Escape newlines
+        .replace(/\\/g, '\\\\')   // Escape backslashes
+        .replace(/"/g, '\\"')     // Escape double quotes
+        .replace(/\r\n/g, '\n')   // Normalize CRLF to LF
+        .replace(/\r/g, '\n')     // Normalize CR to LF
+        .replace(/\n/g, '\\n');   // Escape newlines
 }
 
 async function getProposalList() {
@@ -90,7 +92,7 @@ async function fetchVoteContext(epoch, shortId) {
         }
 
         if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
-            return parsedData.body.comment.trim(); // Preserve structure
+            return parsedData.body.comment.trim();
         }
     } catch (error) {
         console.warn(`Fetch failed for ${epoch}_${shortId}:`, error.message);
@@ -137,7 +139,7 @@ async function updateMissingRationales() {
             if (!missingRationales[proposalId]) {
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: normalizeNewlines(data.rationale)
+                    rationale: escapeForJSON(data.rationale)
                 };
                 updated = true;
                 console.log(`Added new rationale for proposal ${proposalId}`);
