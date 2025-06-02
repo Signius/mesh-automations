@@ -97,10 +97,7 @@ async function fetchVoteContext(epoch, shortId) {
 
                 if (parsedData?.body?.comment) {
                     // Return the comment with preserved formatting
-                    return parsedData.body.comment
-                        .replace(/\\n/g, '\n') // Convert escaped newlines back to actual newlines
-                        .replace(/\\r/g, '\r') // Convert escaped carriage returns back
-                        .replace(/\\t/g, '\t'); // Convert escaped tabs back
+                    return parsedData.body.comment;
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
