@@ -82,22 +82,19 @@ async function fetchVoteContext(epoch, shortId) {
                 // First try to parse as is
                 let parsedData;
                 try {
-                    parsedData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+                    // Parse the JSON but preserve the original string for the comment
+                    const rawData = typeof response.data === 'string' ? response.data : JSON.stringify(response.data);
+                    parsedData = JSON.parse(rawData);
+
+                    // Extract the comment directly from the raw string to preserve formatting
+                    const commentMatch = rawData.match(/"comment":\s*"([^"]*)"/);
+                    if (commentMatch) {
+                        return commentMatch[1]
+                            .replace(/\\n/g, '\n') // Convert escaped newlines to actual newlines
+                            .replace(/\n/g, '\\n'); // Convert actual newlines to \n
+                    }
                 } catch (parseError) {
-                    // If that fails, try to clean the string first
-                    const cleanedData = response.data
-                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
-                        .replace(/\r\n/g, '\n') // Normalize line endings
-                        .replace(/\n/g, '\\n') // Escape newlines
-                        .replace(/\r/g, '\\r') // Escape carriage returns
-                        .replace(/\t/g, '\\t'); // Escape tabs
-
-                    parsedData = JSON.parse(cleanedData);
-                }
-
-                if (parsedData?.body?.comment) {
-                    // Return the comment with preserved formatting
-                    return parsedData.body.comment;
+                    console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
@@ -151,15 +148,10 @@ async function updateMissingRationales() {
         let updated = false;
         for (const [proposalId, data] of Object.entries(newRationales)) {
             if (!missingRationales[proposalId]) {
-                // Format the new rationale before adding it
-                const formattedRationale = data.rationale
-                    .replace(/\r\n/g, '\n') // Normalize line endings
-                    .replace(/\n/g, '\\n') // Convert newlines to \n
-                    .replace(/"/g, '\\"'); // Escape quotes
-
+                // Store rationale with explicit \n characters
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: formattedRationale
+                    rationale: data.rationale
                 };
                 updated = true;
                 console.log(`Added new rationale for proposal ${proposalId}`);
