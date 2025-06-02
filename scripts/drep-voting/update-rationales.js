@@ -87,6 +87,7 @@ async function fetchVoteContext(epoch, shortId) {
                     // If that fails, try to clean the string first
                     const cleanedData = response.data
                         .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
+                        .replace(/\r\n/g, '\n') // Normalize line endings
                         .replace(/\n/g, '\\n') // Escape newlines
                         .replace(/\r/g, '\\r') // Escape carriage returns
                         .replace(/\t/g, '\\t'); // Escape tabs
@@ -95,7 +96,11 @@ async function fetchVoteContext(epoch, shortId) {
                 }
 
                 if (parsedData?.body?.comment) {
-                    return parsedData.body.comment;
+                    // Return the comment with preserved formatting
+                    return parsedData.body.comment
+                        .replace(/\\n/g, '\n') // Convert escaped newlines back to actual newlines
+                        .replace(/\\r/g, '\r') // Convert escaped carriage returns back
+                        .replace(/\\t/g, '\t'); // Convert escaped tabs back
                 }
             } catch (parseError) {
                 console.warn(`Failed to parse response for ${epoch}_${shortId}:`, parseError.message);
@@ -149,9 +154,15 @@ async function updateMissingRationales() {
         let updated = false;
         for (const [proposalId, data] of Object.entries(newRationales)) {
             if (!missingRationales[proposalId]) {
+                // Format the new rationale before adding it
+                const formattedRationale = data.rationale
+                    .replace(/\r\n/g, '\n') // Normalize line endings
+                    .replace(/\n/g, '\\n') // Convert newlines to \n
+                    .replace(/"/g, '\\"'); // Escape quotes
+
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: data.rationale
+                    rationale: formattedRationale
                 };
                 updated = true;
                 console.log(`Added new rationale for proposal ${proposalId}`);
@@ -160,23 +171,8 @@ async function updateMissingRationales() {
 
         // Save updated rationales if changes were made
         if (updated) {
-            // Create a custom replacer function for JSON.stringify
-            const replacer = (key, value) => {
-                if (key === 'rationale') {
-                    // For rationale fields, preserve the original formatting
-                    return value
-                        .replace(/\r\n/g, '\n') // Normalize line endings
-                        .replace(/\n/g, '\\n') // Convert newlines to \n
-                        .replace(/"/g, '\\"'); // Escape quotes
-                }
-                return value;
-            };
-
-            // Stringify with custom replacer and proper indentation
-            const jsonString = JSON.stringify(missingRationales, replacer, 4)
-                .replace(/\\n/g, '\n'); // Convert escaped newlines back to actual newlines
-
-            // Write to file
+            // Write to file with standard JSON stringify
+            const jsonString = JSON.stringify(missingRationales, null, 4);
             fs.writeFileSync(missingRationalesPath, jsonString);
             console.log('Updated missing rationales file');
         } else {
