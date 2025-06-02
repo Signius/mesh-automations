@@ -1,13 +1,13 @@
 {
   "year": 2025,
   "yearlyTotals": {
-    "core": 41205,
-    "react": 39546,
-    "transaction": 40804,
-    "wallet": 41538,
-    "provider": 39039,
-    "coreCsl": 25957,
-    "coreCst": 42247
+    "core": 42616,
+    "react": 40886,
+    "transaction": 42063,
+    "wallet": 42792,
+    "provider": 40249,
+    "coreCsl": 26734,
+    "coreCst": 43533
   },
   "monthlyDownloads": [
     {
@@ -32,13 +32,13 @@
     },
     {
       "month": "May",
-      "downloads": 8649,
+      "downloads": 9974,
       "trend": "📈"
     },
     {
       "month": "June",
-      "downloads": 0,
-      "trend": "➡️"
+      "downloads": 86,
+      "trend": "📉"
     },
     {
       "month": "July",
@@ -104,9 +104,9 @@
     },
     {
       "month": "June",
-      "projects": 0,
-      "files": 0,
-      "repositories": 0
+      "projects": 402,
+      "files": 2304,
+      "repositories": 801
     },
     {
       "month": "July",
@@ -149,5 +149,5 @@
     "name": "March",
     "downloads": 10635
   },
-  "lastUpdated": "2025-05-29T01:09:47.887Z"
+  "lastUpdated": "2025-06-02T07:06:30.184Z"
 }
