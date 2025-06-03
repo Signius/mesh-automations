@@ -98,7 +98,9 @@ async function fetchVoteContext(epoch, shortId) {
 
         let parsedData;
         try {
-            parsedData = JSON.parse(response.data);
+            // Normalize all literal line breaks in the raw JSON string before parsing
+            const normalizedRaw = response.data.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            parsedData = JSON.parse(normalizedRaw);
         } catch (parseError) {
             const cleaned = response.data.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
             parsedData = JSON.parse(cleaned);
@@ -109,11 +111,8 @@ async function fetchVoteContext(epoch, shortId) {
             console.log('--- Raw comment ---\n' + parsedData.body.comment + '\n--- END RAW COMMENT ---');
             // Print JSON stringified version to see if \n are present
             console.log('--- JSON.stringify(comment) ---\n' + JSON.stringify(parsedData.body.comment) + '\n--- END JSON.stringify ---');
-            // Normalize all line endings to \n
-            const normalized = parsedData.body.comment.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-            // Print normalized comment
-            console.log('--- Normalized comment ---\n' + normalized + '\n--- END NORMALIZED ---');
-            return normalized.trim();
+            // No need to normalize again, already done above
+            return parsedData.body.comment.trim();
         }
     } catch (error) {
         if (error.response?.status !== 404) {
