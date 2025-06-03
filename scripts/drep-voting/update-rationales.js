@@ -30,16 +30,6 @@ try {
     console.warn('Could not read missing rationales file:', error.message);
 }
 
-// Escape function to preserve formatting safely
-function escapeForJSON(str) {
-    return str
-        .replace(/\\/g, '\\\\')   // Escape backslashes
-        .replace(/"/g, '\\"')     // Escape double quotes
-        .replace(/\r\n/g, '\n')   // Normalize CRLF to LF
-        .replace(/\r/g, '\n')     // Normalize CR to LF
-        .replace(/\n/g, '\\n');   // Escape newlines
-}
-
 async function getProposalList() {
     try {
         const apiKey = process.env.KOIOS_API_KEY;
@@ -168,7 +158,7 @@ async function updateMissingRationales() {
             if (!missingRationales[proposalId]) {
                 missingRationales[proposalId] = {
                     title: data.title,
-                    rationale: escapeForJSON(data.rationale)
+                    rationale: data.rationale // Store as-is, preserve formatting
                 };
                 updated = true;
                 console.log(`✅ Added new rationale for proposal ${proposalId}`);
