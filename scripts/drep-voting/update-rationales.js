@@ -156,6 +156,8 @@ async function updateMissingRationales() {
 
         for (const [proposalId, data] of Object.entries(newRationales)) {
             if (!missingRationales[proposalId]) {
+                // Debug: print rationale to check for newlines
+                console.log('--- Rationale for', proposalId, '---\n' + data.rationale + '\n--- END ---');
                 missingRationales[proposalId] = {
                     title: data.title,
                     rationale: data.rationale // Store as-is, preserve formatting
