@@ -93,6 +93,9 @@ async function fetchVoteContext(epoch, shortId) {
     try {
         const response = await axios.get(url, { responseType: 'text' });
 
+        // Print raw response data for debugging
+        console.log('--- Raw response.data ---\n' + response.data + '\n--- END RAW ---');
+
         let parsedData;
         try {
             parsedData = JSON.parse(response.data);
@@ -102,7 +105,13 @@ async function fetchVoteContext(epoch, shortId) {
         }
 
         if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
-            return parsedData.body.comment.trim();
+            // Print raw comment before normalization
+            console.log('--- Raw comment ---\n' + parsedData.body.comment + '\n--- END RAW COMMENT ---');
+            // Normalize all line endings to \n
+            const normalized = parsedData.body.comment.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            // Print normalized comment
+            console.log('--- Normalized comment ---\n' + normalized + '\n--- END NORMALIZED ---');
+            return normalized.trim();
         }
     } catch (error) {
         if (error.response?.status !== 404) {
