@@ -107,6 +107,8 @@ async function fetchVoteContext(epoch, shortId) {
         if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
             // Print raw comment before normalization
             console.log('--- Raw comment ---\n' + parsedData.body.comment + '\n--- END RAW COMMENT ---');
+            // Print JSON stringified version to see if \n are present
+            console.log('--- JSON.stringify(comment) ---\n' + JSON.stringify(parsedData.body.comment) + '\n--- END JSON.stringify ---');
             // Normalize all line endings to \n
             const normalized = parsedData.body.comment.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
             // Print normalized comment
