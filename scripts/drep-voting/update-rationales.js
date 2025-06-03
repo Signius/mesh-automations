@@ -96,9 +96,20 @@ async function fetchVoteContext(epoch, shortId) {
         // Print raw response data for debugging
         console.log('--- Raw response.data ---\n' + response.data + '\n--- END RAW ---');
 
+        // Try to extract the LAST comment value manually to preserve all formatting
+        const commentMatches = [...response.data.matchAll(/"comment"\s*:\s*"([\s\S]*?)"\s*(,|\n|\r|})/g)];
+        if (commentMatches.length > 0) {
+            let commentRaw = commentMatches[commentMatches.length - 1][1];
+            // Unescape escaped quotes and backslashes
+            commentRaw = commentRaw.replace(/\\"/g, '"').replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\t/g, '\t').replace(/\\/g, '\\');
+            // Print debug
+            console.log('--- Extracted comment (regex, last) ---\n' + commentRaw + '\n--- END EXTRACTED ---');
+            return commentRaw.trim();
+        }
+
+        // Fallback: try to parse as JSON (may lose formatting)
         let parsedData;
         try {
-            // Normalize all literal line breaks in the raw JSON string before parsing
             const normalizedRaw = response.data.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
             parsedData = JSON.parse(normalizedRaw);
         } catch (parseError) {
@@ -107,11 +118,6 @@ async function fetchVoteContext(epoch, shortId) {
         }
 
         if (parsedData?.body?.comment && typeof parsedData.body.comment === 'string') {
-            // Print raw comment before normalization
-            console.log('--- Raw comment ---\n' + parsedData.body.comment + '\n--- END RAW COMMENT ---');
-            // Print JSON stringified version to see if \n are present
-            console.log('--- JSON.stringify(comment) ---\n' + JSON.stringify(parsedData.body.comment) + '\n--- END JSON.stringify ---');
-            // No need to normalize again, already done above
             return parsedData.body.comment.trim();
         }
     } catch (error) {
