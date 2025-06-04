@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1vdlrcftd48qn2zz8egepr6xyfcmxpfz8r69k769gc5mhg662adesq9yy8pl",
+    "proposalTxHash": "637e3c256da9c1350847ca3211e8c44e3660a4471e8b6f68a8c537746b4aeb7300",
+    "proposalIndex": 0,
+    "voteTxHash": "6c64b6b54aca658afc154dedb3d5f72f4ca8baa66f01f5d44edc7451c027b970",
+    "blockTime": "2025-06-04T14:25:43.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Set a 300 million ADA Net Change Limit for Epochs 563–635",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep have voted as following on the governace action: Set a 300 million ADA Net Change Limit for Epochs 563–635: \n\nYes: 0 votes \nNo: 2 votes \nAbstain: 3 votes\n\nTherefore, we will vote Abstain on the proposal in its current form.\n\nRationale:\n\nWe already voted Yes on the NCL = 200M Ada proposal and vote abstain on the NCL 300M Ada."
+  },
+  {
     "proposalId": "gov_action1u9x73kwufaxa70lfy59g4ynwyrcsaxdcd0gxzzmh67s9fxq4j8hqqk2phgh",
     "proposalTxHash": "e14de8d9dc4f4ddf3fe9250a8a926e20f10e99b86bd0610b77d7a054981591ee00",
     "proposalIndex": 0,
