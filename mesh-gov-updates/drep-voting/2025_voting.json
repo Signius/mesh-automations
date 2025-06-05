@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1fpqwxp2kxvnntr8hpkh9q9djm78ccdww7qlhg5safugh4stmcwzqql5lauu",
+    "proposalTxHash": "4840e305563327358cf70dae5015b2df8f8c35cef03f74521d4f117ac17bc38400",
+    "proposalIndex": 0,
+    "voteTxHash": "f582dae8ecb62f09fe005405b607e5323b08066685493ce0918777d8b4191c96",
+    "blockTime": "2025-06-05T08:00:34.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep Collective have voted as following on the info action Cardano Treasury DeFi Liquidity Budget : \nYes: 0 votes \nNo: 4 votes \nAbstain: 1 vote\n\nTherefore, we will not support the Proposal in its current form.\n\nOur rationale:\nWe are actually not forcefully against the proposal itself but can not support the proposal since it does not provide the correct onchain data, the stored data from the proposer does not matches anymore the data at the time the proposal was initially created, hence why many explorers are not able to display content correctly, leading to quite some confusion for DReps. \n\nWe encourage the proposer to resubmit the proposal with the correct data.\n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
+  },
+  {
     "proposalId": "gov_action1vdlrcftd48qn2zz8egepr6xyfcmxpfz8r69k769gc5mhg662adesq9yy8pl",
     "proposalTxHash": "637e3c256da9c1350847ca3211e8c44e3660a4471e8b6f68a8c537746b4aeb7300",
     "proposalIndex": 0,
