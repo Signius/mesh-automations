@@ -38,5 +38,9 @@
     "gov_action1vdlrcftd48qn2zz8egepr6xyfcmxpfz8r69k769gc5mhg662adesq9yy8pl": {
         "title": "Set a 300 million ADA Net Change Limit for Epochs 563–635",
         "rationale": "Members of the Mesh DRep have voted as following on the governace action: Set a 300 million ADA Net Change Limit for Epochs 563–635: \n\nYes: 0 votes \nNo: 2 votes \nAbstain: 3 votes\n\nTherefore, we will vote Abstain on the proposal in its current form.\n\nRationale:\n\nWe already voted Yes on the NCL = 200M Ada proposal and vote abstain on the NCL 300M Ada."
+    },
+    "gov_action1fpqwxp2kxvnntr8hpkh9q9djm78ccdww7qlhg5safugh4stmcwzqql5lauu": {
+        "title": "Unknown Proposal",
+        "rationale": "Members of the Mesh DRep Collective have voted as following on the info action Cardano Treasury DeFi Liquidity Budget : \nYes: 0 votes \nNo: 4 votes \nAbstain: 1 vote\n\nTherefore, we will not support the Proposal in its current form.\n\nOur rationale:\nWe are actually not forcefully against the proposal itself but can not support the proposal since it does not provide the correct onchain data, the stored data from the proposer does not matches anymore the data at the time the proposal was initially created, hence why many explorers are not able to display content correctly, leading to quite some confusion for DReps. \n\nWe encourage the proposer to resubmit the proposal with the correct data.\n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
     }
 }
