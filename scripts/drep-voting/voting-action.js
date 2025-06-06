@@ -75,6 +75,20 @@ function findFileForYear(year) {
 
 async function fetchMetadata(metaUrl) {
     try {
+        // Handle IPFS URLs
+        if (metaUrl.startsWith('ipfs://')) {
+            const ipfsHash = metaUrl.replace('ipfs://', '');
+            const response = await axios.get(`https://ipfs.io/ipfs/${ipfsHash}`);
+            return response.data;
+        }
+
+        // Handle GitHub raw URLs
+        if (metaUrl.includes('raw.githubusercontent.com')) {
+            const response = await axios.get(metaUrl);
+            return response.data;
+        }
+
+        // Handle regular URLs
         const response = await axios.get(metaUrl);
         return response.data;
     } catch (error) {
@@ -305,7 +319,17 @@ async function getDRepVotes(drepId) {
             }
 
             // Add proposal details to vote
-            processedVote.proposalTitle = proposal.meta_json?.body?.title || missingRationales[vote.proposal_id]?.title || 'Unknown Proposal';
+            let proposalTitle = proposal.meta_json?.body?.title;
+
+            // If title not found in meta_json, try fetching from meta_url
+            if (!proposalTitle && processedVote.metaUrl) {
+                const metadata = await fetchMetadata(processedVote.metaUrl);
+                if (metadata?.body?.title) {
+                    proposalTitle = metadata.body.title;
+                }
+            }
+
+            processedVote.proposalTitle = proposalTitle || missingRationales[vote.proposal_id]?.title || 'Unknown Proposal';
             processedVote.proposalType = proposal.proposal_type || 'Unknown';
             processedVote.proposedEpoch = proposal.proposed_epoch || 'N/A';
             processedVote.expirationEpoch = proposal.expiration || 'N/A';
