@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1mmalzkcxpyn33t05hml2hxpwq0ffv6uu4mhe8sv7guz5nmm4afysqlmepzl",
+    "proposalTxHash": "defbf15b06092718adf4befeab982e03d2966b9caeef93c19e470549ef75ea4900",
+    "proposalIndex": 0,
+    "voteTxHash": "5b29ba2a4512e1df0c5e44fe6f474e85499ef5e9d881db3255b847420f7dee7c",
+    "blockTime": "2025-06-06T08:07:49.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "2025 Cardano Blockchain Ecosystem Budget - 7.5M ₳ for community builders",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep have voted as following on the governace action: 2025 Cardano Blockchain Ecosystem Budget - 7.5M ₳ for community builders: \n\nYes: 6 votes \nNo: 1 votes \nAbstain: 0 votes\n\nTherefore, we support the proposal.\n\nRationale:\n\nWe see the proposal as a serious effort from cardano builders to enable funds for important development which further improves the Cardano ecosystem.\n\nWhile we generally act careful with package proposals like this, which include multiple projects and funding allocations under one proposal, we think that the total of 7 projects within this package have a high likelyhood of a successful execution. Most teams in this proposal have a strong track record and have proven to have all required skills and expertise to ensure a successful implementation.\n\nThat being sad, we still have some doubts on the administrations of the proposal and hope that the effectivity and efficiency wont be impacted by too much bureaucratic overhead which naturally comes with large collaborative proposals. \n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
+  },
+  {
     "proposalId": "gov_action1fpqwxp2kxvnntr8hpkh9q9djm78ccdww7qlhg5safugh4stmcwzqql5lauu",
     "proposalTxHash": "4840e305563327358cf70dae5015b2df8f8c35cef03f74521d4f117ac17bc38400",
     "proposalIndex": 0,
@@ -8,7 +23,7 @@
     "vote": "No",
     "metaUrl": null,
     "metaHash": null,
-    "proposalTitle": "Unknown Proposal",
+    "proposalTitle": "Cardano Treasury DeFi Liquidity Budget",
     "proposalType": "InfoAction",
     "proposedEpoch": 556,
     "expirationEpoch": 563,
