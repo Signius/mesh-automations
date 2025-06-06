@@ -30,6 +30,30 @@ try {
     console.warn('Could not read missing rationales file:', error.message);
 }
 
+async function fetchMetadata(metaUrl) {
+    try {
+        // Handle IPFS URLs
+        if (metaUrl.startsWith('ipfs://')) {
+            const ipfsHash = metaUrl.replace('ipfs://', '');
+            const response = await axios.get(`https://ipfs.io/ipfs/${ipfsHash}`);
+            return response.data;
+        }
+
+        // Handle GitHub raw URLs
+        if (metaUrl.includes('raw.githubusercontent.com')) {
+            const response = await axios.get(metaUrl);
+            return response.data;
+        }
+
+        // Handle regular URLs
+        const response = await axios.get(metaUrl);
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching metadata from ${metaUrl}:`, error.message);
+        return null;
+    }
+}
+
 async function getProposalList() {
     try {
         const apiKey = process.env.KOIOS_API_KEY;
@@ -49,14 +73,26 @@ async function getProposalList() {
             throw new Error('Invalid response format: expected an array');
         }
 
-        const proposalMap = response.data.reduce((acc, proposal) => {
-            if (!proposal.proposal_id) return acc;
-            acc[proposal.proposal_id] = {
-                title: proposal.meta_json?.body?.title || 'Unknown Proposal',
+        const proposalMap = {};
+
+        for (const proposal of response.data) {
+            if (!proposal.proposal_id) continue;
+
+            let proposalTitle = proposal.meta_json?.body?.title;
+
+            // If title not found in meta_json, try fetching from meta_url
+            if (!proposalTitle && proposal.meta_url) {
+                const metadata = await fetchMetadata(proposal.meta_url);
+                if (metadata?.body?.title) {
+                    proposalTitle = metadata.body.title;
+                }
+            }
+
+            proposalMap[proposal.proposal_id] = {
+                title: proposalTitle || 'Unknown Proposal',
                 proposal
             };
-            return acc;
-        }, {});
+        }
 
         console.log(`Successfully mapped ${Object.keys(proposalMap).length} proposals`);
         return proposalMap;
