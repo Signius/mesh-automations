@@ -1,5 +1,35 @@
 [
   {
+    "proposalId": "gov_action1fpqwxp2kxvnntr8hpkh9q9djm78ccdww7qlhg5safugh4stmcwzqql5lauu",
+    "proposalTxHash": "4840e305563327358cf70dae5015b2df8f8c35cef03f74521d4f117ac17bc38400",
+    "proposalIndex": 0,
+    "voteTxHash": "f582dae8ecb62f09fe005405b607e5323b08066685493ce0918777d8b4191c96",
+    "blockTime": "2025-06-05T08:00:34.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Unknown Proposal",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep Collective have voted as following on the info action Cardano Treasury DeFi Liquidity Budget : \nYes: 0 votes \nNo: 4 votes \nAbstain: 1 vote\n\nTherefore, we will not support the Proposal in its current form.\n\nOur rationale:\nWe are actually not forcefully against the proposal itself but can not support the proposal since it does not provide the correct onchain data, the stored data from the proposer does not matches anymore the data at the time the proposal was initially created, hence why many explorers are not able to display content correctly, leading to quite some confusion for DReps. \n\nWe encourage the proposer to resubmit the proposal with the correct data.\n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
+  },
+  {
+    "proposalId": "gov_action1vdlrcftd48qn2zz8egepr6xyfcmxpfz8r69k769gc5mhg662adesq9yy8pl",
+    "proposalTxHash": "637e3c256da9c1350847ca3211e8c44e3660a4471e8b6f68a8c537746b4aeb7300",
+    "proposalIndex": 0,
+    "voteTxHash": "6c64b6b54aca658afc154dedb3d5f72f4ca8baa66f01f5d44edc7451c027b970",
+    "blockTime": "2025-06-04T14:25:43.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Set a 300 million ADA Net Change Limit for Epochs 563–635",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep have voted as following on the governace action: Set a 300 million ADA Net Change Limit for Epochs 563–635: \n\nYes: 0 votes \nNo: 2 votes \nAbstain: 3 votes\n\nTherefore, we will vote Abstain on the proposal in its current form.\n\nRationale:\n\nWe already voted Yes on the NCL = 200M Ada proposal and vote abstain on the NCL 300M Ada."
+  },
+  {
     "proposalId": "gov_action1u9x73kwufaxa70lfy59g4ynwyrcsaxdcd0gxzzmh67s9fxq4j8hqqk2phgh",
     "proposalTxHash": "e14de8d9dc4f4ddf3fe9250a8a926e20f10e99b86bd0610b77d7a054981591ee00",
     "proposalIndex": 0,
@@ -12,7 +42,7 @@
     "proposalType": "InfoAction",
     "proposedEpoch": 557,
     "expirationEpoch": 564,
-    "rationale": "Members of the Mesh DRep have voted as following on the governace action: Cardano Blockchain Ecosystem Budget - 275M ada Administered by Intersect:\n\nYes: 3 votes\nNo: 4 votes\nAbstain: 0 votes\n\nTherefore, we will not support the proposal in its current form.\n\nRationale:\n\nbudget request,\nsince we voted Yes on the NCL 200M Ada, this proposal exceeds the budgets we seem as appropriate for Treasury spendings in 2025, keeping in mind that we are already half-way through the year. Furthermore, we do have doubts of the need of a funding administrator as outlined in the proposal, which itself consumes already several million Ada. Furthermore, even if we may support a large part of the proposals within the package, we identify several budget allocation within the package as highly concerning and dont feel confident to give it a lumb yes vote. We would prefer a more granular approach which allows voters to decide onchain on each proposal and not only on the whole package as one.\n\nfeasible deliverables,\nDue to the massive package, including a wide range of proposals as well as a funding administrator from which we saw in the past that many efforts have not been managed as effectively as we would like to, we see large risks in the successful delivery of the proposal. The produced overhead likely introduces many non-essential burocratic processes which will consume time and resources which could be better spend otherwise and which actually introduces many risks since the process introduces a single point of failure with a central funding administrator on which all proposals have to rely on. The new onchain governance system, in our perspective, was set to exactly avoid such single points of failures.\n\nEcosystem value,\nSummarising all notes already mentioned, we see a high risk in the successful execution of the proposal and therefore have to doubt the value provided to the ecosystem.\n\nTeam,\nMany proposals included in the package have awesome teams with highest skill sets and experience, however, this does not account for all proposals, either does it apply to the funding administrator. Lets be clear, we appreciate Intersect and its effort, yet the past has shown that many efforts at Intersect have not been able to stand up and match with the communities expectations. We surely believe that intersect has its place at the ecosystem, and while Intersect matures and gains experience and expertise, we still think that Intersect at its current stage has a high risk on being a effective administrator of such a large budget and scope.\n\nRecommendation.\nLearn from Project Catalyst, start small, build experience and expertise step by step and increase scope and budgets over time to ensure that the actual capacities to effectively manage such large operations are battle proofed and well matured.\n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
+    "rationale": "Members of the Mesh DRep have voted as following on the governace action: Cardano Blockchain Ecosystem Budget - 275M ada Administered by Intersect: \n\nYes: 3 votes \nNo: 4 votes \nAbstain: 0 votes\n\nTherefore, we will not support the proposal in its current form.\n\nRationale:\n\nbudget request,\nsince we voted Yes on the NCL 200M Ada, this proposal exceeds the budgets we seem as appropriate for Treasury spendings in 2025, keeping in mind that we are already half-way through the year. Furthermore, we do have doubts of the need of a funding administrator as outlined in the proposal, which itself consumes already several million Ada. Furthermore, even if we may support a large part of the proposals within the package, we identify several budget allocation within the package as highly concerning and dont feel confident to give it a lumb yes vote. We would prefer a  more granular approach which allows voters to decide onchain on each proposal and not only on the whole package as one.\n\nfeasible deliverables,\nDue to the massive package, including a wide range of proposals as well as a funding administrator from which we saw in the past that many efforts have not been managed as effectively as we would like to, we see large risks in the successful delivery of the proposal. The produced overhead likely introduces many non-essential burocratic processes which will consume time and resources which could be better spend otherwise and which actually introduces many risks since the process introduces a single point of failure with a central funding administrator on which all proposals have to rely on. The new onchain governance system, in our perspective, was set to exactly avoid such single points of failures. \n\nEcosystem value,\nSummarising all notes already mentioned, we see a high risk in the successful execution of the proposal and therefore have to doubt the value provided to the ecosystem. \n\nTeam,\nMany proposals included in the package have awesome teams with highest skill sets and experience, however, this does not account for all proposals, either does it apply to the funding administrator. Lets be clear, we appreciate Intersect and its effort, yet the past has shown that many efforts at Intersect have not been able to stand up and match with the communities expectations. We surely believe that intersect has its place at the ecosystem, and while Intersect matures and gains experience and expertise, we still think that Intersect at its current stage has a high risk on being a effective administrator of such a large budget and scope. \n\nRecommendation.\nLearn from Project Catalyst, start small, build experience and expertise step by step and increase scope and budgets over time to ensure that the actual capacities to effectively manage such large operations are battle proofed and well matured.\n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
   },
   {
     "proposalId": "gov_action10k0unljvaej0kd89w7pn0zkgdx59c7xkl0x5q78dzvdtd73u0kmqq5xl5y5",
