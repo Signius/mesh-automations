@@ -188,18 +188,22 @@
       "564": {
         "voting_power_lovelace": "21449720273096",
         "total_delegators": 15
+      },
+      "565": {
+        "voting_power_lovelace": "21463944122177",
+        "total_delegators": 15
       }
     },
-    "current_epoch": 564,
+    "current_epoch": 565,
     "total_delegators": 15,
-    "total_amount_ada": 21449720.273096
+    "total_amount_ada": 21463944.122177
   },
   "drepInfo": {
     "drepId": "drep1yv4uesaj92wk8ljlsh4p7jzndnzrflchaz5fzug3zxg4naqkpeas3",
-    "amount": "21449720273096",
+    "amount": "21463944122177",
     "active": true,
     "registered": true,
     "expires_epoch_no": 582,
-    "last_updated": "2025-06-16T02:25:50.839Z"
+    "last_updated": "2025-06-19T02:21:40.175Z"
   }
 }
