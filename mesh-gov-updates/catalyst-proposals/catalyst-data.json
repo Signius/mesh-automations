@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-06-23T02:27:03.814Z",
+  "timestamp": "2025-06-25T02:20:17.028Z",
   "projects": [
     {
       "projectDetails": {
@@ -229,7 +229,7 @@
           "unique_wallets": 328
         }
       },
-      "milestonesCompleted": 3
+      "milestonesCompleted": 4
     }
   ]
 }
