@@ -1,27 +1,32 @@
 {
   "2025-01": {
     "memberCount": 720,
-    "totalMessages": 39,
-    "uniquePosters": 4
+    "totalMessages": 1124,
+    "uniquePosters": 22
   },
   "2025-02": {
     "memberCount": 723,
-    "totalMessages": 264,
-    "uniquePosters": 6
+    "totalMessages": 1854,
+    "uniquePosters": 30
   },
   "2025-03": {
     "memberCount": 727,
-    "totalMessages": 34,
-    "uniquePosters": 7
+    "totalMessages": 2160,
+    "uniquePosters": 31
   },
   "2025-04": {
     "memberCount": 730,
-    "totalMessages": 748,
+    "totalMessages": 2192,
     "uniquePosters": 31
   },
   "2025-05": {
     "memberCount": 734,
-    "totalMessages": 458,
+    "totalMessages": 2703,
     "uniquePosters": 34
+  },
+  "2025-06": {
+    "memberCount": 754,
+    "totalMessages": 3700,
+    "uniquePosters": 41
   }
 }

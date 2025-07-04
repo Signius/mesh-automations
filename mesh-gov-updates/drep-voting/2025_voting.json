@@ -1,5 +1,35 @@
 [
   {
+    "proposalId": "gov_action1vdlrcftd48qn2zz8egepr6xyfcmxpfz8r69k769gc5mhg662adesq9yy8pl",
+    "proposalTxHash": "637e3c256da9c1350847ca3211e8c44e3660a4471e8b6f68a8c537746b4aeb7300",
+    "proposalIndex": 0,
+    "voteTxHash": "3413a2fb941005dd7bf9f682f36a2b3c64a6c8f8d2e8040a993855eeccbc4d12",
+    "blockTime": "2025-06-07T09:56:34.000Z",
+    "vote": "Abstain",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Set a 300 million ADA Net Change Limit for Epochs 563–635",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep have voted as following on the governace action: Set a 300 million ADA Net Change Limit for Epochs 563–635: \n\nYes: 0 votes \nNo: 2 votes \nAbstain: 3 votes\n\nTherefore, we will vote Abstain on the proposal in its current form.\n\nRationale:\n\nWe already voted Yes on the NCL = 200M Ada proposal and vote abstain on the NCL 300M Ada."
+  },
+  {
+    "proposalId": "gov_action1h4ygjv0hjfj3lmafcm76rpdzcm8vsvj9k5wejn3npyxwxm3fesnqqw9kxxz",
+    "proposalTxHash": "bd488931f792651fefa9c6fda185a2c6cec83245b51d994e33090ce36e29cc2600",
+    "proposalIndex": 0,
+    "voteTxHash": "5394deadeda08098a34dd08dc438a027972ed46018373fb1adc20f85ca520748",
+    "blockTime": "2025-06-06T09:05:14.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Cardano Blockchain Ecosystem Budget: Amaru Node Development 2025",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 556,
+    "expirationEpoch": 563,
+    "rationale": "Members of the Mesh DRep have voted as following on the governace action: Cardano Blockchain Ecosystem Budget: Amaru Node Development 2025: \n\nYes: 7 votes \nNo: 0 votes \nAbstain: 0 votes  \n\nTherefore, we support the Amaru proposal.\n\nRationale:\n- modest budget request.\nAmaru requests a total of 1.5M Ada, which is a reasonable amount for the outlined work, furthermore, we appreciate the well outlined budget allocations of the proposal\n\n- feasible deliverables\nThe proposal is well scoped, the envisioned deliverables are very likely to be achieved, one of the most solid proposal we have seen so far indeed.\n\n- Ecosystem value\nAmaru, supporting cardano node diversity definitely adds great value to the cardano ecosystem and we fully support serious projects working on that front\n\n- All-star Team\nWe have no doubt on the team, sort of a finest all-star crew at Amaru with all the needed skills, expertise and experience to successfully execute and complete the proposal\n\nWe see the Amaru proposal as a really well written proposal which introduces a gold standard and a high quality for governance actions from which we hope that other proposers will draw from. Furthermore, we see Pragma as a highly competent organisation which does not only manages its operations in a highly desirable way but also ensures that its projects like Amaru have a highest likelyhood in a cost-effective development and further maintenance. \n\nIf you approve of our reasoning and want to further support us, we welcome you to delegate to our Mesh DRep\nMore about our DRep at: https://gov.meshjs.dev/drep-voting"
+  },
+  {
     "proposalId": "gov_action1mmalzkcxpyn33t05hml2hxpwq0ffv6uu4mhe8sv7guz5nmm4afysqlmepzl",
     "proposalTxHash": "defbf15b06092718adf4befeab982e03d2966b9caeef93c19e470549ef75ea4900",
     "proposalIndex": 0,

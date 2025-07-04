@@ -1,51 +1,51 @@
 {
   "github": {
-    "core_in_package_json": 802,
-    "core_in_any_file": 1928,
-    "core_in_repositories": 802
+    "core_in_package_json": 809,
+    "core_in_any_file": 1864,
+    "core_in_repositories": 809
   },
   "npm": {
     "downloads": {
       "last_day": 0,
-      "last_week": 2238,
-      "last_month": 9974,
+      "last_week": 3370,
+      "last_month": 10831,
       "last_year": 56420,
-      "core_package_last_12_months": 76967
+      "core_package_last_12_months": 82734
     },
-    "react_package_downloads": 67615,
-    "transaction_package_downloads": 64050,
-    "wallet_package_downloads": 64247,
-    "provider_package_downloads": 60765,
-    "core_csl_package_downloads": 50097,
-    "core_cst_package_downloads": 68709,
-    "latest_version": "1.9.0-beta.54",
-    "dependents_count": 284920
+    "react_package_downloads": 75717,
+    "transaction_package_downloads": 74548,
+    "wallet_package_downloads": 74700,
+    "provider_package_downloads": 70197,
+    "core_csl_package_downloads": 55332,
+    "core_cst_package_downloads": 80564,
+    "latest_version": "1.9.0-beta.61",
+    "dependents_count": 289457
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-06-05&to=2025-06-05",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-06-05&to=2025-06-05"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2024-07-03&to=2025-07-03",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2024-07-03&to=2025-07-03"
   },
   "contributors": {
-    "unique_count": 49,
+    "unique_count": 53,
     "contributors": [
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "commits": 1367,
-        "pull_requests": 181,
-        "contributions": 1548,
+        "commits": 1399,
+        "pull_requests": 188,
+        "contributions": 1587,
         "repositories": [
           {
             "name": "mesh",
-            "commits": 956,
-            "pull_requests": 142,
-            "contributions": 1098
+            "commits": 978,
+            "pull_requests": 149,
+            "contributions": 1127
           },
           {
             "name": "web3-sdk",
-            "commits": 99,
+            "commits": 107,
             "pull_requests": 25,
-            "contributions": 124
+            "contributions": 132
           },
           {
             "name": "multisig",
@@ -78,13 +78,13 @@
             "contributions": 19
           },
           {
-            "name": "polkadot",
-            "commits": 11,
+            "name": "governance",
+            "commits": 12,
             "pull_requests": 1,
-            "contributions": 12
+            "contributions": 13
           },
           {
-            "name": "governance",
+            "name": "polkadot",
             "commits": 11,
             "pull_requests": 1,
             "contributions": 12
@@ -214,21 +214,27 @@
             "commits": 1,
             "pull_requests": 0,
             "contributions": 1
+          },
+          {
+            "name": "asteria",
+            "commits": 1,
+            "pull_requests": 0,
+            "contributions": 1
           }
         ]
       },
       {
         "login": "HinsonSIDAN",
         "avatar_url": "https://avatars.githubusercontent.com/u/90688504?v=4",
-        "commits": 589,
-        "pull_requests": 96,
-        "contributions": 685,
+        "commits": 621,
+        "pull_requests": 97,
+        "contributions": 718,
         "repositories": [
           {
             "name": "mesh",
-            "commits": 412,
-            "pull_requests": 65,
-            "contributions": 477
+            "commits": 435,
+            "pull_requests": 66,
+            "contributions": 501
           },
           {
             "name": "mesh-core",
@@ -250,12 +256,18 @@
           },
           {
             "name": "mesh-saas",
-            "commits": 8,
+            "commits": 11,
             "pull_requests": 2,
-            "contributions": 10
+            "contributions": 13
           },
           {
             "name": "mesh-nextjs-template",
+            "commits": 6,
+            "pull_requests": 0,
+            "contributions": 6
+          },
+          {
+            "name": "mesh-aiken-crowdfund",
             "commits": 6,
             "pull_requests": 0,
             "contributions": 6
@@ -289,15 +301,15 @@
       {
         "login": "abdelkrimdev",
         "avatar_url": "https://avatars.githubusercontent.com/u/8070119?v=4",
-        "commits": 446,
-        "pull_requests": 34,
-        "contributions": 480,
+        "commits": 447,
+        "pull_requests": 35,
+        "contributions": 482,
         "repositories": [
           {
             "name": "mesh",
-            "commits": 404,
-            "pull_requests": 34,
-            "contributions": 438
+            "commits": 405,
+            "pull_requests": 35,
+            "contributions": 440
           },
           {
             "name": "staking-next-js-template",
@@ -352,81 +364,66 @@
       {
         "login": "twwu123",
         "avatar_url": "https://avatars.githubusercontent.com/u/45336147?v=4",
-        "commits": 367,
-        "pull_requests": 53,
-        "contributions": 420,
+        "commits": 376,
+        "pull_requests": 54,
+        "contributions": 430,
         "repositories": [
           {
             "name": "mesh",
-            "commits": 367,
-            "pull_requests": 53,
-            "contributions": 420
-          }
-        ]
-      },
-      {
-        "login": "QSchlegel",
-        "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4",
-        "commits": 101,
-        "pull_requests": 26,
-        "contributions": 127,
-        "repositories": [
-          {
-            "name": "multisig",
-            "commits": 101,
-            "pull_requests": 26,
-            "contributions": 127
+            "commits": 376,
+            "pull_requests": 54,
+            "contributions": 430
           }
         ]
       },
       {
         "login": "Andre-Diamond",
         "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
-        "commits": 83,
-        "pull_requests": 7,
-        "contributions": 90,
+        "commits": 278,
+        "pull_requests": 9,
+        "contributions": 287,
         "repositories": [
           {
             "name": "governance",
-            "commits": 83,
-            "pull_requests": 7,
-            "contributions": 90
+            "commits": 278,
+            "pull_requests": 9,
+            "contributions": 287
           }
         ]
       },
       {
-        "login": "lisicky",
-        "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
-        "commits": 77,
-        "pull_requests": 11,
-        "contributions": 88,
+        "login": "QSchlegel",
+        "avatar_url": "https://avatars.githubusercontent.com/u/34195172?v=4",
+        "commits": 143,
+        "pull_requests": 46,
+        "contributions": 189,
         "repositories": [
           {
-            "name": "mesh",
-            "commits": 74,
-            "pull_requests": 11,
-            "contributions": 85
+            "name": "multisig",
+            "commits": 143,
+            "pull_requests": 45,
+            "contributions": 188
           },
           {
-            "name": "mesh-saas",
-            "commits": 3,
-            "pull_requests": 0,
-            "contributions": 3
+            "name": "mesh",
+            "commits": 0,
+            "pull_requests": 1,
+            "contributions": 1
           }
         ]
       },
       {
         "login": "JustLeif",
         "avatar_url": "https://avatars.githubusercontent.com/u/69766831?v=4",
-        "commits": 61,
-        "pull_requests": 16,
-        "contributions": 77,
+        "commits": 72,
+        "pull_requests": 22,
+        "contributions": 94,
         "repositories": [
           {
             "name": "web3-sdk",
-            "commits": 35,
-            "pull_requests": 6,
-            "contributions": 41
+            "commits": 46,
+            "pull_requests": 12,
+            "contributions": 58
           },
           {
             "name": "mesh",
@@ -449,6 +446,27 @@
         ]
       },
       {
+        "login": "lisicky",
+        "avatar_url": "https://avatars.githubusercontent.com/u/6154537?v=4",
+        "commits": 80,
+        "pull_requests": 12,
+        "contributions": 92,
+        "repositories": [
+          {
+            "name": "mesh",
+            "commits": 77,
+            "pull_requests": 12,
+            "contributions": 89
+          },
+          {
+            "name": "mesh-saas",
+            "commits": 3,
+            "pull_requests": 0,
+            "contributions": 3
+          }
+        ]
+      },
+      {
         "login": "justinschreiner",
         "avatar_url": "https://avatars.githubusercontent.com/u/43378478?v=4",
         "commits": 60,
@@ -460,6 +478,33 @@
             "commits": 60,
             "pull_requests": 11,
             "contributions": 71
+          }
+        ]
+      },
+      {
+        "login": "ErickRomeroDev",
+        "avatar_url": "https://avatars.githubusercontent.com/u/39284904?v=4",
+        "commits": 49,
+        "pull_requests": 14,
+        "contributions": 63,
+        "repositories": [
+          {
+            "name": "midnight",
+            "commits": 22,
+            "pull_requests": 10,
+            "contributions": 32
+          },
+          {
+            "name": "midnight-starter-template",
+            "commits": 26,
+            "pull_requests": 3,
+            "contributions": 29
+          },
+          {
+            "name": "examples",
+            "commits": 1,
+            "pull_requests": 1,
+            "contributions": 2
           }
         ]
       },
@@ -539,6 +584,33 @@
         ]
       },
       {
+        "login": "Technosophorso",
+        "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
+        "commits": 38,
+        "pull_requests": 4,
+        "contributions": 42,
+        "repositories": [
+          {
+            "name": "governance",
+            "commits": 31,
+            "pull_requests": 4,
+            "contributions": 35
+          },
+          {
+            "name": "polkadot",
+            "commits": 5,
+            "pull_requests": 0,
+            "contributions": 5
+          },
+          {
+            "name": "mesh-aiken-crowdfund",
+            "commits": 2,
+            "pull_requests": 0,
+            "contributions": 2
+          }
+        ]
+      },
+      {
         "login": "Temasar1",
         "avatar_url": "https://avatars.githubusercontent.com/u/178079919?v=4",
         "commits": 37,
@@ -581,65 +653,17 @@
         ]
       },
       {
-        "login": "ErickRomeroDev",
-        "avatar_url": "https://avatars.githubusercontent.com/u/39284904?v=4",
-        "commits": 25,
-        "pull_requests": 11,
-        "contributions": 36,
-        "repositories": [
-          {
-            "name": "midnight",
-            "commits": 22,
-            "pull_requests": 10,
-            "contributions": 32
-          },
-          {
-            "name": "examples",
-            "commits": 1,
-            "pull_requests": 1,
-            "contributions": 2
-          },
-          {
-            "name": "midnight-starter-template",
-            "commits": 2,
-            "pull_requests": 0,
-            "contributions": 2
-          }
-        ]
-      },
-      {
         "login": "github-actions[bot]",
         "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
-        "commits": 26,
+        "commits": 28,
         "pull_requests": 0,
-        "contributions": 26,
+        "contributions": 28,
         "repositories": [
           {
             "name": "governance",
-            "commits": 26,
+            "commits": 28,
             "pull_requests": 0,
-            "contributions": 26
-          }
-        ]
-      },
-      {
-        "login": "Technosophorso",
-        "avatar_url": "https://avatars.githubusercontent.com/u/119736053?v=4",
-        "commits": 22,
-        "pull_requests": 1,
-        "contributions": 23,
-        "repositories": [
-          {
-            "name": "governance",
-            "commits": 17,
-            "pull_requests": 1,
-            "contributions": 18
-          },
-          {
-            "name": "polkadot",
-            "commits": 5,
-            "pull_requests": 0,
-            "contributions": 5
+            "contributions": 28
           }
         ]
       },
@@ -661,6 +685,21 @@
             "commits": 5,
             "pull_requests": 2,
             "contributions": 7
+          }
+        ]
+      },
+      {
+        "login": "kenlau666",
+        "avatar_url": "https://avatars.githubusercontent.com/u/98103533?v=4",
+        "commits": 17,
+        "pull_requests": 0,
+        "contributions": 17,
+        "repositories": [
+          {
+            "name": "mesh-aiken-crowdfund",
+            "commits": 17,
+            "pull_requests": 0,
+            "contributions": 17
           }
         ]
       },
@@ -806,6 +845,21 @@
         ]
       },
       {
+        "login": "actions-user",
+        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
+        "commits": 8,
+        "pull_requests": 0,
+        "contributions": 8,
+        "repositories": [
+          {
+            "name": "governance",
+            "commits": 8,
+            "pull_requests": 0,
+            "contributions": 8
+          }
+        ]
+      },
+      {
         "login": "rober-m",
         "avatar_url": "https://avatars.githubusercontent.com/u/48034748?v=4",
         "commits": 4,
@@ -917,21 +971,6 @@
         ]
       },
       {
-        "login": "actions-user",
-        "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-        "commits": 4,
-        "pull_requests": 0,
-        "contributions": 4,
-        "repositories": [
-          {
-            "name": "governance",
-            "commits": 4,
-            "pull_requests": 0,
-            "contributions": 4
-          }
-        ]
-      },
-      {
         "login": "bytewizard42i",
         "avatar_url": "https://avatars.githubusercontent.com/u/100811071?v=4",
         "commits": 2,
@@ -943,6 +982,21 @@
             "commits": 2,
             "pull_requests": 1,
             "contributions": 3
+          }
+        ]
+      },
+      {
+        "login": "schaier-io",
+        "avatar_url": "https://avatars.githubusercontent.com/u/80533393?v=4",
+        "commits": 1,
+        "pull_requests": 1,
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "mesh",
+            "commits": 1,
+            "pull_requests": 1,
+            "contributions": 2
           }
         ]
       },
@@ -1064,6 +1118,21 @@
         ]
       },
       {
+        "login": "christiangruender",
+        "avatar_url": "https://avatars.githubusercontent.com/u/131187233?v=4",
+        "commits": 2,
+        "pull_requests": 0,
+        "contributions": 2,
+        "repositories": [
+          {
+            "name": "multisig",
+            "commits": 2,
+            "pull_requests": 0,
+            "contributions": 2
+          }
+        ]
+      },
+      {
         "login": "turbobot-temp",
         "avatar_url": "https://avatars.githubusercontent.com/u/145653950?v=4",
         "commits": 2,
@@ -1139,6 +1208,21 @@
         ]
       },
       {
+        "login": "unspent-tx",
+        "avatar_url": "https://avatars.githubusercontent.com/u/205478529?v=4",
+        "commits": 1,
+        "pull_requests": 0,
+        "contributions": 1,
+        "repositories": [
+          {
+            "name": "web3-sdk",
+            "commits": 1,
+            "pull_requests": 0,
+            "contributions": 1
+          }
+        ]
+      },
+      {
         "login": "tainabugs",
         "avatar_url": "https://avatars.githubusercontent.com/u/142628244?v=4",
         "commits": 0,
@@ -1154,8 +1238,8 @@
         ]
       }
     ],
-    "total_pull_requests": 529,
-    "total_commits": 3542,
-    "total_contributions": 4071
+    "total_pull_requests": 575,
+    "total_commits": 3934,
+    "total_contributions": 4509
   }
 }

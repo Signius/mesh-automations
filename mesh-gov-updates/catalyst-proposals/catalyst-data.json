@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-06-06T02:16:08.563Z",
+  "timestamp": "2025-07-04T02:19:35.413Z",
   "projects": [
     {
       "projectDetails": {
@@ -76,7 +76,7 @@
         "title": "Mesh New Features to Improve Developer experience and Cardano Adoption",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 170000,
+        "funds_distributed": 200000,
         "project_id": 1200147,
         "name": "Mesh New Features to Improve Developer experience and Cardano Adoption",
         "category": "F12: Cardano Open: Developers",
@@ -91,7 +91,7 @@
           "unique_wallets": 388
         }
       },
-      "milestonesCompleted": 4
+      "milestonesCompleted": 5
     },
     {
       "projectDetails": {
@@ -168,7 +168,7 @@
         "title": "Maintain Mesh and Build Developer Community",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 152000,
+        "funds_distributed": 160000,
         "project_id": 1300130,
         "name": "Maintain Mesh and Build Developer Community",
         "category": "F13: Cardano Open: Developers",
@@ -183,7 +183,7 @@
           "unique_wallets": 316
         }
       },
-      "milestonesCompleted": 3
+      "milestonesCompleted": 4
     },
     {
       "projectDetails": {
@@ -191,7 +191,7 @@
         "title": "Cardano Multisig Platform by Mesh, Clarity DAO & Fluid Tokens",
         "budget": 500000,
         "milestones_qty": 6,
-        "funds_distributed": 155000,
+        "funds_distributed": 255000,
         "project_id": 1300050,
         "name": "Cardano Multisig Platform by Mesh, Clarity DAO & Fluid Tokens",
         "category": "F13: Cardano Use Cases: Product",
@@ -214,7 +214,7 @@
         "title": "Cardano Builder Fest Asia by Mesh, Socious, SIDAN, Vietnam Cardano",
         "budget": 99016,
         "milestones_qty": 4,
-        "funds_distributed": 84164,
+        "funds_distributed": 99016,
         "project_id": 1300036,
         "name": "Cardano Builder Fest Asia by Mesh, Socious, SIDAN, Vietnam Cardano",
         "category": "F13: Cardano Open: Ecosystem",
@@ -229,7 +229,7 @@
           "unique_wallets": 328
         }
       },
-      "milestonesCompleted": 3
+      "milestonesCompleted": 4
     }
   ]
 }
