@@ -13,14 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run Discord-Stats Action
-        uses: Signius/discord-stats-action@1.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          discord-token: ${{ secrets.DISCORD_TOKEN }}
-          guild-id:       ${{ secrets.GUILD_ID }}
-          output-file:    mesh-gov-updates/discord-stats/stats.json
-          backfill:       'false'
-          backfill-year:  '2025'
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Discord Stats Script
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          GUILD_ID: ${{ secrets.GUILD_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_ANALYTICS_TOKEN }}
+          BACKFILL: 'false'
+          BACKFILL_YEAR: '2025'
+        run: node scripts/discord-stats/getStats.js
 
       - name: Commit stats.json
         run: |

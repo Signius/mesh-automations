@@ -11,6 +11,8 @@ A Node.js automation tool for tracking and documenting DRep (Delegate Representa
 - Integrates with documentation systems
 - Updates Catalyst proposal information and voting status
 - Tracks proposal funding and implementation progress
+- Collects Discord engagement statistics via API
+- Monitors community activity and participation metrics
 
 ## Repository Structure
 
@@ -19,6 +21,7 @@ A Node.js automation tool for tracking and documenting DRep (Delegate Representa
 - `apps/docs/` - Documentation output
 - `config.json` - Configuration settings
 - `catalyst-proposals/` - Catalyst proposal tracking and updates
+- `mesh-gov-updates/` - Community statistics and governance data
 
 ## Setup
 
@@ -40,6 +43,8 @@ The automation runs through GitHub Actions to:
 - Update voting history
 - Monitor and update Catalyst proposal status
 - Track proposal funding and implementation milestones
+- Collect Discord engagement statistics monthly
+- Update community activity metrics
 
 
 
