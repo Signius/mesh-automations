@@ -75,13 +75,7 @@ function processEngagementData(rawData) {
   // API returns array of daily data, we need to aggregate by month
   const monthlyData = {}
 
-  // Extract approximate_member_count from the response
-  const approximateMemberCount = rawData.approximate_member_count || 0
-
   for (const dayData of rawData) {
-    // Skip if this is not a day data object (like approximate_member_count)
-    if (!dayData.day_pt) continue
-
     const date = new Date(dayData.day_pt)
     const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
 
@@ -89,7 +83,7 @@ function processEngagementData(rawData) {
       monthlyData[monthKey] = {
         totalMessages: 0,
         uniquePosters: 0, // communicators
-        memberCount: approximateMemberCount, // Use the approximate member count
+        memberCounts: [], // collect all approximate_member_count values
         totalVisitors: 0,
         totalCommunicators: 0,
         daysCounted: 0
@@ -99,14 +93,24 @@ function processEngagementData(rawData) {
     monthlyData[monthKey].totalMessages += dayData.messages || 0
     monthlyData[monthKey].totalVisitors += dayData.visitors || 0
     monthlyData[monthKey].totalCommunicators += dayData.communicators || 0
+    if (typeof dayData.approximate_member_count === 'number') {
+      monthlyData[monthKey].memberCounts.push(dayData.approximate_member_count)
+    }
     monthlyData[monthKey].daysCounted += 1
   }
 
   // Calculate averages and finalize the data
   const processedData = {}
   for (const [monthKey, data] of Object.entries(monthlyData)) {
+    // Use the maximum approximate_member_count for the month, or fallback to average visitors if not available
+    let memberCount = 0
+    if (data.memberCounts.length > 0) {
+      memberCount = Math.max(...data.memberCounts)
+    } else {
+      memberCount = Math.round(data.totalVisitors / data.daysCounted)
+    }
     processedData[monthKey] = {
-      memberCount: data.memberCount, // Use the approximate member count directly
+      memberCount,
       totalMessages: data.totalMessages,
       uniquePosters: Math.round(data.totalCommunicators / data.daysCounted) // Average daily communicators
     }
