@@ -75,7 +75,13 @@ function processEngagementData(rawData) {
   // API returns array of daily data, we need to aggregate by month
   const monthlyData = {}
 
+  // Extract approximate_member_count from the response
+  const approximateMemberCount = rawData.approximate_member_count || 0
+
   for (const dayData of rawData) {
+    // Skip if this is not a day data object (like approximate_member_count)
+    if (!dayData.day_pt) continue
+
     const date = new Date(dayData.day_pt)
     const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
 
@@ -83,7 +89,7 @@ function processEngagementData(rawData) {
       monthlyData[monthKey] = {
         totalMessages: 0,
         uniquePosters: 0, // communicators
-        memberCount: 0, // visitors
+        memberCount: approximateMemberCount, // Use the approximate member count
         totalVisitors: 0,
         totalCommunicators: 0,
         daysCounted: 0
@@ -100,7 +106,7 @@ function processEngagementData(rawData) {
   const processedData = {}
   for (const [monthKey, data] of Object.entries(monthlyData)) {
     processedData[monthKey] = {
-      memberCount: Math.round(data.totalVisitors / data.daysCounted), // Average daily visitors
+      memberCount: data.memberCount, // Use the approximate member count directly
       totalMessages: data.totalMessages,
       uniquePosters: Math.round(data.totalCommunicators / data.daysCounted) // Average daily communicators
     }
