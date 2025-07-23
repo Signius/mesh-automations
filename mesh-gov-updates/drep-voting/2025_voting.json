@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1n5sn54mgf47a7men2ryq6ppx88kta4wvenz2qkl4f9v6ppje8easqxwm88m",
+    "proposalTxHash": "9d213a57684d7ddf6f3350c80d042639ecbed5ccccc4a05bf54959a086593e7b00",
+    "proposalIndex": 0,
+    "voteTxHash": "8bce47f5ba5fe40f7c85c50a3806c3fb1d53f53b45e5940a61fd7a937e48a5a2",
+    "blockTime": "2025-07-23T12:59:55.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Cardano GovTool Budget - 12 months full active maintenance and development",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 567,
+    "expirationEpoch": 574,
+    "rationale": "No rationale available"
+  },
+  {
     "proposalId": "gov_action1vrkk4dpuss8l3z9g4uc2rmf8ks0f7j534zvz9v4k85dlc54wa3zsqq68rx0",
     "proposalTxHash": "60ed6ab43c840ff888a8af30a1ed27b41e9f4a91a89822b2b63d1bfc52aeec4500",
     "proposalIndex": 0,
