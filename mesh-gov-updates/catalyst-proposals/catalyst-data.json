@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-15T02:22:20.272Z",
+  "timestamp": "2025-08-18T02:28:48.897Z",
   "projects": [
     {
       "projectDetails": {
@@ -145,7 +145,7 @@
         "title": "Mesh: Cquisitor - Transaction Investigation Tool",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 72000,
+        "funds_distributed": 112000,
         "project_id": 1300134,
         "name": "Mesh: Cquisitor - Transaction Investigation Tool",
         "category": "F13: Cardano Open: Developers",
@@ -168,7 +168,7 @@
         "title": "Maintain Mesh and Build Developer Community",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 160000,
+        "funds_distributed": 200000,
         "project_id": 1300130,
         "name": "Maintain Mesh and Build Developer Community",
         "category": "F13: Cardano Open: Developers",
