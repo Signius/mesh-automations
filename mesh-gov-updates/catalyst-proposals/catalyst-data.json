@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-20T02:06:27.668Z",
+  "timestamp": "2025-08-22T02:06:22.213Z",
   "projects": [
     {
       "projectDetails": {
@@ -137,7 +137,7 @@
           "unique_wallets": 484
         }
       },
-      "milestonesCompleted": 2
+      "milestonesCompleted": 3
     },
     {
       "projectDetails": {
@@ -160,7 +160,7 @@
           "unique_wallets": 316
         }
       },
-      "milestonesCompleted": 2
+      "milestonesCompleted": 3
     },
     {
       "projectDetails": {
