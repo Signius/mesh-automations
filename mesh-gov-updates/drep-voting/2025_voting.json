@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1fl6r784t2ffw7q96du2znhprw90r3xvrfugvqelgqewgxex42kdqq9tgrd5",
+    "proposalTxHash": "4ff43f1eab5252ef00ba6f1429dc23715e3899834f10c067e8065c8364d5559a00",
+    "proposalIndex": 0,
+    "voteTxHash": "c007b4ae876a267514b33a15da05b364f8995721be720cedbf2117d45084c102",
+    "blockTime": "2025-08-25T15:17:46.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Cardano Global Listing Expansion - Powered by Snek",
+    "proposalType": "TreasuryWithdrawals",
+    "proposedEpoch": 573,
+    "expirationEpoch": 580,
+    "rationale": "Members of the Mesh DRep have voted as following:\n\nYes: 0 votes \nNo: 2 votes \nAbstain: 0 votes  \n\nTherefore, we vote NO.\n\nRationale:\nWhile we support projects which drive ecosystem adoption, we do not support treasury funding to finance development/maintenance/enhancements such as listings of any meme-coins. Furthermore, the proposer did not follow the given requirements for submitting treasury withdrawal proposals after an initial info-action as stated in the constitution. Finally, ecosystem treasuries investing in meme-coins has been already proven to be a bad idea, e.g Polkadot and its DED meme coin. Sometimes its helpful to learn from other ecosystems and to avoid repeating mistakes.\n\nAnyway, we hope the SNEK team doesn't take our No vote personally, we don't have anything against SNEK and some of our members are even holders, so ye, keep building guys, but to take treasury funds, thats a nope from us :)."
+  },
+  {
     "proposalId": "gov_action1g7sw0f8e8qa34lppj2erksvzf4j6e9udwaq6efslc8apdqeazygsq2spyyt",
     "proposalTxHash": "47a0e7a4f9383b1afc2192b23b41824d65ac978d7741aca61fc1fa16833d111100",
     "proposalIndex": 0,
