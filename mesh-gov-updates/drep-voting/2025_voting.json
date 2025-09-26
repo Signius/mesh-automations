@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1jr84r96lnsvu9yd6c0jhxe9gj5r7vnd2pgkntc6klplxdpyzz4tqqc9uldx",
+    "proposalTxHash": "90cf51975f9c19c291bac3e57364a89507e64daa0a2d35e356f87e668482155600",
+    "proposalIndex": 0,
+    "voteTxHash": "301353e2a00a8474c25afcee4b85e7a98fe944b6617b45d5c17b440563f89547",
+    "blockTime": "2025-09-26T07:03:54.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Budget: ₳5M Loan for Cardano's Global Listing Expansion - Powered by Snek",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 580,
+    "expirationEpoch": 587,
+    "rationale": "No rationale available"
+  },
+  {
     "proposalId": "gov_action13836fuy3yttxn4hkeqka398q9qnwsjtmul4sxc3nht7qae8uvejsqm7ukh8",
     "proposalTxHash": "89e3a4f09122d669d6f6c82dd894e02826e8497be7eb036233bafc0ee4fc666500",
     "proposalIndex": 0,
