@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1u4jrcvlkppjzuv5j9z5ksacwtvv77h6glu0knpcjut8gvjjfu0cqqt3alsy",
+    "proposalTxHash": "e5643c33f608642e329228a968770e5b19ef5f48ff1f698712e2ce864a49e3f000",
+    "proposalIndex": 0,
+    "voteTxHash": "a7e9dce62ff323e63d7c5c8a0f3dceef5d312dd37d39c8bfe8eecc743d29e6f7",
+    "blockTime": "2025-09-29T08:39:26.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Stablecoin DeFi Liquidity Budget",
+    "proposalType": "InfoAction",
+    "proposedEpoch": 582,
+    "expirationEpoch": 589,
+    "rationale": "Members of the Mesh DRep have voted as following:\n\nYes: 2 votes \nNo: 1 votes \nAbstain: 1 votes  \n\nTherefore, we vote YES on this proposal.\n\nRationale:\nWe acknowledge the fact that Stable coin liquidity is indeed crucial if we want to see a healthy DeFi ecosystem on Cardano. As of the budget, 50M Ada would currently amount to 14% of the total 2025 Net Change Limit, not too bad as a first allocation and a realistic number measured against the importance of the matter.\nFurthermore, we salute the proposers who have showed quite some effort in socializing the proposal intend with the public over the past few months which made it easy for voters to engage with the proposal & proposers before the vote. Lastly, glad to see that the data errors from the first proposal a few months back have been fixed this time. All fine from our side, may the votes be with you."
+  },
+  {
     "proposalId": "gov_action1jr84r96lnsvu9yd6c0jhxe9gj5r7vnd2pgkntc6klplxdpyzz4tqqc9uldx",
     "proposalTxHash": "90cf51975f9c19c291bac3e57364a89507e64daa0a2d35e356f87e668482155600",
     "proposalIndex": 0,
