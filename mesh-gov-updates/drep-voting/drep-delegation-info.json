@@ -275,11 +275,11 @@
       },
       "586": {
         "voting_power_lovelace": "21357283500214",
-        "total_delegators": 18
+        "total_delegators": 19
       }
     },
     "current_epoch": 586,
-    "total_delegators": 18,
+    "total_delegators": 19,
     "total_amount_ada": 21357283.500214
   },
   "drepInfo": {
@@ -288,6 +288,6 @@
     "active": true,
     "registered": true,
     "expires_epoch_no": 605,
-    "last_updated": "2025-10-02T01:59:49.240Z"
+    "last_updated": "2025-10-06T02:08:16.525Z"
   }
 }
