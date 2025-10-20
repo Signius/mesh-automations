@@ -90,5 +90,9 @@
     "gov_action1u4jrcvlkppjzuv5j9z5ksacwtvv77h6glu0knpcjut8gvjjfu0cqqt3alsy": {
         "title": "Stablecoin DeFi Liquidity Budget",
         "rationale": "Members of the Mesh DRep have voted as following:\n\nYes: 2 votes \nNo: 1 votes \nAbstain: 1 votes  \n\nTherefore, we vote YES on this proposal.\n\nRationale:\nWe acknowledge the fact that Stable coin liquidity is indeed crucial if we want to see a healthy DeFi ecosystem on Cardano. As of the budget, 50M Ada would currently amount to 14% of the total 2025 Net Change Limit, not too bad as a first allocation and a realistic number measured against the importance of the matter.\nFurthermore, we salute the proposers who have showed quite some effort in socializing the proposal intend with the public over the past few months which made it easy for voters to engage with the proposal & proposers before the vote. Lastly, glad to see that the data errors from the first proposal a few months back have been fixed this time. All fine from our side, may the votes be with you."
+    },
+    "gov_action1n9hdlcmshrj3hee4g8n4fxdgrprpxp0r03l6psd3j0evtpck0nrsqm57age": {
+        "title": "Defining the Cardano 2030 Vision & Strategy",
+        "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 0 votes \nNo: 1 votes \nAbstain: 2 votes  \n\nTherefore, we vote Abstain on the proposal.\n\nRationale:\n\nWe appreciate the efforts to help in outlining Cardanos steps ahead and while the vision presents valid objectives the document itself somewhat stays vague, seems somewhere between a constitution (which outlines and provides objectives) and a budgets proposal (which targets to enables resources to actionize and execute objectives). Therefore, not sure what exactly this info action would actually enable or trigger since its not a constitution, therefore no one has to adhere to it, nor a budget requests and therefore has no executive resources and power."
     }
 }
