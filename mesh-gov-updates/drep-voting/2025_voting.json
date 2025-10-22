@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action16tdkp3fs0j6303e4utgp8rftdug0ckezr4sslgv8wxdaeq40ngpsq5sr06h",
+    "proposalTxHash": "d2db60c5307cb517c735e2d0138d2b6f10fc5b221d610fa187719bdc82af9a0300",
+    "proposalIndex": 0,
+    "voteTxHash": "97febbb0c238e1440aa51855701571f93a44cc67050c0b2eec2dc0b52b5af4fb",
+    "blockTime": "2025-10-22T09:04:02.000Z",
+    "vote": "No",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "Withdraw ₳1,150,000 for GovTool 12 months active maintenance and development",
+    "proposalType": "TreasuryWithdrawals",
+    "proposedEpoch": 584,
+    "expirationEpoch": 591,
+    "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 0 votes \nNo: 4 votes \nAbstain: 1 votes  \n\nTherefore, we vote NO on the proposal.\n\nRationale:\n\nVery much the same rationale we already stated for the previously rejected gov.tool proposal.  \n\nWe are actually in favor of gov.tools and their work and we indeed think that open source governance tools are a prior net positive for the ecosystem, yet we do not think that the proposal budget request matches the current state of the project. \n\nWe recommend gov.tools to request a lower budget or to alternatively apply with a proposal at project catalyst at first to build up further solid base and increase budgets and scope progressively over time."
+  },
+  {
     "proposalId": "gov_action1n9hdlcmshrj3hee4g8n4fxdgrprpxp0r03l6psd3j0evtpck0nrsqm57age",
     "proposalTxHash": "996edfe370b8e51be73541e75499a818461305e37c7fa0c1b193f2c587167cc700",
     "proposalIndex": 0,
