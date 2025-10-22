@@ -94,5 +94,9 @@
     "gov_action1n9hdlcmshrj3hee4g8n4fxdgrprpxp0r03l6psd3j0evtpck0nrsqm57age": {
         "title": "Defining the Cardano 2030 Vision & Strategy",
         "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 0 votes \nNo: 1 votes \nAbstain: 2 votes  \n\nTherefore, we vote Abstain on the proposal.\n\nRationale:\n\nWe appreciate the efforts to help in outlining Cardanos steps ahead and while the vision presents valid objectives the document itself somewhat stays vague, seems somewhere between a constitution (which outlines and provides objectives) and a budgets proposal (which targets to enables resources to actionize and execute objectives). Therefore, not sure what exactly this info action would actually enable or trigger since its not a constitution, therefore no one has to adhere to it, nor a budget requests and therefore has no executive resources and power."
+    },
+    "gov_action16tdkp3fs0j6303e4utgp8rftdug0ckezr4sslgv8wxdaeq40ngpsq5sr06h": {
+        "title": "Withdraw ₳1,150,000 for GovTool 12 months active maintenance and development",
+        "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 0 votes \nNo: 4 votes \nAbstain: 1 votes  \n\nTherefore, we vote NO on the proposal.\n\nRationale:\n\nVery much the same rationale we already stated for the previously rejected gov.tool proposal.  \n\nWe are actually in favor of gov.tools and their work and we indeed think that open source governance tools are a prior net positive for the ecosystem, yet we do not think that the proposal budget request matches the current state of the project. \n\nWe recommend gov.tools to request a lower budget or to alternatively apply with a proposal at project catalyst at first to build up further solid base and increase budgets and scope progressively over time."
     }
 }
