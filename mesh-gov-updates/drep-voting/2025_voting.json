@@ -1,5 +1,20 @@
 [
   {
+    "proposalId": "gov_action1ezp0r9rgf4njx93p9uq7l3kjs9m739jm0ntf26vplcmucec4jc0qqxjlfrc",
+    "proposalTxHash": "c882f194684d672316212f01efc6d28177e8965b7cd6956981fe37cc6715961e00",
+    "proposalIndex": 0,
+    "voteTxHash": "f36dd8f92afc92cdcb9beddb89f50404d1681e5bf991b2c7b37c864a0cd2d2b2",
+    "blockTime": "2025-10-27T09:38:49.000Z",
+    "vote": "Yes",
+    "metaUrl": null,
+    "metaHash": null,
+    "proposalTitle": "CARDANO BLOCKCHAIN ECOSYSTEM CONSTITUTION v2.3",
+    "proposalType": "NewConstitution",
+    "proposedEpoch": 586,
+    "expirationEpoch": 593,
+    "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 2 votes \nNo: 0 votes \nAbstain: 0 votes  \n\nTherefore, we vote YES on the proposal.\n\nRationale:\n\nDrawing from rationales from Yuta San on this gov action, which are quite on point.\n\n\n- The Cardano Constitution v2.3 removes  a few non-binding expectations, the Budget Info Action mechanism, and mandatory CC conduct rules.\n\n- It adds more clear definitions, enforces immutability of proposal documents, and applies treasury audit/accountability safeguards to all withdrawals.\n\n- Community review of v2.0 had 86.23% DRep participation, and v2.3 incorporates feedback and improvements, addressing prior concerns to reinforce legitimacy and broad input."
+  },
+  {
     "proposalId": "gov_action16tdkp3fs0j6303e4utgp8rftdug0ckezr4sslgv8wxdaeq40ngpsq5sr06h",
     "proposalTxHash": "d2db60c5307cb517c735e2d0138d2b6f10fc5b221d610fa187719bdc82af9a0300",
     "proposalIndex": 0,
