@@ -98,5 +98,9 @@
     "gov_action16tdkp3fs0j6303e4utgp8rftdug0ckezr4sslgv8wxdaeq40ngpsq5sr06h": {
         "title": "Withdraw ₳1,150,000 for GovTool 12 months active maintenance and development",
         "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 0 votes \nNo: 4 votes \nAbstain: 1 votes  \n\nTherefore, we vote NO on the proposal.\n\nRationale:\n\nVery much the same rationale we already stated for the previously rejected gov.tool proposal.  \n\nWe are actually in favor of gov.tools and their work and we indeed think that open source governance tools are a prior net positive for the ecosystem, yet we do not think that the proposal budget request matches the current state of the project. \n\nWe recommend gov.tools to request a lower budget or to alternatively apply with a proposal at project catalyst at first to build up further solid base and increase budgets and scope progressively over time."
+    },
+    "gov_action1ezp0r9rgf4njx93p9uq7l3kjs9m739jm0ntf26vplcmucec4jc0qqxjlfrc": {
+        "title": "CARDANO BLOCKCHAIN ECOSYSTEM CONSTITUTION v2.3",
+        "rationale": "Members of the Mesh DRep have voted as following\n\nYes: 2 votes \nNo: 0 votes \nAbstain: 0 votes  \n\nTherefore, we vote YES on the proposal.\n\nRationale:\n\nDrawing from rationales from Yuta San on this gov action, which are quite on point.\n\n\n- The Cardano Constitution v2.3 removes  a few non-binding expectations, the Budget Info Action mechanism, and mandatory CC conduct rules.\n\n- It adds more clear definitions, enforces immutability of proposal documents, and applies treasury audit/accountability safeguards to all withdrawals.\n\n- Community review of v2.0 had 86.23% DRep participation, and v2.3 incorporates feedback and improvements, addressing prior concerns to reinforce legitimacy and broad input."
     }
 }
