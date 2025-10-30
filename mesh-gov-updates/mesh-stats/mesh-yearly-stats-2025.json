@@ -1,13 +1,13 @@
 {
   "year": 2025,
   "yearlyTotals": {
-    "core": 110227,
-    "react": 108190,
-    "transaction": 125788,
-    "wallet": 129667,
-    "provider": 106057,
-    "coreCsl": 52631,
-    "coreCst": 138525
+    "core": 116620,
+    "react": 114563,
+    "transaction": 134912,
+    "wallet": 138788,
+    "provider": 112282,
+    "coreCsl": 53454,
+    "coreCst": 148051
   },
   "monthlyDownloads": [
     {
@@ -57,7 +57,7 @@
     },
     {
       "month": "October",
-      "downloads": 16577,
+      "downloads": 22970,
       "trend": "🔥"
     },
     {
@@ -147,7 +147,7 @@
   ],
   "peakMonth": {
     "name": "October",
-    "downloads": 16577
+    "downloads": 22970
   },
-  "lastUpdated": "2025-10-23T01:09:24.670Z"
+  "lastUpdated": "2025-10-30T01:12:35.492Z"
 }
