@@ -4,10 +4,10 @@
     "core": 56420,
     "react": 34716,
     "transaction": 21088,
-    "wallet": 20554,
-    "provider": 19613,
-    "coreCsl": 22928,
-    "coreCst": 24256
+    "wallet": 0,
+    "provider": 0,
+    "coreCsl": 0,
+    "coreCst": 0
   },
   "monthlyDownloads": [
     {
@@ -149,5 +149,5 @@
     "name": "December",
     "downloads": 6929
   },
-  "lastUpdated": "2025-11-06T01:13:45.304Z"
+  "lastUpdated": "2025-11-13T01:14:09.366Z"
 }

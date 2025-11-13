@@ -1,69 +1,69 @@
 {
   "year": 2025,
   "yearlyTotals": {
-    "core": 122474,
-    "react": 120354,
-    "transaction": 143061,
-    "wallet": 146888,
-    "provider": 118022,
-    "coreCsl": 54539,
-    "coreCst": 156566
+    "core": 9974,
+    "react": 0,
+    "transaction": 0,
+    "wallet": 0,
+    "provider": 0,
+    "coreCsl": 0,
+    "coreCst": 0
   },
   "monthlyDownloads": [
     {
       "month": "January",
-      "downloads": 5912,
+      "downloads": 0,
       "trend": "➡️"
     },
     {
       "month": "February",
-      "downloads": 7458,
-      "trend": "📈"
+      "downloads": 0,
+      "trend": "➡️"
     },
     {
       "month": "March",
-      "downloads": 10635,
-      "trend": "📈"
+      "downloads": 0,
+      "trend": "➡️"
     },
     {
       "month": "April",
-      "downloads": 8551,
-      "trend": "📉"
+      "downloads": 0,
+      "trend": "➡️"
     },
     {
       "month": "May",
       "downloads": 9974,
-      "trend": "📈"
-    },
-    {
-      "month": "June",
-      "downloads": 10831,
-      "trend": "📈"
-    },
-    {
-      "month": "July",
-      "downloads": 12643,
-      "trend": "📈"
-    },
-    {
-      "month": "August",
-      "downloads": 11973,
-      "trend": "📉"
-    },
-    {
-      "month": "September",
-      "downloads": 15673,
-      "trend": "📈"
-    },
-    {
-      "month": "October",
-      "downloads": 26480,
       "trend": "🔥"
     },
     {
-      "month": "November",
-      "downloads": 2344,
+      "month": "June",
+      "downloads": 0,
       "trend": "📉"
+    },
+    {
+      "month": "July",
+      "downloads": 0,
+      "trend": "➡️"
+    },
+    {
+      "month": "August",
+      "downloads": 0,
+      "trend": "➡️"
+    },
+    {
+      "month": "September",
+      "downloads": 0,
+      "trend": "➡️"
+    },
+    {
+      "month": "October",
+      "downloads": 0,
+      "trend": "➡️"
+    },
+    {
+      "month": "November",
+      "downloads": 0,
+      "trend": "➡️"
     },
     {
       "month": "December",
@@ -134,8 +134,8 @@
     },
     {
       "month": "November",
-      "projects": 486,
-      "files": 1160,
+      "projects": 500,
+      "files": 1112,
       "repositories": 825
     },
     {
@@ -146,8 +146,8 @@
     }
   ],
   "peakMonth": {
-    "name": "October",
-    "downloads": 26480
+    "name": "May",
+    "downloads": 9974
   },
-  "lastUpdated": "2025-11-06T01:14:01.352Z"
+  "lastUpdated": "2025-11-13T01:14:12.004Z"
 }
