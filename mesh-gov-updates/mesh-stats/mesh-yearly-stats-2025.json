@@ -1,7 +1,7 @@
 {
   "year": 2025,
   "yearlyTotals": {
-    "core": 9974,
+    "core": 0,
     "react": 0,
     "transaction": 0,
     "wallet": 0,
@@ -13,57 +13,57 @@
     {
       "month": "January",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "February",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "March",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "April",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "May",
-      "downloads": 9974,
+      "downloads": 0,
       "trend": "🔥"
     },
     {
       "month": "June",
       "downloads": 0,
-      "trend": "📉"
+      "trend": "🔥"
     },
     {
       "month": "July",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "August",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "September",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "October",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "November",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "December",
@@ -134,8 +134,8 @@
     },
     {
       "month": "November",
-      "projects": 500,
-      "files": 1112,
+      "projects": 518,
+      "files": 2328,
       "repositories": 825
     },
     {
@@ -146,8 +146,8 @@
     }
   ],
   "peakMonth": {
-    "name": "May",
-    "downloads": 9974
+    "name": "January",
+    "downloads": 0
   },
-  "lastUpdated": "2025-11-13T01:14:12.004Z"
+  "lastUpdated": "2025-11-20T01:10:20.931Z"
 }
