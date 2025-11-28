@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-26T02:15:29.330Z",
+  "timestamp": "2025-11-28T02:07:11.067Z",
   "projects": [
     {
       "projectDetails": {
@@ -145,7 +145,7 @@
         "title": "Mesh: Cquisitor - Transaction Investigation Tool",
         "budget": 200000,
         "milestones_qty": 5,
-        "funds_distributed": 160000,
+        "funds_distributed": 200000,
         "project_id": 1300134,
         "name": "Mesh: Cquisitor - Transaction Investigation Tool",
         "category": "F13: Cardano Open: Developers",
