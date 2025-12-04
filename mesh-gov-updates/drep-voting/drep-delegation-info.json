@@ -326,16 +326,16 @@
         "total_delegators": 20
       }
     },
-    "current_epoch": 598,
-    "total_delegators": 20,
-    "total_amount_ada": 21184127.101335
+    "current_epoch": 0,
+    "total_delegators": 0,
+    "total_amount_ada": 0
   },
   "drepInfo": {
     "drepId": "drep1yv4uesaj92wk8ljlsh4p7jzndnzrflchaz5fzug3zxg4naqkpeas3",
-    "amount": "21184127101335",
-    "active": true,
-    "registered": true,
-    "expires_epoch_no": 615,
-    "last_updated": "2025-12-01T02:39:59.305Z"
+    "amount": "N/A",
+    "active": false,
+    "registered": false,
+    "expires_epoch_no": 0,
+    "last_updated": "2025-12-04T02:20:27.941Z"
   }
 }
