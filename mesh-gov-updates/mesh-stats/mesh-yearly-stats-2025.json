@@ -2,12 +2,12 @@
   "year": 2025,
   "yearlyTotals": {
     "core": 0,
-    "react": 0,
+    "react": 7162,
     "transaction": 0,
     "wallet": 0,
     "provider": 0,
     "coreCsl": 0,
-    "coreCst": 0
+    "coreCst": 10495
   },
   "monthlyDownloads": [
     {
@@ -68,7 +68,7 @@
     {
       "month": "December",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     }
   ],
   "githubStats": [
@@ -140,14 +140,14 @@
     },
     {
       "month": "December",
-      "projects": 0,
-      "files": 0,
-      "repositories": 0
+      "projects": 558,
+      "files": 2816,
+      "repositories": 827
     }
   ],
   "peakMonth": {
     "name": "January",
     "downloads": 0
   },
-  "lastUpdated": "2025-11-27T01:12:25.618Z"
+  "lastUpdated": "2025-12-04T01:14:05.022Z"
 }

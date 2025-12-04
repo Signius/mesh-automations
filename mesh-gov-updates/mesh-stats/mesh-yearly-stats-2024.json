@@ -6,7 +6,7 @@
     "transaction": 21088,
     "wallet": 0,
     "provider": 0,
-    "coreCsl": 0,
+    "coreCsl": 637,
     "coreCst": 0
   },
   "monthlyDownloads": [
@@ -149,5 +149,5 @@
     "name": "December",
     "downloads": 6929
   },
-  "lastUpdated": "2025-11-27T01:12:24.149Z"
+  "lastUpdated": "2025-12-04T01:14:02.374Z"
 }
