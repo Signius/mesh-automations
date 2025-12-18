@@ -140,14 +140,14 @@
     },
     {
       "month": "December",
-      "projects": 558,
-      "files": 2816,
-      "repositories": 827
+      "projects": 556,
+      "files": 2688,
+      "repositories": 828
     }
   ],
   "peakMonth": {
     "name": "January",
     "downloads": 0
   },
-  "lastUpdated": "2025-12-11T01:16:23.159Z"
+  "lastUpdated": "2025-12-18T01:12:23.809Z"
 }
