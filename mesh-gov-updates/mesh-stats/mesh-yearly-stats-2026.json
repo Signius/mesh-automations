@@ -1,5 +1,5 @@
 {
-  "year": 2025,
+  "year": 2026,
   "yearlyTotals": {
     "core": 0,
     "react": 0,
@@ -18,136 +18,136 @@
     {
       "month": "February",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "March",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "April",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "May",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "June",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "July",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "August",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "September",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "October",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "November",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "December",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     }
   ],
   "githubStats": [
     {
       "month": "January",
-      "projects": 0,
-      "files": 0,
-      "repositories": 591
+      "projects": 560,
+      "files": 2600,
+      "repositories": 829
     },
     {
       "month": "February",
       "projects": 0,
       "files": 0,
-      "repositories": 626
+      "repositories": 0
     },
     {
       "month": "March",
       "projects": 0,
       "files": 0,
-      "repositories": 671
+      "repositories": 0
     },
     {
       "month": "April",
-      "projects": 394,
-      "files": 1056,
-      "repositories": 708
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "May",
-      "projects": 416,
-      "files": 2232,
-      "repositories": 789
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "June",
-      "projects": 442,
-      "files": 2256,
-      "repositories": 809
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "July",
-      "projects": 452,
-      "files": 1624,
-      "repositories": 814
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "August",
-      "projects": 430,
-      "files": 1112,
-      "repositories": 818
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "September",
-      "projects": 432,
-      "files": 2608,
-      "repositories": 821
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "October",
-      "projects": 498,
-      "files": 2912,
-      "repositories": 823
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "November",
-      "projects": 518,
-      "files": 2328,
-      "repositories": 825
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     },
     {
       "month": "December",
-      "projects": 584,
-      "files": 2496,
-      "repositories": 829
+      "projects": 0,
+      "files": 0,
+      "repositories": 0
     }
   ],
   "peakMonth": {
     "name": "January",
     "downloads": 0
   },
-  "lastUpdated": "2026-01-01T01:23:51.610Z"
+  "lastUpdated": "2026-01-01T01:23:52.288Z"
 }
