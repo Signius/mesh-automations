@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-16T02:27:44.606Z",
+  "timestamp": "2026-01-19T02:33:37.182Z",
   "projects": [
     {
       "projectDetails": {
@@ -191,7 +191,7 @@
         "title": "Cardano Multisig Platform by Mesh, Clarity DAO & Fluid Tokens",
         "budget": 500000,
         "milestones_qty": 6,
-        "funds_distributed": 415000,
+        "funds_distributed": 425000,
         "project_id": 1300050,
         "name": "Cardano Multisig Platform by Mesh, Clarity DAO & Fluid Tokens",
         "category": "F13: Cardano Use Cases: Product",
