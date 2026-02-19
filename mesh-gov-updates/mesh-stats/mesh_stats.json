@@ -1,29 +1,29 @@
 {
   "github": {
     "core_in_package_json": 839,
-    "core_in_any_file": 2920,
+    "core_in_any_file": 2608,
     "core_in_repositories": 839
   },
   "npm": {
     "downloads": {
       "last_day": 0,
-      "last_week": 6650,
+      "last_week": 3061,
       "last_month": 27751,
       "last_year": 186058,
-      "core_package_last_12_months": 213681
+      "core_package_last_12_months": 215437
     },
-    "react_package_downloads": 207627,
-    "transaction_package_downloads": 275187,
-    "wallet_package_downloads": 280592,
-    "provider_package_downloads": 209056,
-    "core_csl_package_downloads": 62630,
-    "core_cst_package_downloads": 293089,
+    "react_package_downloads": 208855,
+    "transaction_package_downloads": 277622,
+    "wallet_package_downloads": 283439,
+    "provider_package_downloads": 210741,
+    "core_csl_package_downloads": 62551,
+    "core_cst_package_downloads": 295638,
     "latest_version": "1.9.0-beta.98",
-    "dependents_count": 337102
+    "dependents_count": 339900
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2025-02-12&to=2026-02-12",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2025-02-12&to=2026-02-12"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2025-02-19&to=2026-02-19",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2025-02-19&to=2026-02-19"
   },
   "contributors": {
     "unique_count": 64,
@@ -31,9 +31,9 @@
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "commits": 1429,
-        "pull_requests": 185,
-        "contributions": 1614,
+        "commits": 1435,
+        "pull_requests": 186,
+        "contributions": 1621,
         "repositories": [
           {
             "name": "mesh",
@@ -114,6 +114,12 @@
             "contributions": 9
           },
           {
+            "name": "wallet",
+            "commits": 7,
+            "pull_requests": 2,
+            "contributions": 9
+          },
+          {
             "name": "minting-next-js-template",
             "commits": 8,
             "pull_requests": 0,
@@ -168,12 +174,6 @@
             "contributions": 5
           },
           {
-            "name": "wallet",
-            "commits": 3,
-            "pull_requests": 1,
-            "contributions": 4
-          },
-          {
             "name": "whitepaper",
             "commits": 3,
             "pull_requests": 0,
@@ -181,6 +181,12 @@
           },
           {
             "name": "mesh-pbl-course-content",
+            "commits": 3,
+            "pull_requests": 0,
+            "contributions": 3
+          },
+          {
+            "name": "react",
             "commits": 3,
             "pull_requests": 0,
             "contributions": 3
@@ -259,12 +265,6 @@
           },
           {
             "name": "contracts",
-            "commits": 1,
-            "pull_requests": 0,
-            "contributions": 1
-          },
-          {
-            "name": "react",
             "commits": 1,
             "pull_requests": 0,
             "contributions": 1
@@ -496,9 +496,9 @@
       {
         "login": "Temasar1",
         "avatar_url": "https://avatars.githubusercontent.com/u/178079919?v=4",
-        "commits": 255,
-        "pull_requests": 35,
-        "contributions": 290,
+        "commits": 262,
+        "pull_requests": 38,
+        "contributions": 300,
         "repositories": [
           {
             "name": "mesh",
@@ -513,15 +513,21 @@
             "contributions": 67
           },
           {
+            "name": "hydra",
+            "commits": 9,
+            "pull_requests": 4,
+            "contributions": 13
+          },
+          {
+            "name": "hydra-react",
+            "commits": 9,
+            "pull_requests": 2,
+            "contributions": 11
+          },
+          {
             "name": "Mesh-AI",
             "commits": 8,
             "pull_requests": 2,
-            "contributions": 10
-          },
-          {
-            "name": "hydra",
-            "commits": 7,
-            "pull_requests": 3,
             "contributions": 10
           },
           {
@@ -529,12 +535,6 @@
             "commits": 7,
             "pull_requests": 3,
             "contributions": 10
-          },
-          {
-            "name": "hydra-react",
-            "commits": 4,
-            "pull_requests": 0,
-            "contributions": 4
           },
           {
             "name": "hydra-controller",
@@ -604,15 +604,15 @@
       {
         "login": "github-actions[bot]",
         "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
-        "commits": 265,
+        "commits": 272,
         "pull_requests": 0,
-        "contributions": 265,
+        "contributions": 272,
         "repositories": [
           {
             "name": "governance",
-            "commits": 265,
+            "commits": 272,
             "pull_requests": 0,
-            "contributions": 265
+            "contributions": 272
           }
         ]
       },
@@ -652,15 +652,15 @@
       {
         "login": "luislucena16",
         "avatar_url": "https://avatars.githubusercontent.com/u/86749595?v=4",
-        "commits": 176,
+        "commits": 180,
         "pull_requests": 17,
-        "contributions": 193,
+        "contributions": 197,
         "repositories": [
           {
             "name": "midnight-setup",
-            "commits": 65,
+            "commits": 69,
             "pull_requests": 0,
-            "contributions": 65
+            "contributions": 69
           },
           {
             "name": "mesh",
@@ -826,15 +826,15 @@
       {
         "login": "actions-user",
         "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-        "commits": 40,
+        "commits": 41,
         "pull_requests": 0,
-        "contributions": 40,
+        "contributions": 41,
         "repositories": [
           {
             "name": "governance",
-            "commits": 40,
+            "commits": 41,
             "pull_requests": 0,
-            "contributions": 40
+            "contributions": 41
           }
         ]
       },
@@ -1595,8 +1595,8 @@
         ]
       }
     ],
-    "total_pull_requests": 840,
-    "total_commits": 6017,
-    "total_contributions": 6857
+    "total_pull_requests": 844,
+    "total_commits": 6042,
+    "total_contributions": 6886
   }
 }
