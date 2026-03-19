@@ -1,7 +1,7 @@
 {
   "year": 2026,
   "yearlyTotals": {
-    "core": 0,
+    "core": 7726,
     "react": 0,
     "transaction": 0,
     "wallet": 0,
@@ -13,16 +13,16 @@
     {
       "month": "January",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "February",
       "downloads": 0,
-      "trend": "🔥"
+      "trend": "➡️"
     },
     {
       "month": "March",
-      "downloads": 0,
+      "downloads": 7726,
       "trend": "🔥"
     },
     {
@@ -86,9 +86,9 @@
     },
     {
       "month": "March",
-      "projects": 576,
-      "files": 2328,
-      "repositories": 845
+      "projects": 568,
+      "files": 2984,
+      "repositories": 848
     },
     {
       "month": "April",
@@ -146,8 +146,8 @@
     }
   ],
   "peakMonth": {
-    "name": "January",
-    "downloads": 0
+    "name": "March",
+    "downloads": 7726
   },
-  "lastUpdated": "2026-03-12T01:30:51.970Z"
+  "lastUpdated": "2026-03-19T01:44:07.747Z"
 }
