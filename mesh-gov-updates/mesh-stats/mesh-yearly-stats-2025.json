@@ -2,10 +2,10 @@
   "year": 2025,
   "yearlyTotals": {
     "core": 0,
-    "react": 9843,
+    "react": 0,
     "transaction": 0,
     "wallet": 0,
-    "provider": 14748,
+    "provider": 0,
     "coreCsl": 0,
     "coreCst": 0
   },
@@ -149,5 +149,5 @@
     "name": "January",
     "downloads": 0
   },
-  "lastUpdated": "2026-03-19T01:44:06.150Z"
+  "lastUpdated": "2026-04-02T01:53:41.664Z"
 }
