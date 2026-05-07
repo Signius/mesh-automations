@@ -1,29 +1,29 @@
 {
   "github": {
-    "core_in_package_json": 851,
+    "core_in_package_json": 852,
     "core_in_any_file": 3048,
-    "core_in_repositories": 851
+    "core_in_repositories": 852
   },
   "npm": {
     "downloads": {
       "last_day": 0,
-      "last_week": 6754,
-      "last_month": 16662,
+      "last_week": 7006,
+      "last_month": 26593,
       "last_year": 186058,
-      "core_package_last_12_months": 238102
+      "core_package_last_12_months": 242686
     },
-    "react_package_downloads": 212875,
-    "transaction_package_downloads": 310335,
-    "wallet_package_downloads": 325523,
-    "provider_package_downloads": 233158,
-    "core_csl_package_downloads": 62311,
-    "core_cst_package_downloads": 348026,
+    "react_package_downloads": 213992,
+    "transaction_package_downloads": 316412,
+    "wallet_package_downloads": 331877,
+    "provider_package_downloads": 237858,
+    "core_csl_package_downloads": 62832,
+    "core_cst_package_downloads": 357713,
     "latest_version": "1.9.0-beta.102",
-    "dependents_count": 376911
+    "dependents_count": 379987
   },
   "urls": {
-    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2025-04-30&to=2026-04-30",
-    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2025-04-30&to=2026-04-30"
+    "npm_stat_url": "https://npm-stat.com/charts.html?package=@meshsdk/core&from=2025-05-07&to=2026-05-07",
+    "npm_stat_compare_url": "https://npm-stat.com/charts.html?package=@meshsdk/core,@meshsdk/react&from=2025-05-07&to=2026-05-07"
   },
   "contributors": {
     "unique_count": 71,
@@ -31,9 +31,9 @@
       {
         "login": "jinglescode",
         "avatar_url": "https://avatars.githubusercontent.com/u/1694368?v=4",
-        "commits": 1447,
-        "pull_requests": 189,
-        "contributions": 1636,
+        "commits": 1448,
+        "pull_requests": 190,
+        "contributions": 1638,
         "repositories": [
           {
             "name": "mesh",
@@ -43,9 +43,9 @@
           },
           {
             "name": "multisig",
-            "commits": 95,
-            "pull_requests": 5,
-            "contributions": 100
+            "commits": 96,
+            "pull_requests": 6,
+            "contributions": 102
           },
           {
             "name": "midnight",
@@ -389,8 +389,8 @@
         "login": "Andre-Diamond",
         "avatar_url": "https://avatars.githubusercontent.com/u/32074058?v=4",
         "commits": 560,
-        "pull_requests": 58,
-        "contributions": 618,
+        "pull_requests": 59,
+        "contributions": 619,
         "repositories": [
           {
             "name": "governance",
@@ -401,8 +401,8 @@
           {
             "name": "multisig",
             "commits": 104,
-            "pull_requests": 19,
-            "contributions": 123
+            "pull_requests": 20,
+            "contributions": 124
           }
         ]
       },
@@ -493,15 +493,15 @@
       {
         "login": "github-actions[bot]",
         "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
-        "commits": 348,
+        "commits": 358,
         "pull_requests": 0,
-        "contributions": 348,
+        "contributions": 358,
         "repositories": [
           {
             "name": "governance",
-            "commits": 347,
+            "commits": 357,
             "pull_requests": 0,
-            "contributions": 347
+            "contributions": 357
           },
           {
             "name": "cexplorer-community",
@@ -796,15 +796,15 @@
       {
         "login": "actions-user",
         "avatar_url": "https://avatars.githubusercontent.com/u/65916846?v=4",
-        "commits": 51,
+        "commits": 52,
         "pull_requests": 0,
-        "contributions": 51,
+        "contributions": 52,
         "repositories": [
           {
             "name": "governance",
-            "commits": 51,
+            "commits": 52,
             "pull_requests": 0,
-            "contributions": 51
+            "contributions": 52
           }
         ]
       },
@@ -1730,8 +1730,8 @@
         ]
       }
     ],
-    "total_pull_requests": 885,
-    "total_commits": 6362,
-    "total_contributions": 7247
+    "total_pull_requests": 887,
+    "total_commits": 6374,
+    "total_contributions": 7261
   }
 }
