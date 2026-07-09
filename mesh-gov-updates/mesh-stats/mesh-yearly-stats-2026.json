@@ -43,7 +43,7 @@
     {
       "month": "July",
       "downloads": 0,
-      "trend": "➡️"
+      "trend": "🔥"
     },
     {
       "month": "August",
@@ -110,9 +110,9 @@
     },
     {
       "month": "July",
-      "projects": 0,
-      "files": 0,
-      "repositories": 0
+      "projects": 790,
+      "files": 8784,
+      "repositories": 872
     },
     {
       "month": "August",
@@ -149,5 +149,5 @@
     "name": "January",
     "downloads": 0
   },
-  "lastUpdated": "2026-06-25T02:48:17.727Z"
+  "lastUpdated": "2026-07-09T02:26:12.552Z"
 }
