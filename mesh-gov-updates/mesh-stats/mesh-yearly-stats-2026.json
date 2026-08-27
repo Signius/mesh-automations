@@ -116,8 +116,8 @@
     },
     {
       "month": "August",
-      "projects": 924,
-      "files": 8640,
+      "projects": 914,
+      "files": 8736,
       "repositories": 882
     },
     {
@@ -149,5 +149,5 @@
     "name": "January",
     "downloads": 0
   },
-  "lastUpdated": "2026-08-20T00:59:29.115Z"
+  "lastUpdated": "2026-08-27T06:45:00.599Z"
 }
